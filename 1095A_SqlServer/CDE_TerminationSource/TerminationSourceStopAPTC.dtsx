@@ -1,0 +1,1007 @@
+<?xml version="1.0"?>
+<DTS:Executable xmlns:DTS="www.microsoft.com/SqlServer/Dts"
+  DTS:refId="Package"
+  DTS:CreationDate="11/29/2016 9:58:01 AM"
+  DTS:CreationName="Microsoft.Package"
+  DTS:CreatorComputerName="5CG5032LL5"
+  DTS:CreatorName="AZ\KKemp"
+  DTS:DTSID="{0F05DA7C-3CC9-4057-946A-A29D79DA6016}"
+  DTS:ExecutableType="Microsoft.Package"
+  DTS:LastModifiedProductVersion="14.0.3026.27"
+  DTS:LocaleID="1033"
+  DTS:ObjectName="TerminationSourceStopAPTC"
+  DTS:PackageType="5"
+  DTS:VersionBuild="51"
+  DTS:VersionGUID="{6E008338-1A9B-43C2-B4D0-C029906A7156}">
+  <DTS:Property
+    DTS:Name="PackageFormatVersion">8</DTS:Property>
+  <DTS:ConnectionManagers>
+    <DTS:ConnectionManager
+      DTS:refId="Package.ConnectionManagers[ERR_1095A]"
+      DTS:CreationName="OLEDB"
+      DTS:DTSID="{DD267035-8D94-4E04-A808-414ADD84CFD9}"
+      DTS:ObjectName="ERR_1095A">
+      <DTS:ObjectData>
+        <DTS:ConnectionManager
+          DTS:ConnectionString="Data Source=localhost;Initial Catalog=ERR_1095A;Provider=SQLNCLI11.1;Integrated Security=SSPI;Auto Translate=False;" />
+      </DTS:ObjectData>
+    </DTS:ConnectionManager>
+    <DTS:ConnectionManager
+      DTS:refId="Package.ConnectionManagers[Flat File Connection Manager]"
+      DTS:CreationName="FLATFILE"
+      DTS:DTSID="{5051F5ED-FFB3-4D3E-B15A-32C873C99764}"
+      DTS:ObjectName="Flat File Connection Manager">
+      <DTS:PropertyExpression
+        DTS:Name="ConnectionString">@[User::TerminationSource_FileName]</DTS:PropertyExpression>
+      <DTS:ObjectData>
+        <DTS:ConnectionManager
+          DTS:Format="Delimited"
+          DTS:LocaleID="1033"
+          DTS:HeaderRowDelimiter="_x000D__x000A_"
+          DTS:ColumnNamesInFirstDataRow="True"
+          DTS:RowDelimiter=""
+          DTS:TextQualifier="_x003C_none_x003E_"
+          DTS:CodePage="1252">
+          <DTS:FlatFileColumns>
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x007C_"
+              DTS:MaximumWidth="50"
+              DTS:DataType="129"
+              DTS:TextQualified="True"
+              DTS:ObjectName="MGPI"
+              DTS:DTSID="{ADC35850-E915-4C21-AC15-429C02E7FFA6}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x007C_"
+              DTS:MaximumWidth="50"
+              DTS:DataType="129"
+              DTS:TextQualified="True"
+              DTS:ObjectName="SEGMENT"
+              DTS:DTSID="{95F3A1D5-757F-44F3-B31E-256F8F49482E}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x007C_"
+              DTS:MaximumWidth="50"
+              DTS:DataType="129"
+              DTS:TextQualified="True"
+              DTS:ObjectName="CANCELLATION SOURCE"
+              DTS:DTSID="{2C2BAA69-D5EB-4D85-AA9A-C0C9A9255297}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x007C_"
+              DTS:MaximumWidth="50"
+              DTS:DataType="129"
+              DTS:TextQualified="True"
+              DTS:ObjectName="TERMINATION SOURCE"
+              DTS:DTSID="{239BB5E3-8425-4013-A484-53E99268AF9F}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x000D__x000A_"
+              DTS:MaximumWidth="50"
+              DTS:DataType="129"
+              DTS:TextQualified="True"
+              DTS:ObjectName="ESD DATE"
+              DTS:DTSID="{25961117-DBC6-4CC4-829C-E76666A06881}"
+              DTS:CreationName="" />
+          </DTS:FlatFileColumns>
+        </DTS:ConnectionManager>
+      </DTS:ObjectData>
+    </DTS:ConnectionManager>
+  </DTS:ConnectionManagers>
+  <DTS:Variables>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{5002FB2A-C8DE-4DEB-BB32-8EA87ACA6DF3}"
+      DTS:EvaluateAsExpression="True"
+      DTS:Expression="(DT_STR, 100, 1252) @[$Project::FileFolder] +  (DT_STR, 100, 1252)(&quot;TerminationSource\\archive&quot;)"
+      DTS:IncludeInDebugDump="2345"
+      DTS:Namespace="User"
+      DTS:ObjectName="TerminationSourceDirectory_Archive">
+      <DTS:VariableValue
+        DTS:DataType="8">C:\Data\files\in\TerminationSource\archive</DTS:VariableValue>
+    </DTS:Variable>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{A4638C89-EFB9-4AB0-A1AE-66A0F9F994D8}"
+      DTS:EvaluateAsExpression="True"
+      DTS:Expression="(DT_STR, 100, 1252) @[$Project::FileFolder] +  (DT_STR, 100, 1252)(&quot;TerminationSource\\new&quot;)"
+      DTS:IncludeInDebugDump="2345"
+      DTS:Namespace="User"
+      DTS:ObjectName="TerminationSourceDirectory_New">
+      <DTS:VariableValue
+        DTS:DataType="8">C:\Data\files\in\TerminationSource\new</DTS:VariableValue>
+    </DTS:Variable>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{6AEB1A9B-EBC7-4B01-BF69-D6818EE54457}"
+      DTS:IncludeInDebugDump="2345"
+      DTS:Namespace="User"
+      DTS:ObjectName="TerminationSource_FileName">
+      <DTS:VariableValue
+        DTS:DataType="8"
+        xml:space="preserve"></DTS:VariableValue>
+    </DTS:Variable>
+  </DTS:Variables>
+  <DTS:Executables>
+    <DTS:Executable
+      DTS:refId="Package\Termination Source"
+      DTS:CreationName="STOCK:SEQUENCE"
+      DTS:Description="Sequence Container"
+      DTS:DTSID="{bbd5542f-5cb4-45bc-b428-7c38e8e46038}"
+      DTS:ExecutableType="STOCK:SEQUENCE"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Termination Source">
+      <DTS:Variables />
+      <DTS:Executables>
+        <DTS:Executable
+          DTS:refId="Package\Termination Source\Foreach Termination Source File"
+          DTS:CreationName="STOCK:FOREACHLOOP"
+          DTS:Description="Foreach Loop Container"
+          DTS:DTSID="{5641425f-b0d5-45c5-b213-2328ed03e0f1}"
+          DTS:ExecutableType="STOCK:FOREACHLOOP"
+          DTS:LocaleID="-1"
+          DTS:ObjectName="Foreach Termination Source File">
+          <DTS:ForEachEnumerator
+            DTS:CreationName="Microsoft.ForEachFileEnumerator"
+            DTS:DTSID="{49d30146-fbe5-495f-8326-7684e9434c9d}"
+            DTS:ObjectName="{8CDEE2C3-9CF7-4024-9E77-84AB73BE3D92}">
+            <DTS:PropertyExpression
+              DTS:Name="Directory">@[User::TerminationSourceDirectory_New]</DTS:PropertyExpression>
+            <DTS:ObjectData>
+              <ForEachFileEnumeratorProperties>
+                <FEFEProperty
+                  Folder="C:\Data\files\in\TerminationSource\new" />
+                <FEFEProperty
+                  FileSpec="*.*" />
+                <FEFEProperty
+                  FileNameRetrievalType="0" />
+                <FEFEProperty
+                  Recurse="0" />
+              </ForEachFileEnumeratorProperties>
+            </DTS:ObjectData>
+          </DTS:ForEachEnumerator>
+          <DTS:Variables />
+          <DTS:Executables>
+            <DTS:Executable
+              DTS:refId="Package\Termination Source\Foreach Termination Source File\Archive Termination Source File"
+              DTS:CreationName="Microsoft.FileSystemTask"
+              DTS:Description="File System Task"
+              DTS:DTSID="{e94d8819-a130-4379-8862-9b4afb46ee62}"
+              DTS:ExecutableType="Microsoft.FileSystemTask"
+              DTS:LocaleID="-1"
+              DTS:ObjectName="Archive Termination Source File"
+              DTS:TaskContact="File System Task;Microsoft Corporation; SQL Server 2012; © 2007 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+              DTS:ThreadHint="0">
+              <DTS:Variables />
+              <DTS:ObjectData>
+                <FileSystemData
+                  TaskOperationType="MoveFile"
+                  TaskOverwriteDestFile="True"
+                  TaskSourcePath="{5051F5ED-FFB3-4D3E-B15A-32C873C99764}"
+                  TaskDestinationPath="User::TerminationSourceDirectory_Archive"
+                  TaskIsDestinationVariable="True" />
+              </DTS:ObjectData>
+            </DTS:Executable>
+            <DTS:Executable
+              DTS:refId="Package\Termination Source\Foreach Termination Source File\Load BuuErrTermCancel stage"
+              DTS:CreationName="Microsoft.Pipeline"
+              DTS:Description="Data Flow Task"
+              DTS:DTSID="{eecd7421-e581-413f-a3e6-d0a116c75f17}"
+              DTS:ExecutableType="Microsoft.Pipeline"
+              DTS:LocaleID="-1"
+              DTS:ObjectName="Load BuuErrTermCancel stage"
+              DTS:TaskContact="Performs high-performance data extraction, transformation and loading;Microsoft Corporation; Microsoft SQL Server; (C) 2007 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1">
+              <DTS:Variables />
+              <DTS:ObjectData>
+                <pipeline
+                  version="1">
+                  <components>
+                    <component
+                      refId="Package\Termination Source\Foreach Termination Source File\Load BuuErrTermCancel stage\OLE DB Destination"
+                      componentClassID="Microsoft.OLEDBDestination"
+                      contactInfo="OLE DB Destination;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;4"
+                      description="OLE DB Destination"
+                      name="OLE DB Destination"
+                      usesDispositions="true"
+                      version="4">
+                      <properties>
+                        <property
+                          dataType="System.Int32"
+                          description="The number of seconds before a command times out.  A value of 0 indicates an infinite time-out."
+                          name="CommandTimeout">0</property>
+                        <property
+                          dataType="System.String"
+                          description="Specifies the name of the database object used to open a rowset."
+                          name="OpenRowset">[stage].[BuuErrTermCancel]</property>
+                        <property
+                          dataType="System.String"
+                          description="Specifies the variable that contains the name of the database object used to open a rowset."
+                          name="OpenRowsetVariable"></property>
+                        <property
+                          dataType="System.String"
+                          description="The SQL command to be executed."
+                          name="SqlCommand"
+                          UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor"></property>
+                        <property
+                          dataType="System.Int32"
+                          description="Specifies the column code page to use when code page information is unavailable from the data source."
+                          name="DefaultCodePage">1252</property>
+                        <property
+                          dataType="System.Boolean"
+                          description="Forces the use of the DefaultCodePage property value when describing character data."
+                          name="AlwaysUseDefaultCodePage">false</property>
+                        <property
+                          dataType="System.Int32"
+                          description="Specifies the mode used to access the database."
+                          name="AccessMode"
+                          typeConverter="AccessMode">3</property>
+                        <property
+                          dataType="System.Boolean"
+                          description="Indicates whether the values supplied for identity columns will be copied to the destination. If false, values for identity columns will be auto-generated at the destination. Applies only if fast load is turned on."
+                          name="FastLoadKeepIdentity">false</property>
+                        <property
+                          dataType="System.Boolean"
+                          description="Indicates whether the columns containing null will have null inserted in the destination. If false, columns containing null will have their default values inserted at the destination. Applies only if fast load is turned on."
+                          name="FastLoadKeepNulls">false</property>
+                        <property
+                          dataType="System.String"
+                          description="Specifies options to be used with fast load.  Applies only if fast load is turned on."
+                          name="FastLoadOptions">TABLOCK,CHECK_CONSTRAINTS</property>
+                        <property
+                          dataType="System.Int32"
+                          description="Specifies when commits are issued during data insertion.  A value of 0 specifies that one commit will be issued at the end of data insertion.  Applies only if fast load is turned on."
+                          name="FastLoadMaxInsertCommitSize">2147483647</property>
+                      </properties>
+                      <connections>
+                        <connection
+                          refId="Package\Termination Source\Foreach Termination Source File\Load BuuErrTermCancel stage\OLE DB Destination.Connections[OleDbConnection]"
+                          connectionManagerID="Package.ConnectionManagers[ERR_1095A]"
+                          connectionManagerRefId="Package.ConnectionManagers[ERR_1095A]"
+                          description="The OLE DB runtime connection used to access the database."
+                          name="OleDbConnection" />
+                      </connections>
+                      <inputs>
+                        <input
+                          refId="Package\Termination Source\Foreach Termination Source File\Load BuuErrTermCancel stage\OLE DB Destination.Inputs[OLE DB Destination Input]"
+                          errorOrTruncationOperation="Insert"
+                          errorRowDisposition="FailComponent"
+                          hasSideEffects="true"
+                          name="OLE DB Destination Input">
+                          <inputColumns>
+                            <inputColumn
+                              refId="Package\Termination Source\Foreach Termination Source File\Load BuuErrTermCancel stage\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[MGPI]"
+                              cachedCodepage="1252"
+                              cachedDataType="str"
+                              cachedLength="50"
+                              cachedName="MGPI"
+                              externalMetadataColumnId="Package\Termination Source\Foreach Termination Source File\Load BuuErrTermCancel stage\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[MGPI]"
+                              lineageId="Package\Termination Source\Foreach Termination Source File\Load BuuErrTermCancel stage\Termination Source file.Outputs[Flat File Source Output].Columns[MGPI]" />
+                            <inputColumn
+                              refId="Package\Termination Source\Foreach Termination Source File\Load BuuErrTermCancel stage\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[SEGMENT]"
+                              cachedCodepage="1252"
+                              cachedDataType="str"
+                              cachedLength="50"
+                              cachedName="SEGMENT"
+                              externalMetadataColumnId="Package\Termination Source\Foreach Termination Source File\Load BuuErrTermCancel stage\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[Segment]"
+                              lineageId="Package\Termination Source\Foreach Termination Source File\Load BuuErrTermCancel stage\Termination Source file.Outputs[Flat File Source Output].Columns[SEGMENT]" />
+                            <inputColumn
+                              refId="Package\Termination Source\Foreach Termination Source File\Load BuuErrTermCancel stage\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[CANCELLATION SOURCE]"
+                              cachedCodepage="1252"
+                              cachedDataType="str"
+                              cachedLength="50"
+                              cachedName="CANCELLATION SOURCE"
+                              externalMetadataColumnId="Package\Termination Source\Foreach Termination Source File\Load BuuErrTermCancel stage\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[CancelationSource]"
+                              lineageId="Package\Termination Source\Foreach Termination Source File\Load BuuErrTermCancel stage\Termination Source file.Outputs[Flat File Source Output].Columns[CANCELLATION SOURCE]" />
+                            <inputColumn
+                              refId="Package\Termination Source\Foreach Termination Source File\Load BuuErrTermCancel stage\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[TERMINATION SOURCE]"
+                              cachedCodepage="1252"
+                              cachedDataType="str"
+                              cachedLength="50"
+                              cachedName="TERMINATION SOURCE"
+                              externalMetadataColumnId="Package\Termination Source\Foreach Termination Source File\Load BuuErrTermCancel stage\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[TerminationSource]"
+                              lineageId="Package\Termination Source\Foreach Termination Source File\Load BuuErrTermCancel stage\Termination Source file.Outputs[Flat File Source Output].Columns[TERMINATION SOURCE]" />
+                            <inputColumn
+                              refId="Package\Termination Source\Foreach Termination Source File\Load BuuErrTermCancel stage\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[ESD DATE]"
+                              cachedCodepage="1252"
+                              cachedDataType="str"
+                              cachedLength="50"
+                              cachedName="ESD DATE"
+                              externalMetadataColumnId="Package\Termination Source\Foreach Termination Source File\Load BuuErrTermCancel stage\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[EsdDate]"
+                              lineageId="Package\Termination Source\Foreach Termination Source File\Load BuuErrTermCancel stage\Termination Source file.Outputs[Flat File Source Output].Columns[ESD DATE]" />
+                          </inputColumns>
+                          <externalMetadataColumns
+                            isUsed="True">
+                            <externalMetadataColumn
+                              refId="Package\Termination Source\Foreach Termination Source File\Load BuuErrTermCancel stage\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[BuuErrTermCancelId]"
+                              dataType="i4"
+                              name="BuuErrTermCancelId" />
+                            <externalMetadataColumn
+                              refId="Package\Termination Source\Foreach Termination Source File\Load BuuErrTermCancel stage\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[MGPI]"
+                              codePage="1252"
+                              dataType="str"
+                              length="100"
+                              name="MGPI" />
+                            <externalMetadataColumn
+                              refId="Package\Termination Source\Foreach Termination Source File\Load BuuErrTermCancel stage\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[Segment]"
+                              codePage="1252"
+                              dataType="str"
+                              length="100"
+                              name="Segment" />
+                            <externalMetadataColumn
+                              refId="Package\Termination Source\Foreach Termination Source File\Load BuuErrTermCancel stage\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[CancelationSource]"
+                              dataType="i4"
+                              name="CancelationSource" />
+                            <externalMetadataColumn
+                              refId="Package\Termination Source\Foreach Termination Source File\Load BuuErrTermCancel stage\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[TerminationSource]"
+                              dataType="i4"
+                              name="TerminationSource" />
+                            <externalMetadataColumn
+                              refId="Package\Termination Source\Foreach Termination Source File\Load BuuErrTermCancel stage\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[EsdDate]"
+                              dataType="dbDate"
+                              name="EsdDate" />
+                          </externalMetadataColumns>
+                        </input>
+                      </inputs>
+                      <outputs>
+                        <output
+                          refId="Package\Termination Source\Foreach Termination Source File\Load BuuErrTermCancel stage\OLE DB Destination.Outputs[OLE DB Destination Error Output]"
+                          exclusionGroup="1"
+                          isErrorOut="true"
+                          name="OLE DB Destination Error Output"
+                          synchronousInputId="Package\Termination Source\Foreach Termination Source File\Load BuuErrTermCancel stage\OLE DB Destination.Inputs[OLE DB Destination Input]">
+                          <outputColumns>
+                            <outputColumn
+                              refId="Package\Termination Source\Foreach Termination Source File\Load BuuErrTermCancel stage\OLE DB Destination.Outputs[OLE DB Destination Error Output].Columns[ErrorCode]"
+                              dataType="i4"
+                              lineageId="Package\Termination Source\Foreach Termination Source File\Load BuuErrTermCancel stage\OLE DB Destination.Outputs[OLE DB Destination Error Output].Columns[ErrorCode]"
+                              name="ErrorCode"
+                              specialFlags="1" />
+                            <outputColumn
+                              refId="Package\Termination Source\Foreach Termination Source File\Load BuuErrTermCancel stage\OLE DB Destination.Outputs[OLE DB Destination Error Output].Columns[ErrorColumn]"
+                              dataType="i4"
+                              lineageId="Package\Termination Source\Foreach Termination Source File\Load BuuErrTermCancel stage\OLE DB Destination.Outputs[OLE DB Destination Error Output].Columns[ErrorColumn]"
+                              name="ErrorColumn"
+                              specialFlags="2" />
+                          </outputColumns>
+                          <externalMetadataColumns />
+                        </output>
+                      </outputs>
+                    </component>
+                    <component
+                      refId="Package\Termination Source\Foreach Termination Source File\Load BuuErrTermCancel stage\Termination Source file"
+                      componentClassID="Microsoft.FlatFileSource"
+                      contactInfo="Flat File Source;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;1"
+                      description="Flat File Source"
+                      localeId="1033"
+                      name="Termination Source file"
+                      usesDispositions="true"
+                      version="1">
+                      <properties>
+                        <property
+                          dataType="System.Boolean"
+                          description="Specifies whether zero-length columns are treated as null."
+                          name="RetainNulls">true</property>
+                        <property
+                          dataType="System.String"
+                          description="Specifies the name of an output column containing the file name. If no name is specified, no output column containing the file name will be generated."
+                          name="FileNameColumnName"></property>
+                      </properties>
+                      <connections>
+                        <connection
+                          refId="Package\Termination Source\Foreach Termination Source File\Load BuuErrTermCancel stage\Termination Source file.Connections[FlatFileConnection]"
+                          connectionManagerID="Package.ConnectionManagers[Flat File Connection Manager]"
+                          connectionManagerRefId="Package.ConnectionManagers[Flat File Connection Manager]"
+                          name="FlatFileConnection" />
+                      </connections>
+                      <outputs>
+                        <output
+                          refId="Package\Termination Source\Foreach Termination Source File\Load BuuErrTermCancel stage\Termination Source file.Outputs[Flat File Source Output]"
+                          name="Flat File Source Output">
+                          <outputColumns>
+                            <outputColumn
+                              refId="Package\Termination Source\Foreach Termination Source File\Load BuuErrTermCancel stage\Termination Source file.Outputs[Flat File Source Output].Columns[MGPI]"
+                              codePage="1252"
+                              dataType="str"
+                              errorOrTruncationOperation="Conversion"
+                              errorRowDisposition="FailComponent"
+                              externalMetadataColumnId="Package\Termination Source\Foreach Termination Source File\Load BuuErrTermCancel stage\Termination Source file.Outputs[Flat File Source Output].ExternalColumns[MGPI]"
+                              length="50"
+                              lineageId="Package\Termination Source\Foreach Termination Source File\Load BuuErrTermCancel stage\Termination Source file.Outputs[Flat File Source Output].Columns[MGPI]"
+                              name="MGPI"
+                              truncationRowDisposition="FailComponent">
+                              <properties>
+                                <property
+                                  dataType="System.Boolean"
+                                  description="Indicates whether the column uses the faster, locale-neutral parsing routines."
+                                  name="FastParse">false</property>
+                                <property
+                                  dataType="System.Boolean"
+                                  description="Indicates whether the data is in binary format."
+                                  name="UseBinaryFormat">false</property>
+                              </properties>
+                            </outputColumn>
+                            <outputColumn
+                              refId="Package\Termination Source\Foreach Termination Source File\Load BuuErrTermCancel stage\Termination Source file.Outputs[Flat File Source Output].Columns[SEGMENT]"
+                              codePage="1252"
+                              dataType="str"
+                              errorOrTruncationOperation="Conversion"
+                              errorRowDisposition="FailComponent"
+                              externalMetadataColumnId="Package\Termination Source\Foreach Termination Source File\Load BuuErrTermCancel stage\Termination Source file.Outputs[Flat File Source Output].ExternalColumns[SEGMENT]"
+                              length="50"
+                              lineageId="Package\Termination Source\Foreach Termination Source File\Load BuuErrTermCancel stage\Termination Source file.Outputs[Flat File Source Output].Columns[SEGMENT]"
+                              name="SEGMENT"
+                              truncationRowDisposition="FailComponent">
+                              <properties>
+                                <property
+                                  dataType="System.Boolean"
+                                  description="Indicates whether the column uses the faster, locale-neutral parsing routines."
+                                  name="FastParse">false</property>
+                                <property
+                                  dataType="System.Boolean"
+                                  description="Indicates whether the data is in binary format."
+                                  name="UseBinaryFormat">false</property>
+                              </properties>
+                            </outputColumn>
+                            <outputColumn
+                              refId="Package\Termination Source\Foreach Termination Source File\Load BuuErrTermCancel stage\Termination Source file.Outputs[Flat File Source Output].Columns[CANCELLATION SOURCE]"
+                              codePage="1252"
+                              dataType="str"
+                              errorOrTruncationOperation="Conversion"
+                              errorRowDisposition="FailComponent"
+                              externalMetadataColumnId="Package\Termination Source\Foreach Termination Source File\Load BuuErrTermCancel stage\Termination Source file.Outputs[Flat File Source Output].ExternalColumns[CANCELLATION SOURCE]"
+                              length="50"
+                              lineageId="Package\Termination Source\Foreach Termination Source File\Load BuuErrTermCancel stage\Termination Source file.Outputs[Flat File Source Output].Columns[CANCELLATION SOURCE]"
+                              name="CANCELLATION SOURCE"
+                              truncationRowDisposition="FailComponent">
+                              <properties>
+                                <property
+                                  dataType="System.Boolean"
+                                  description="Indicates whether the column uses the faster, locale-neutral parsing routines."
+                                  name="FastParse">false</property>
+                                <property
+                                  dataType="System.Boolean"
+                                  description="Indicates whether the data is in binary format."
+                                  name="UseBinaryFormat">false</property>
+                              </properties>
+                            </outputColumn>
+                            <outputColumn
+                              refId="Package\Termination Source\Foreach Termination Source File\Load BuuErrTermCancel stage\Termination Source file.Outputs[Flat File Source Output].Columns[TERMINATION SOURCE]"
+                              codePage="1252"
+                              dataType="str"
+                              errorOrTruncationOperation="Conversion"
+                              errorRowDisposition="FailComponent"
+                              externalMetadataColumnId="Package\Termination Source\Foreach Termination Source File\Load BuuErrTermCancel stage\Termination Source file.Outputs[Flat File Source Output].ExternalColumns[TERMINATION SOURCE]"
+                              length="50"
+                              lineageId="Package\Termination Source\Foreach Termination Source File\Load BuuErrTermCancel stage\Termination Source file.Outputs[Flat File Source Output].Columns[TERMINATION SOURCE]"
+                              name="TERMINATION SOURCE"
+                              truncationRowDisposition="FailComponent">
+                              <properties>
+                                <property
+                                  dataType="System.Boolean"
+                                  description="Indicates whether the column uses the faster, locale-neutral parsing routines."
+                                  name="FastParse">false</property>
+                                <property
+                                  dataType="System.Boolean"
+                                  description="Indicates whether the data is in binary format."
+                                  name="UseBinaryFormat">false</property>
+                              </properties>
+                            </outputColumn>
+                            <outputColumn
+                              refId="Package\Termination Source\Foreach Termination Source File\Load BuuErrTermCancel stage\Termination Source file.Outputs[Flat File Source Output].Columns[ESD DATE]"
+                              codePage="1252"
+                              dataType="str"
+                              errorOrTruncationOperation="Conversion"
+                              errorRowDisposition="FailComponent"
+                              externalMetadataColumnId="Package\Termination Source\Foreach Termination Source File\Load BuuErrTermCancel stage\Termination Source file.Outputs[Flat File Source Output].ExternalColumns[ESD DATE]"
+                              length="50"
+                              lineageId="Package\Termination Source\Foreach Termination Source File\Load BuuErrTermCancel stage\Termination Source file.Outputs[Flat File Source Output].Columns[ESD DATE]"
+                              name="ESD DATE"
+                              truncationRowDisposition="FailComponent">
+                              <properties>
+                                <property
+                                  dataType="System.Boolean"
+                                  description="Indicates whether the column uses the faster, locale-neutral parsing routines."
+                                  name="FastParse">false</property>
+                                <property
+                                  dataType="System.Boolean"
+                                  description="Indicates whether the data is in binary format."
+                                  name="UseBinaryFormat">false</property>
+                              </properties>
+                            </outputColumn>
+                          </outputColumns>
+                          <externalMetadataColumns
+                            isUsed="True">
+                            <externalMetadataColumn
+                              refId="Package\Termination Source\Foreach Termination Source File\Load BuuErrTermCancel stage\Termination Source file.Outputs[Flat File Source Output].ExternalColumns[MGPI]"
+                              codePage="1252"
+                              dataType="str"
+                              length="50"
+                              name="MGPI" />
+                            <externalMetadataColumn
+                              refId="Package\Termination Source\Foreach Termination Source File\Load BuuErrTermCancel stage\Termination Source file.Outputs[Flat File Source Output].ExternalColumns[SEGMENT]"
+                              codePage="1252"
+                              dataType="str"
+                              length="50"
+                              name="SEGMENT" />
+                            <externalMetadataColumn
+                              refId="Package\Termination Source\Foreach Termination Source File\Load BuuErrTermCancel stage\Termination Source file.Outputs[Flat File Source Output].ExternalColumns[CANCELLATION SOURCE]"
+                              codePage="1252"
+                              dataType="str"
+                              length="50"
+                              name="CANCELLATION SOURCE" />
+                            <externalMetadataColumn
+                              refId="Package\Termination Source\Foreach Termination Source File\Load BuuErrTermCancel stage\Termination Source file.Outputs[Flat File Source Output].ExternalColumns[TERMINATION SOURCE]"
+                              codePage="1252"
+                              dataType="str"
+                              length="50"
+                              name="TERMINATION SOURCE" />
+                            <externalMetadataColumn
+                              refId="Package\Termination Source\Foreach Termination Source File\Load BuuErrTermCancel stage\Termination Source file.Outputs[Flat File Source Output].ExternalColumns[ESD DATE]"
+                              codePage="1252"
+                              dataType="str"
+                              length="50"
+                              name="ESD DATE" />
+                          </externalMetadataColumns>
+                        </output>
+                        <output
+                          refId="Package\Termination Source\Foreach Termination Source File\Load BuuErrTermCancel stage\Termination Source file.Outputs[Flat File Source Error Output]"
+                          isErrorOut="true"
+                          name="Flat File Source Error Output">
+                          <outputColumns>
+                            <outputColumn
+                              refId="Package\Termination Source\Foreach Termination Source File\Load BuuErrTermCancel stage\Termination Source file.Outputs[Flat File Source Error Output].Columns[Flat File Source Error Output Column]"
+                              codePage="1252"
+                              dataType="text"
+                              description="Flat File Source Error Output Column"
+                              lineageId="Package\Termination Source\Foreach Termination Source File\Load BuuErrTermCancel stage\Termination Source file.Outputs[Flat File Source Error Output].Columns[Flat File Source Error Output Column]"
+                              name="Flat File Source Error Output Column" />
+                            <outputColumn
+                              refId="Package\Termination Source\Foreach Termination Source File\Load BuuErrTermCancel stage\Termination Source file.Outputs[Flat File Source Error Output].Columns[ErrorCode]"
+                              dataType="i4"
+                              lineageId="Package\Termination Source\Foreach Termination Source File\Load BuuErrTermCancel stage\Termination Source file.Outputs[Flat File Source Error Output].Columns[ErrorCode]"
+                              name="ErrorCode"
+                              specialFlags="1" />
+                            <outputColumn
+                              refId="Package\Termination Source\Foreach Termination Source File\Load BuuErrTermCancel stage\Termination Source file.Outputs[Flat File Source Error Output].Columns[ErrorColumn]"
+                              dataType="i4"
+                              lineageId="Package\Termination Source\Foreach Termination Source File\Load BuuErrTermCancel stage\Termination Source file.Outputs[Flat File Source Error Output].Columns[ErrorColumn]"
+                              name="ErrorColumn"
+                              specialFlags="2" />
+                          </outputColumns>
+                          <externalMetadataColumns />
+                        </output>
+                      </outputs>
+                    </component>
+                  </components>
+                  <paths>
+                    <path
+                      refId="Package\Termination Source\Foreach Termination Source File\Load BuuErrTermCancel stage.Paths[Flat File Source Output]"
+                      endId="Package\Termination Source\Foreach Termination Source File\Load BuuErrTermCancel stage\OLE DB Destination.Inputs[OLE DB Destination Input]"
+                      name="Flat File Source Output"
+                      startId="Package\Termination Source\Foreach Termination Source File\Load BuuErrTermCancel stage\Termination Source file.Outputs[Flat File Source Output]" />
+                  </paths>
+                </pipeline>
+              </DTS:ObjectData>
+            </DTS:Executable>
+            <DTS:Executable
+              DTS:refId="Package\Termination Source\Foreach Termination Source File\Load stage to archive table"
+              DTS:CreationName="Microsoft.ExecuteSQLTask"
+              DTS:Description="Execute SQL Task"
+              DTS:DTSID="{8cb02031-326c-457e-b974-cb8b4ec35fa6}"
+              DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+              DTS:LocaleID="-1"
+              DTS:ObjectName="Load stage to archive table"
+              DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2012; © 2007 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+              DTS:ThreadHint="0">
+              <DTS:Variables />
+              <DTS:ObjectData>
+                <SQLTask:SqlTaskData
+                  SQLTask:Connection="{DD267035-8D94-4E04-A808-414ADD84CFD9}"
+                  SQLTask:SqlStatementSource="EXEC [dbo].[pLoad_BuuErrTermCancelArchive]" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
+              </DTS:ObjectData>
+            </DTS:Executable>
+            <DTS:Executable
+              DTS:refId="Package\Termination Source\Foreach Termination Source File\Merge BuuErrTermCancel Execute SQL Task"
+              DTS:CreationName="Microsoft.ExecuteSQLTask"
+              DTS:Description="Execute SQL Task"
+              DTS:DTSID="{d5350b68-5273-4866-b824-54e3a99236b5}"
+              DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+              DTS:LocaleID="-1"
+              DTS:ObjectName="Merge BuuErrTermCancel Execute SQL Task"
+              DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2012; © 2007 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+              DTS:ThreadHint="0">
+              <DTS:Variables />
+              <DTS:ObjectData>
+                <SQLTask:SqlTaskData
+                  SQLTask:Connection="{DD267035-8D94-4E04-A808-414ADD84CFD9}"
+                  SQLTask:SqlStatementSource="EXEC [dbo].[pMergeBuuErrTermCancel]" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
+              </DTS:ObjectData>
+            </DTS:Executable>
+            <DTS:Executable
+              DTS:refId="Package\Termination Source\Foreach Termination Source File\Truncate stage"
+              DTS:CreationName="Microsoft.ExecuteSQLTask"
+              DTS:Description="Execute SQL Task"
+              DTS:DTSID="{20386279-f57b-4187-a49b-ca4cec41d421}"
+              DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+              DTS:LocaleID="-1"
+              DTS:ObjectName="Truncate stage"
+              DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2012; © 2007 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+              DTS:ThreadHint="0">
+              <DTS:Variables />
+              <DTS:ObjectData>
+                <SQLTask:SqlTaskData
+                  SQLTask:Connection="{DD267035-8D94-4E04-A808-414ADD84CFD9}"
+                  SQLTask:SqlStatementSource="TRUNCATE TABLE [stage].[BuuErrTermCancel];" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
+              </DTS:ObjectData>
+            </DTS:Executable>
+          </DTS:Executables>
+          <DTS:PrecedenceConstraints>
+            <DTS:PrecedenceConstraint
+              DTS:refId="Package\Termination Source\Foreach Termination Source File.PrecedenceConstraints[Constraint]"
+              DTS:CreationName=""
+              DTS:DTSID="{609EF9E8-EDD2-43B4-A72C-A3A4DFE7CD61}"
+              DTS:From="Package\Termination Source\Foreach Termination Source File\Load BuuErrTermCancel stage"
+              DTS:LogicalAnd="True"
+              DTS:ObjectName="Constraint"
+              DTS:To="Package\Termination Source\Foreach Termination Source File\Merge BuuErrTermCancel Execute SQL Task" />
+            <DTS:PrecedenceConstraint
+              DTS:refId="Package\Termination Source\Foreach Termination Source File.PrecedenceConstraints[Constraint 1]"
+              DTS:CreationName=""
+              DTS:DTSID="{8B6850FE-4254-405D-8D3C-7AD4007857B4}"
+              DTS:From="Package\Termination Source\Foreach Termination Source File\Merge BuuErrTermCancel Execute SQL Task"
+              DTS:LogicalAnd="True"
+              DTS:ObjectName="Constraint 1"
+              DTS:To="Package\Termination Source\Foreach Termination Source File\Load stage to archive table" />
+            <DTS:PrecedenceConstraint
+              DTS:refId="Package\Termination Source\Foreach Termination Source File.PrecedenceConstraints[Constraint 2]"
+              DTS:CreationName=""
+              DTS:DTSID="{97C29419-1257-4454-9E2B-8EF2A25ADE8B}"
+              DTS:From="Package\Termination Source\Foreach Termination Source File\Load stage to archive table"
+              DTS:LogicalAnd="True"
+              DTS:ObjectName="Constraint 2"
+              DTS:To="Package\Termination Source\Foreach Termination Source File\Archive Termination Source File" />
+            <DTS:PrecedenceConstraint
+              DTS:refId="Package\Termination Source\Foreach Termination Source File.PrecedenceConstraints[Constraint 3]"
+              DTS:CreationName=""
+              DTS:DTSID="{D81B4E61-0D9F-4649-8BAC-93B8105F51D7}"
+              DTS:From="Package\Termination Source\Foreach Termination Source File\Archive Termination Source File"
+              DTS:LogicalAnd="True"
+              DTS:ObjectName="Constraint 3"
+              DTS:To="Package\Termination Source\Foreach Termination Source File\Truncate stage" />
+          </DTS:PrecedenceConstraints>
+          <DTS:ForEachVariableMappings>
+            <DTS:ForEachVariableMapping
+              DTS:CreationName=""
+              DTS:DTSID="{B31F65E6-1A95-4EA2-9ED9-F32A5265E73A}"
+              DTS:ObjectName="{B31F65E6-1A95-4EA2-9ED9-F32A5265E73A}"
+              DTS:ValueIndex="0"
+              DTS:VariableName="User::TerminationSource_FileName" />
+          </DTS:ForEachVariableMappings>
+        </DTS:Executable>
+        <DTS:Executable
+          DTS:refId="Package\Termination Source\Log Message Execute SQL Task"
+          DTS:CreationName="Microsoft.ExecuteSQLTask"
+          DTS:Description="Execute SQL Task"
+          DTS:DTSID="{3e5f3a99-8c6d-437b-83af-96b244488eb3}"
+          DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+          DTS:LocaleID="-1"
+          DTS:ObjectName="Log Message Execute SQL Task"
+          DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2012; © 2007 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+          DTS:ThreadHint="0">
+          <DTS:Variables />
+          <DTS:ObjectData>
+            <SQLTask:SqlTaskData
+              SQLTask:Connection="{DD267035-8D94-4E04-A808-414ADD84CFD9}"
+              SQLTask:SqlStatementSource="INSERT INTO [dbo].[SSIS_Execution_Log]&#xA;           ([Category]&#xA;           ,[Package]&#xA;           ,[Package_Execution_Id]&#xA;           ,[Task]&#xA;           ,[Event_Details]&#xA;           ,[Custom_Message])&#xA;     VALUES&#xA;           ('SSIS Package'&#xA;           ,?&#xA;           ,?&#xA;           ,?&#xA;           ,?&#xA;           ,'')" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask">
+              <SQLTask:ParameterBinding
+                SQLTask:ParameterName="0"
+                SQLTask:DtsVariableName="System::PackageName"
+                SQLTask:ParameterDirection="Input"
+                SQLTask:DataType="129"
+                SQLTask:ParameterSize="255" />
+              <SQLTask:ParameterBinding
+                SQLTask:ParameterName="1"
+                SQLTask:DtsVariableName="System::ExecutionInstanceGUID"
+                SQLTask:ParameterDirection="Input"
+                SQLTask:DataType="129"
+                SQLTask:ParameterSize="255" />
+              <SQLTask:ParameterBinding
+                SQLTask:ParameterName="2"
+                SQLTask:DtsVariableName="System::PackageName"
+                SQLTask:ParameterDirection="Input"
+                SQLTask:DataType="129"
+                SQLTask:ParameterSize="255" />
+              <SQLTask:ParameterBinding
+                SQLTask:ParameterName="3"
+                SQLTask:DtsVariableName="User::TerminationSourceDirectory_New"
+                SQLTask:ParameterDirection="Input"
+                SQLTask:DataType="129"
+                SQLTask:ParameterSize="255" />
+            </SQLTask:SqlTaskData>
+          </DTS:ObjectData>
+        </DTS:Executable>
+        <DTS:Executable
+          DTS:refId="Package\Termination Source\Truncate BuuErrTermCancel stage"
+          DTS:CreationName="Microsoft.ExecuteSQLTask"
+          DTS:Description="Execute SQL Task"
+          DTS:DTSID="{e714e44f-42c1-4ff6-b003-d47a7a6c3584}"
+          DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+          DTS:LocaleID="-1"
+          DTS:ObjectName="Truncate BuuErrTermCancel stage"
+          DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2012; © 2007 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+          DTS:ThreadHint="0">
+          <DTS:Variables />
+          <DTS:ObjectData>
+            <SQLTask:SqlTaskData
+              SQLTask:Connection="{DD267035-8D94-4E04-A808-414ADD84CFD9}"
+              SQLTask:SqlStatementSource="TRUNCATE TABLE [stage].[BuuErrTermCancel];" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
+          </DTS:ObjectData>
+        </DTS:Executable>
+      </DTS:Executables>
+      <DTS:PrecedenceConstraints>
+        <DTS:PrecedenceConstraint
+          DTS:refId="Package\Termination Source.PrecedenceConstraints[Constraint]"
+          DTS:CreationName=""
+          DTS:DTSID="{51428ef7-121d-43d0-931b-2ad43f0cdfab}"
+          DTS:From="Package\Termination Source\Log Message Execute SQL Task"
+          DTS:LogicalAnd="True"
+          DTS:ObjectName="Constraint"
+          DTS:To="Package\Termination Source\Truncate BuuErrTermCancel stage" />
+        <DTS:PrecedenceConstraint
+          DTS:refId="Package\Termination Source.PrecedenceConstraints[Constraint 1]"
+          DTS:CreationName=""
+          DTS:DTSID="{c1de058d-b068-45ec-803a-210433354275}"
+          DTS:From="Package\Termination Source\Truncate BuuErrTermCancel stage"
+          DTS:LogicalAnd="True"
+          DTS:ObjectName="Constraint 1"
+          DTS:To="Package\Termination Source\Foreach Termination Source File" />
+      </DTS:PrecedenceConstraints>
+    </DTS:Executable>
+  </DTS:Executables>
+  <DTS:DesignTimeProperties><![CDATA[<?xml version="1.0"?>
+<!--This CDATA section contains the layout information of the package. The section includes information such as (x,y) coordinates, width, and height.-->
+<!--If you manually edit this section and make a mistake, you can delete it. -->
+<!--The package will still be able to load normally but the previous layout information will be lost and the designer will automatically re-arrange the elements on the design surface.-->
+<Objects
+  Version="8">
+  <!--Each node below will contain properties that do not affect runtime behavior.-->
+  <Package
+    design-time-name="Package">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="16" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
+        <NodeLayout
+          Size="228,42"
+          Id="Package\Termination Source\Foreach Termination Source File\Archive Termination Source File"
+          TopLeft="123.362554112554,316.293831168831" />
+        <NodeLayout
+          Size="221,42"
+          Id="Package\Termination Source\Foreach Termination Source File\Load BuuErrTermCancel stage"
+          TopLeft="126.862554112554,32.1753246753249" />
+        <NodeLayout
+          Size="207,42"
+          Id="Package\Termination Source\Foreach Termination Source File\Load stage to archive table"
+          TopLeft="133.862554112554,221.587662337662" />
+        <NodeLayout
+          Size="287,42"
+          Id="Package\Termination Source\Foreach Termination Source File\Merge BuuErrTermCancel Execute SQL Task"
+          TopLeft="93.8625541125542,126.881493506494" />
+        <NodeLayout
+          Size="149,42"
+          Id="Package\Termination Source\Foreach Termination Source File\Truncate stage"
+          TopLeft="161,411" />
+        <EdgeLayout
+          Id="Package\Termination Source\Foreach Termination Source File.PrecedenceConstraints[Constraint]"
+          TopLeft="237.362554112554,74.1753246753249">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,52.7061688311688"
+              Start="0,0"
+              End="0,45.2061688311688">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,45.2061688311688" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\Termination Source\Foreach Termination Source File.PrecedenceConstraints[Constraint 1]"
+          TopLeft="237.362554112554,168.881493506494">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,52.7061688311688"
+              Start="0,0"
+              End="0,45.2061688311688">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,45.2061688311688" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\Termination Source\Foreach Termination Source File.PrecedenceConstraints[Constraint 2]"
+          TopLeft="237.362554112554,263.587662337662">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,52.7061688311688"
+              Start="0,0"
+              End="0,45.2061688311688">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,45.2061688311688" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\Termination Source\Foreach Termination Source File.PrecedenceConstraints[Constraint 3]"
+          TopLeft="236.431277056277,358.293831168831">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,52.7061688311688"
+              Start="0,0"
+              End="0,45.2061688311688">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,45.2061688311688" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <ContainerLayout
+          HeaderHeight="43"
+          IsExpanded="True"
+          PanelSize="475,490"
+          Size="475,533"
+          Id="Package\Termination Source\Foreach Termination Source File"
+          TopLeft="52.3690476190475,183.654761904762" />
+        <NodeLayout
+          Size="229,42"
+          Id="Package\Termination Source\Log Message Execute SQL Task"
+          TopLeft="173.142857142857,28.5714285714286" />
+        <NodeLayout
+          Size="240,42"
+          Id="Package\Termination Source\Truncate BuuErrTermCancel stage"
+          TopLeft="167.5,104.5" />
+        <EdgeLayout
+          Id="Package\Termination Source.PrecedenceConstraints[Constraint]"
+          TopLeft="287.571428571429,70.5714285714286">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,33.9285714285714"
+              Start="0,0"
+              End="0,26.4285714285714">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,26.4285714285714" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\Termination Source.PrecedenceConstraints[Constraint 1]"
+          TopLeft="288.684523809524,146.5">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,37.154761904762"
+              Start="0,0"
+              End="0,29.654761904762">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,29.654761904762" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <ContainerLayout
+          HeaderHeight="43"
+          IsExpanded="True"
+          PanelSize="574,757"
+          Size="574,800"
+          Id="Package\Termination Source"
+          TopLeft="60,66.6666666666666" />
+      </GraphLayout>
+    </LayoutInfo>
+  </Package>
+  <TaskHost
+    design-time-name="Package\Termination Source\Foreach Termination Source File\Load BuuErrTermCancel stage">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
+        <NodeLayout
+          Size="188,42"
+          Id="Package\Termination Source\Foreach Termination Source File\Load BuuErrTermCancel stage\Termination Source file"
+          TopLeft="67,60" />
+        <NodeLayout
+          Size="173,42"
+          Id="Package\Termination Source\Foreach Termination Source File\Load BuuErrTermCancel stage\OLE DB Destination"
+          TopLeft="74,171" />
+        <EdgeLayout
+          Id="Package\Termination Source\Foreach Termination Source File\Load BuuErrTermCancel stage.Paths[Flat File Source Output]"
+          TopLeft="160.75,102">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,69"
+              Start="0,0"
+              End="0,61.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,61.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+      </GraphLayout>
+    </LayoutInfo>
+  </TaskHost>
+  <PipelineComponentMetadata
+    design-time-name="Package\Termination Source\Foreach Termination Source File\Load BuuErrTermCancel stage\OLE DB Destination">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+      <Property>
+        <Name>TableInfoObjectType</Name>
+        <Value
+          type="q2:string">Table</Value>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+</Objects>]]></DTS:DesignTimeProperties>
+</DTS:Executable>

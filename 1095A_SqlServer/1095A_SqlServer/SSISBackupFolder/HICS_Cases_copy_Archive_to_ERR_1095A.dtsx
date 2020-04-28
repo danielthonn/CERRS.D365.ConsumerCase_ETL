@@ -1,0 +1,2526 @@
+<?xml version="1.0"?>
+<DTS:Executable xmlns:DTS="www.microsoft.com/SqlServer/Dts"
+  DTS:refId="Package"
+  DTS:CreationDate="1/11/2017 8:40:04 AM"
+  DTS:CreationName="Microsoft.Package"
+  DTS:CreatorComputerName="WIN-J49D2568219"
+  DTS:CreatorName="CERRS-AWSCLOUD\l5hp"
+  DTS:Description="SSIS Package Description"
+  DTS:DTSID="{5E413095-B344-4BEC-96A1-E952DDF6BE7B}"
+  DTS:ExecutableType="Microsoft.Package"
+  DTS:LastModifiedProductVersion="13.0.1601.5"
+  DTS:LocaleID="1033"
+  DTS:MaxErrorCount="0"
+  DTS:ObjectName="HICS_Cases_copy_Archive_to_ERR_1095A"
+  DTS:VersionBuild="2"
+  DTS:VersionGUID="{0FED042B-FF90-4AE7-892E-C53E7C7A3029}">
+  <DTS:Property
+    DTS:Name="PackageFormatVersion">8</DTS:Property>
+  <DTS:ConnectionManagers>
+    <DTS:ConnectionManager
+      DTS:refId="Package.ConnectionManagers[DestinationConnectionOLEDB]"
+      DTS:CreationName="OLEDB"
+      DTS:DTSID="{182A3005-1978-4C9C-8DEE-8C5BA6F5BFAD}"
+      DTS:ObjectName="DestinationConnectionOLEDB">
+      <DTS:ObjectData>
+        <DTS:ConnectionManager
+          DTS:ConnectionString="Data Source=localhost;Initial Catalog=ERR_1095A;Provider=SQLNCLI11.1;Integrated Security=SSPI;Auto Translate=false;" />
+      </DTS:ObjectData>
+    </DTS:ConnectionManager>
+    <DTS:ConnectionManager
+      DTS:refId="Package.ConnectionManagers[SourceConnectionOLEDB]"
+      DTS:CreationName="OLEDB"
+      DTS:DTSID="{D5AC7309-22F3-4710-9147-ECECA6CE24D2}"
+      DTS:ObjectName="SourceConnectionOLEDB">
+      <DTS:ObjectData>
+        <DTS:ConnectionManager
+          DTS:ConnectionString="Data Source=localhost;Initial Catalog=Archive;Provider=SQLNCLI11.1;Integrated Security=SSPI;Auto Translate=false;" />
+      </DTS:ObjectData>
+    </DTS:ConnectionManager>
+  </DTS:ConnectionManagers>
+  <DTS:Variables />
+  <DTS:Executables>
+    <DTS:Executable
+      DTS:refId="Package\Data Flow Task 1"
+      DTS:CreationName="Microsoft.Pipeline"
+      DTS:DTSID="{E1D9D8ED-192E-4696-A4C7-CF8D51B634AC}"
+      DTS:ExecutableType="Microsoft.Pipeline"
+      DTS:FailPackageOnFailure="True"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Data Flow Task 1"
+      DTS:TaskContact="Performs high-performance data extraction, transformation and loading;Microsoft Corporation; Microsoft SQL Server; (C) 2007 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <pipeline
+          defaultBufferSize="3145728"
+          version="1">
+          <components>
+            <component
+              refId="Package\Data Flow Task 1\Destination - HICS_Cases"
+              componentClassID="Microsoft.OLEDBDestination"
+              contactInfo="OLE DB Destination;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;4"
+              description="OLE DB Destination"
+              name="Destination - HICS_Cases"
+              usesDispositions="true"
+              version="4">
+              <properties>
+                <property
+                  dataType="System.Int32"
+                  description="The number of seconds before a command times out.  A value of 0 indicates an infinite time-out."
+                  name="CommandTimeout">0</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the name of the database object used to open a rowset."
+                  name="OpenRowset">[stage].[HICS_Cases]</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the variable that contains the name of the database object used to open a rowset."
+                  name="OpenRowsetVariable"></property>
+                <property
+                  dataType="System.String"
+                  description="The SQL command to be executed."
+                  name="SqlCommand"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor"></property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the column code page to use when code page information is unavailable from the data source."
+                  name="DefaultCodePage">1252</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Forces the use of the DefaultCodePage property value when describing character data."
+                  name="AlwaysUseDefaultCodePage">false</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the mode used to access the database."
+                  name="AccessMode"
+                  typeConverter="AccessMode">3</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Indicates whether the values supplied for identity columns will be copied to the destination. If false, values for identity columns will be auto-generated at the destination. Applies only if fast load is turned on."
+                  name="FastLoadKeepIdentity">false</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Indicates whether the columns containing null will have null inserted in the destination. If false, columns containing null will have their default values inserted at the destination. Applies only if fast load is turned on."
+                  name="FastLoadKeepNulls">false</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies options to be used with fast load.  Applies only if fast load is turned on."
+                  name="FastLoadOptions">TABLOCK,CHECK_CONSTRAINTS</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies when commits are issued during data insertion.  A value of 0 specifies that one commit will be issued at the end of data insertion.  Applies only if fast load is turned on."
+                  name="FastLoadMaxInsertCommitSize">2147483647</property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\Data Flow Task 1\Destination - HICS_Cases.Connections[OleDbConnection]"
+                  connectionManagerID="Package.ConnectionManagers[DestinationConnectionOLEDB]"
+                  connectionManagerRefId="Package.ConnectionManagers[DestinationConnectionOLEDB]"
+                  description="The OLE DB runtime connection used to access the database."
+                  name="OleDbConnection" />
+              </connections>
+              <inputs>
+                <input
+                  refId="Package\Data Flow Task 1\Destination - HICS_Cases.Inputs[Destination Input]"
+                  errorOrTruncationOperation="Insert"
+                  errorRowDisposition="FailComponent"
+                  hasSideEffects="true"
+                  name="Destination Input">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\Data Flow Task 1\Destination - HICS_Cases.Inputs[Destination Input].Columns[Case_ID]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="15"
+                      cachedName="Case_ID"
+                      externalMetadataColumnId="Package\Data Flow Task 1\Destination - HICS_Cases.Inputs[Destination Input].ExternalColumns[Case_ID]"
+                      lineageId="Package\Data Flow Task 1\Source - HICS_Cases.Outputs[OLE DB Source Output].Columns[Case_ID]" />
+                    <inputColumn
+                      refId="Package\Data Flow Task 1\Destination - HICS_Cases.Inputs[Destination Input].Columns[Case_Narrative]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="8000"
+                      cachedName="Case_Narrative"
+                      externalMetadataColumnId="Package\Data Flow Task 1\Destination - HICS_Cases.Inputs[Destination Input].ExternalColumns[Case_Narrative]"
+                      lineageId="Package\Data Flow Task 1\Source - HICS_Cases.Outputs[OLE DB Source Output].Columns[Case_Narrative]" />
+                    <inputColumn
+                      refId="Package\Data Flow Task 1\Destination - HICS_Cases.Inputs[Destination Input].Columns[Received Date]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="25"
+                      cachedName="Received Date"
+                      externalMetadataColumnId="Package\Data Flow Task 1\Destination - HICS_Cases.Inputs[Destination Input].ExternalColumns[Received Date]"
+                      lineageId="Package\Data Flow Task 1\Source - HICS_Cases.Outputs[OLE DB Source Output].Columns[Received Date]" />
+                    <inputColumn
+                      refId="Package\Data Flow Task 1\Destination - HICS_Cases.Inputs[Destination Input].Columns[Issuer Assignment Date]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="25"
+                      cachedName="Issuer Assignment Date"
+                      externalMetadataColumnId="Package\Data Flow Task 1\Destination - HICS_Cases.Inputs[Destination Input].ExternalColumns[Issuer Assignment Date]"
+                      lineageId="Package\Data Flow Task 1\Source - HICS_Cases.Outputs[OLE DB Source Output].Columns[Issuer Assignment Date]" />
+                    <inputColumn
+                      refId="Package\Data Flow Task 1\Destination - HICS_Cases.Inputs[Destination Input].Columns[Caseworker Assignment Date]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="25"
+                      cachedName="Caseworker Assignment Date"
+                      externalMetadataColumnId="Package\Data Flow Task 1\Destination - HICS_Cases.Inputs[Destination Input].ExternalColumns[Caseworker Assignment Date]"
+                      lineageId="Package\Data Flow Task 1\Source - HICS_Cases.Outputs[OLE DB Source Output].Columns[Caseworker Assignment Date]" />
+                    <inputColumn
+                      refId="Package\Data Flow Task 1\Destination - HICS_Cases.Inputs[Destination Input].Columns[Issuer ID]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="50"
+                      cachedName="Issuer ID"
+                      externalMetadataColumnId="Package\Data Flow Task 1\Destination - HICS_Cases.Inputs[Destination Input].ExternalColumns[Issuer ID]"
+                      lineageId="Package\Data Flow Task 1\Source - HICS_Cases.Outputs[OLE DB Source Output].Columns[Issuer ID]" />
+                    <inputColumn
+                      refId="Package\Data Flow Task 1\Destination - HICS_Cases.Inputs[Destination Input].Columns[Parent Organization]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="100"
+                      cachedName="Parent Organization"
+                      externalMetadataColumnId="Package\Data Flow Task 1\Destination - HICS_Cases.Inputs[Destination Input].ExternalColumns[Parent Organization]"
+                      lineageId="Package\Data Flow Task 1\Source - HICS_Cases.Outputs[OLE DB Source Output].Columns[Parent Organization]" />
+                    <inputColumn
+                      refId="Package\Data Flow Task 1\Destination - HICS_Cases.Inputs[Destination Input].Columns[Issuer Name]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="100"
+                      cachedName="Issuer Name"
+                      externalMetadataColumnId="Package\Data Flow Task 1\Destination - HICS_Cases.Inputs[Destination Input].ExternalColumns[Issuer Name]"
+                      lineageId="Package\Data Flow Task 1\Source - HICS_Cases.Outputs[OLE DB Source Output].Columns[Issuer Name]" />
+                    <inputColumn
+                      refId="Package\Data Flow Task 1\Destination - HICS_Cases.Inputs[Destination Input].Columns[Issuer State]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="2"
+                      cachedName="Issuer State"
+                      externalMetadataColumnId="Package\Data Flow Task 1\Destination - HICS_Cases.Inputs[Destination Input].ExternalColumns[Issuer State]"
+                      lineageId="Package\Data Flow Task 1\Source - HICS_Cases.Outputs[OLE DB Source Output].Columns[Issuer State]" />
+                    <inputColumn
+                      refId="Package\Data Flow Task 1\Destination - HICS_Cases.Inputs[Destination Input].Columns[Other Issuer Plan ID]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="100"
+                      cachedName="Other Issuer Plan ID"
+                      externalMetadataColumnId="Package\Data Flow Task 1\Destination - HICS_Cases.Inputs[Destination Input].ExternalColumns[Other Issuer Plan ID]"
+                      lineageId="Package\Data Flow Task 1\Source - HICS_Cases.Outputs[OLE DB Source Output].Columns[Other Issuer Plan ID]" />
+                    <inputColumn
+                      refId="Package\Data Flow Task 1\Destination - HICS_Cases.Inputs[Destination Input].Columns[Plan ID]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="50"
+                      cachedName="Plan ID"
+                      externalMetadataColumnId="Package\Data Flow Task 1\Destination - HICS_Cases.Inputs[Destination Input].ExternalColumns[Plan ID]"
+                      lineageId="Package\Data Flow Task 1\Source - HICS_Cases.Outputs[OLE DB Source Output].Columns[Plan ID]" />
+                    <inputColumn
+                      refId="Package\Data Flow Task 1\Destination - HICS_Cases.Inputs[Destination Input].Columns[Plan Name]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="200"
+                      cachedName="Plan Name"
+                      externalMetadataColumnId="Package\Data Flow Task 1\Destination - HICS_Cases.Inputs[Destination Input].ExternalColumns[Plan Name]"
+                      lineageId="Package\Data Flow Task 1\Source - HICS_Cases.Outputs[OLE DB Source Output].Columns[Plan Name]" />
+                    <inputColumn
+                      refId="Package\Data Flow Task 1\Destination - HICS_Cases.Inputs[Destination Input].Columns[Case Source]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="10"
+                      cachedName="Case Source"
+                      externalMetadataColumnId="Package\Data Flow Task 1\Destination - HICS_Cases.Inputs[Destination Input].ExternalColumns[Case Source]"
+                      lineageId="Package\Data Flow Task 1\Source - HICS_Cases.Outputs[OLE DB Source Output].Columns[Case Source]" />
+                    <inputColumn
+                      refId="Package\Data Flow Task 1\Destination - HICS_Cases.Inputs[Destination Input].Columns[Case Source Description]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="100"
+                      cachedName="Case Source Description"
+                      externalMetadataColumnId="Package\Data Flow Task 1\Destination - HICS_Cases.Inputs[Destination Input].ExternalColumns[Case Source Description]"
+                      lineageId="Package\Data Flow Task 1\Source - HICS_Cases.Outputs[OLE DB Source Output].Columns[Case Source Description]" />
+                    <inputColumn
+                      refId="Package\Data Flow Task 1\Destination - HICS_Cases.Inputs[Destination Input].Columns[Issue Level]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="20"
+                      cachedName="Issue Level"
+                      externalMetadataColumnId="Package\Data Flow Task 1\Destination - HICS_Cases.Inputs[Destination Input].ExternalColumns[Issue Level]"
+                      lineageId="Package\Data Flow Task 1\Source - HICS_Cases.Outputs[OLE DB Source Output].Columns[Issue Level]" />
+                    <inputColumn
+                      refId="Package\Data Flow Task 1\Destination - HICS_Cases.Inputs[Destination Input].Columns[Issue Level Description]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="100"
+                      cachedName="Issue Level Description"
+                      externalMetadataColumnId="Package\Data Flow Task 1\Destination - HICS_Cases.Inputs[Destination Input].ExternalColumns[Issue Level Description]"
+                      lineageId="Package\Data Flow Task 1\Source - HICS_Cases.Outputs[OLE DB Source Output].Columns[Issue Level Description]" />
+                    <inputColumn
+                      refId="Package\Data Flow Task 1\Destination - HICS_Cases.Inputs[Destination Input].Columns[Caseworker]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="10"
+                      cachedName="Caseworker"
+                      externalMetadataColumnId="Package\Data Flow Task 1\Destination - HICS_Cases.Inputs[Destination Input].ExternalColumns[Caseworker]"
+                      lineageId="Package\Data Flow Task 1\Source - HICS_Cases.Outputs[OLE DB Source Output].Columns[Caseworker]" />
+                    <inputColumn
+                      refId="Package\Data Flow Task 1\Destination - HICS_Cases.Inputs[Destination Input].Columns[Caseworker Name]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="100"
+                      cachedName="Caseworker Name"
+                      externalMetadataColumnId="Package\Data Flow Task 1\Destination - HICS_Cases.Inputs[Destination Input].ExternalColumns[Caseworker Name]"
+                      lineageId="Package\Data Flow Task 1\Source - HICS_Cases.Outputs[OLE DB Source Output].Columns[Caseworker Name]" />
+                    <inputColumn
+                      refId="Package\Data Flow Task 1\Destination - HICS_Cases.Inputs[Destination Input].Columns[Category]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="10"
+                      cachedName="Category"
+                      externalMetadataColumnId="Package\Data Flow Task 1\Destination - HICS_Cases.Inputs[Destination Input].ExternalColumns[Category]"
+                      lineageId="Package\Data Flow Task 1\Source - HICS_Cases.Outputs[OLE DB Source Output].Columns[Category]" />
+                    <inputColumn
+                      refId="Package\Data Flow Task 1\Destination - HICS_Cases.Inputs[Destination Input].Columns[Category Description]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="100"
+                      cachedName="Category Description"
+                      externalMetadataColumnId="Package\Data Flow Task 1\Destination - HICS_Cases.Inputs[Destination Input].ExternalColumns[Category Description]"
+                      lineageId="Package\Data Flow Task 1\Source - HICS_Cases.Outputs[OLE DB Source Output].Columns[Category Description]" />
+                    <inputColumn
+                      refId="Package\Data Flow Task 1\Destination - HICS_Cases.Inputs[Destination Input].Columns[Subcategory]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="10"
+                      cachedName="Subcategory"
+                      externalMetadataColumnId="Package\Data Flow Task 1\Destination - HICS_Cases.Inputs[Destination Input].ExternalColumns[Subcategory]"
+                      lineageId="Package\Data Flow Task 1\Source - HICS_Cases.Outputs[OLE DB Source Output].Columns[Subcategory]" />
+                    <inputColumn
+                      refId="Package\Data Flow Task 1\Destination - HICS_Cases.Inputs[Destination Input].Columns[Subcategory Description]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="100"
+                      cachedName="Subcategory Description"
+                      externalMetadataColumnId="Package\Data Flow Task 1\Destination - HICS_Cases.Inputs[Destination Input].ExternalColumns[Subcategory Description]"
+                      lineageId="Package\Data Flow Task 1\Source - HICS_Cases.Outputs[OLE DB Source Output].Columns[Subcategory Description]" />
+                    <inputColumn
+                      refId="Package\Data Flow Task 1\Destination - HICS_Cases.Inputs[Destination Input].Columns[Other Subcategory]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="100"
+                      cachedName="Other Subcategory"
+                      externalMetadataColumnId="Package\Data Flow Task 1\Destination - HICS_Cases.Inputs[Destination Input].ExternalColumns[Other Subcategory]"
+                      lineageId="Package\Data Flow Task 1\Source - HICS_Cases.Outputs[OLE DB Source Output].Columns[Other Subcategory]" />
+                    <inputColumn
+                      refId="Package\Data Flow Task 1\Destination - HICS_Cases.Inputs[Destination Input].Columns[Market Place Model]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="10"
+                      cachedName="Market Place Model"
+                      externalMetadataColumnId="Package\Data Flow Task 1\Destination - HICS_Cases.Inputs[Destination Input].ExternalColumns[Market Place Model]"
+                      lineageId="Package\Data Flow Task 1\Source - HICS_Cases.Outputs[OLE DB Source Output].Columns[Market Place Model]" />
+                    <inputColumn
+                      refId="Package\Data Flow Task 1\Destination - HICS_Cases.Inputs[Destination Input].Columns[Market Place Model Description]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="100"
+                      cachedName="Market Place Model Description"
+                      externalMetadataColumnId="Package\Data Flow Task 1\Destination - HICS_Cases.Inputs[Destination Input].ExternalColumns[Market Place Model Description]"
+                      lineageId="Package\Data Flow Task 1\Source - HICS_Cases.Outputs[OLE DB Source Output].Columns[Market Place Model Description]" />
+                    <inputColumn
+                      refId="Package\Data Flow Task 1\Destination - HICS_Cases.Inputs[Destination Input].Columns[COOP]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="10"
+                      cachedName="COOP"
+                      externalMetadataColumnId="Package\Data Flow Task 1\Destination - HICS_Cases.Inputs[Destination Input].ExternalColumns[COOP]"
+                      lineageId="Package\Data Flow Task 1\Source - HICS_Cases.Outputs[OLE DB Source Output].Columns[COOP]" />
+                    <inputColumn
+                      refId="Package\Data Flow Task 1\Destination - HICS_Cases.Inputs[Destination Input].Columns[PCIP]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="10"
+                      cachedName="PCIP"
+                      externalMetadataColumnId="Package\Data Flow Task 1\Destination - HICS_Cases.Inputs[Destination Input].ExternalColumns[PCIP]"
+                      lineageId="Package\Data Flow Task 1\Source - HICS_Cases.Outputs[OLE DB Source Output].Columns[PCIP]" />
+                    <inputColumn
+                      refId="Package\Data Flow Task 1\Destination - HICS_Cases.Inputs[Destination Input].Columns[SHOP]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="10"
+                      cachedName="SHOP"
+                      externalMetadataColumnId="Package\Data Flow Task 1\Destination - HICS_Cases.Inputs[Destination Input].ExternalColumns[SHOP]"
+                      lineageId="Package\Data Flow Task 1\Source - HICS_Cases.Outputs[OLE DB Source Output].Columns[SHOP]" />
+                    <inputColumn
+                      refId="Package\Data Flow Task 1\Destination - HICS_Cases.Inputs[Destination Input].Columns[SWIFT]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="10"
+                      cachedName="SWIFT"
+                      externalMetadataColumnId="Package\Data Flow Task 1\Destination - HICS_Cases.Inputs[Destination Input].ExternalColumns[SWIFT]"
+                      lineageId="Package\Data Flow Task 1\Source - HICS_Cases.Outputs[OLE DB Source Output].Columns[SWIFT]" />
+                    <inputColumn
+                      refId="Package\Data Flow Task 1\Destination - HICS_Cases.Inputs[Destination Input].Columns[Media Interest]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="10"
+                      cachedName="Media Interest"
+                      externalMetadataColumnId="Package\Data Flow Task 1\Destination - HICS_Cases.Inputs[Destination Input].ExternalColumns[Media Interest]"
+                      lineageId="Package\Data Flow Task 1\Source - HICS_Cases.Outputs[OLE DB Source Output].Columns[Media Interest]" />
+                    <inputColumn
+                      refId="Package\Data Flow Task 1\Destination - HICS_Cases.Inputs[Destination Input].Columns[Elected Official]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="10"
+                      cachedName="Elected Official"
+                      externalMetadataColumnId="Package\Data Flow Task 1\Destination - HICS_Cases.Inputs[Destination Input].ExternalColumns[Elected Official]"
+                      lineageId="Package\Data Flow Task 1\Source - HICS_Cases.Outputs[OLE DB Source Output].Columns[Elected Official]" />
+                    <inputColumn
+                      refId="Package\Data Flow Task 1\Destination - HICS_Cases.Inputs[Destination Input].Columns[Agent Broker]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="10"
+                      cachedName="Agent Broker"
+                      externalMetadataColumnId="Package\Data Flow Task 1\Destination - HICS_Cases.Inputs[Destination Input].ExternalColumns[Agent Broker]"
+                      lineageId="Package\Data Flow Task 1\Source - HICS_Cases.Outputs[OLE DB Source Output].Columns[Agent Broker]" />
+                    <inputColumn
+                      refId="Package\Data Flow Task 1\Destination - HICS_Cases.Inputs[Destination Input].Columns[CMS Issue]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="10"
+                      cachedName="CMS Issue"
+                      externalMetadataColumnId="Package\Data Flow Task 1\Destination - HICS_Cases.Inputs[Destination Input].ExternalColumns[CMS Issue]"
+                      lineageId="Package\Data Flow Task 1\Source - HICS_Cases.Outputs[OLE DB Source Output].Columns[CMS Issue]" />
+                    <inputColumn
+                      refId="Package\Data Flow Task 1\Destination - HICS_Cases.Inputs[Destination Input].Columns[Resolved]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="10"
+                      cachedName="Resolved"
+                      externalMetadataColumnId="Package\Data Flow Task 1\Destination - HICS_Cases.Inputs[Destination Input].ExternalColumns[Resolved]"
+                      lineageId="Package\Data Flow Task 1\Source - HICS_Cases.Outputs[OLE DB Source Output].Columns[Resolved]" />
+                    <inputColumn
+                      refId="Package\Data Flow Task 1\Destination - HICS_Cases.Inputs[Destination Input].Columns[Resolution Date]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="25"
+                      cachedName="Resolution Date"
+                      externalMetadataColumnId="Package\Data Flow Task 1\Destination - HICS_Cases.Inputs[Destination Input].ExternalColumns[Resolution Date]"
+                      lineageId="Package\Data Flow Task 1\Source - HICS_Cases.Outputs[OLE DB Source Output].Columns[Resolution Date]" />
+                    <inputColumn
+                      refId="Package\Data Flow Task 1\Destination - HICS_Cases.Inputs[Destination Input].Columns[Date of Resolution Notification]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="25"
+                      cachedName="Date of Resolution Notification"
+                      externalMetadataColumnId="Package\Data Flow Task 1\Destination - HICS_Cases.Inputs[Destination Input].ExternalColumns[Date of Resolution Notification]"
+                      lineageId="Package\Data Flow Task 1\Source - HICS_Cases.Outputs[OLE DB Source Output].Columns[Date of Resolution Notification]" />
+                    <inputColumn
+                      refId="Package\Data Flow Task 1\Destination - HICS_Cases.Inputs[Destination Input].Columns[Region]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="10"
+                      cachedName="Region"
+                      externalMetadataColumnId="Package\Data Flow Task 1\Destination - HICS_Cases.Inputs[Destination Input].ExternalColumns[Region]"
+                      lineageId="Package\Data Flow Task 1\Source - HICS_Cases.Outputs[OLE DB Source Output].Columns[Region]" />
+                    <inputColumn
+                      refId="Package\Data Flow Task 1\Destination - HICS_Cases.Inputs[Destination Input].Columns[Component]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="50"
+                      cachedName="Component"
+                      externalMetadataColumnId="Package\Data Flow Task 1\Destination - HICS_Cases.Inputs[Destination Input].ExternalColumns[Component]"
+                      lineageId="Package\Data Flow Task 1\Source - HICS_Cases.Outputs[OLE DB Source Output].Columns[Component]" />
+                    <inputColumn
+                      refId="Package\Data Flow Task 1\Destination - HICS_Cases.Inputs[Destination Input].Columns[Appeals DecisionMade]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="50"
+                      cachedName="Appeals DecisionMade"
+                      externalMetadataColumnId="Package\Data Flow Task 1\Destination - HICS_Cases.Inputs[Destination Input].ExternalColumns[Appeals DecisionMade]"
+                      lineageId="Package\Data Flow Task 1\Source - HICS_Cases.Outputs[OLE DB Source Output].Columns[Appeals DecisionMade]" />
+                    <inputColumn
+                      refId="Package\Data Flow Task 1\Destination - HICS_Cases.Inputs[Destination Input].Columns[White House Correspondence]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="50"
+                      cachedName="White House Correspondence"
+                      externalMetadataColumnId="Package\Data Flow Task 1\Destination - HICS_Cases.Inputs[Destination Input].ExternalColumns[White House Correspondence]"
+                      lineageId="Package\Data Flow Task 1\Source - HICS_Cases.Outputs[OLE DB Source Output].Columns[White House Correspondence]" />
+                    <inputColumn
+                      refId="Package\Data Flow Task 1\Destination - HICS_Cases.Inputs[Destination Input].Columns[Case Pending XOSC Helpdesk]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="50"
+                      cachedName="Case Pending XOSC Helpdesk"
+                      externalMetadataColumnId="Package\Data Flow Task 1\Destination - HICS_Cases.Inputs[Destination Input].ExternalColumns[Case Pending XOSC Helpdesk]"
+                      lineageId="Package\Data Flow Task 1\Source - HICS_Cases.Outputs[OLE DB Source Output].Columns[Case Pending XOSC Helpdesk]" />
+                    <inputColumn
+                      refId="Package\Data Flow Task 1\Destination - HICS_Cases.Inputs[Destination Input].Columns[Date Case Referred]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="25"
+                      cachedName="Date Case Referred"
+                      externalMetadataColumnId="Package\Data Flow Task 1\Destination - HICS_Cases.Inputs[Destination Input].ExternalColumns[Date Case Referred]"
+                      lineageId="Package\Data Flow Task 1\Source - HICS_Cases.Outputs[OLE DB Source Output].Columns[Date Case Referred]" />
+                    <inputColumn
+                      refId="Package\Data Flow Task 1\Destination - HICS_Cases.Inputs[Destination Input].Columns[SEP Decision Made]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="50"
+                      cachedName="SEP Decision Made"
+                      externalMetadataColumnId="Package\Data Flow Task 1\Destination - HICS_Cases.Inputs[Destination Input].ExternalColumns[SEP Decision Made]"
+                      lineageId="Package\Data Flow Task 1\Source - HICS_Cases.Outputs[OLE DB Source Output].Columns[SEP Decision Made]" />
+                    <inputColumn
+                      refId="Package\Data Flow Task 1\Destination - HICS_Cases.Inputs[Destination Input].Columns[Application ID]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="50"
+                      cachedName="Application ID"
+                      externalMetadataColumnId="Package\Data Flow Task 1\Destination - HICS_Cases.Inputs[Destination Input].ExternalColumns[Application ID]"
+                      lineageId="Package\Data Flow Task 1\Source - HICS_Cases.Outputs[OLE DB Source Output].Columns[Application ID]" />
+                    <inputColumn
+                      refId="Package\Data Flow Task 1\Destination - HICS_Cases.Inputs[Destination Input].Columns[Reserved Date]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="25"
+                      cachedName="Reserved Date"
+                      externalMetadataColumnId="Package\Data Flow Task 1\Destination - HICS_Cases.Inputs[Destination Input].ExternalColumns[Reserved Date]"
+                      lineageId="Package\Data Flow Task 1\Source - HICS_Cases.Outputs[OLE DB Source Output].Columns[Reserved Date]" />
+                    <inputColumn
+                      refId="Package\Data Flow Task 1\Destination - HICS_Cases.Inputs[Destination Input].Columns[Coverage Year]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="4"
+                      cachedName="Coverage Year"
+                      externalMetadataColumnId="Package\Data Flow Task 1\Destination - HICS_Cases.Inputs[Destination Input].ExternalColumns[Coverage Year]"
+                      lineageId="Package\Data Flow Task 1\Source - HICS_Cases.Outputs[OLE DB Source Output].Columns[Coverage Year]" />
+                    <inputColumn
+                      refId="Package\Data Flow Task 1\Destination - HICS_Cases.Inputs[Destination Input].Columns[Agree with Issue Level]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="5"
+                      cachedName="Agree with Issue Level"
+                      externalMetadataColumnId="Package\Data Flow Task 1\Destination - HICS_Cases.Inputs[Destination Input].ExternalColumns[Agree with Issue Level]"
+                      lineageId="Package\Data Flow Task 1\Source - HICS_Cases.Outputs[OLE DB Source Output].Columns[Agree with Issue Level]" />
+                    <inputColumn
+                      refId="Package\Data Flow Task 1\Destination - HICS_Cases.Inputs[Destination Input].Columns[Agree with Issue Level Text]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="1000"
+                      cachedName="Agree with Issue Level Text"
+                      externalMetadataColumnId="Package\Data Flow Task 1\Destination - HICS_Cases.Inputs[Destination Input].ExternalColumns[Agree with Issue Level Text]"
+                      lineageId="Package\Data Flow Task 1\Source - HICS_Cases.Outputs[OLE DB Source Output].Columns[Agree with Issue Level Text]" />
+                    <inputColumn
+                      refId="Package\Data Flow Task 1\Destination - HICS_Cases.Inputs[Destination Input].Columns[Preferred Language]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="50"
+                      cachedName="Preferred Language"
+                      externalMetadataColumnId="Package\Data Flow Task 1\Destination - HICS_Cases.Inputs[Destination Input].ExternalColumns[Preferred Language]"
+                      lineageId="Package\Data Flow Task 1\Source - HICS_Cases.Outputs[OLE DB Source Output].Columns[Preferred Language]" />
+                    <inputColumn
+                      refId="Package\Data Flow Task 1\Destination - HICS_Cases.Inputs[Destination Input].Columns[Preferred Callback Time]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="50"
+                      cachedName="Preferred Callback Time"
+                      externalMetadataColumnId="Package\Data Flow Task 1\Destination - HICS_Cases.Inputs[Destination Input].ExternalColumns[Preferred Callback Time]"
+                      lineageId="Package\Data Flow Task 1\Source - HICS_Cases.Outputs[OLE DB Source Output].Columns[Preferred Callback Time]" />
+                    <inputColumn
+                      refId="Package\Data Flow Task 1\Destination - HICS_Cases.Inputs[Destination Input].Columns[Has Consumer Contacted Issuer]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="50"
+                      cachedName="Has Consumer Contacted Issuer"
+                      externalMetadataColumnId="Package\Data Flow Task 1\Destination - HICS_Cases.Inputs[Destination Input].ExternalColumns[Has Consumer Contacted Issuer]"
+                      lineageId="Package\Data Flow Task 1\Source - HICS_Cases.Outputs[OLE DB Source Output].Columns[Has Consumer Contacted Issuer]" />
+                    <inputColumn
+                      refId="Package\Data Flow Task 1\Destination - HICS_Cases.Inputs[Destination Input].Columns[Outcome of Resolution]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="1000"
+                      cachedName="Outcome of Resolution"
+                      externalMetadataColumnId="Package\Data Flow Task 1\Destination - HICS_Cases.Inputs[Destination Input].ExternalColumns[Outcome of Resolution]"
+                      lineageId="Package\Data Flow Task 1\Source - HICS_Cases.Outputs[OLE DB Source Output].Columns[Outcome of Resolution]" />
+                    <inputColumn
+                      refId="Package\Data Flow Task 1\Destination - HICS_Cases.Inputs[Destination Input].Columns[Other Outcome of Resolution]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="1000"
+                      cachedName="Other Outcome of Resolution"
+                      externalMetadataColumnId="Package\Data Flow Task 1\Destination - HICS_Cases.Inputs[Destination Input].ExternalColumns[Other Outcome of Resolution]"
+                      lineageId="Package\Data Flow Task 1\Source - HICS_Cases.Outputs[OLE DB Source Output].Columns[Other Outcome of Resolution]" />
+                    <inputColumn
+                      refId="Package\Data Flow Task 1\Destination - HICS_Cases.Inputs[Destination Input].Columns[GFE Requested]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="1000"
+                      cachedName="GFE Requested"
+                      externalMetadataColumnId="Package\Data Flow Task 1\Destination - HICS_Cases.Inputs[Destination Input].ExternalColumns[GFE Requested]"
+                      lineageId="Package\Data Flow Task 1\Source - HICS_Cases.Outputs[OLE DB Source Output].Columns[GFE Requested]" />
+                    <inputColumn
+                      refId="Package\Data Flow Task 1\Destination - HICS_Cases.Inputs[Destination Input].Columns[Source_File]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="255"
+                      cachedName="Source_File"
+                      externalMetadataColumnId="Package\Data Flow Task 1\Destination - HICS_Cases.Inputs[Destination Input].ExternalColumns[Source_File]"
+                      lineageId="Package\Data Flow Task 1\Source - HICS_Cases.Outputs[OLE DB Source Output].Columns[Source_File]" />
+                    <inputColumn
+                      refId="Package\Data Flow Task 1\Destination - HICS_Cases.Inputs[Destination Input].Columns[ErrReviewRequested]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="10"
+                      cachedName="ErrReviewRequested"
+                      externalMetadataColumnId="Package\Data Flow Task 1\Destination - HICS_Cases.Inputs[Destination Input].ExternalColumns[ErrReviewRequested]"
+                      lineageId="Package\Data Flow Task 1\Source - HICS_Cases.Outputs[OLE DB Source Output].Columns[ErrReviewRequested]" />
+                  </inputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task 1\Destination - HICS_Cases.Inputs[Destination Input].ExternalColumns[Case_ID]"
+                      codePage="1252"
+                      dataType="str"
+                      length="15"
+                      name="Case_ID" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task 1\Destination - HICS_Cases.Inputs[Destination Input].ExternalColumns[Case_Narrative]"
+                      codePage="1252"
+                      dataType="str"
+                      length="8000"
+                      name="Case_Narrative" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task 1\Destination - HICS_Cases.Inputs[Destination Input].ExternalColumns[Received Date]"
+                      codePage="1252"
+                      dataType="str"
+                      length="25"
+                      name="Received Date" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task 1\Destination - HICS_Cases.Inputs[Destination Input].ExternalColumns[Issuer Assignment Date]"
+                      codePage="1252"
+                      dataType="str"
+                      length="25"
+                      name="Issuer Assignment Date" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task 1\Destination - HICS_Cases.Inputs[Destination Input].ExternalColumns[Caseworker Assignment Date]"
+                      codePage="1252"
+                      dataType="str"
+                      length="25"
+                      name="Caseworker Assignment Date" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task 1\Destination - HICS_Cases.Inputs[Destination Input].ExternalColumns[Issuer ID]"
+                      codePage="1252"
+                      dataType="str"
+                      length="50"
+                      name="Issuer ID" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task 1\Destination - HICS_Cases.Inputs[Destination Input].ExternalColumns[Parent Organization]"
+                      codePage="1252"
+                      dataType="str"
+                      length="100"
+                      name="Parent Organization" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task 1\Destination - HICS_Cases.Inputs[Destination Input].ExternalColumns[Issuer Name]"
+                      codePage="1252"
+                      dataType="str"
+                      length="100"
+                      name="Issuer Name" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task 1\Destination - HICS_Cases.Inputs[Destination Input].ExternalColumns[Issuer State]"
+                      codePage="1252"
+                      dataType="str"
+                      length="2"
+                      name="Issuer State" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task 1\Destination - HICS_Cases.Inputs[Destination Input].ExternalColumns[Other Issuer Plan ID]"
+                      codePage="1252"
+                      dataType="str"
+                      length="100"
+                      name="Other Issuer Plan ID" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task 1\Destination - HICS_Cases.Inputs[Destination Input].ExternalColumns[Plan ID]"
+                      codePage="1252"
+                      dataType="str"
+                      length="50"
+                      name="Plan ID" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task 1\Destination - HICS_Cases.Inputs[Destination Input].ExternalColumns[Plan Name]"
+                      codePage="1252"
+                      dataType="str"
+                      length="200"
+                      name="Plan Name" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task 1\Destination - HICS_Cases.Inputs[Destination Input].ExternalColumns[Case Source]"
+                      codePage="1252"
+                      dataType="str"
+                      length="10"
+                      name="Case Source" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task 1\Destination - HICS_Cases.Inputs[Destination Input].ExternalColumns[Case Source Description]"
+                      codePage="1252"
+                      dataType="str"
+                      length="100"
+                      name="Case Source Description" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task 1\Destination - HICS_Cases.Inputs[Destination Input].ExternalColumns[Issue Level]"
+                      codePage="1252"
+                      dataType="str"
+                      length="20"
+                      name="Issue Level" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task 1\Destination - HICS_Cases.Inputs[Destination Input].ExternalColumns[Issue Level Description]"
+                      codePage="1252"
+                      dataType="str"
+                      length="100"
+                      name="Issue Level Description" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task 1\Destination - HICS_Cases.Inputs[Destination Input].ExternalColumns[Caseworker]"
+                      codePage="1252"
+                      dataType="str"
+                      length="10"
+                      name="Caseworker" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task 1\Destination - HICS_Cases.Inputs[Destination Input].ExternalColumns[Caseworker Name]"
+                      codePage="1252"
+                      dataType="str"
+                      length="100"
+                      name="Caseworker Name" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task 1\Destination - HICS_Cases.Inputs[Destination Input].ExternalColumns[Category]"
+                      codePage="1252"
+                      dataType="str"
+                      length="10"
+                      name="Category" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task 1\Destination - HICS_Cases.Inputs[Destination Input].ExternalColumns[Category Description]"
+                      codePage="1252"
+                      dataType="str"
+                      length="100"
+                      name="Category Description" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task 1\Destination - HICS_Cases.Inputs[Destination Input].ExternalColumns[Subcategory]"
+                      codePage="1252"
+                      dataType="str"
+                      length="10"
+                      name="Subcategory" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task 1\Destination - HICS_Cases.Inputs[Destination Input].ExternalColumns[Subcategory Description]"
+                      codePage="1252"
+                      dataType="str"
+                      length="100"
+                      name="Subcategory Description" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task 1\Destination - HICS_Cases.Inputs[Destination Input].ExternalColumns[Other Subcategory]"
+                      codePage="1252"
+                      dataType="str"
+                      length="100"
+                      name="Other Subcategory" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task 1\Destination - HICS_Cases.Inputs[Destination Input].ExternalColumns[Market Place Model]"
+                      codePage="1252"
+                      dataType="str"
+                      length="10"
+                      name="Market Place Model" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task 1\Destination - HICS_Cases.Inputs[Destination Input].ExternalColumns[Market Place Model Description]"
+                      codePage="1252"
+                      dataType="str"
+                      length="100"
+                      name="Market Place Model Description" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task 1\Destination - HICS_Cases.Inputs[Destination Input].ExternalColumns[COOP]"
+                      codePage="1252"
+                      dataType="str"
+                      length="10"
+                      name="COOP" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task 1\Destination - HICS_Cases.Inputs[Destination Input].ExternalColumns[PCIP]"
+                      codePage="1252"
+                      dataType="str"
+                      length="10"
+                      name="PCIP" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task 1\Destination - HICS_Cases.Inputs[Destination Input].ExternalColumns[SHOP]"
+                      codePage="1252"
+                      dataType="str"
+                      length="10"
+                      name="SHOP" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task 1\Destination - HICS_Cases.Inputs[Destination Input].ExternalColumns[SWIFT]"
+                      codePage="1252"
+                      dataType="str"
+                      length="10"
+                      name="SWIFT" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task 1\Destination - HICS_Cases.Inputs[Destination Input].ExternalColumns[Media Interest]"
+                      codePage="1252"
+                      dataType="str"
+                      length="10"
+                      name="Media Interest" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task 1\Destination - HICS_Cases.Inputs[Destination Input].ExternalColumns[Elected Official]"
+                      codePage="1252"
+                      dataType="str"
+                      length="10"
+                      name="Elected Official" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task 1\Destination - HICS_Cases.Inputs[Destination Input].ExternalColumns[Agent Broker]"
+                      codePage="1252"
+                      dataType="str"
+                      length="10"
+                      name="Agent Broker" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task 1\Destination - HICS_Cases.Inputs[Destination Input].ExternalColumns[CMS Issue]"
+                      codePage="1252"
+                      dataType="str"
+                      length="10"
+                      name="CMS Issue" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task 1\Destination - HICS_Cases.Inputs[Destination Input].ExternalColumns[Resolved]"
+                      codePage="1252"
+                      dataType="str"
+                      length="10"
+                      name="Resolved" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task 1\Destination - HICS_Cases.Inputs[Destination Input].ExternalColumns[Resolution Date]"
+                      codePage="1252"
+                      dataType="str"
+                      length="25"
+                      name="Resolution Date" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task 1\Destination - HICS_Cases.Inputs[Destination Input].ExternalColumns[Date of Resolution Notification]"
+                      codePage="1252"
+                      dataType="str"
+                      length="25"
+                      name="Date of Resolution Notification" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task 1\Destination - HICS_Cases.Inputs[Destination Input].ExternalColumns[Region]"
+                      codePage="1252"
+                      dataType="str"
+                      length="10"
+                      name="Region" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task 1\Destination - HICS_Cases.Inputs[Destination Input].ExternalColumns[Component]"
+                      codePage="1252"
+                      dataType="str"
+                      length="50"
+                      name="Component" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task 1\Destination - HICS_Cases.Inputs[Destination Input].ExternalColumns[Appeals DecisionMade]"
+                      codePage="1252"
+                      dataType="str"
+                      length="50"
+                      name="Appeals DecisionMade" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task 1\Destination - HICS_Cases.Inputs[Destination Input].ExternalColumns[White House Correspondence]"
+                      codePage="1252"
+                      dataType="str"
+                      length="50"
+                      name="White House Correspondence" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task 1\Destination - HICS_Cases.Inputs[Destination Input].ExternalColumns[Case Pending XOSC Helpdesk]"
+                      codePage="1252"
+                      dataType="str"
+                      length="50"
+                      name="Case Pending XOSC Helpdesk" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task 1\Destination - HICS_Cases.Inputs[Destination Input].ExternalColumns[Date Case Referred]"
+                      codePage="1252"
+                      dataType="str"
+                      length="25"
+                      name="Date Case Referred" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task 1\Destination - HICS_Cases.Inputs[Destination Input].ExternalColumns[SEP Decision Made]"
+                      codePage="1252"
+                      dataType="str"
+                      length="50"
+                      name="SEP Decision Made" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task 1\Destination - HICS_Cases.Inputs[Destination Input].ExternalColumns[Application ID]"
+                      codePage="1252"
+                      dataType="str"
+                      length="50"
+                      name="Application ID" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task 1\Destination - HICS_Cases.Inputs[Destination Input].ExternalColumns[Reserved Date]"
+                      codePage="1252"
+                      dataType="str"
+                      length="25"
+                      name="Reserved Date" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task 1\Destination - HICS_Cases.Inputs[Destination Input].ExternalColumns[Coverage Year]"
+                      codePage="1252"
+                      dataType="str"
+                      length="4"
+                      name="Coverage Year" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task 1\Destination - HICS_Cases.Inputs[Destination Input].ExternalColumns[Agree with Issue Level]"
+                      codePage="1252"
+                      dataType="str"
+                      length="5"
+                      name="Agree with Issue Level" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task 1\Destination - HICS_Cases.Inputs[Destination Input].ExternalColumns[Agree with Issue Level Text]"
+                      codePage="1252"
+                      dataType="str"
+                      length="1000"
+                      name="Agree with Issue Level Text" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task 1\Destination - HICS_Cases.Inputs[Destination Input].ExternalColumns[Preferred Language]"
+                      codePage="1252"
+                      dataType="str"
+                      length="50"
+                      name="Preferred Language" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task 1\Destination - HICS_Cases.Inputs[Destination Input].ExternalColumns[Preferred Callback Time]"
+                      codePage="1252"
+                      dataType="str"
+                      length="50"
+                      name="Preferred Callback Time" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task 1\Destination - HICS_Cases.Inputs[Destination Input].ExternalColumns[Has Consumer Contacted Issuer]"
+                      codePage="1252"
+                      dataType="str"
+                      length="50"
+                      name="Has Consumer Contacted Issuer" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task 1\Destination - HICS_Cases.Inputs[Destination Input].ExternalColumns[Outcome of Resolution]"
+                      codePage="1252"
+                      dataType="str"
+                      length="1000"
+                      name="Outcome of Resolution" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task 1\Destination - HICS_Cases.Inputs[Destination Input].ExternalColumns[Other Outcome of Resolution]"
+                      codePage="1252"
+                      dataType="str"
+                      length="1000"
+                      name="Other Outcome of Resolution" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task 1\Destination - HICS_Cases.Inputs[Destination Input].ExternalColumns[GFE Requested]"
+                      codePage="1252"
+                      dataType="str"
+                      length="1000"
+                      name="GFE Requested" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task 1\Destination - HICS_Cases.Inputs[Destination Input].ExternalColumns[Source_File]"
+                      codePage="1252"
+                      dataType="str"
+                      length="255"
+                      name="Source_File" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task 1\Destination - HICS_Cases.Inputs[Destination Input].ExternalColumns[ErrReviewRequested]"
+                      codePage="1252"
+                      dataType="str"
+                      length="10"
+                      name="ErrReviewRequested" />
+                  </externalMetadataColumns>
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\Data Flow Task 1\Destination - HICS_Cases.Outputs[OLE DB Destination Error Output]"
+                  exclusionGroup="1"
+                  isErrorOut="true"
+                  name="OLE DB Destination Error Output"
+                  synchronousInputId="Package\Data Flow Task 1\Destination - HICS_Cases.Inputs[Destination Input]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Data Flow Task 1\Destination - HICS_Cases.Outputs[OLE DB Destination Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\Data Flow Task 1\Destination - HICS_Cases.Outputs[OLE DB Destination Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\Data Flow Task 1\Destination - HICS_Cases.Outputs[OLE DB Destination Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\Data Flow Task 1\Destination - HICS_Cases.Outputs[OLE DB Destination Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\Data Flow Task 1\Source - HICS_Cases"
+              componentClassID="Microsoft.OLEDBSource"
+              contactInfo="OLE DB Source;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;7"
+              description="OLE DB Source"
+              name="Source - HICS_Cases"
+              usesDispositions="true"
+              version="7">
+              <properties>
+                <property
+                  dataType="System.Int32"
+                  description="The number of seconds before a command times out.  A value of 0 indicates an infinite time-out."
+                  name="CommandTimeout">0</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the name of the database object used to open a rowset."
+                  name="OpenRowset">[dbo].[HICS_Cases]</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the variable that contains the name of the database object used to open a rowset."
+                  name="OpenRowsetVariable"></property>
+                <property
+                  dataType="System.String"
+                  description="The SQL command to be executed."
+                  name="SqlCommand"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor"></property>
+                <property
+                  dataType="System.String"
+                  description="The variable that contains the SQL command to be executed."
+                  name="SqlCommandVariable"></property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the column code page to use when code page information is unavailable from the data source."
+                  name="DefaultCodePage">1252</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Forces the use of the DefaultCodePage property value when describing character data."
+                  name="AlwaysUseDefaultCodePage">false</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the mode used to access the database."
+                  name="AccessMode"
+                  typeConverter="AccessMode">0</property>
+                <property
+                  dataType="System.String"
+                  description="The mappings between the parameters in the SQL command and variables."
+                  name="ParameterMapping"></property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\Data Flow Task 1\Source - HICS_Cases.Connections[OleDbConnection]"
+                  connectionManagerID="Package.ConnectionManagers[SourceConnectionOLEDB]"
+                  connectionManagerRefId="Package.ConnectionManagers[SourceConnectionOLEDB]"
+                  description="The OLE DB runtime connection used to access the database."
+                  name="OleDbConnection" />
+              </connections>
+              <outputs>
+                <output
+                  refId="Package\Data Flow Task 1\Source - HICS_Cases.Outputs[OLE DB Source Output]"
+                  name="OLE DB Source Output">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Data Flow Task 1\Source - HICS_Cases.Outputs[OLE DB Source Output].Columns[Case_ID]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Data Flow Task 1\Source - HICS_Cases.Outputs[OLE DB Source Output].ExternalColumns[Case_ID]"
+                      length="15"
+                      lineageId="Package\Data Flow Task 1\Source - HICS_Cases.Outputs[OLE DB Source Output].Columns[Case_ID]"
+                      name="Case_ID"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Data Flow Task 1\Source - HICS_Cases.Outputs[OLE DB Source Output].Columns[Case_Narrative]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Data Flow Task 1\Source - HICS_Cases.Outputs[OLE DB Source Output].ExternalColumns[Case_Narrative]"
+                      length="8000"
+                      lineageId="Package\Data Flow Task 1\Source - HICS_Cases.Outputs[OLE DB Source Output].Columns[Case_Narrative]"
+                      name="Case_Narrative"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Data Flow Task 1\Source - HICS_Cases.Outputs[OLE DB Source Output].Columns[Received Date]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Data Flow Task 1\Source - HICS_Cases.Outputs[OLE DB Source Output].ExternalColumns[Received Date]"
+                      length="25"
+                      lineageId="Package\Data Flow Task 1\Source - HICS_Cases.Outputs[OLE DB Source Output].Columns[Received Date]"
+                      name="Received Date"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Data Flow Task 1\Source - HICS_Cases.Outputs[OLE DB Source Output].Columns[Issuer Assignment Date]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Data Flow Task 1\Source - HICS_Cases.Outputs[OLE DB Source Output].ExternalColumns[Issuer Assignment Date]"
+                      length="25"
+                      lineageId="Package\Data Flow Task 1\Source - HICS_Cases.Outputs[OLE DB Source Output].Columns[Issuer Assignment Date]"
+                      name="Issuer Assignment Date"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Data Flow Task 1\Source - HICS_Cases.Outputs[OLE DB Source Output].Columns[Caseworker Assignment Date]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Data Flow Task 1\Source - HICS_Cases.Outputs[OLE DB Source Output].ExternalColumns[Caseworker Assignment Date]"
+                      length="25"
+                      lineageId="Package\Data Flow Task 1\Source - HICS_Cases.Outputs[OLE DB Source Output].Columns[Caseworker Assignment Date]"
+                      name="Caseworker Assignment Date"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Data Flow Task 1\Source - HICS_Cases.Outputs[OLE DB Source Output].Columns[Issuer ID]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Data Flow Task 1\Source - HICS_Cases.Outputs[OLE DB Source Output].ExternalColumns[Issuer ID]"
+                      length="50"
+                      lineageId="Package\Data Flow Task 1\Source - HICS_Cases.Outputs[OLE DB Source Output].Columns[Issuer ID]"
+                      name="Issuer ID"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Data Flow Task 1\Source - HICS_Cases.Outputs[OLE DB Source Output].Columns[Parent Organization]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Data Flow Task 1\Source - HICS_Cases.Outputs[OLE DB Source Output].ExternalColumns[Parent Organization]"
+                      length="100"
+                      lineageId="Package\Data Flow Task 1\Source - HICS_Cases.Outputs[OLE DB Source Output].Columns[Parent Organization]"
+                      name="Parent Organization"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Data Flow Task 1\Source - HICS_Cases.Outputs[OLE DB Source Output].Columns[Issuer Name]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Data Flow Task 1\Source - HICS_Cases.Outputs[OLE DB Source Output].ExternalColumns[Issuer Name]"
+                      length="100"
+                      lineageId="Package\Data Flow Task 1\Source - HICS_Cases.Outputs[OLE DB Source Output].Columns[Issuer Name]"
+                      name="Issuer Name"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Data Flow Task 1\Source - HICS_Cases.Outputs[OLE DB Source Output].Columns[Issuer State]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Data Flow Task 1\Source - HICS_Cases.Outputs[OLE DB Source Output].ExternalColumns[Issuer State]"
+                      length="2"
+                      lineageId="Package\Data Flow Task 1\Source - HICS_Cases.Outputs[OLE DB Source Output].Columns[Issuer State]"
+                      name="Issuer State"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Data Flow Task 1\Source - HICS_Cases.Outputs[OLE DB Source Output].Columns[Other Issuer Plan ID]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Data Flow Task 1\Source - HICS_Cases.Outputs[OLE DB Source Output].ExternalColumns[Other Issuer Plan ID]"
+                      length="100"
+                      lineageId="Package\Data Flow Task 1\Source - HICS_Cases.Outputs[OLE DB Source Output].Columns[Other Issuer Plan ID]"
+                      name="Other Issuer Plan ID"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Data Flow Task 1\Source - HICS_Cases.Outputs[OLE DB Source Output].Columns[Plan ID]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Data Flow Task 1\Source - HICS_Cases.Outputs[OLE DB Source Output].ExternalColumns[Plan ID]"
+                      length="50"
+                      lineageId="Package\Data Flow Task 1\Source - HICS_Cases.Outputs[OLE DB Source Output].Columns[Plan ID]"
+                      name="Plan ID"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Data Flow Task 1\Source - HICS_Cases.Outputs[OLE DB Source Output].Columns[Plan Name]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Data Flow Task 1\Source - HICS_Cases.Outputs[OLE DB Source Output].ExternalColumns[Plan Name]"
+                      length="200"
+                      lineageId="Package\Data Flow Task 1\Source - HICS_Cases.Outputs[OLE DB Source Output].Columns[Plan Name]"
+                      name="Plan Name"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Data Flow Task 1\Source - HICS_Cases.Outputs[OLE DB Source Output].Columns[Case Source]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Data Flow Task 1\Source - HICS_Cases.Outputs[OLE DB Source Output].ExternalColumns[Case Source]"
+                      length="10"
+                      lineageId="Package\Data Flow Task 1\Source - HICS_Cases.Outputs[OLE DB Source Output].Columns[Case Source]"
+                      name="Case Source"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Data Flow Task 1\Source - HICS_Cases.Outputs[OLE DB Source Output].Columns[Case Source Description]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Data Flow Task 1\Source - HICS_Cases.Outputs[OLE DB Source Output].ExternalColumns[Case Source Description]"
+                      length="100"
+                      lineageId="Package\Data Flow Task 1\Source - HICS_Cases.Outputs[OLE DB Source Output].Columns[Case Source Description]"
+                      name="Case Source Description"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Data Flow Task 1\Source - HICS_Cases.Outputs[OLE DB Source Output].Columns[Issue Level]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Data Flow Task 1\Source - HICS_Cases.Outputs[OLE DB Source Output].ExternalColumns[Issue Level]"
+                      length="20"
+                      lineageId="Package\Data Flow Task 1\Source - HICS_Cases.Outputs[OLE DB Source Output].Columns[Issue Level]"
+                      name="Issue Level"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Data Flow Task 1\Source - HICS_Cases.Outputs[OLE DB Source Output].Columns[Issue Level Description]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Data Flow Task 1\Source - HICS_Cases.Outputs[OLE DB Source Output].ExternalColumns[Issue Level Description]"
+                      length="100"
+                      lineageId="Package\Data Flow Task 1\Source - HICS_Cases.Outputs[OLE DB Source Output].Columns[Issue Level Description]"
+                      name="Issue Level Description"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Data Flow Task 1\Source - HICS_Cases.Outputs[OLE DB Source Output].Columns[Caseworker]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Data Flow Task 1\Source - HICS_Cases.Outputs[OLE DB Source Output].ExternalColumns[Caseworker]"
+                      length="10"
+                      lineageId="Package\Data Flow Task 1\Source - HICS_Cases.Outputs[OLE DB Source Output].Columns[Caseworker]"
+                      name="Caseworker"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Data Flow Task 1\Source - HICS_Cases.Outputs[OLE DB Source Output].Columns[Caseworker Name]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Data Flow Task 1\Source - HICS_Cases.Outputs[OLE DB Source Output].ExternalColumns[Caseworker Name]"
+                      length="100"
+                      lineageId="Package\Data Flow Task 1\Source - HICS_Cases.Outputs[OLE DB Source Output].Columns[Caseworker Name]"
+                      name="Caseworker Name"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Data Flow Task 1\Source - HICS_Cases.Outputs[OLE DB Source Output].Columns[Category]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Data Flow Task 1\Source - HICS_Cases.Outputs[OLE DB Source Output].ExternalColumns[Category]"
+                      length="10"
+                      lineageId="Package\Data Flow Task 1\Source - HICS_Cases.Outputs[OLE DB Source Output].Columns[Category]"
+                      name="Category"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Data Flow Task 1\Source - HICS_Cases.Outputs[OLE DB Source Output].Columns[Category Description]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Data Flow Task 1\Source - HICS_Cases.Outputs[OLE DB Source Output].ExternalColumns[Category Description]"
+                      length="100"
+                      lineageId="Package\Data Flow Task 1\Source - HICS_Cases.Outputs[OLE DB Source Output].Columns[Category Description]"
+                      name="Category Description"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Data Flow Task 1\Source - HICS_Cases.Outputs[OLE DB Source Output].Columns[Subcategory]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Data Flow Task 1\Source - HICS_Cases.Outputs[OLE DB Source Output].ExternalColumns[Subcategory]"
+                      length="10"
+                      lineageId="Package\Data Flow Task 1\Source - HICS_Cases.Outputs[OLE DB Source Output].Columns[Subcategory]"
+                      name="Subcategory"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Data Flow Task 1\Source - HICS_Cases.Outputs[OLE DB Source Output].Columns[Subcategory Description]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Data Flow Task 1\Source - HICS_Cases.Outputs[OLE DB Source Output].ExternalColumns[Subcategory Description]"
+                      length="100"
+                      lineageId="Package\Data Flow Task 1\Source - HICS_Cases.Outputs[OLE DB Source Output].Columns[Subcategory Description]"
+                      name="Subcategory Description"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Data Flow Task 1\Source - HICS_Cases.Outputs[OLE DB Source Output].Columns[Other Subcategory]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Data Flow Task 1\Source - HICS_Cases.Outputs[OLE DB Source Output].ExternalColumns[Other Subcategory]"
+                      length="100"
+                      lineageId="Package\Data Flow Task 1\Source - HICS_Cases.Outputs[OLE DB Source Output].Columns[Other Subcategory]"
+                      name="Other Subcategory"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Data Flow Task 1\Source - HICS_Cases.Outputs[OLE DB Source Output].Columns[Market Place Model]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Data Flow Task 1\Source - HICS_Cases.Outputs[OLE DB Source Output].ExternalColumns[Market Place Model]"
+                      length="10"
+                      lineageId="Package\Data Flow Task 1\Source - HICS_Cases.Outputs[OLE DB Source Output].Columns[Market Place Model]"
+                      name="Market Place Model"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Data Flow Task 1\Source - HICS_Cases.Outputs[OLE DB Source Output].Columns[Market Place Model Description]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Data Flow Task 1\Source - HICS_Cases.Outputs[OLE DB Source Output].ExternalColumns[Market Place Model Description]"
+                      length="100"
+                      lineageId="Package\Data Flow Task 1\Source - HICS_Cases.Outputs[OLE DB Source Output].Columns[Market Place Model Description]"
+                      name="Market Place Model Description"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Data Flow Task 1\Source - HICS_Cases.Outputs[OLE DB Source Output].Columns[COOP]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Data Flow Task 1\Source - HICS_Cases.Outputs[OLE DB Source Output].ExternalColumns[COOP]"
+                      length="10"
+                      lineageId="Package\Data Flow Task 1\Source - HICS_Cases.Outputs[OLE DB Source Output].Columns[COOP]"
+                      name="COOP"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Data Flow Task 1\Source - HICS_Cases.Outputs[OLE DB Source Output].Columns[PCIP]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Data Flow Task 1\Source - HICS_Cases.Outputs[OLE DB Source Output].ExternalColumns[PCIP]"
+                      length="10"
+                      lineageId="Package\Data Flow Task 1\Source - HICS_Cases.Outputs[OLE DB Source Output].Columns[PCIP]"
+                      name="PCIP"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Data Flow Task 1\Source - HICS_Cases.Outputs[OLE DB Source Output].Columns[SHOP]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Data Flow Task 1\Source - HICS_Cases.Outputs[OLE DB Source Output].ExternalColumns[SHOP]"
+                      length="10"
+                      lineageId="Package\Data Flow Task 1\Source - HICS_Cases.Outputs[OLE DB Source Output].Columns[SHOP]"
+                      name="SHOP"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Data Flow Task 1\Source - HICS_Cases.Outputs[OLE DB Source Output].Columns[SWIFT]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Data Flow Task 1\Source - HICS_Cases.Outputs[OLE DB Source Output].ExternalColumns[SWIFT]"
+                      length="10"
+                      lineageId="Package\Data Flow Task 1\Source - HICS_Cases.Outputs[OLE DB Source Output].Columns[SWIFT]"
+                      name="SWIFT"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Data Flow Task 1\Source - HICS_Cases.Outputs[OLE DB Source Output].Columns[Media Interest]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Data Flow Task 1\Source - HICS_Cases.Outputs[OLE DB Source Output].ExternalColumns[Media Interest]"
+                      length="10"
+                      lineageId="Package\Data Flow Task 1\Source - HICS_Cases.Outputs[OLE DB Source Output].Columns[Media Interest]"
+                      name="Media Interest"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Data Flow Task 1\Source - HICS_Cases.Outputs[OLE DB Source Output].Columns[Elected Official]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Data Flow Task 1\Source - HICS_Cases.Outputs[OLE DB Source Output].ExternalColumns[Elected Official]"
+                      length="10"
+                      lineageId="Package\Data Flow Task 1\Source - HICS_Cases.Outputs[OLE DB Source Output].Columns[Elected Official]"
+                      name="Elected Official"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Data Flow Task 1\Source - HICS_Cases.Outputs[OLE DB Source Output].Columns[Agent Broker]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Data Flow Task 1\Source - HICS_Cases.Outputs[OLE DB Source Output].ExternalColumns[Agent Broker]"
+                      length="10"
+                      lineageId="Package\Data Flow Task 1\Source - HICS_Cases.Outputs[OLE DB Source Output].Columns[Agent Broker]"
+                      name="Agent Broker"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Data Flow Task 1\Source - HICS_Cases.Outputs[OLE DB Source Output].Columns[CMS Issue]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Data Flow Task 1\Source - HICS_Cases.Outputs[OLE DB Source Output].ExternalColumns[CMS Issue]"
+                      length="10"
+                      lineageId="Package\Data Flow Task 1\Source - HICS_Cases.Outputs[OLE DB Source Output].Columns[CMS Issue]"
+                      name="CMS Issue"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Data Flow Task 1\Source - HICS_Cases.Outputs[OLE DB Source Output].Columns[Resolved]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Data Flow Task 1\Source - HICS_Cases.Outputs[OLE DB Source Output].ExternalColumns[Resolved]"
+                      length="10"
+                      lineageId="Package\Data Flow Task 1\Source - HICS_Cases.Outputs[OLE DB Source Output].Columns[Resolved]"
+                      name="Resolved"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Data Flow Task 1\Source - HICS_Cases.Outputs[OLE DB Source Output].Columns[Resolution Date]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Data Flow Task 1\Source - HICS_Cases.Outputs[OLE DB Source Output].ExternalColumns[Resolution Date]"
+                      length="25"
+                      lineageId="Package\Data Flow Task 1\Source - HICS_Cases.Outputs[OLE DB Source Output].Columns[Resolution Date]"
+                      name="Resolution Date"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Data Flow Task 1\Source - HICS_Cases.Outputs[OLE DB Source Output].Columns[Date of Resolution Notification]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Data Flow Task 1\Source - HICS_Cases.Outputs[OLE DB Source Output].ExternalColumns[Date of Resolution Notification]"
+                      length="25"
+                      lineageId="Package\Data Flow Task 1\Source - HICS_Cases.Outputs[OLE DB Source Output].Columns[Date of Resolution Notification]"
+                      name="Date of Resolution Notification"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Data Flow Task 1\Source - HICS_Cases.Outputs[OLE DB Source Output].Columns[Region]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Data Flow Task 1\Source - HICS_Cases.Outputs[OLE DB Source Output].ExternalColumns[Region]"
+                      length="10"
+                      lineageId="Package\Data Flow Task 1\Source - HICS_Cases.Outputs[OLE DB Source Output].Columns[Region]"
+                      name="Region"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Data Flow Task 1\Source - HICS_Cases.Outputs[OLE DB Source Output].Columns[Component]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Data Flow Task 1\Source - HICS_Cases.Outputs[OLE DB Source Output].ExternalColumns[Component]"
+                      length="50"
+                      lineageId="Package\Data Flow Task 1\Source - HICS_Cases.Outputs[OLE DB Source Output].Columns[Component]"
+                      name="Component"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Data Flow Task 1\Source - HICS_Cases.Outputs[OLE DB Source Output].Columns[Appeals DecisionMade]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Data Flow Task 1\Source - HICS_Cases.Outputs[OLE DB Source Output].ExternalColumns[Appeals DecisionMade]"
+                      length="50"
+                      lineageId="Package\Data Flow Task 1\Source - HICS_Cases.Outputs[OLE DB Source Output].Columns[Appeals DecisionMade]"
+                      name="Appeals DecisionMade"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Data Flow Task 1\Source - HICS_Cases.Outputs[OLE DB Source Output].Columns[White House Correspondence]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Data Flow Task 1\Source - HICS_Cases.Outputs[OLE DB Source Output].ExternalColumns[White House Correspondence]"
+                      length="50"
+                      lineageId="Package\Data Flow Task 1\Source - HICS_Cases.Outputs[OLE DB Source Output].Columns[White House Correspondence]"
+                      name="White House Correspondence"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Data Flow Task 1\Source - HICS_Cases.Outputs[OLE DB Source Output].Columns[Case Pending XOSC Helpdesk]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Data Flow Task 1\Source - HICS_Cases.Outputs[OLE DB Source Output].ExternalColumns[Case Pending XOSC Helpdesk]"
+                      length="50"
+                      lineageId="Package\Data Flow Task 1\Source - HICS_Cases.Outputs[OLE DB Source Output].Columns[Case Pending XOSC Helpdesk]"
+                      name="Case Pending XOSC Helpdesk"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Data Flow Task 1\Source - HICS_Cases.Outputs[OLE DB Source Output].Columns[Date Case Referred]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Data Flow Task 1\Source - HICS_Cases.Outputs[OLE DB Source Output].ExternalColumns[Date Case Referred]"
+                      length="25"
+                      lineageId="Package\Data Flow Task 1\Source - HICS_Cases.Outputs[OLE DB Source Output].Columns[Date Case Referred]"
+                      name="Date Case Referred"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Data Flow Task 1\Source - HICS_Cases.Outputs[OLE DB Source Output].Columns[SEP Decision Made]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Data Flow Task 1\Source - HICS_Cases.Outputs[OLE DB Source Output].ExternalColumns[SEP Decision Made]"
+                      length="50"
+                      lineageId="Package\Data Flow Task 1\Source - HICS_Cases.Outputs[OLE DB Source Output].Columns[SEP Decision Made]"
+                      name="SEP Decision Made"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Data Flow Task 1\Source - HICS_Cases.Outputs[OLE DB Source Output].Columns[Application ID]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Data Flow Task 1\Source - HICS_Cases.Outputs[OLE DB Source Output].ExternalColumns[Application ID]"
+                      length="50"
+                      lineageId="Package\Data Flow Task 1\Source - HICS_Cases.Outputs[OLE DB Source Output].Columns[Application ID]"
+                      name="Application ID"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Data Flow Task 1\Source - HICS_Cases.Outputs[OLE DB Source Output].Columns[Reserved Date]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Data Flow Task 1\Source - HICS_Cases.Outputs[OLE DB Source Output].ExternalColumns[Reserved Date]"
+                      length="25"
+                      lineageId="Package\Data Flow Task 1\Source - HICS_Cases.Outputs[OLE DB Source Output].Columns[Reserved Date]"
+                      name="Reserved Date"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Data Flow Task 1\Source - HICS_Cases.Outputs[OLE DB Source Output].Columns[Coverage Year]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Data Flow Task 1\Source - HICS_Cases.Outputs[OLE DB Source Output].ExternalColumns[Coverage Year]"
+                      length="4"
+                      lineageId="Package\Data Flow Task 1\Source - HICS_Cases.Outputs[OLE DB Source Output].Columns[Coverage Year]"
+                      name="Coverage Year"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Data Flow Task 1\Source - HICS_Cases.Outputs[OLE DB Source Output].Columns[Agree with Issue Level]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Data Flow Task 1\Source - HICS_Cases.Outputs[OLE DB Source Output].ExternalColumns[Agree with Issue Level]"
+                      length="5"
+                      lineageId="Package\Data Flow Task 1\Source - HICS_Cases.Outputs[OLE DB Source Output].Columns[Agree with Issue Level]"
+                      name="Agree with Issue Level"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Data Flow Task 1\Source - HICS_Cases.Outputs[OLE DB Source Output].Columns[Agree with Issue Level Text]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Data Flow Task 1\Source - HICS_Cases.Outputs[OLE DB Source Output].ExternalColumns[Agree with Issue Level Text]"
+                      length="1000"
+                      lineageId="Package\Data Flow Task 1\Source - HICS_Cases.Outputs[OLE DB Source Output].Columns[Agree with Issue Level Text]"
+                      name="Agree with Issue Level Text"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Data Flow Task 1\Source - HICS_Cases.Outputs[OLE DB Source Output].Columns[Preferred Language]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Data Flow Task 1\Source - HICS_Cases.Outputs[OLE DB Source Output].ExternalColumns[Preferred Language]"
+                      length="50"
+                      lineageId="Package\Data Flow Task 1\Source - HICS_Cases.Outputs[OLE DB Source Output].Columns[Preferred Language]"
+                      name="Preferred Language"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Data Flow Task 1\Source - HICS_Cases.Outputs[OLE DB Source Output].Columns[Preferred Callback Time]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Data Flow Task 1\Source - HICS_Cases.Outputs[OLE DB Source Output].ExternalColumns[Preferred Callback Time]"
+                      length="50"
+                      lineageId="Package\Data Flow Task 1\Source - HICS_Cases.Outputs[OLE DB Source Output].Columns[Preferred Callback Time]"
+                      name="Preferred Callback Time"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Data Flow Task 1\Source - HICS_Cases.Outputs[OLE DB Source Output].Columns[Has Consumer Contacted Issuer]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Data Flow Task 1\Source - HICS_Cases.Outputs[OLE DB Source Output].ExternalColumns[Has Consumer Contacted Issuer]"
+                      length="50"
+                      lineageId="Package\Data Flow Task 1\Source - HICS_Cases.Outputs[OLE DB Source Output].Columns[Has Consumer Contacted Issuer]"
+                      name="Has Consumer Contacted Issuer"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Data Flow Task 1\Source - HICS_Cases.Outputs[OLE DB Source Output].Columns[Outcome of Resolution]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Data Flow Task 1\Source - HICS_Cases.Outputs[OLE DB Source Output].ExternalColumns[Outcome of Resolution]"
+                      length="1000"
+                      lineageId="Package\Data Flow Task 1\Source - HICS_Cases.Outputs[OLE DB Source Output].Columns[Outcome of Resolution]"
+                      name="Outcome of Resolution"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Data Flow Task 1\Source - HICS_Cases.Outputs[OLE DB Source Output].Columns[Other Outcome of Resolution]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Data Flow Task 1\Source - HICS_Cases.Outputs[OLE DB Source Output].ExternalColumns[Other Outcome of Resolution]"
+                      length="1000"
+                      lineageId="Package\Data Flow Task 1\Source - HICS_Cases.Outputs[OLE DB Source Output].Columns[Other Outcome of Resolution]"
+                      name="Other Outcome of Resolution"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Data Flow Task 1\Source - HICS_Cases.Outputs[OLE DB Source Output].Columns[GFE Requested]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Data Flow Task 1\Source - HICS_Cases.Outputs[OLE DB Source Output].ExternalColumns[GFE Requested]"
+                      length="1000"
+                      lineageId="Package\Data Flow Task 1\Source - HICS_Cases.Outputs[OLE DB Source Output].Columns[GFE Requested]"
+                      name="GFE Requested"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Data Flow Task 1\Source - HICS_Cases.Outputs[OLE DB Source Output].Columns[Source_File]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Data Flow Task 1\Source - HICS_Cases.Outputs[OLE DB Source Output].ExternalColumns[Source_File]"
+                      length="255"
+                      lineageId="Package\Data Flow Task 1\Source - HICS_Cases.Outputs[OLE DB Source Output].Columns[Source_File]"
+                      name="Source_File"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Data Flow Task 1\Source - HICS_Cases.Outputs[OLE DB Source Output].Columns[ErrReviewRequested]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Data Flow Task 1\Source - HICS_Cases.Outputs[OLE DB Source Output].ExternalColumns[ErrReviewRequested]"
+                      length="10"
+                      lineageId="Package\Data Flow Task 1\Source - HICS_Cases.Outputs[OLE DB Source Output].Columns[ErrReviewRequested]"
+                      name="ErrReviewRequested"
+                      truncationRowDisposition="FailComponent" />
+                  </outputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task 1\Source - HICS_Cases.Outputs[OLE DB Source Output].ExternalColumns[Case_ID]"
+                      codePage="1252"
+                      dataType="str"
+                      length="15"
+                      name="Case_ID" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task 1\Source - HICS_Cases.Outputs[OLE DB Source Output].ExternalColumns[Case_Narrative]"
+                      codePage="1252"
+                      dataType="str"
+                      length="8000"
+                      name="Case_Narrative" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task 1\Source - HICS_Cases.Outputs[OLE DB Source Output].ExternalColumns[Received Date]"
+                      codePage="1252"
+                      dataType="str"
+                      length="25"
+                      name="Received Date" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task 1\Source - HICS_Cases.Outputs[OLE DB Source Output].ExternalColumns[Issuer Assignment Date]"
+                      codePage="1252"
+                      dataType="str"
+                      length="25"
+                      name="Issuer Assignment Date" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task 1\Source - HICS_Cases.Outputs[OLE DB Source Output].ExternalColumns[Caseworker Assignment Date]"
+                      codePage="1252"
+                      dataType="str"
+                      length="25"
+                      name="Caseworker Assignment Date" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task 1\Source - HICS_Cases.Outputs[OLE DB Source Output].ExternalColumns[Issuer ID]"
+                      codePage="1252"
+                      dataType="str"
+                      length="50"
+                      name="Issuer ID" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task 1\Source - HICS_Cases.Outputs[OLE DB Source Output].ExternalColumns[Parent Organization]"
+                      codePage="1252"
+                      dataType="str"
+                      length="100"
+                      name="Parent Organization" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task 1\Source - HICS_Cases.Outputs[OLE DB Source Output].ExternalColumns[Issuer Name]"
+                      codePage="1252"
+                      dataType="str"
+                      length="100"
+                      name="Issuer Name" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task 1\Source - HICS_Cases.Outputs[OLE DB Source Output].ExternalColumns[Issuer State]"
+                      codePage="1252"
+                      dataType="str"
+                      length="2"
+                      name="Issuer State" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task 1\Source - HICS_Cases.Outputs[OLE DB Source Output].ExternalColumns[Other Issuer Plan ID]"
+                      codePage="1252"
+                      dataType="str"
+                      length="100"
+                      name="Other Issuer Plan ID" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task 1\Source - HICS_Cases.Outputs[OLE DB Source Output].ExternalColumns[Plan ID]"
+                      codePage="1252"
+                      dataType="str"
+                      length="50"
+                      name="Plan ID" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task 1\Source - HICS_Cases.Outputs[OLE DB Source Output].ExternalColumns[Plan Name]"
+                      codePage="1252"
+                      dataType="str"
+                      length="200"
+                      name="Plan Name" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task 1\Source - HICS_Cases.Outputs[OLE DB Source Output].ExternalColumns[Case Source]"
+                      codePage="1252"
+                      dataType="str"
+                      length="10"
+                      name="Case Source" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task 1\Source - HICS_Cases.Outputs[OLE DB Source Output].ExternalColumns[Case Source Description]"
+                      codePage="1252"
+                      dataType="str"
+                      length="100"
+                      name="Case Source Description" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task 1\Source - HICS_Cases.Outputs[OLE DB Source Output].ExternalColumns[Issue Level]"
+                      codePage="1252"
+                      dataType="str"
+                      length="20"
+                      name="Issue Level" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task 1\Source - HICS_Cases.Outputs[OLE DB Source Output].ExternalColumns[Issue Level Description]"
+                      codePage="1252"
+                      dataType="str"
+                      length="100"
+                      name="Issue Level Description" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task 1\Source - HICS_Cases.Outputs[OLE DB Source Output].ExternalColumns[Caseworker]"
+                      codePage="1252"
+                      dataType="str"
+                      length="10"
+                      name="Caseworker" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task 1\Source - HICS_Cases.Outputs[OLE DB Source Output].ExternalColumns[Caseworker Name]"
+                      codePage="1252"
+                      dataType="str"
+                      length="100"
+                      name="Caseworker Name" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task 1\Source - HICS_Cases.Outputs[OLE DB Source Output].ExternalColumns[Category]"
+                      codePage="1252"
+                      dataType="str"
+                      length="10"
+                      name="Category" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task 1\Source - HICS_Cases.Outputs[OLE DB Source Output].ExternalColumns[Category Description]"
+                      codePage="1252"
+                      dataType="str"
+                      length="100"
+                      name="Category Description" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task 1\Source - HICS_Cases.Outputs[OLE DB Source Output].ExternalColumns[Subcategory]"
+                      codePage="1252"
+                      dataType="str"
+                      length="10"
+                      name="Subcategory" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task 1\Source - HICS_Cases.Outputs[OLE DB Source Output].ExternalColumns[Subcategory Description]"
+                      codePage="1252"
+                      dataType="str"
+                      length="100"
+                      name="Subcategory Description" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task 1\Source - HICS_Cases.Outputs[OLE DB Source Output].ExternalColumns[Other Subcategory]"
+                      codePage="1252"
+                      dataType="str"
+                      length="100"
+                      name="Other Subcategory" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task 1\Source - HICS_Cases.Outputs[OLE DB Source Output].ExternalColumns[Market Place Model]"
+                      codePage="1252"
+                      dataType="str"
+                      length="10"
+                      name="Market Place Model" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task 1\Source - HICS_Cases.Outputs[OLE DB Source Output].ExternalColumns[Market Place Model Description]"
+                      codePage="1252"
+                      dataType="str"
+                      length="100"
+                      name="Market Place Model Description" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task 1\Source - HICS_Cases.Outputs[OLE DB Source Output].ExternalColumns[COOP]"
+                      codePage="1252"
+                      dataType="str"
+                      length="10"
+                      name="COOP" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task 1\Source - HICS_Cases.Outputs[OLE DB Source Output].ExternalColumns[PCIP]"
+                      codePage="1252"
+                      dataType="str"
+                      length="10"
+                      name="PCIP" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task 1\Source - HICS_Cases.Outputs[OLE DB Source Output].ExternalColumns[SHOP]"
+                      codePage="1252"
+                      dataType="str"
+                      length="10"
+                      name="SHOP" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task 1\Source - HICS_Cases.Outputs[OLE DB Source Output].ExternalColumns[SWIFT]"
+                      codePage="1252"
+                      dataType="str"
+                      length="10"
+                      name="SWIFT" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task 1\Source - HICS_Cases.Outputs[OLE DB Source Output].ExternalColumns[Media Interest]"
+                      codePage="1252"
+                      dataType="str"
+                      length="10"
+                      name="Media Interest" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task 1\Source - HICS_Cases.Outputs[OLE DB Source Output].ExternalColumns[Elected Official]"
+                      codePage="1252"
+                      dataType="str"
+                      length="10"
+                      name="Elected Official" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task 1\Source - HICS_Cases.Outputs[OLE DB Source Output].ExternalColumns[Agent Broker]"
+                      codePage="1252"
+                      dataType="str"
+                      length="10"
+                      name="Agent Broker" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task 1\Source - HICS_Cases.Outputs[OLE DB Source Output].ExternalColumns[CMS Issue]"
+                      codePage="1252"
+                      dataType="str"
+                      length="10"
+                      name="CMS Issue" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task 1\Source - HICS_Cases.Outputs[OLE DB Source Output].ExternalColumns[Resolved]"
+                      codePage="1252"
+                      dataType="str"
+                      length="10"
+                      name="Resolved" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task 1\Source - HICS_Cases.Outputs[OLE DB Source Output].ExternalColumns[Resolution Date]"
+                      codePage="1252"
+                      dataType="str"
+                      length="25"
+                      name="Resolution Date" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task 1\Source - HICS_Cases.Outputs[OLE DB Source Output].ExternalColumns[Date of Resolution Notification]"
+                      codePage="1252"
+                      dataType="str"
+                      length="25"
+                      name="Date of Resolution Notification" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task 1\Source - HICS_Cases.Outputs[OLE DB Source Output].ExternalColumns[Region]"
+                      codePage="1252"
+                      dataType="str"
+                      length="10"
+                      name="Region" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task 1\Source - HICS_Cases.Outputs[OLE DB Source Output].ExternalColumns[Component]"
+                      codePage="1252"
+                      dataType="str"
+                      length="50"
+                      name="Component" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task 1\Source - HICS_Cases.Outputs[OLE DB Source Output].ExternalColumns[Appeals DecisionMade]"
+                      codePage="1252"
+                      dataType="str"
+                      length="50"
+                      name="Appeals DecisionMade" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task 1\Source - HICS_Cases.Outputs[OLE DB Source Output].ExternalColumns[White House Correspondence]"
+                      codePage="1252"
+                      dataType="str"
+                      length="50"
+                      name="White House Correspondence" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task 1\Source - HICS_Cases.Outputs[OLE DB Source Output].ExternalColumns[Case Pending XOSC Helpdesk]"
+                      codePage="1252"
+                      dataType="str"
+                      length="50"
+                      name="Case Pending XOSC Helpdesk" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task 1\Source - HICS_Cases.Outputs[OLE DB Source Output].ExternalColumns[Date Case Referred]"
+                      codePage="1252"
+                      dataType="str"
+                      length="25"
+                      name="Date Case Referred" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task 1\Source - HICS_Cases.Outputs[OLE DB Source Output].ExternalColumns[SEP Decision Made]"
+                      codePage="1252"
+                      dataType="str"
+                      length="50"
+                      name="SEP Decision Made" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task 1\Source - HICS_Cases.Outputs[OLE DB Source Output].ExternalColumns[Application ID]"
+                      codePage="1252"
+                      dataType="str"
+                      length="50"
+                      name="Application ID" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task 1\Source - HICS_Cases.Outputs[OLE DB Source Output].ExternalColumns[Reserved Date]"
+                      codePage="1252"
+                      dataType="str"
+                      length="25"
+                      name="Reserved Date" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task 1\Source - HICS_Cases.Outputs[OLE DB Source Output].ExternalColumns[Coverage Year]"
+                      codePage="1252"
+                      dataType="str"
+                      length="4"
+                      name="Coverage Year" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task 1\Source - HICS_Cases.Outputs[OLE DB Source Output].ExternalColumns[Agree with Issue Level]"
+                      codePage="1252"
+                      dataType="str"
+                      length="5"
+                      name="Agree with Issue Level" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task 1\Source - HICS_Cases.Outputs[OLE DB Source Output].ExternalColumns[Agree with Issue Level Text]"
+                      codePage="1252"
+                      dataType="str"
+                      length="1000"
+                      name="Agree with Issue Level Text" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task 1\Source - HICS_Cases.Outputs[OLE DB Source Output].ExternalColumns[Preferred Language]"
+                      codePage="1252"
+                      dataType="str"
+                      length="50"
+                      name="Preferred Language" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task 1\Source - HICS_Cases.Outputs[OLE DB Source Output].ExternalColumns[Preferred Callback Time]"
+                      codePage="1252"
+                      dataType="str"
+                      length="50"
+                      name="Preferred Callback Time" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task 1\Source - HICS_Cases.Outputs[OLE DB Source Output].ExternalColumns[Has Consumer Contacted Issuer]"
+                      codePage="1252"
+                      dataType="str"
+                      length="50"
+                      name="Has Consumer Contacted Issuer" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task 1\Source - HICS_Cases.Outputs[OLE DB Source Output].ExternalColumns[Outcome of Resolution]"
+                      codePage="1252"
+                      dataType="str"
+                      length="1000"
+                      name="Outcome of Resolution" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task 1\Source - HICS_Cases.Outputs[OLE DB Source Output].ExternalColumns[Other Outcome of Resolution]"
+                      codePage="1252"
+                      dataType="str"
+                      length="1000"
+                      name="Other Outcome of Resolution" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task 1\Source - HICS_Cases.Outputs[OLE DB Source Output].ExternalColumns[GFE Requested]"
+                      codePage="1252"
+                      dataType="str"
+                      length="1000"
+                      name="GFE Requested" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task 1\Source - HICS_Cases.Outputs[OLE DB Source Output].ExternalColumns[Source_File]"
+                      codePage="1252"
+                      dataType="str"
+                      length="255"
+                      name="Source_File" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task 1\Source - HICS_Cases.Outputs[OLE DB Source Output].ExternalColumns[ErrReviewRequested]"
+                      codePage="1252"
+                      dataType="str"
+                      length="10"
+                      name="ErrReviewRequested" />
+                  </externalMetadataColumns>
+                </output>
+                <output
+                  refId="Package\Data Flow Task 1\Source - HICS_Cases.Outputs[OLE DB Source Error Output]"
+                  isErrorOut="true"
+                  name="OLE DB Source Error Output">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Data Flow Task 1\Source - HICS_Cases.Outputs[OLE DB Source Error Output].Columns[Case_ID]"
+                      codePage="1252"
+                      dataType="str"
+                      length="15"
+                      lineageId="Package\Data Flow Task 1\Source - HICS_Cases.Outputs[OLE DB Source Error Output].Columns[Case_ID]"
+                      name="Case_ID" />
+                    <outputColumn
+                      refId="Package\Data Flow Task 1\Source - HICS_Cases.Outputs[OLE DB Source Error Output].Columns[Case_Narrative]"
+                      codePage="1252"
+                      dataType="str"
+                      length="8000"
+                      lineageId="Package\Data Flow Task 1\Source - HICS_Cases.Outputs[OLE DB Source Error Output].Columns[Case_Narrative]"
+                      name="Case_Narrative" />
+                    <outputColumn
+                      refId="Package\Data Flow Task 1\Source - HICS_Cases.Outputs[OLE DB Source Error Output].Columns[Received Date]"
+                      codePage="1252"
+                      dataType="str"
+                      length="25"
+                      lineageId="Package\Data Flow Task 1\Source - HICS_Cases.Outputs[OLE DB Source Error Output].Columns[Received Date]"
+                      name="Received Date" />
+                    <outputColumn
+                      refId="Package\Data Flow Task 1\Source - HICS_Cases.Outputs[OLE DB Source Error Output].Columns[Issuer Assignment Date]"
+                      codePage="1252"
+                      dataType="str"
+                      length="25"
+                      lineageId="Package\Data Flow Task 1\Source - HICS_Cases.Outputs[OLE DB Source Error Output].Columns[Issuer Assignment Date]"
+                      name="Issuer Assignment Date" />
+                    <outputColumn
+                      refId="Package\Data Flow Task 1\Source - HICS_Cases.Outputs[OLE DB Source Error Output].Columns[Caseworker Assignment Date]"
+                      codePage="1252"
+                      dataType="str"
+                      length="25"
+                      lineageId="Package\Data Flow Task 1\Source - HICS_Cases.Outputs[OLE DB Source Error Output].Columns[Caseworker Assignment Date]"
+                      name="Caseworker Assignment Date" />
+                    <outputColumn
+                      refId="Package\Data Flow Task 1\Source - HICS_Cases.Outputs[OLE DB Source Error Output].Columns[Issuer ID]"
+                      codePage="1252"
+                      dataType="str"
+                      length="50"
+                      lineageId="Package\Data Flow Task 1\Source - HICS_Cases.Outputs[OLE DB Source Error Output].Columns[Issuer ID]"
+                      name="Issuer ID" />
+                    <outputColumn
+                      refId="Package\Data Flow Task 1\Source - HICS_Cases.Outputs[OLE DB Source Error Output].Columns[Parent Organization]"
+                      codePage="1252"
+                      dataType="str"
+                      length="100"
+                      lineageId="Package\Data Flow Task 1\Source - HICS_Cases.Outputs[OLE DB Source Error Output].Columns[Parent Organization]"
+                      name="Parent Organization" />
+                    <outputColumn
+                      refId="Package\Data Flow Task 1\Source - HICS_Cases.Outputs[OLE DB Source Error Output].Columns[Issuer Name]"
+                      codePage="1252"
+                      dataType="str"
+                      length="100"
+                      lineageId="Package\Data Flow Task 1\Source - HICS_Cases.Outputs[OLE DB Source Error Output].Columns[Issuer Name]"
+                      name="Issuer Name" />
+                    <outputColumn
+                      refId="Package\Data Flow Task 1\Source - HICS_Cases.Outputs[OLE DB Source Error Output].Columns[Issuer State]"
+                      codePage="1252"
+                      dataType="str"
+                      length="2"
+                      lineageId="Package\Data Flow Task 1\Source - HICS_Cases.Outputs[OLE DB Source Error Output].Columns[Issuer State]"
+                      name="Issuer State" />
+                    <outputColumn
+                      refId="Package\Data Flow Task 1\Source - HICS_Cases.Outputs[OLE DB Source Error Output].Columns[Other Issuer Plan ID]"
+                      codePage="1252"
+                      dataType="str"
+                      length="100"
+                      lineageId="Package\Data Flow Task 1\Source - HICS_Cases.Outputs[OLE DB Source Error Output].Columns[Other Issuer Plan ID]"
+                      name="Other Issuer Plan ID" />
+                    <outputColumn
+                      refId="Package\Data Flow Task 1\Source - HICS_Cases.Outputs[OLE DB Source Error Output].Columns[Plan ID]"
+                      codePage="1252"
+                      dataType="str"
+                      length="50"
+                      lineageId="Package\Data Flow Task 1\Source - HICS_Cases.Outputs[OLE DB Source Error Output].Columns[Plan ID]"
+                      name="Plan ID" />
+                    <outputColumn
+                      refId="Package\Data Flow Task 1\Source - HICS_Cases.Outputs[OLE DB Source Error Output].Columns[Plan Name]"
+                      codePage="1252"
+                      dataType="str"
+                      length="200"
+                      lineageId="Package\Data Flow Task 1\Source - HICS_Cases.Outputs[OLE DB Source Error Output].Columns[Plan Name]"
+                      name="Plan Name" />
+                    <outputColumn
+                      refId="Package\Data Flow Task 1\Source - HICS_Cases.Outputs[OLE DB Source Error Output].Columns[Case Source]"
+                      codePage="1252"
+                      dataType="str"
+                      length="10"
+                      lineageId="Package\Data Flow Task 1\Source - HICS_Cases.Outputs[OLE DB Source Error Output].Columns[Case Source]"
+                      name="Case Source" />
+                    <outputColumn
+                      refId="Package\Data Flow Task 1\Source - HICS_Cases.Outputs[OLE DB Source Error Output].Columns[Case Source Description]"
+                      codePage="1252"
+                      dataType="str"
+                      length="100"
+                      lineageId="Package\Data Flow Task 1\Source - HICS_Cases.Outputs[OLE DB Source Error Output].Columns[Case Source Description]"
+                      name="Case Source Description" />
+                    <outputColumn
+                      refId="Package\Data Flow Task 1\Source - HICS_Cases.Outputs[OLE DB Source Error Output].Columns[Issue Level]"
+                      codePage="1252"
+                      dataType="str"
+                      length="20"
+                      lineageId="Package\Data Flow Task 1\Source - HICS_Cases.Outputs[OLE DB Source Error Output].Columns[Issue Level]"
+                      name="Issue Level" />
+                    <outputColumn
+                      refId="Package\Data Flow Task 1\Source - HICS_Cases.Outputs[OLE DB Source Error Output].Columns[Issue Level Description]"
+                      codePage="1252"
+                      dataType="str"
+                      length="100"
+                      lineageId="Package\Data Flow Task 1\Source - HICS_Cases.Outputs[OLE DB Source Error Output].Columns[Issue Level Description]"
+                      name="Issue Level Description" />
+                    <outputColumn
+                      refId="Package\Data Flow Task 1\Source - HICS_Cases.Outputs[OLE DB Source Error Output].Columns[Caseworker]"
+                      codePage="1252"
+                      dataType="str"
+                      length="10"
+                      lineageId="Package\Data Flow Task 1\Source - HICS_Cases.Outputs[OLE DB Source Error Output].Columns[Caseworker]"
+                      name="Caseworker" />
+                    <outputColumn
+                      refId="Package\Data Flow Task 1\Source - HICS_Cases.Outputs[OLE DB Source Error Output].Columns[Caseworker Name]"
+                      codePage="1252"
+                      dataType="str"
+                      length="100"
+                      lineageId="Package\Data Flow Task 1\Source - HICS_Cases.Outputs[OLE DB Source Error Output].Columns[Caseworker Name]"
+                      name="Caseworker Name" />
+                    <outputColumn
+                      refId="Package\Data Flow Task 1\Source - HICS_Cases.Outputs[OLE DB Source Error Output].Columns[Category]"
+                      codePage="1252"
+                      dataType="str"
+                      length="10"
+                      lineageId="Package\Data Flow Task 1\Source - HICS_Cases.Outputs[OLE DB Source Error Output].Columns[Category]"
+                      name="Category" />
+                    <outputColumn
+                      refId="Package\Data Flow Task 1\Source - HICS_Cases.Outputs[OLE DB Source Error Output].Columns[Category Description]"
+                      codePage="1252"
+                      dataType="str"
+                      length="100"
+                      lineageId="Package\Data Flow Task 1\Source - HICS_Cases.Outputs[OLE DB Source Error Output].Columns[Category Description]"
+                      name="Category Description" />
+                    <outputColumn
+                      refId="Package\Data Flow Task 1\Source - HICS_Cases.Outputs[OLE DB Source Error Output].Columns[Subcategory]"
+                      codePage="1252"
+                      dataType="str"
+                      length="10"
+                      lineageId="Package\Data Flow Task 1\Source - HICS_Cases.Outputs[OLE DB Source Error Output].Columns[Subcategory]"
+                      name="Subcategory" />
+                    <outputColumn
+                      refId="Package\Data Flow Task 1\Source - HICS_Cases.Outputs[OLE DB Source Error Output].Columns[Subcategory Description]"
+                      codePage="1252"
+                      dataType="str"
+                      length="100"
+                      lineageId="Package\Data Flow Task 1\Source - HICS_Cases.Outputs[OLE DB Source Error Output].Columns[Subcategory Description]"
+                      name="Subcategory Description" />
+                    <outputColumn
+                      refId="Package\Data Flow Task 1\Source - HICS_Cases.Outputs[OLE DB Source Error Output].Columns[Other Subcategory]"
+                      codePage="1252"
+                      dataType="str"
+                      length="100"
+                      lineageId="Package\Data Flow Task 1\Source - HICS_Cases.Outputs[OLE DB Source Error Output].Columns[Other Subcategory]"
+                      name="Other Subcategory" />
+                    <outputColumn
+                      refId="Package\Data Flow Task 1\Source - HICS_Cases.Outputs[OLE DB Source Error Output].Columns[Market Place Model]"
+                      codePage="1252"
+                      dataType="str"
+                      length="10"
+                      lineageId="Package\Data Flow Task 1\Source - HICS_Cases.Outputs[OLE DB Source Error Output].Columns[Market Place Model]"
+                      name="Market Place Model" />
+                    <outputColumn
+                      refId="Package\Data Flow Task 1\Source - HICS_Cases.Outputs[OLE DB Source Error Output].Columns[Market Place Model Description]"
+                      codePage="1252"
+                      dataType="str"
+                      length="100"
+                      lineageId="Package\Data Flow Task 1\Source - HICS_Cases.Outputs[OLE DB Source Error Output].Columns[Market Place Model Description]"
+                      name="Market Place Model Description" />
+                    <outputColumn
+                      refId="Package\Data Flow Task 1\Source - HICS_Cases.Outputs[OLE DB Source Error Output].Columns[COOP]"
+                      codePage="1252"
+                      dataType="str"
+                      length="10"
+                      lineageId="Package\Data Flow Task 1\Source - HICS_Cases.Outputs[OLE DB Source Error Output].Columns[COOP]"
+                      name="COOP" />
+                    <outputColumn
+                      refId="Package\Data Flow Task 1\Source - HICS_Cases.Outputs[OLE DB Source Error Output].Columns[PCIP]"
+                      codePage="1252"
+                      dataType="str"
+                      length="10"
+                      lineageId="Package\Data Flow Task 1\Source - HICS_Cases.Outputs[OLE DB Source Error Output].Columns[PCIP]"
+                      name="PCIP" />
+                    <outputColumn
+                      refId="Package\Data Flow Task 1\Source - HICS_Cases.Outputs[OLE DB Source Error Output].Columns[SHOP]"
+                      codePage="1252"
+                      dataType="str"
+                      length="10"
+                      lineageId="Package\Data Flow Task 1\Source - HICS_Cases.Outputs[OLE DB Source Error Output].Columns[SHOP]"
+                      name="SHOP" />
+                    <outputColumn
+                      refId="Package\Data Flow Task 1\Source - HICS_Cases.Outputs[OLE DB Source Error Output].Columns[SWIFT]"
+                      codePage="1252"
+                      dataType="str"
+                      length="10"
+                      lineageId="Package\Data Flow Task 1\Source - HICS_Cases.Outputs[OLE DB Source Error Output].Columns[SWIFT]"
+                      name="SWIFT" />
+                    <outputColumn
+                      refId="Package\Data Flow Task 1\Source - HICS_Cases.Outputs[OLE DB Source Error Output].Columns[Media Interest]"
+                      codePage="1252"
+                      dataType="str"
+                      length="10"
+                      lineageId="Package\Data Flow Task 1\Source - HICS_Cases.Outputs[OLE DB Source Error Output].Columns[Media Interest]"
+                      name="Media Interest" />
+                    <outputColumn
+                      refId="Package\Data Flow Task 1\Source - HICS_Cases.Outputs[OLE DB Source Error Output].Columns[Elected Official]"
+                      codePage="1252"
+                      dataType="str"
+                      length="10"
+                      lineageId="Package\Data Flow Task 1\Source - HICS_Cases.Outputs[OLE DB Source Error Output].Columns[Elected Official]"
+                      name="Elected Official" />
+                    <outputColumn
+                      refId="Package\Data Flow Task 1\Source - HICS_Cases.Outputs[OLE DB Source Error Output].Columns[Agent Broker]"
+                      codePage="1252"
+                      dataType="str"
+                      length="10"
+                      lineageId="Package\Data Flow Task 1\Source - HICS_Cases.Outputs[OLE DB Source Error Output].Columns[Agent Broker]"
+                      name="Agent Broker" />
+                    <outputColumn
+                      refId="Package\Data Flow Task 1\Source - HICS_Cases.Outputs[OLE DB Source Error Output].Columns[CMS Issue]"
+                      codePage="1252"
+                      dataType="str"
+                      length="10"
+                      lineageId="Package\Data Flow Task 1\Source - HICS_Cases.Outputs[OLE DB Source Error Output].Columns[CMS Issue]"
+                      name="CMS Issue" />
+                    <outputColumn
+                      refId="Package\Data Flow Task 1\Source - HICS_Cases.Outputs[OLE DB Source Error Output].Columns[Resolved]"
+                      codePage="1252"
+                      dataType="str"
+                      length="10"
+                      lineageId="Package\Data Flow Task 1\Source - HICS_Cases.Outputs[OLE DB Source Error Output].Columns[Resolved]"
+                      name="Resolved" />
+                    <outputColumn
+                      refId="Package\Data Flow Task 1\Source - HICS_Cases.Outputs[OLE DB Source Error Output].Columns[Resolution Date]"
+                      codePage="1252"
+                      dataType="str"
+                      length="25"
+                      lineageId="Package\Data Flow Task 1\Source - HICS_Cases.Outputs[OLE DB Source Error Output].Columns[Resolution Date]"
+                      name="Resolution Date" />
+                    <outputColumn
+                      refId="Package\Data Flow Task 1\Source - HICS_Cases.Outputs[OLE DB Source Error Output].Columns[Date of Resolution Notification]"
+                      codePage="1252"
+                      dataType="str"
+                      length="25"
+                      lineageId="Package\Data Flow Task 1\Source - HICS_Cases.Outputs[OLE DB Source Error Output].Columns[Date of Resolution Notification]"
+                      name="Date of Resolution Notification" />
+                    <outputColumn
+                      refId="Package\Data Flow Task 1\Source - HICS_Cases.Outputs[OLE DB Source Error Output].Columns[Region]"
+                      codePage="1252"
+                      dataType="str"
+                      length="10"
+                      lineageId="Package\Data Flow Task 1\Source - HICS_Cases.Outputs[OLE DB Source Error Output].Columns[Region]"
+                      name="Region" />
+                    <outputColumn
+                      refId="Package\Data Flow Task 1\Source - HICS_Cases.Outputs[OLE DB Source Error Output].Columns[Component]"
+                      codePage="1252"
+                      dataType="str"
+                      length="50"
+                      lineageId="Package\Data Flow Task 1\Source - HICS_Cases.Outputs[OLE DB Source Error Output].Columns[Component]"
+                      name="Component" />
+                    <outputColumn
+                      refId="Package\Data Flow Task 1\Source - HICS_Cases.Outputs[OLE DB Source Error Output].Columns[Appeals DecisionMade]"
+                      codePage="1252"
+                      dataType="str"
+                      length="50"
+                      lineageId="Package\Data Flow Task 1\Source - HICS_Cases.Outputs[OLE DB Source Error Output].Columns[Appeals DecisionMade]"
+                      name="Appeals DecisionMade" />
+                    <outputColumn
+                      refId="Package\Data Flow Task 1\Source - HICS_Cases.Outputs[OLE DB Source Error Output].Columns[White House Correspondence]"
+                      codePage="1252"
+                      dataType="str"
+                      length="50"
+                      lineageId="Package\Data Flow Task 1\Source - HICS_Cases.Outputs[OLE DB Source Error Output].Columns[White House Correspondence]"
+                      name="White House Correspondence" />
+                    <outputColumn
+                      refId="Package\Data Flow Task 1\Source - HICS_Cases.Outputs[OLE DB Source Error Output].Columns[Case Pending XOSC Helpdesk]"
+                      codePage="1252"
+                      dataType="str"
+                      length="50"
+                      lineageId="Package\Data Flow Task 1\Source - HICS_Cases.Outputs[OLE DB Source Error Output].Columns[Case Pending XOSC Helpdesk]"
+                      name="Case Pending XOSC Helpdesk" />
+                    <outputColumn
+                      refId="Package\Data Flow Task 1\Source - HICS_Cases.Outputs[OLE DB Source Error Output].Columns[Date Case Referred]"
+                      codePage="1252"
+                      dataType="str"
+                      length="25"
+                      lineageId="Package\Data Flow Task 1\Source - HICS_Cases.Outputs[OLE DB Source Error Output].Columns[Date Case Referred]"
+                      name="Date Case Referred" />
+                    <outputColumn
+                      refId="Package\Data Flow Task 1\Source - HICS_Cases.Outputs[OLE DB Source Error Output].Columns[SEP Decision Made]"
+                      codePage="1252"
+                      dataType="str"
+                      length="50"
+                      lineageId="Package\Data Flow Task 1\Source - HICS_Cases.Outputs[OLE DB Source Error Output].Columns[SEP Decision Made]"
+                      name="SEP Decision Made" />
+                    <outputColumn
+                      refId="Package\Data Flow Task 1\Source - HICS_Cases.Outputs[OLE DB Source Error Output].Columns[Application ID]"
+                      codePage="1252"
+                      dataType="str"
+                      length="50"
+                      lineageId="Package\Data Flow Task 1\Source - HICS_Cases.Outputs[OLE DB Source Error Output].Columns[Application ID]"
+                      name="Application ID" />
+                    <outputColumn
+                      refId="Package\Data Flow Task 1\Source - HICS_Cases.Outputs[OLE DB Source Error Output].Columns[Reserved Date]"
+                      codePage="1252"
+                      dataType="str"
+                      length="25"
+                      lineageId="Package\Data Flow Task 1\Source - HICS_Cases.Outputs[OLE DB Source Error Output].Columns[Reserved Date]"
+                      name="Reserved Date" />
+                    <outputColumn
+                      refId="Package\Data Flow Task 1\Source - HICS_Cases.Outputs[OLE DB Source Error Output].Columns[Coverage Year]"
+                      codePage="1252"
+                      dataType="str"
+                      length="4"
+                      lineageId="Package\Data Flow Task 1\Source - HICS_Cases.Outputs[OLE DB Source Error Output].Columns[Coverage Year]"
+                      name="Coverage Year" />
+                    <outputColumn
+                      refId="Package\Data Flow Task 1\Source - HICS_Cases.Outputs[OLE DB Source Error Output].Columns[Agree with Issue Level]"
+                      codePage="1252"
+                      dataType="str"
+                      length="5"
+                      lineageId="Package\Data Flow Task 1\Source - HICS_Cases.Outputs[OLE DB Source Error Output].Columns[Agree with Issue Level]"
+                      name="Agree with Issue Level" />
+                    <outputColumn
+                      refId="Package\Data Flow Task 1\Source - HICS_Cases.Outputs[OLE DB Source Error Output].Columns[Agree with Issue Level Text]"
+                      codePage="1252"
+                      dataType="str"
+                      length="1000"
+                      lineageId="Package\Data Flow Task 1\Source - HICS_Cases.Outputs[OLE DB Source Error Output].Columns[Agree with Issue Level Text]"
+                      name="Agree with Issue Level Text" />
+                    <outputColumn
+                      refId="Package\Data Flow Task 1\Source - HICS_Cases.Outputs[OLE DB Source Error Output].Columns[Preferred Language]"
+                      codePage="1252"
+                      dataType="str"
+                      length="50"
+                      lineageId="Package\Data Flow Task 1\Source - HICS_Cases.Outputs[OLE DB Source Error Output].Columns[Preferred Language]"
+                      name="Preferred Language" />
+                    <outputColumn
+                      refId="Package\Data Flow Task 1\Source - HICS_Cases.Outputs[OLE DB Source Error Output].Columns[Preferred Callback Time]"
+                      codePage="1252"
+                      dataType="str"
+                      length="50"
+                      lineageId="Package\Data Flow Task 1\Source - HICS_Cases.Outputs[OLE DB Source Error Output].Columns[Preferred Callback Time]"
+                      name="Preferred Callback Time" />
+                    <outputColumn
+                      refId="Package\Data Flow Task 1\Source - HICS_Cases.Outputs[OLE DB Source Error Output].Columns[Has Consumer Contacted Issuer]"
+                      codePage="1252"
+                      dataType="str"
+                      length="50"
+                      lineageId="Package\Data Flow Task 1\Source - HICS_Cases.Outputs[OLE DB Source Error Output].Columns[Has Consumer Contacted Issuer]"
+                      name="Has Consumer Contacted Issuer" />
+                    <outputColumn
+                      refId="Package\Data Flow Task 1\Source - HICS_Cases.Outputs[OLE DB Source Error Output].Columns[Outcome of Resolution]"
+                      codePage="1252"
+                      dataType="str"
+                      length="1000"
+                      lineageId="Package\Data Flow Task 1\Source - HICS_Cases.Outputs[OLE DB Source Error Output].Columns[Outcome of Resolution]"
+                      name="Outcome of Resolution" />
+                    <outputColumn
+                      refId="Package\Data Flow Task 1\Source - HICS_Cases.Outputs[OLE DB Source Error Output].Columns[Other Outcome of Resolution]"
+                      codePage="1252"
+                      dataType="str"
+                      length="1000"
+                      lineageId="Package\Data Flow Task 1\Source - HICS_Cases.Outputs[OLE DB Source Error Output].Columns[Other Outcome of Resolution]"
+                      name="Other Outcome of Resolution" />
+                    <outputColumn
+                      refId="Package\Data Flow Task 1\Source - HICS_Cases.Outputs[OLE DB Source Error Output].Columns[GFE Requested]"
+                      codePage="1252"
+                      dataType="str"
+                      length="1000"
+                      lineageId="Package\Data Flow Task 1\Source - HICS_Cases.Outputs[OLE DB Source Error Output].Columns[GFE Requested]"
+                      name="GFE Requested" />
+                    <outputColumn
+                      refId="Package\Data Flow Task 1\Source - HICS_Cases.Outputs[OLE DB Source Error Output].Columns[Source_File]"
+                      codePage="1252"
+                      dataType="str"
+                      length="255"
+                      lineageId="Package\Data Flow Task 1\Source - HICS_Cases.Outputs[OLE DB Source Error Output].Columns[Source_File]"
+                      name="Source_File" />
+                    <outputColumn
+                      refId="Package\Data Flow Task 1\Source - HICS_Cases.Outputs[OLE DB Source Error Output].Columns[ErrReviewRequested]"
+                      codePage="1252"
+                      dataType="str"
+                      length="10"
+                      lineageId="Package\Data Flow Task 1\Source - HICS_Cases.Outputs[OLE DB Source Error Output].Columns[ErrReviewRequested]"
+                      name="ErrReviewRequested" />
+                    <outputColumn
+                      refId="Package\Data Flow Task 1\Source - HICS_Cases.Outputs[OLE DB Source Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\Data Flow Task 1\Source - HICS_Cases.Outputs[OLE DB Source Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\Data Flow Task 1\Source - HICS_Cases.Outputs[OLE DB Source Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\Data Flow Task 1\Source - HICS_Cases.Outputs[OLE DB Source Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+          </components>
+          <paths>
+            <path
+              refId="Package\Data Flow Task 1.Paths[OLE DB Source Output]"
+              endId="Package\Data Flow Task 1\Destination - HICS_Cases.Inputs[Destination Input]"
+              name="OLE DB Source Output"
+              startId="Package\Data Flow Task 1\Source - HICS_Cases.Outputs[OLE DB Source Output]" />
+          </paths>
+        </pipeline>
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\Preparation SQL Task 1"
+      DTS:CreationName="Microsoft.ExecuteSQLTask"
+      DTS:DTSID="{51F7C174-1831-4FF0-9BE2-AF697EF9985D}"
+      DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+      DTS:FailPackageOnFailure="True"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Preparation SQL Task 1"
+      DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2012; © 2007 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+      DTS:ThreadHint="0">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <SQLTask:SqlTaskData
+          SQLTask:Connection="{182A3005-1978-4C9C-8DEE-8C5BA6F5BFAD}"
+          SQLTask:SqlStatementSource="TRUNCATE TABLE [stage].[HICS_Cases]&#xA;GO&#xA;" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
+      </DTS:ObjectData>
+    </DTS:Executable>
+  </DTS:Executables>
+  <DTS:PrecedenceConstraints>
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[{83326669-4AB2-4452-9702-8113877302E3\}]"
+      DTS:CreationName=""
+      DTS:DTSID="{83326669-4AB2-4452-9702-8113877302E3}"
+      DTS:From="Package\Preparation SQL Task 1"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="{83326669-4AB2-4452-9702-8113877302E3}"
+      DTS:To="Package\Data Flow Task 1" />
+  </DTS:PrecedenceConstraints>
+  <DTS:DesignTimeProperties><![CDATA[<?xml version="1.0"?>
+<!--This CDATA section contains the layout information of the package. The section includes information such as (x,y) coordinates, width, and height.-->
+<!--If you manually edit this section and make a mistake, you can delete it. -->
+<!--The package will still be able to load normally but the previous layout information will be lost and the designer will automatically re-arrange the elements on the design surface.-->
+<Objects
+  Version="8">
+  <!--Each node below will contain properties that do not affect runtime behavior.-->
+  <Package
+    design-time-name="Package">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
+        <NodeLayout
+          Size="160,42"
+          Id="Package\Data Flow Task 1"
+          TopLeft="20.5,107.5" />
+        <NodeLayout
+          Size="190,42"
+          Id="Package\Preparation SQL Task 1"
+          TopLeft="5.50000000000001,5.5" />
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[{83326669-4AB2-4452-9702-8113877302E3\}]"
+          TopLeft="100.5,47.5">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,60"
+              Start="0,0"
+              End="0,52.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,52.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+      </GraphLayout>
+    </LayoutInfo>
+  </Package>
+  <TaskHost
+    design-time-name="Package\Data Flow Task 1">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
+        <NodeLayout
+          Size="178,42"
+          Id="Package\Data Flow Task 1\Source - HICS_Cases"
+          TopLeft="16,5.5" />
+        <NodeLayout
+          Size="199,42"
+          Id="Package\Data Flow Task 1\Destination - HICS_Cases"
+          TopLeft="5.50000000000001,107.5" />
+        <EdgeLayout
+          Id="Package\Data Flow Task 1.Paths[OLE DB Source Output]"
+          TopLeft="105,47.5">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,60"
+              Start="0,0"
+              End="0,52.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,52.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+      </GraphLayout>
+    </LayoutInfo>
+  </TaskHost>
+  <PipelineComponentMetadata
+    design-time-name="Package\Data Flow Task 1\Destination - HICS_Cases">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+      <Property>
+        <Name>TableInfoObjectType</Name>
+        <Value
+          type="q2:string">Table</Value>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+  <PipelineComponentMetadata
+    design-time-name="Package\Data Flow Task 1\Source - HICS_Cases">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+      <Property>
+        <Name>TableInfoObjectType</Name>
+        <Value
+          type="q2:string">Table</Value>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+</Objects>]]></DTS:DesignTimeProperties>
+</DTS:Executable>

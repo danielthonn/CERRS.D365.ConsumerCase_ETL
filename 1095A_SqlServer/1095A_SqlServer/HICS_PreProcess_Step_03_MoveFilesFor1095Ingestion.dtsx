@@ -1,0 +1,352 @@
+<?xml version="1.0"?>
+<DTS:Executable xmlns:DTS="www.microsoft.com/SqlServer/Dts"
+  DTS:refId="Package"
+  DTS:CreationDate="6/2/2017 8:26:04 AM"
+  DTS:CreationName="Microsoft.Package"
+  DTS:CreatorComputerName="5CG5388ZQ5"
+  DTS:CreatorName="AZ\adm_cn"
+  DTS:DTSID="{D8ECBB95-F18D-4F5C-8CC7-3E64BFDDAF19}"
+  DTS:ExecutableType="Microsoft.Package"
+  DTS:LastModifiedProductVersion="13.0.1601.5"
+  DTS:LocaleID="1033"
+  DTS:ObjectName="HICS_PreProcess_Step_03_MoveFilesFor1095Ingestion"
+  DTS:PackageType="5"
+  DTS:VersionBuild="20"
+  DTS:VersionGUID="{741BDC4E-DDB3-47EC-90F4-3B5BF7521364}">
+  <DTS:Property
+    DTS:Name="PackageFormatVersion">8</DTS:Property>
+  <DTS:Variables>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{896EA72C-BCE0-4E7D-AB42-36019D4A1B60}"
+      DTS:EvaluateAsExpression="True"
+      DTS:Expression="(DT_WSTR, 50) @[$Project::SSISFolder]  + (DT_WSTR, 20) (&quot;HICS\\cases&quot;)"
+      DTS:IncludeInDebugDump="2345"
+      DTS:Namespace="User"
+      DTS:ObjectName="HICSCasesDirectoryName">
+      <DTS:VariableValue
+        DTS:DataType="8">C:\Data\files\in\HICS\cases</DTS:VariableValue>
+    </DTS:Variable>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{56CE3D26-420C-41CA-B8D3-929483F961BD}"
+      DTS:EvaluateAsExpression="True"
+      DTS:Expression="@[$Project::HICSFolder]"
+      DTS:IncludeInDebugDump="2345"
+      DTS:Namespace="User"
+      DTS:ObjectName="HicsFiles">
+      <DTS:VariableValue
+        DTS:DataType="8">C:\DataTeam\HICS_Extract\</DTS:VariableValue>
+    </DTS:Variable>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{7CD50664-31E9-4F22-8E36-E8938AE6B2BB}"
+      DTS:EvaluateAsExpression="True"
+      DTS:Expression="@[$Project::HICSFolder]  + &quot;OutFiles\\not_category_4.txt&quot;"
+      DTS:IncludeInDebugDump="2345"
+      DTS:Namespace="User"
+      DTS:ObjectName="NotCat4FileName">
+      <DTS:VariableValue
+        DTS:DataType="8">C:\DataTeam\HICS_Extract\OutFiles\not_category_4.txt</DTS:VariableValue>
+    </DTS:Variable>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{9756DEC8-E0CF-4164-8C89-53B9349A9341}"
+      DTS:IncludeInDebugDump="2345"
+      DTS:Namespace="User"
+      DTS:ObjectName="ProcessingFileName">
+      <DTS:VariableValue
+        DTS:DataType="8">C:\DataTeam\HICS_Extract\Processing\2016_Q1_cases_20170503_PreProcessed_Cat4_CN.txt</DTS:VariableValue>
+    </DTS:Variable>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{9623B2A1-4C6C-4337-98A6-4C9C6599AA04}"
+      DTS:IncludeInDebugDump="2345"
+      DTS:Namespace="User"
+      DTS:ObjectName="SSISHicsLoadFile">
+      <DTS:VariableValue
+        DTS:DataType="8">C:\Data\SSIS HICS LOAD\2016_Q1_cases_20170503_PreProcessed_Cat1_CN.txt</DTS:VariableValue>
+    </DTS:Variable>
+  </DTS:Variables>
+  <DTS:Executables>
+    <DTS:Executable
+      DTS:refId="Package\Mark Move Files"
+      DTS:CreationName="STOCK:SEQUENCE"
+      DTS:Description="Sequence Container"
+      DTS:DTSID="{FEE86728-9294-45E2-A591-1BDE663DBF8C}"
+      DTS:ExecutableType="STOCK:SEQUENCE"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Mark Move Files">
+      <DTS:Variables />
+      <DTS:Executables>
+        <DTS:Executable
+          DTS:refId="Package\Mark Move Files\Copy Not Cat 4"
+          DTS:CreationName="Microsoft.FileSystemTask"
+          DTS:Description="File System Task"
+          DTS:DTSID="{8AF53C05-4FE8-44D5-9FD6-6C08D745700F}"
+          DTS:ExecutableType="Microsoft.FileSystemTask"
+          DTS:LocaleID="-1"
+          DTS:ObjectName="Copy Not Cat 4"
+          DTS:ThreadHint="0">
+          <DTS:Variables />
+          <DTS:ObjectData>
+            <FileSystemData
+              TaskOverwriteDestFile="True"
+              TaskSourcePath="User::NotCat4FileName"
+              TaskIsSourceVariable="True"
+              TaskDestinationPath="$Project::HICSDestinationFolder"
+              TaskIsDestinationVariable="True" />
+          </DTS:ObjectData>
+        </DTS:Executable>
+        <DTS:Executable
+          DTS:refId="Package\Mark Move Files\Move Processing Files To SSIS HICS LOAD"
+          DTS:CreationName="STOCK:FOREACHLOOP"
+          DTS:Description="Foreach Loop Container"
+          DTS:DTSID="{F31AB7D8-D024-441E-926C-BDCC96D89256}"
+          DTS:ExecutableType="STOCK:FOREACHLOOP"
+          DTS:LocaleID="-1"
+          DTS:ObjectName="Move Processing Files To SSIS HICS LOAD">
+          <DTS:ForEachEnumerator
+            DTS:CreationName="Microsoft.ForEachFileEnumerator"
+            DTS:DTSID="{7D3EB2CD-B295-4474-BFD7-C7C4DDE90099}"
+            DTS:ObjectName="{7D3EB2CD-B295-4474-BFD7-C7C4DDE90099}">
+            <DTS:PropertyExpression
+              DTS:Name="Directory">@[User::HicsFiles]+"Processing\\"</DTS:PropertyExpression>
+            <DTS:ObjectData>
+              <ForEachFileEnumeratorProperties>
+                <FEFEProperty
+                  Folder="C:\DataTeam\HICS_Extract\Processing\" />
+                <FEFEProperty
+                  FileSpec="*.txt" />
+                <FEFEProperty
+                  FileNameRetrievalType="0" />
+                <FEFEProperty
+                  Recurse="0" />
+              </ForEachFileEnumeratorProperties>
+            </DTS:ObjectData>
+          </DTS:ForEachEnumerator>
+          <DTS:Variables />
+          <DTS:Executables>
+            <DTS:Executable
+              DTS:refId="Package\Mark Move Files\Move Processing Files To SSIS HICS LOAD\Copy Processing Files"
+              DTS:CreationName="Microsoft.FileSystemTask"
+              DTS:Description="File System Task"
+              DTS:DTSID="{396C9E8F-2373-4F02-A70C-C4CBDF6E52CE}"
+              DTS:ExecutableType="Microsoft.FileSystemTask"
+              DTS:LocaleID="-1"
+              DTS:ObjectName="Copy Processing Files"
+              DTS:ThreadHint="0">
+              <DTS:Variables />
+              <DTS:ObjectData>
+                <FileSystemData
+                  TaskOverwriteDestFile="True"
+                  TaskSourcePath="User::ProcessingFileName"
+                  TaskIsSourceVariable="True"
+                  TaskDestinationPath="$Project::HICSDestinationFolder"
+                  TaskIsDestinationVariable="True" />
+              </DTS:ObjectData>
+            </DTS:Executable>
+          </DTS:Executables>
+          <DTS:ForEachVariableMappings>
+            <DTS:ForEachVariableMapping
+              DTS:CreationName=""
+              DTS:DTSID="{D0006BDC-0E71-4831-967E-B24D968A423D}"
+              DTS:ObjectName="{D0006BDC-0E71-4831-967E-B24D968A423D}"
+              DTS:ValueIndex="0"
+              DTS:VariableName="User::ProcessingFileName" />
+          </DTS:ForEachVariableMappings>
+        </DTS:Executable>
+      </DTS:Executables>
+      <DTS:PrecedenceConstraints>
+        <DTS:PrecedenceConstraint
+          DTS:refId="Package\Mark Move Files.PrecedenceConstraints[Constraint]"
+          DTS:CreationName=""
+          DTS:DTSID="{6723517C-2D12-4EE8-99BA-8E4CD8C55C22}"
+          DTS:From="Package\Mark Move Files\Move Processing Files To SSIS HICS LOAD"
+          DTS:LogicalAnd="True"
+          DTS:ObjectName="Constraint"
+          DTS:To="Package\Mark Move Files\Copy Not Cat 4" />
+      </DTS:PrecedenceConstraints>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\Yelena Copy Files"
+      DTS:CreationName="STOCK:SEQUENCE"
+      DTS:Description="Sequence Container"
+      DTS:DTSID="{314E12D8-DC43-4CC2-A396-3CE1A66F3158}"
+      DTS:ExecutableType="STOCK:SEQUENCE"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Yelena Copy Files">
+      <DTS:Variables />
+      <DTS:Executables>
+        <DTS:Executable
+          DTS:refId="Package\Yelena Copy Files\Foreach Loop Container"
+          DTS:CreationName="STOCK:FOREACHLOOP"
+          DTS:Description="Foreach Loop Container"
+          DTS:DTSID="{22265C26-F902-49BA-AAF3-5C61874194FA}"
+          DTS:ExecutableType="STOCK:FOREACHLOOP"
+          DTS:LocaleID="-1"
+          DTS:ObjectName="Foreach Loop Container">
+          <DTS:ForEachEnumerator
+            DTS:CreationName="Microsoft.ForEachFileEnumerator"
+            DTS:DTSID="{10E73439-3E9D-44E9-A902-5215C584DE83}"
+            DTS:ObjectName="{10E73439-3E9D-44E9-A902-5215C584DE83}">
+            <DTS:PropertyExpression
+              DTS:Name="Directory">@[$Project::HICSDestinationFolder]</DTS:PropertyExpression>
+            <DTS:ObjectData>
+              <ForEachFileEnumeratorProperties>
+                <FEFEProperty
+                  Folder="C:\Data\SSIS HICS LOAD\" />
+                <FEFEProperty
+                  FileSpec="*.txt" />
+                <FEFEProperty
+                  FileNameRetrievalType="0" />
+                <FEFEProperty
+                  Recurse="0" />
+              </ForEachFileEnumeratorProperties>
+            </DTS:ObjectData>
+          </DTS:ForEachEnumerator>
+          <DTS:Variables />
+          <DTS:Executables>
+            <DTS:Executable
+              DTS:refId="Package\Yelena Copy Files\Foreach Loop Container\File System Task"
+              DTS:CreationName="Microsoft.FileSystemTask"
+              DTS:Description="File System Task"
+              DTS:DTSID="{3A1542E9-E67B-41A4-8A25-B9A5B70F26C7}"
+              DTS:ExecutableType="Microsoft.FileSystemTask"
+              DTS:LocaleID="-1"
+              DTS:ObjectName="File System Task"
+              DTS:ThreadHint="0">
+              <DTS:Variables />
+              <DTS:ObjectData>
+                <FileSystemData
+                  TaskOverwriteDestFile="True"
+                  TaskSourcePath="User::SSISHicsLoadFile"
+                  TaskIsSourceVariable="True"
+                  TaskDestinationPath="User::HICSCasesDirectoryName"
+                  TaskIsDestinationVariable="True" />
+              </DTS:ObjectData>
+            </DTS:Executable>
+          </DTS:Executables>
+          <DTS:ForEachVariableMappings>
+            <DTS:ForEachVariableMapping
+              DTS:CreationName=""
+              DTS:DTSID="{33F11983-5FFE-4C7E-8D77-9391615E52D6}"
+              DTS:ObjectName="{33F11983-5FFE-4C7E-8D77-9391615E52D6}"
+              DTS:ValueIndex="0"
+              DTS:VariableName="User::SSISHicsLoadFile" />
+          </DTS:ForEachVariableMappings>
+        </DTS:Executable>
+      </DTS:Executables>
+    </DTS:Executable>
+  </DTS:Executables>
+  <DTS:PrecedenceConstraints>
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint]"
+      DTS:CreationName=""
+      DTS:DTSID="{E6FBEF5E-A9BE-4536-89EB-D395AC3EEE9A}"
+      DTS:From="Package\Mark Move Files"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint"
+      DTS:To="Package\Yelena Copy Files" />
+  </DTS:PrecedenceConstraints>
+  <DTS:DesignTimeProperties><![CDATA[<?xml version="1.0"?>
+<!--This CDATA section contains the layout information of the package. The section includes information such as (x,y) coordinates, width, and height.-->
+<!--If you manually edit this section and make a mistake, you can delete it. -->
+<!--The package will still be able to load normally but the previous layout information will be lost and the designer will automatically re-arrange the elements on the design surface.-->
+<Objects
+  Version="8">
+  <!--Each node below will contain properties that do not affect runtime behavior.-->
+  <Package
+    design-time-name="Package">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="16" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
+        <NodeLayout
+          Size="150,42"
+          Id="Package\Mark Move Files\Copy Not Cat 4"
+          TopLeft="297.5,56" />
+        <NodeLayout
+          Size="180,42"
+          Id="Package\Mark Move Files\Move Processing Files To SSIS HICS LOAD\Copy Processing Files"
+          TopLeft="26,14" />
+        <ContainerLayout
+          HeaderHeight="43"
+          IsExpanded="True"
+          PanelSize="238,111"
+          Size="238,154"
+          Id="Package\Mark Move Files\Move Processing Files To SSIS HICS LOAD"
+          TopLeft="5.5,4" />
+        <EdgeLayout
+          Id="Package\Mark Move Files.PrecedenceConstraints[Constraint]"
+          TopLeft="243.5,73.75">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="54,0"
+              Start="0,0"
+              End="46.5,0">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="46.5,0" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <ContainerLayout
+          HeaderHeight="43"
+          IsExpanded="True"
+          PanelSize="460,163"
+          Size="460,206"
+          Id="Package\Mark Move Files"
+          TopLeft="261.666666666667,33" />
+        <NodeLayout
+          Size="158,42"
+          Id="Package\Yelena Copy Files\Foreach Loop Container\File System Task"
+          TopLeft="10,6.33333333333331" />
+        <ContainerLayout
+          HeaderHeight="43"
+          IsExpanded="True"
+          PanelSize="174,103"
+          Size="174,146"
+          Id="Package\Yelena Copy Files\Foreach Loop Container"
+          TopLeft="22,8.33333333333331" />
+        <ContainerLayout
+          HeaderHeight="43"
+          IsExpanded="True"
+          PanelSize="241,209"
+          Size="241,252"
+          Id="Package\Yelena Copy Files"
+          TopLeft="373,284.666666666667" />
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint]"
+          TopLeft="492.583333333333,239">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,45.6666666666666"
+              Start="0,0"
+              End="0,38.1666666666666">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,38.1666666666666" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+      </GraphLayout>
+    </LayoutInfo>
+  </Package>
+</Objects>]]></DTS:DesignTimeProperties>
+</DTS:Executable>

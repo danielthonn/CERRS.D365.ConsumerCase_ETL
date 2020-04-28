@@ -1,0 +1,43 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 14
+VisualStudioVersion = 14.0.25420.1
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{159641D6-6404-4A2A-AE62-294DE0FE8301}") = "1095A_SqlServer", "1095A_SqlServer\1095A_SqlServer.dtproj", "{6544AFA6-87FD-4DB0-AD57-20CF68DC3ABB}"
+EndProject
+Project("{159641D6-6404-4A2A-AE62-294DE0FE8301}") = "CDE_PreAudit", "CDE_PreAudit\CDE_PreAudit.dtproj", "{B22020A1-7D1A-431E-98AD-68E64093E1A0}"
+EndProject
+Project("{159641D6-6404-4A2A-AE62-294DE0FE8301}") = "CDE_Midas", "CDE_Midas\CDE_Midas.dtproj", "{C51613CB-9D1A-4581-95E7-02403DCA5A9F}"
+EndProject
+Project("{159641D6-6404-4A2A-AE62-294DE0FE8301}") = "CDE_TerminationSource", "CDE_TerminationSource\CDE_TerminationSource.dtproj", "{E033C32B-CFD7-4F94-96B2-22AD71A6FF18}"
+EndProject
+Project("{159641D6-6404-4A2A-AE62-294DE0FE8301}") = "CDE_FFMExtract", "CDE_FFMExtract\CDE_FFMExtract.dtproj", "{A81059E3-0B10-4B28-9EF2-EE8D6C9BB579}"
+EndProject
+Project("{159641D6-6404-4A2A-AE62-294DE0FE8301}") = "CDE_RCNO", "CDE_RCNO\CDE_RCNO.dtproj", "{767DF6CB-C76E-4EFA-8365-7762BD9522ED}"
+EndProject
+Project("{159641D6-6404-4A2A-AE62-294DE0FE8301}") = "CDE_Medicare", "CDE_Medicare\CDE_Medicare.dtproj", "{9A0C0E3B-899A-4237-BAA1-99A369CD0DEF}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Development|Default = Development|Default
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{6544AFA6-87FD-4DB0-AD57-20CF68DC3ABB}.Development|Default.ActiveCfg = Development
+		{6544AFA6-87FD-4DB0-AD57-20CF68DC3ABB}.Development|Default.Build.0 = Development
+		{B22020A1-7D1A-431E-98AD-68E64093E1A0}.Development|Default.ActiveCfg = Development
+		{B22020A1-7D1A-431E-98AD-68E64093E1A0}.Development|Default.Build.0 = Development
+		{C51613CB-9D1A-4581-95E7-02403DCA5A9F}.Development|Default.ActiveCfg = Development
+		{C51613CB-9D1A-4581-95E7-02403DCA5A9F}.Development|Default.Build.0 = Development
+		{E033C32B-CFD7-4F94-96B2-22AD71A6FF18}.Development|Default.ActiveCfg = Development
+		{E033C32B-CFD7-4F94-96B2-22AD71A6FF18}.Development|Default.Build.0 = Development
+		{A81059E3-0B10-4B28-9EF2-EE8D6C9BB579}.Development|Default.ActiveCfg = Development
+		{A81059E3-0B10-4B28-9EF2-EE8D6C9BB579}.Development|Default.Build.0 = Development
+		{767DF6CB-C76E-4EFA-8365-7762BD9522ED}.Development|Default.ActiveCfg = Development
+		{767DF6CB-C76E-4EFA-8365-7762BD9522ED}.Development|Default.Build.0 = Development
+		{9A0C0E3B-899A-4237-BAA1-99A369CD0DEF}.Development|Default.ActiveCfg = Development
+		{9A0C0E3B-899A-4237-BAA1-99A369CD0DEF}.Development|Default.Build.0 = Development
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

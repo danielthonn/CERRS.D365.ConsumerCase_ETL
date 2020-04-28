@@ -1,0 +1,1785 @@
+<?xml version="1.0"?>
+<DTS:Executable xmlns:DTS="www.microsoft.com/SqlServer/Dts"
+  DTS:refId="Package"
+  DTS:CreationDate="4/16/2015 1:39:25 PM"
+  DTS:CreationName="SSIS.Package.3"
+  DTS:CreatorComputerName="TCOISPJW8DB08"
+  DTS:CreatorName="ECAP\jhenningsen"
+  DTS:DTSID="{D53A3AB0-EA81-4481-AF85-327AF1F91E37}"
+  DTS:ExecutableType="SSIS.Package.3"
+  DTS:LastModifiedProductVersion="11.0.5058.0"
+  DTS:LocaleID="1033"
+  DTS:ObjectName="AddressInfo"
+  DTS:PackageType="5"
+  DTS:VersionBuild="212"
+  DTS:VersionGUID="{DF6A046E-A004-4C5A-B206-D16AB3637710}">
+  <DTS:Property
+    DTS:Name="PackageFormatVersion">6</DTS:Property>
+  <DTS:ConnectionManagers>
+    <DTS:ConnectionManager
+      DTS:refId="Package.ConnectionManagers[Address Info Excel Connection Manager]"
+      DTS:CreationName="EXCEL"
+      DTS:DelayValidation="True"
+      DTS:DTSID="{89539CDE-CBD0-4A07-B3D8-8686CA900C90}"
+      DTS:ObjectName="Address Info Excel Connection Manager">
+      <DTS:PropertyExpression
+        DTS:Name="ConnectionString">(DT_WSTR, 200) ("Provider=Microsoft.ACE.OLEDB.12.0;Data Source=" +  @[User::OutputFilePath] + ";Extended Properties=\"Excel 12.0 XML;HDR=YES\";")</DTS:PropertyExpression>
+      <DTS:ObjectData>
+        <DTS:ConnectionManager
+          DTS:ConnectionString="Provider=Microsoft.ACE.OLEDB.12.0;Data Source=\\TCOISPDW8WS03\data\files\out\AddressInfo\Out\ADD_Daily_Cases_08_31_15.xlsx;Extended Properties=&quot;EXCEL 12.0 XML;HDR=YES&quot;;" />
+      </DTS:ObjectData>
+    </DTS:ConnectionManager>
+    <DTS:ConnectionManager
+      DTS:refId="Package.ConnectionManagers[ADD_Daily_Cases.xlsx]"
+      DTS:CreationName="FILE"
+      DTS:DTSID="{AD04149B-34B3-4C9C-A5C6-31B41D27A550}"
+      DTS:ObjectName="ADD_Daily_Cases.xlsx">
+      <DTS:ObjectData>
+        <DTS:ConnectionManager
+          DTS:FileUsageType="1"
+          DTS:ConnectionString="\\TCOISPDW8WS03\data\files\out\AddressInfo\Template\ADD_Daily_Cases.xlsx" />
+      </DTS:ObjectData>
+    </DTS:ConnectionManager>
+    <DTS:ConnectionManager
+      DTS:refId="Package.ConnectionManagers[ERR_1095A]"
+      DTS:CreationName="OLEDB"
+      DTS:DTSID="{6C62E31C-24A8-4A74-BD05-6AD1F0A692D9}"
+      DTS:ObjectName="ERR_1095A">
+      <DTS:ObjectData>
+        <DTS:ConnectionManager
+          DTS:ConnectionString="Data Source=localhost;Initial Catalog=ERR_1095A;Provider=SQLNCLI11.1;Integrated Security=SSPI;Auto Translate=False;" />
+      </DTS:ObjectData>
+    </DTS:ConnectionManager>
+  </DTS:ConnectionManagers>
+  <DTS:Variables>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{1BD9C17F-7484-4DA6-8DC3-42EA8E2E866C}"
+      DTS:IncludeInDebugDump="2345"
+      DTS:Namespace="User"
+      DTS:ObjectName="FullFileDirectoryName">
+      <DTS:VariableValue
+        DTS:DataType="8">\\tcoispDw8ap22\ssis\FullFile\new</DTS:VariableValue>
+    </DTS:Variable>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{0AB73028-EE1F-4F9F-B10C-395D3A055DD9}"
+      DTS:IncludeInDebugDump="2345"
+      DTS:Namespace="User"
+      DTS:ObjectName="FullFileName">
+      <DTS:VariableValue
+        DTS:DataType="8">\\tcoispDw8ap22\ssis\FullFile\new\ERR1095A_HICS_Cases_Original_Data_FULL_FILE_20150503.xlsx</DTS:VariableValue>
+    </DTS:Variable>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{BC07E1DA-8206-43E7-BFE4-870EA4CF09AB}"
+      DTS:EvaluateAsExpression="True"
+      DTS:Expression="(DT_STR, 50, 1252) @[$Project::FilesFolder] +  (DT_STR, 100, 1252) (&quot;out\\AddressInfo\\Out\\ADD_Daily_Cases_&quot;)+ RIGHT(&quot;0&quot; + (DT_STR, 2, 1252)DATEPART( &quot;MM&quot;, GETDATE()),2) + &quot;_&quot; + RIGHT(&quot;0&quot; + (DT_STR, 2, 1252)DATEPART( &quot;dd&quot;, GETDATE()),2) + &quot;_&quot; +RIGHT((DT_STR,4, 1252)DATEPART( &quot;YY&quot;, GETDATE()),2)+(DT_STR, 5, 1252)(&quot;.xlsx&quot;)"
+      DTS:IncludeInDebugDump="2345"
+      DTS:Namespace="User"
+      DTS:ObjectName="OutputFilePath">
+      <DTS:VariableValue
+        DTS:DataType="8">\\TCOISPDW8WS03\data\files\out\AddressInfo\Out\ADD_Daily_Cases_08_31_15.xlsx</DTS:VariableValue>
+    </DTS:Variable>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{9FCEB0D1-80E6-4AF0-95DF-2D31C6ACFD01}"
+      DTS:IncludeInDebugDump="2345"
+      DTS:Namespace="User"
+      DTS:ObjectName="SheetName">
+      <DTS:VariableValue
+        DTS:DataType="8">Add_Results$A1:W12500</DTS:VariableValue>
+    </DTS:Variable>
+  </DTS:Variables>
+  <DTS:Executables>
+    <DTS:Executable
+      DTS:refId="Package\Address Info Sequence Container"
+      DTS:CreationName="STOCK:SEQUENCE"
+      DTS:Description="Sequence Container"
+      DTS:DTSID="{6E4E4E86-7F3E-49BC-9116-64867C3290F3}"
+      DTS:ExecutableType="STOCK:SEQUENCE"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Address Info Sequence Container">
+      <DTS:Variables />
+      <DTS:Executables>
+        <DTS:Executable
+          DTS:refId="Package\Address Info Sequence Container\Address Info Data Flow Task"
+          DTS:CreationName="SSIS.Pipeline.3"
+          DTS:Description="Data Flow Task"
+          DTS:DTSID="{F4B4DCDB-1D0B-402A-9C7D-E8BC49CD7A09}"
+          DTS:ExecutableType="SSIS.Pipeline.3"
+          DTS:LocaleID="-1"
+          DTS:ObjectName="Address Info Data Flow Task"
+          DTS:TaskContact="Performs high-performance data extraction, transformation and loading;Microsoft Corporation; Microsoft SQL Server; (C) 2007 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1">
+          <DTS:Variables />
+          <DTS:ObjectData>
+            <pipeline
+              version="1">
+              <components>
+                <component
+                  refId="Package\Address Info Sequence Container\Address Info Data Flow Task\Address Query OLE DB Source"
+                  componentClassID="{165A526D-D5DE-47FF-96A6-F8274C19826B}"
+                  contactInfo="OLE DB Source;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;7"
+                  description="OLE DB Source"
+                  name="Address Query OLE DB Source"
+                  usesDispositions="true"
+                  version="7">
+                  <properties>
+                    <property
+                      dataType="System.Int32"
+                      description="The number of seconds before a command times out.  A value of 0 indicates an infinite time-out."
+                      name="CommandTimeout">0</property>
+                    <property
+                      dataType="System.String"
+                      description="Specifies the name of the database object used to open a rowset."
+                      name="OpenRowset"></property>
+                    <property
+                      dataType="System.String"
+                      description="Specifies the variable that contains the name of the database object used to open a rowset."
+                      name="OpenRowsetVariable"></property>
+                    <property
+                      dataType="System.String"
+                      description="The SQL command to be executed."
+                      name="SqlCommand"
+                      UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor, Microsoft.DataTransformationServices.Controls, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91">EXEC [dbo].[pAddressInfo]</property>
+                    <property
+                      dataType="System.String"
+                      description="The variable that contains the SQL command to be executed."
+                      name="SqlCommandVariable"></property>
+                    <property
+                      dataType="System.Int32"
+                      description="Specifies the column code page to use when code page information is unavailable from the data source."
+                      name="DefaultCodePage">1252</property>
+                    <property
+                      dataType="System.Boolean"
+                      description="Forces the use of the DefaultCodePage property value when describing character data."
+                      name="AlwaysUseDefaultCodePage">false</property>
+                    <property
+                      dataType="System.Int32"
+                      description="Specifies the mode used to access the database."
+                      name="AccessMode"
+                      typeConverter="AccessMode">2</property>
+                    <property
+                      dataType="System.String"
+                      description="The mappings between the parameters in the SQL command and variables."
+                      name="ParameterMapping"></property>
+                  </properties>
+                  <connections>
+                    <connection
+                      refId="Package\Address Info Sequence Container\Address Info Data Flow Task\Address Query OLE DB Source.Connections[OleDbConnection]"
+                      connectionManagerID="Package.ConnectionManagers[ERR_1095A]"
+                      connectionManagerRefId="Package.ConnectionManagers[ERR_1095A]"
+                      description="The OLE DB runtime connection used to access the database."
+                      name="OleDbConnection" />
+                  </connections>
+                  <outputs>
+                    <output
+                      refId="Package\Address Info Sequence Container\Address Info Data Flow Task\Address Query OLE DB Source.Outputs[OLE DB Source Output]"
+                      name="OLE DB Source Output">
+                      <outputColumns>
+                        <outputColumn
+                          refId="Package\Address Info Sequence Container\Address Info Data Flow Task\Address Query OLE DB Source.Outputs[OLE DB Source Output].Columns[CaseID]"
+                          codePage="1252"
+                          dataType="str"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Address Info Sequence Container\Address Info Data Flow Task\Address Query OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[CaseID]"
+                          length="50"
+                          lineageId="Package\Address Info Sequence Container\Address Info Data Flow Task\Address Query OLE DB Source.Outputs[OLE DB Source Output].Columns[CaseID]"
+                          name="CaseID"
+                          truncationRowDisposition="FailComponent" />
+                        <outputColumn
+                          refId="Package\Address Info Sequence Container\Address Info Data Flow Task\Address Query OLE DB Source.Outputs[OLE DB Source Output].Columns[ApplicationID]"
+                          dataType="i8"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Address Info Sequence Container\Address Info Data Flow Task\Address Query OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[ApplicationID]"
+                          lineageId="Package\Address Info Sequence Container\Address Info Data Flow Task\Address Query OLE DB Source.Outputs[OLE DB Source Output].Columns[ApplicationID]"
+                          name="ApplicationID"
+                          truncationRowDisposition="FailComponent" />
+                        <outputColumn
+                          refId="Package\Address Info Sequence Container\Address Info Data Flow Task\Address Query OLE DB Source.Outputs[OLE DB Source Output].Columns[PolicyID]"
+                          dataType="i8"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Address Info Sequence Container\Address Info Data Flow Task\Address Query OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[PolicyID]"
+                          lineageId="Package\Address Info Sequence Container\Address Info Data Flow Task\Address Query OLE DB Source.Outputs[OLE DB Source Output].Columns[PolicyID]"
+                          name="PolicyID"
+                          truncationRowDisposition="FailComponent" />
+                        <outputColumn
+                          refId="Package\Address Info Sequence Container\Address Info Data Flow Task\Address Query OLE DB Source.Outputs[OLE DB Source Output].Columns[SubcategoryDescription]"
+                          codePage="1252"
+                          dataType="str"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Address Info Sequence Container\Address Info Data Flow Task\Address Query OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[SubcategoryDescription]"
+                          length="255"
+                          lineageId="Package\Address Info Sequence Container\Address Info Data Flow Task\Address Query OLE DB Source.Outputs[OLE DB Source Output].Columns[SubcategoryDescription]"
+                          name="SubcategoryDescription"
+                          truncationRowDisposition="FailComponent" />
+                        <outputColumn
+                          refId="Package\Address Info Sequence Container\Address Info Data Flow Task\Address Query OLE DB Source.Outputs[OLE DB Source Output].Columns[CaseNarrative]"
+                          dataType="nText"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Address Info Sequence Container\Address Info Data Flow Task\Address Query OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[CaseNarrative]"
+                          lineageId="Package\Address Info Sequence Container\Address Info Data Flow Task\Address Query OLE DB Source.Outputs[OLE DB Source Output].Columns[CaseNarrative]"
+                          name="CaseNarrative"
+                          truncationRowDisposition="FailComponent" />
+                        <outputColumn
+                          refId="Package\Address Info Sequence Container\Address Info Data Flow Task\Address Query OLE DB Source.Outputs[OLE DB Source Output].Columns[HICS_Address1]"
+                          codePage="1252"
+                          dataType="str"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Address Info Sequence Container\Address Info Data Flow Task\Address Query OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[HICS_Address1]"
+                          length="500"
+                          lineageId="Package\Address Info Sequence Container\Address Info Data Flow Task\Address Query OLE DB Source.Outputs[OLE DB Source Output].Columns[HICS_Address1]"
+                          name="HICS_Address1"
+                          truncationRowDisposition="FailComponent" />
+                        <outputColumn
+                          refId="Package\Address Info Sequence Container\Address Info Data Flow Task\Address Query OLE DB Source.Outputs[OLE DB Source Output].Columns[HICS_Address2]"
+                          codePage="1252"
+                          dataType="str"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Address Info Sequence Container\Address Info Data Flow Task\Address Query OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[HICS_Address2]"
+                          length="500"
+                          lineageId="Package\Address Info Sequence Container\Address Info Data Flow Task\Address Query OLE DB Source.Outputs[OLE DB Source Output].Columns[HICS_Address2]"
+                          name="HICS_Address2"
+                          truncationRowDisposition="FailComponent" />
+                        <outputColumn
+                          refId="Package\Address Info Sequence Container\Address Info Data Flow Task\Address Query OLE DB Source.Outputs[OLE DB Source Output].Columns[HICS_City]"
+                          codePage="1252"
+                          dataType="str"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Address Info Sequence Container\Address Info Data Flow Task\Address Query OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[HICS_City]"
+                          length="100"
+                          lineageId="Package\Address Info Sequence Container\Address Info Data Flow Task\Address Query OLE DB Source.Outputs[OLE DB Source Output].Columns[HICS_City]"
+                          name="HICS_City"
+                          truncationRowDisposition="FailComponent" />
+                        <outputColumn
+                          refId="Package\Address Info Sequence Container\Address Info Data Flow Task\Address Query OLE DB Source.Outputs[OLE DB Source Output].Columns[HICS_State]"
+                          codePage="1252"
+                          dataType="str"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Address Info Sequence Container\Address Info Data Flow Task\Address Query OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[HICS_State]"
+                          length="2"
+                          lineageId="Package\Address Info Sequence Container\Address Info Data Flow Task\Address Query OLE DB Source.Outputs[OLE DB Source Output].Columns[HICS_State]"
+                          name="HICS_State"
+                          truncationRowDisposition="FailComponent" />
+                        <outputColumn
+                          refId="Package\Address Info Sequence Container\Address Info Data Flow Task\Address Query OLE DB Source.Outputs[OLE DB Source Output].Columns[HICS_ZipCode]"
+                          codePage="1252"
+                          dataType="str"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Address Info Sequence Container\Address Info Data Flow Task\Address Query OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[HICS_ZipCode]"
+                          length="20"
+                          lineageId="Package\Address Info Sequence Container\Address Info Data Flow Task\Address Query OLE DB Source.Outputs[OLE DB Source Output].Columns[HICS_ZipCode]"
+                          name="HICS_ZipCode"
+                          truncationRowDisposition="FailComponent" />
+                        <outputColumn
+                          refId="Package\Address Info Sequence Container\Address Info Data Flow Task\Address Query OLE DB Source.Outputs[OLE DB Source Output].Columns[MIDAS_Address1]"
+                          codePage="1252"
+                          dataType="str"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Address Info Sequence Container\Address Info Data Flow Task\Address Query OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[MIDAS_Address1]"
+                          length="200"
+                          lineageId="Package\Address Info Sequence Container\Address Info Data Flow Task\Address Query OLE DB Source.Outputs[OLE DB Source Output].Columns[MIDAS_Address1]"
+                          name="MIDAS_Address1"
+                          truncationRowDisposition="FailComponent" />
+                        <outputColumn
+                          refId="Package\Address Info Sequence Container\Address Info Data Flow Task\Address Query OLE DB Source.Outputs[OLE DB Source Output].Columns[MIDAS_Address2]"
+                          codePage="1252"
+                          dataType="str"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Address Info Sequence Container\Address Info Data Flow Task\Address Query OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[MIDAS_Address2]"
+                          length="200"
+                          lineageId="Package\Address Info Sequence Container\Address Info Data Flow Task\Address Query OLE DB Source.Outputs[OLE DB Source Output].Columns[MIDAS_Address2]"
+                          name="MIDAS_Address2"
+                          truncationRowDisposition="FailComponent" />
+                        <outputColumn
+                          refId="Package\Address Info Sequence Container\Address Info Data Flow Task\Address Query OLE DB Source.Outputs[OLE DB Source Output].Columns[MIDAS_City]"
+                          codePage="1252"
+                          dataType="str"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Address Info Sequence Container\Address Info Data Flow Task\Address Query OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[MIDAS_City]"
+                          length="200"
+                          lineageId="Package\Address Info Sequence Container\Address Info Data Flow Task\Address Query OLE DB Source.Outputs[OLE DB Source Output].Columns[MIDAS_City]"
+                          name="MIDAS_City"
+                          truncationRowDisposition="FailComponent" />
+                        <outputColumn
+                          refId="Package\Address Info Sequence Container\Address Info Data Flow Task\Address Query OLE DB Source.Outputs[OLE DB Source Output].Columns[MIDAS_State]"
+                          codePage="1252"
+                          dataType="str"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Address Info Sequence Container\Address Info Data Flow Task\Address Query OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[MIDAS_State]"
+                          length="2"
+                          lineageId="Package\Address Info Sequence Container\Address Info Data Flow Task\Address Query OLE DB Source.Outputs[OLE DB Source Output].Columns[MIDAS_State]"
+                          name="MIDAS_State"
+                          truncationRowDisposition="FailComponent" />
+                        <outputColumn
+                          refId="Package\Address Info Sequence Container\Address Info Data Flow Task\Address Query OLE DB Source.Outputs[OLE DB Source Output].Columns[MIDAS_ZipCode]"
+                          codePage="1252"
+                          dataType="str"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Address Info Sequence Container\Address Info Data Flow Task\Address Query OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[MIDAS_ZipCode]"
+                          length="50"
+                          lineageId="Package\Address Info Sequence Container\Address Info Data Flow Task\Address Query OLE DB Source.Outputs[OLE DB Source Output].Columns[MIDAS_ZipCode]"
+                          name="MIDAS_ZipCode"
+                          truncationRowDisposition="FailComponent" />
+                        <outputColumn
+                          refId="Package\Address Info Sequence Container\Address Info Data Flow Task\Address Query OLE DB Source.Outputs[OLE DB Source Output].Columns[Case Type]"
+                          codePage="1252"
+                          dataType="str"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Address Info Sequence Container\Address Info Data Flow Task\Address Query OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[Case Type]"
+                          length="50"
+                          lineageId="Package\Address Info Sequence Container\Address Info Data Flow Task\Address Query OLE DB Source.Outputs[OLE DB Source Output].Columns[Case Type]"
+                          name="Case Type"
+                          truncationRowDisposition="FailComponent" />
+                        <outputColumn
+                          refId="Package\Address Info Sequence Container\Address Info Data Flow Task\Address Query OLE DB Source.Outputs[OLE DB Source Output].Columns[Case Status]"
+                          codePage="1252"
+                          dataType="str"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Address Info Sequence Container\Address Info Data Flow Task\Address Query OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[Case Status]"
+                          length="255"
+                          lineageId="Package\Address Info Sequence Container\Address Info Data Flow Task\Address Query OLE DB Source.Outputs[OLE DB Source Output].Columns[Case Status]"
+                          name="Case Status"
+                          truncationRowDisposition="FailComponent" />
+                        <outputColumn
+                          refId="Package\Address Info Sequence Container\Address Info Data Flow Task\Address Query OLE DB Source.Outputs[OLE DB Source Output].Columns[HIOS_ID]"
+                          dataType="i4"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Address Info Sequence Container\Address Info Data Flow Task\Address Query OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[HIOS_ID]"
+                          lineageId="Package\Address Info Sequence Container\Address Info Data Flow Task\Address Query OLE DB Source.Outputs[OLE DB Source Output].Columns[HIOS_ID]"
+                          name="HIOS_ID"
+                          truncationRowDisposition="FailComponent" />
+                        <outputColumn
+                          refId="Package\Address Info Sequence Container\Address Info Data Flow Task\Address Query OLE DB Source.Outputs[OLE DB Source Output].Columns[Correlated Case]"
+                          codePage="1252"
+                          dataType="str"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Address Info Sequence Container\Address Info Data Flow Task\Address Query OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[Correlated Case]"
+                          length="50"
+                          lineageId="Package\Address Info Sequence Container\Address Info Data Flow Task\Address Query OLE DB Source.Outputs[OLE DB Source Output].Columns[Correlated Case]"
+                          name="Correlated Case"
+                          truncationRowDisposition="FailComponent" />
+                        <outputColumn
+                          refId="Package\Address Info Sequence Container\Address Info Data Flow Task\Address Query OLE DB Source.Outputs[OLE DB Source Output].Columns[Policy-1095]"
+                          dataType="i4"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Address Info Sequence Container\Address Info Data Flow Task\Address Query OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[Policy-1095]"
+                          lineageId="Package\Address Info Sequence Container\Address Info Data Flow Task\Address Query OLE DB Source.Outputs[OLE DB Source Output].Columns[Policy-1095]"
+                          name="Policy-1095"
+                          truncationRowDisposition="FailComponent" />
+                        <outputColumn
+                          refId="Package\Address Info Sequence Container\Address Info Data Flow Task\Address Query OLE DB Source.Outputs[OLE DB Source Output].Columns[Policy-Preaudit]"
+                          dataType="i4"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Address Info Sequence Container\Address Info Data Flow Task\Address Query OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[Policy-Preaudit]"
+                          lineageId="Package\Address Info Sequence Container\Address Info Data Flow Task\Address Query OLE DB Source.Outputs[OLE DB Source Output].Columns[Policy-Preaudit]"
+                          name="Policy-Preaudit"
+                          truncationRowDisposition="FailComponent" />
+                        <outputColumn
+                          refId="Package\Address Info Sequence Container\Address Info Data Flow Task\Address Query OLE DB Source.Outputs[OLE DB Source Output].Columns[Manual1095]"
+                          dataType="i4"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Address Info Sequence Container\Address Info Data Flow Task\Address Query OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[Manual1095]"
+                          lineageId="Package\Address Info Sequence Container\Address Info Data Flow Task\Address Query OLE DB Source.Outputs[OLE DB Source Output].Columns[Manual1095]"
+                          name="Manual1095"
+                          truncationRowDisposition="FailComponent" />
+                        <outputColumn
+                          refId="Package\Address Info Sequence Container\Address Info Data Flow Task\Address Query OLE DB Source.Outputs[OLE DB Source Output].Columns[IRS]"
+                          dataType="bool"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Address Info Sequence Container\Address Info Data Flow Task\Address Query OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[IRS]"
+                          lineageId="Package\Address Info Sequence Container\Address Info Data Flow Task\Address Query OLE DB Source.Outputs[OLE DB Source Output].Columns[IRS]"
+                          name="IRS"
+                          truncationRowDisposition="FailComponent" />
+                      </outputColumns>
+                      <externalMetadataColumns
+                        isUsed="True">
+                        <externalMetadataColumn
+                          refId="Package\Address Info Sequence Container\Address Info Data Flow Task\Address Query OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[CaseID]"
+                          codePage="1252"
+                          dataType="str"
+                          length="50"
+                          name="CaseID" />
+                        <externalMetadataColumn
+                          refId="Package\Address Info Sequence Container\Address Info Data Flow Task\Address Query OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[ApplicationID]"
+                          dataType="i8"
+                          name="ApplicationID" />
+                        <externalMetadataColumn
+                          refId="Package\Address Info Sequence Container\Address Info Data Flow Task\Address Query OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[PolicyID]"
+                          dataType="i8"
+                          name="PolicyID" />
+                        <externalMetadataColumn
+                          refId="Package\Address Info Sequence Container\Address Info Data Flow Task\Address Query OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[SubcategoryDescription]"
+                          codePage="1252"
+                          dataType="str"
+                          length="255"
+                          name="SubcategoryDescription" />
+                        <externalMetadataColumn
+                          refId="Package\Address Info Sequence Container\Address Info Data Flow Task\Address Query OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[CaseNarrative]"
+                          dataType="nText"
+                          name="CaseNarrative" />
+                        <externalMetadataColumn
+                          refId="Package\Address Info Sequence Container\Address Info Data Flow Task\Address Query OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[HICS_Address1]"
+                          codePage="1252"
+                          dataType="str"
+                          length="500"
+                          name="HICS_Address1" />
+                        <externalMetadataColumn
+                          refId="Package\Address Info Sequence Container\Address Info Data Flow Task\Address Query OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[HICS_Address2]"
+                          codePage="1252"
+                          dataType="str"
+                          length="500"
+                          name="HICS_Address2" />
+                        <externalMetadataColumn
+                          refId="Package\Address Info Sequence Container\Address Info Data Flow Task\Address Query OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[HICS_City]"
+                          codePage="1252"
+                          dataType="str"
+                          length="100"
+                          name="HICS_City" />
+                        <externalMetadataColumn
+                          refId="Package\Address Info Sequence Container\Address Info Data Flow Task\Address Query OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[HICS_State]"
+                          codePage="1252"
+                          dataType="str"
+                          length="2"
+                          name="HICS_State" />
+                        <externalMetadataColumn
+                          refId="Package\Address Info Sequence Container\Address Info Data Flow Task\Address Query OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[HICS_ZipCode]"
+                          codePage="1252"
+                          dataType="str"
+                          length="20"
+                          name="HICS_ZipCode" />
+                        <externalMetadataColumn
+                          refId="Package\Address Info Sequence Container\Address Info Data Flow Task\Address Query OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[MIDAS_Address1]"
+                          codePage="1252"
+                          dataType="str"
+                          length="200"
+                          name="MIDAS_Address1" />
+                        <externalMetadataColumn
+                          refId="Package\Address Info Sequence Container\Address Info Data Flow Task\Address Query OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[MIDAS_Address2]"
+                          codePage="1252"
+                          dataType="str"
+                          length="200"
+                          name="MIDAS_Address2" />
+                        <externalMetadataColumn
+                          refId="Package\Address Info Sequence Container\Address Info Data Flow Task\Address Query OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[MIDAS_City]"
+                          codePage="1252"
+                          dataType="str"
+                          length="200"
+                          name="MIDAS_City" />
+                        <externalMetadataColumn
+                          refId="Package\Address Info Sequence Container\Address Info Data Flow Task\Address Query OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[MIDAS_State]"
+                          codePage="1252"
+                          dataType="str"
+                          length="2"
+                          name="MIDAS_State" />
+                        <externalMetadataColumn
+                          refId="Package\Address Info Sequence Container\Address Info Data Flow Task\Address Query OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[MIDAS_ZipCode]"
+                          codePage="1252"
+                          dataType="str"
+                          length="50"
+                          name="MIDAS_ZipCode" />
+                        <externalMetadataColumn
+                          refId="Package\Address Info Sequence Container\Address Info Data Flow Task\Address Query OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[Case Type]"
+                          codePage="1252"
+                          dataType="str"
+                          length="50"
+                          name="Case Type" />
+                        <externalMetadataColumn
+                          refId="Package\Address Info Sequence Container\Address Info Data Flow Task\Address Query OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[Case Status]"
+                          codePage="1252"
+                          dataType="str"
+                          length="255"
+                          name="Case Status" />
+                        <externalMetadataColumn
+                          refId="Package\Address Info Sequence Container\Address Info Data Flow Task\Address Query OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[HIOS_ID]"
+                          dataType="i4"
+                          name="HIOS_ID" />
+                        <externalMetadataColumn
+                          refId="Package\Address Info Sequence Container\Address Info Data Flow Task\Address Query OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[Correlated Case]"
+                          codePage="1252"
+                          dataType="str"
+                          length="50"
+                          name="Correlated Case" />
+                        <externalMetadataColumn
+                          refId="Package\Address Info Sequence Container\Address Info Data Flow Task\Address Query OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[Policy-1095]"
+                          dataType="i4"
+                          name="Policy-1095" />
+                        <externalMetadataColumn
+                          refId="Package\Address Info Sequence Container\Address Info Data Flow Task\Address Query OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[Policy-Preaudit]"
+                          dataType="i4"
+                          name="Policy-Preaudit" />
+                        <externalMetadataColumn
+                          refId="Package\Address Info Sequence Container\Address Info Data Flow Task\Address Query OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[Manual1095]"
+                          dataType="i4"
+                          name="Manual1095" />
+                        <externalMetadataColumn
+                          refId="Package\Address Info Sequence Container\Address Info Data Flow Task\Address Query OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[IRS]"
+                          dataType="bool"
+                          name="IRS" />
+                      </externalMetadataColumns>
+                    </output>
+                    <output
+                      refId="Package\Address Info Sequence Container\Address Info Data Flow Task\Address Query OLE DB Source.Outputs[OLE DB Source Error Output]"
+                      isErrorOut="true"
+                      name="OLE DB Source Error Output">
+                      <outputColumns>
+                        <outputColumn
+                          refId="Package\Address Info Sequence Container\Address Info Data Flow Task\Address Query OLE DB Source.Outputs[OLE DB Source Error Output].Columns[CaseID]"
+                          codePage="1252"
+                          dataType="str"
+                          length="50"
+                          lineageId="Package\Address Info Sequence Container\Address Info Data Flow Task\Address Query OLE DB Source.Outputs[OLE DB Source Error Output].Columns[CaseID]"
+                          name="CaseID" />
+                        <outputColumn
+                          refId="Package\Address Info Sequence Container\Address Info Data Flow Task\Address Query OLE DB Source.Outputs[OLE DB Source Error Output].Columns[Case Type]"
+                          codePage="1252"
+                          dataType="str"
+                          length="50"
+                          lineageId="Package\Address Info Sequence Container\Address Info Data Flow Task\Address Query OLE DB Source.Outputs[OLE DB Source Error Output].Columns[Case Type]"
+                          name="Case Type" />
+                        <outputColumn
+                          refId="Package\Address Info Sequence Container\Address Info Data Flow Task\Address Query OLE DB Source.Outputs[OLE DB Source Error Output].Columns[Case Status]"
+                          codePage="1252"
+                          dataType="str"
+                          length="255"
+                          lineageId="Package\Address Info Sequence Container\Address Info Data Flow Task\Address Query OLE DB Source.Outputs[OLE DB Source Error Output].Columns[Case Status]"
+                          name="Case Status" />
+                        <outputColumn
+                          refId="Package\Address Info Sequence Container\Address Info Data Flow Task\Address Query OLE DB Source.Outputs[OLE DB Source Error Output].Columns[ApplicationID]"
+                          dataType="i8"
+                          lineageId="Package\Address Info Sequence Container\Address Info Data Flow Task\Address Query OLE DB Source.Outputs[OLE DB Source Error Output].Columns[ApplicationID]"
+                          name="ApplicationID" />
+                        <outputColumn
+                          refId="Package\Address Info Sequence Container\Address Info Data Flow Task\Address Query OLE DB Source.Outputs[OLE DB Source Error Output].Columns[PolicyID]"
+                          dataType="i8"
+                          lineageId="Package\Address Info Sequence Container\Address Info Data Flow Task\Address Query OLE DB Source.Outputs[OLE DB Source Error Output].Columns[PolicyID]"
+                          name="PolicyID" />
+                        <outputColumn
+                          refId="Package\Address Info Sequence Container\Address Info Data Flow Task\Address Query OLE DB Source.Outputs[OLE DB Source Error Output].Columns[HIOS_ID]"
+                          dataType="i4"
+                          lineageId="Package\Address Info Sequence Container\Address Info Data Flow Task\Address Query OLE DB Source.Outputs[OLE DB Source Error Output].Columns[HIOS_ID]"
+                          name="HIOS_ID" />
+                        <outputColumn
+                          refId="Package\Address Info Sequence Container\Address Info Data Flow Task\Address Query OLE DB Source.Outputs[OLE DB Source Error Output].Columns[SubcategoryDescription]"
+                          codePage="1252"
+                          dataType="str"
+                          length="255"
+                          lineageId="Package\Address Info Sequence Container\Address Info Data Flow Task\Address Query OLE DB Source.Outputs[OLE DB Source Error Output].Columns[SubcategoryDescription]"
+                          name="SubcategoryDescription" />
+                        <outputColumn
+                          refId="Package\Address Info Sequence Container\Address Info Data Flow Task\Address Query OLE DB Source.Outputs[OLE DB Source Error Output].Columns[Correlated Case]"
+                          codePage="1252"
+                          dataType="str"
+                          length="50"
+                          lineageId="Package\Address Info Sequence Container\Address Info Data Flow Task\Address Query OLE DB Source.Outputs[OLE DB Source Error Output].Columns[Correlated Case]"
+                          name="Correlated Case" />
+                        <outputColumn
+                          refId="Package\Address Info Sequence Container\Address Info Data Flow Task\Address Query OLE DB Source.Outputs[OLE DB Source Error Output].Columns[Policy-1095]"
+                          dataType="i4"
+                          lineageId="Package\Address Info Sequence Container\Address Info Data Flow Task\Address Query OLE DB Source.Outputs[OLE DB Source Error Output].Columns[Policy-1095]"
+                          name="Policy-1095" />
+                        <outputColumn
+                          refId="Package\Address Info Sequence Container\Address Info Data Flow Task\Address Query OLE DB Source.Outputs[OLE DB Source Error Output].Columns[Policy-Preaudit]"
+                          dataType="i4"
+                          lineageId="Package\Address Info Sequence Container\Address Info Data Flow Task\Address Query OLE DB Source.Outputs[OLE DB Source Error Output].Columns[Policy-Preaudit]"
+                          name="Policy-Preaudit" />
+                        <outputColumn
+                          refId="Package\Address Info Sequence Container\Address Info Data Flow Task\Address Query OLE DB Source.Outputs[OLE DB Source Error Output].Columns[Manual1095]"
+                          dataType="i4"
+                          lineageId="Package\Address Info Sequence Container\Address Info Data Flow Task\Address Query OLE DB Source.Outputs[OLE DB Source Error Output].Columns[Manual1095]"
+                          name="Manual1095" />
+                        <outputColumn
+                          refId="Package\Address Info Sequence Container\Address Info Data Flow Task\Address Query OLE DB Source.Outputs[OLE DB Source Error Output].Columns[IRS]"
+                          dataType="bool"
+                          lineageId="Package\Address Info Sequence Container\Address Info Data Flow Task\Address Query OLE DB Source.Outputs[OLE DB Source Error Output].Columns[IRS]"
+                          name="IRS" />
+                        <outputColumn
+                          refId="Package\Address Info Sequence Container\Address Info Data Flow Task\Address Query OLE DB Source.Outputs[OLE DB Source Error Output].Columns[CaseNarrative]"
+                          dataType="nText"
+                          lineageId="Package\Address Info Sequence Container\Address Info Data Flow Task\Address Query OLE DB Source.Outputs[OLE DB Source Error Output].Columns[CaseNarrative]"
+                          name="CaseNarrative" />
+                        <outputColumn
+                          refId="Package\Address Info Sequence Container\Address Info Data Flow Task\Address Query OLE DB Source.Outputs[OLE DB Source Error Output].Columns[HICS_Address1]"
+                          codePage="1252"
+                          dataType="str"
+                          length="500"
+                          lineageId="Package\Address Info Sequence Container\Address Info Data Flow Task\Address Query OLE DB Source.Outputs[OLE DB Source Error Output].Columns[HICS_Address1]"
+                          name="HICS_Address1" />
+                        <outputColumn
+                          refId="Package\Address Info Sequence Container\Address Info Data Flow Task\Address Query OLE DB Source.Outputs[OLE DB Source Error Output].Columns[HICS_Address2]"
+                          codePage="1252"
+                          dataType="str"
+                          length="500"
+                          lineageId="Package\Address Info Sequence Container\Address Info Data Flow Task\Address Query OLE DB Source.Outputs[OLE DB Source Error Output].Columns[HICS_Address2]"
+                          name="HICS_Address2" />
+                        <outputColumn
+                          refId="Package\Address Info Sequence Container\Address Info Data Flow Task\Address Query OLE DB Source.Outputs[OLE DB Source Error Output].Columns[HICS_City]"
+                          codePage="1252"
+                          dataType="str"
+                          length="100"
+                          lineageId="Package\Address Info Sequence Container\Address Info Data Flow Task\Address Query OLE DB Source.Outputs[OLE DB Source Error Output].Columns[HICS_City]"
+                          name="HICS_City" />
+                        <outputColumn
+                          refId="Package\Address Info Sequence Container\Address Info Data Flow Task\Address Query OLE DB Source.Outputs[OLE DB Source Error Output].Columns[HICS_State]"
+                          codePage="1252"
+                          dataType="str"
+                          length="2"
+                          lineageId="Package\Address Info Sequence Container\Address Info Data Flow Task\Address Query OLE DB Source.Outputs[OLE DB Source Error Output].Columns[HICS_State]"
+                          name="HICS_State" />
+                        <outputColumn
+                          refId="Package\Address Info Sequence Container\Address Info Data Flow Task\Address Query OLE DB Source.Outputs[OLE DB Source Error Output].Columns[HICS_ZipCode]"
+                          codePage="1252"
+                          dataType="str"
+                          length="20"
+                          lineageId="Package\Address Info Sequence Container\Address Info Data Flow Task\Address Query OLE DB Source.Outputs[OLE DB Source Error Output].Columns[HICS_ZipCode]"
+                          name="HICS_ZipCode" />
+                        <outputColumn
+                          refId="Package\Address Info Sequence Container\Address Info Data Flow Task\Address Query OLE DB Source.Outputs[OLE DB Source Error Output].Columns[MIDAS_Address1]"
+                          codePage="1252"
+                          dataType="str"
+                          length="200"
+                          lineageId="Package\Address Info Sequence Container\Address Info Data Flow Task\Address Query OLE DB Source.Outputs[OLE DB Source Error Output].Columns[MIDAS_Address1]"
+                          name="MIDAS_Address1" />
+                        <outputColumn
+                          refId="Package\Address Info Sequence Container\Address Info Data Flow Task\Address Query OLE DB Source.Outputs[OLE DB Source Error Output].Columns[MIDAS_Address2]"
+                          codePage="1252"
+                          dataType="str"
+                          length="200"
+                          lineageId="Package\Address Info Sequence Container\Address Info Data Flow Task\Address Query OLE DB Source.Outputs[OLE DB Source Error Output].Columns[MIDAS_Address2]"
+                          name="MIDAS_Address2" />
+                        <outputColumn
+                          refId="Package\Address Info Sequence Container\Address Info Data Flow Task\Address Query OLE DB Source.Outputs[OLE DB Source Error Output].Columns[MIDAS_City]"
+                          codePage="1252"
+                          dataType="str"
+                          length="200"
+                          lineageId="Package\Address Info Sequence Container\Address Info Data Flow Task\Address Query OLE DB Source.Outputs[OLE DB Source Error Output].Columns[MIDAS_City]"
+                          name="MIDAS_City" />
+                        <outputColumn
+                          refId="Package\Address Info Sequence Container\Address Info Data Flow Task\Address Query OLE DB Source.Outputs[OLE DB Source Error Output].Columns[MIDAS_State]"
+                          codePage="1252"
+                          dataType="str"
+                          length="2"
+                          lineageId="Package\Address Info Sequence Container\Address Info Data Flow Task\Address Query OLE DB Source.Outputs[OLE DB Source Error Output].Columns[MIDAS_State]"
+                          name="MIDAS_State" />
+                        <outputColumn
+                          refId="Package\Address Info Sequence Container\Address Info Data Flow Task\Address Query OLE DB Source.Outputs[OLE DB Source Error Output].Columns[MIDAS_ZipCode]"
+                          codePage="1252"
+                          dataType="str"
+                          length="50"
+                          lineageId="Package\Address Info Sequence Container\Address Info Data Flow Task\Address Query OLE DB Source.Outputs[OLE DB Source Error Output].Columns[MIDAS_ZipCode]"
+                          name="MIDAS_ZipCode" />
+                        <outputColumn
+                          refId="Package\Address Info Sequence Container\Address Info Data Flow Task\Address Query OLE DB Source.Outputs[OLE DB Source Error Output].Columns[ErrorCode]"
+                          dataType="i4"
+                          lineageId="Package\Address Info Sequence Container\Address Info Data Flow Task\Address Query OLE DB Source.Outputs[OLE DB Source Error Output].Columns[ErrorCode]"
+                          name="ErrorCode"
+                          specialFlags="1" />
+                        <outputColumn
+                          refId="Package\Address Info Sequence Container\Address Info Data Flow Task\Address Query OLE DB Source.Outputs[OLE DB Source Error Output].Columns[ErrorColumn]"
+                          dataType="i4"
+                          lineageId="Package\Address Info Sequence Container\Address Info Data Flow Task\Address Query OLE DB Source.Outputs[OLE DB Source Error Output].Columns[ErrorColumn]"
+                          name="ErrorColumn"
+                          specialFlags="2" />
+                      </outputColumns>
+                      <externalMetadataColumns />
+                    </output>
+                  </outputs>
+                </component>
+                <component
+                  refId="Package\Address Info Sequence Container\Address Info Data Flow Task\ADD_Daily_Cases Excel Destination"
+                  componentClassID="{1F5D5712-2FBA-4CB9-A95A-86C1F336E1DA}"
+                  contactInfo="Excel Destination;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;0"
+                  description="Excel Destination"
+                  name="ADD_Daily_Cases Excel Destination"
+                  usesDispositions="true"
+                  validateExternalMetadata="False">
+                  <properties>
+                    <property
+                      dataType="System.Int32"
+                      description="The number of seconds before a command times out.  A value of 0 indicates an infinite time-out."
+                      name="CommandTimeout">0</property>
+                    <property
+                      dataType="System.String"
+                      description="Specifies the name of the database object used to open a rowset."
+                      name="OpenRowset">ADD_Results$</property>
+                    <property
+                      dataType="System.String"
+                      description="Specifies the variable that contains the name of the database object used to open a rowset."
+                      name="OpenRowsetVariable">User::SheetName</property>
+                    <property
+                      dataType="System.String"
+                      description="The SQL command to be executed."
+                      name="SqlCommand"
+                      UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor, Microsoft.DataTransformationServices.Controls, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"></property>
+                    <property
+                      dataType="System.Int32"
+                      description="Specifies the mode used to access the database."
+                      name="AccessMode"
+                      typeConverter="AccessMode">1</property>
+                    <property
+                      dataType="System.Boolean"
+                      description="Indicates whether the values supplied for identity columns will be copied to the destination. If false, values for identity columns will be auto-generated at the destination. Applies only if fast load is turned on."
+                      name="FastLoadKeepIdentity">false</property>
+                    <property
+                      dataType="System.Boolean"
+                      description="Indicates whether the columns containing null will have null inserted in the destination. If false, columns containing null will have their default values inserted at the destination. Applies only if fast load is turned on."
+                      name="FastLoadKeepNulls">false</property>
+                    <property
+                      dataType="System.String"
+                      description="Specifies options to be used with fast load.  Applies only if fast load is turned on."
+                      name="FastLoadOptions"></property>
+                    <property
+                      dataType="System.Int32"
+                      description="Specifies when commits are issued during data insertion.  A value of 0 specifies that one commit will be issued at the end of data insertion.  Applies only if fast load is turned on."
+                      name="FastLoadMaxInsertCommitSize">2147483647</property>
+                  </properties>
+                  <connections>
+                    <connection
+                      refId="Package\Address Info Sequence Container\Address Info Data Flow Task\ADD_Daily_Cases Excel Destination.Connections[OleDbConnection]"
+                      connectionManagerID="Package.ConnectionManagers[Address Info Excel Connection Manager]"
+                      connectionManagerRefId="Package.ConnectionManagers[Address Info Excel Connection Manager]"
+                      description="The OLE DB runtime connection used to access the database."
+                      name="OleDbConnection" />
+                  </connections>
+                  <inputs>
+                    <input
+                      refId="Package\Address Info Sequence Container\Address Info Data Flow Task\ADD_Daily_Cases Excel Destination.Inputs[Excel Destination Input]"
+                      errorOrTruncationOperation="Insert"
+                      errorRowDisposition="FailComponent"
+                      hasSideEffects="true"
+                      name="Excel Destination Input">
+                      <inputColumns>
+                        <inputColumn
+                          refId="Package\Address Info Sequence Container\Address Info Data Flow Task\ADD_Daily_Cases Excel Destination.Inputs[Excel Destination Input].Columns[ApplicationID]"
+                          cachedDataType="i8"
+                          cachedName="ApplicationID"
+                          externalMetadataColumnId="Package\Address Info Sequence Container\Address Info Data Flow Task\ADD_Daily_Cases Excel Destination.Inputs[Excel Destination Input].ExternalColumns[ApplicationID]"
+                          lineageId="Package\Address Info Sequence Container\Address Info Data Flow Task\Address Query OLE DB Source.Outputs[OLE DB Source Output].Columns[ApplicationID]" />
+                        <inputColumn
+                          refId="Package\Address Info Sequence Container\Address Info Data Flow Task\ADD_Daily_Cases Excel Destination.Inputs[Excel Destination Input].Columns[PolicyID]"
+                          cachedDataType="i8"
+                          cachedName="PolicyID"
+                          externalMetadataColumnId="Package\Address Info Sequence Container\Address Info Data Flow Task\ADD_Daily_Cases Excel Destination.Inputs[Excel Destination Input].ExternalColumns[PolicyID]"
+                          lineageId="Package\Address Info Sequence Container\Address Info Data Flow Task\Address Query OLE DB Source.Outputs[OLE DB Source Output].Columns[PolicyID]" />
+                        <inputColumn
+                          refId="Package\Address Info Sequence Container\Address Info Data Flow Task\ADD_Daily_Cases Excel Destination.Inputs[Excel Destination Input].Columns[CaseNarrative]"
+                          cachedDataType="nText"
+                          cachedName="CaseNarrative"
+                          externalMetadataColumnId="Package\Address Info Sequence Container\Address Info Data Flow Task\ADD_Daily_Cases Excel Destination.Inputs[Excel Destination Input].ExternalColumns[CaseNarrative]"
+                          lineageId="Package\Address Info Sequence Container\Address Info Data Flow Task\Address Query OLE DB Source.Outputs[OLE DB Source Output].Columns[CaseNarrative]" />
+                        <inputColumn
+                          refId="Package\Address Info Sequence Container\Address Info Data Flow Task\ADD_Daily_Cases Excel Destination.Inputs[Excel Destination Input].Columns[Policy-1095]"
+                          cachedDataType="i4"
+                          cachedName="Policy-1095"
+                          externalMetadataColumnId="Package\Address Info Sequence Container\Address Info Data Flow Task\ADD_Daily_Cases Excel Destination.Inputs[Excel Destination Input].ExternalColumns[Policy-1095]"
+                          lineageId="Package\Address Info Sequence Container\Address Info Data Flow Task\Address Query OLE DB Source.Outputs[OLE DB Source Output].Columns[Policy-1095]" />
+                        <inputColumn
+                          refId="Package\Address Info Sequence Container\Address Info Data Flow Task\ADD_Daily_Cases Excel Destination.Inputs[Excel Destination Input].Columns[Policy-Preaudit]"
+                          cachedDataType="i4"
+                          cachedName="Policy-Preaudit"
+                          externalMetadataColumnId="Package\Address Info Sequence Container\Address Info Data Flow Task\ADD_Daily_Cases Excel Destination.Inputs[Excel Destination Input].ExternalColumns[Policy-Preaudit]"
+                          lineageId="Package\Address Info Sequence Container\Address Info Data Flow Task\Address Query OLE DB Source.Outputs[OLE DB Source Output].Columns[Policy-Preaudit]" />
+                        <inputColumn
+                          refId="Package\Address Info Sequence Container\Address Info Data Flow Task\ADD_Daily_Cases Excel Destination.Inputs[Excel Destination Input].Columns[Manual1095]"
+                          cachedDataType="i4"
+                          cachedName="Manual1095"
+                          externalMetadataColumnId="Package\Address Info Sequence Container\Address Info Data Flow Task\ADD_Daily_Cases Excel Destination.Inputs[Excel Destination Input].ExternalColumns[Manual1095]"
+                          lineageId="Package\Address Info Sequence Container\Address Info Data Flow Task\Address Query OLE DB Source.Outputs[OLE DB Source Output].Columns[Manual1095]" />
+                        <inputColumn
+                          refId="Package\Address Info Sequence Container\Address Info Data Flow Task\ADD_Daily_Cases Excel Destination.Inputs[Excel Destination Input].Columns[IRS]"
+                          cachedDataType="bool"
+                          cachedName="IRS"
+                          externalMetadataColumnId="Package\Address Info Sequence Container\Address Info Data Flow Task\ADD_Daily_Cases Excel Destination.Inputs[Excel Destination Input].ExternalColumns[IRS]"
+                          lineageId="Package\Address Info Sequence Container\Address Info Data Flow Task\Address Query OLE DB Source.Outputs[OLE DB Source Output].Columns[IRS]" />
+                        <inputColumn
+                          refId="Package\Address Info Sequence Container\Address Info Data Flow Task\ADD_Daily_Cases Excel Destination.Inputs[Excel Destination Input].Columns[uniCaseID]"
+                          cachedDataType="wstr"
+                          cachedLength="50"
+                          cachedName="uniCaseID"
+                          externalMetadataColumnId="Package\Address Info Sequence Container\Address Info Data Flow Task\ADD_Daily_Cases Excel Destination.Inputs[Excel Destination Input].ExternalColumns[CaseID]"
+                          lineageId="Package\Address Info Sequence Container\Address Info Data Flow Task\Unicode Data Conversion.Outputs[Data Conversion Output].Columns[uniCaseID]" />
+                        <inputColumn
+                          refId="Package\Address Info Sequence Container\Address Info Data Flow Task\ADD_Daily_Cases Excel Destination.Inputs[Excel Destination Input].Columns[uniCaseType]"
+                          cachedDataType="wstr"
+                          cachedLength="50"
+                          cachedName="uniCaseType"
+                          externalMetadataColumnId="Package\Address Info Sequence Container\Address Info Data Flow Task\ADD_Daily_Cases Excel Destination.Inputs[Excel Destination Input].ExternalColumns[Case Type]"
+                          lineageId="Package\Address Info Sequence Container\Address Info Data Flow Task\Unicode Data Conversion.Outputs[Data Conversion Output].Columns[uniCaseType]" />
+                        <inputColumn
+                          refId="Package\Address Info Sequence Container\Address Info Data Flow Task\ADD_Daily_Cases Excel Destination.Inputs[Excel Destination Input].Columns[uniCaseStatus]"
+                          cachedDataType="wstr"
+                          cachedLength="255"
+                          cachedName="uniCaseStatus"
+                          externalMetadataColumnId="Package\Address Info Sequence Container\Address Info Data Flow Task\ADD_Daily_Cases Excel Destination.Inputs[Excel Destination Input].ExternalColumns[Case Status]"
+                          lineageId="Package\Address Info Sequence Container\Address Info Data Flow Task\Unicode Data Conversion.Outputs[Data Conversion Output].Columns[uniCaseStatus]" />
+                        <inputColumn
+                          refId="Package\Address Info Sequence Container\Address Info Data Flow Task\ADD_Daily_Cases Excel Destination.Inputs[Excel Destination Input].Columns[uniHIOS_ID]"
+                          cachedDataType="wstr"
+                          cachedLength="20"
+                          cachedName="uniHIOS_ID"
+                          externalMetadataColumnId="Package\Address Info Sequence Container\Address Info Data Flow Task\ADD_Daily_Cases Excel Destination.Inputs[Excel Destination Input].ExternalColumns[HIOS_ID]"
+                          lineageId="Package\Address Info Sequence Container\Address Info Data Flow Task\Unicode Data Conversion.Outputs[Data Conversion Output].Columns[uniHIOS_ID]" />
+                        <inputColumn
+                          refId="Package\Address Info Sequence Container\Address Info Data Flow Task\ADD_Daily_Cases Excel Destination.Inputs[Excel Destination Input].Columns[uniSubcategoryDescription]"
+                          cachedDataType="wstr"
+                          cachedLength="255"
+                          cachedName="uniSubcategoryDescription"
+                          externalMetadataColumnId="Package\Address Info Sequence Container\Address Info Data Flow Task\ADD_Daily_Cases Excel Destination.Inputs[Excel Destination Input].ExternalColumns[SubcategoryDescription]"
+                          lineageId="Package\Address Info Sequence Container\Address Info Data Flow Task\Unicode Data Conversion.Outputs[Data Conversion Output].Columns[uniSubcategoryDescription]" />
+                        <inputColumn
+                          refId="Package\Address Info Sequence Container\Address Info Data Flow Task\ADD_Daily_Cases Excel Destination.Inputs[Excel Destination Input].Columns[uniCorrelated Case]"
+                          cachedDataType="wstr"
+                          cachedLength="50"
+                          cachedName="uniCorrelated Case"
+                          externalMetadataColumnId="Package\Address Info Sequence Container\Address Info Data Flow Task\ADD_Daily_Cases Excel Destination.Inputs[Excel Destination Input].ExternalColumns[Correlated Case]"
+                          lineageId="Package\Address Info Sequence Container\Address Info Data Flow Task\Unicode Data Conversion.Outputs[Data Conversion Output].Columns[uniCorrelated Case]" />
+                        <inputColumn
+                          refId="Package\Address Info Sequence Container\Address Info Data Flow Task\ADD_Daily_Cases Excel Destination.Inputs[Excel Destination Input].Columns[uniHICS_Address1]"
+                          cachedDataType="wstr"
+                          cachedLength="500"
+                          cachedName="uniHICS_Address1"
+                          externalMetadataColumnId="Package\Address Info Sequence Container\Address Info Data Flow Task\ADD_Daily_Cases Excel Destination.Inputs[Excel Destination Input].ExternalColumns[HICS_Address1]"
+                          lineageId="Package\Address Info Sequence Container\Address Info Data Flow Task\Unicode Data Conversion.Outputs[Data Conversion Output].Columns[uniHICS_Address1]" />
+                        <inputColumn
+                          refId="Package\Address Info Sequence Container\Address Info Data Flow Task\ADD_Daily_Cases Excel Destination.Inputs[Excel Destination Input].Columns[uniHICS_Address2]"
+                          cachedDataType="wstr"
+                          cachedLength="500"
+                          cachedName="uniHICS_Address2"
+                          externalMetadataColumnId="Package\Address Info Sequence Container\Address Info Data Flow Task\ADD_Daily_Cases Excel Destination.Inputs[Excel Destination Input].ExternalColumns[HICS_Address2]"
+                          lineageId="Package\Address Info Sequence Container\Address Info Data Flow Task\Unicode Data Conversion.Outputs[Data Conversion Output].Columns[uniHICS_Address2]" />
+                        <inputColumn
+                          refId="Package\Address Info Sequence Container\Address Info Data Flow Task\ADD_Daily_Cases Excel Destination.Inputs[Excel Destination Input].Columns[uniHICS_City]"
+                          cachedDataType="wstr"
+                          cachedLength="100"
+                          cachedName="uniHICS_City"
+                          externalMetadataColumnId="Package\Address Info Sequence Container\Address Info Data Flow Task\ADD_Daily_Cases Excel Destination.Inputs[Excel Destination Input].ExternalColumns[HICS_City]"
+                          lineageId="Package\Address Info Sequence Container\Address Info Data Flow Task\Unicode Data Conversion.Outputs[Data Conversion Output].Columns[uniHICS_City]" />
+                        <inputColumn
+                          refId="Package\Address Info Sequence Container\Address Info Data Flow Task\ADD_Daily_Cases Excel Destination.Inputs[Excel Destination Input].Columns[uniHICS_State]"
+                          cachedDataType="wstr"
+                          cachedLength="2"
+                          cachedName="uniHICS_State"
+                          externalMetadataColumnId="Package\Address Info Sequence Container\Address Info Data Flow Task\ADD_Daily_Cases Excel Destination.Inputs[Excel Destination Input].ExternalColumns[HICS_State]"
+                          lineageId="Package\Address Info Sequence Container\Address Info Data Flow Task\Unicode Data Conversion.Outputs[Data Conversion Output].Columns[uniHICS_State]" />
+                        <inputColumn
+                          refId="Package\Address Info Sequence Container\Address Info Data Flow Task\ADD_Daily_Cases Excel Destination.Inputs[Excel Destination Input].Columns[uniHICS_ZipCode]"
+                          cachedDataType="wstr"
+                          cachedLength="20"
+                          cachedName="uniHICS_ZipCode"
+                          externalMetadataColumnId="Package\Address Info Sequence Container\Address Info Data Flow Task\ADD_Daily_Cases Excel Destination.Inputs[Excel Destination Input].ExternalColumns[HICS_ZipCode]"
+                          lineageId="Package\Address Info Sequence Container\Address Info Data Flow Task\Unicode Data Conversion.Outputs[Data Conversion Output].Columns[uniHICS_ZipCode]" />
+                        <inputColumn
+                          refId="Package\Address Info Sequence Container\Address Info Data Flow Task\ADD_Daily_Cases Excel Destination.Inputs[Excel Destination Input].Columns[uniMIDAS_Address1]"
+                          cachedDataType="wstr"
+                          cachedLength="200"
+                          cachedName="uniMIDAS_Address1"
+                          externalMetadataColumnId="Package\Address Info Sequence Container\Address Info Data Flow Task\ADD_Daily_Cases Excel Destination.Inputs[Excel Destination Input].ExternalColumns[MIDAS_Address1]"
+                          lineageId="Package\Address Info Sequence Container\Address Info Data Flow Task\Unicode Data Conversion.Outputs[Data Conversion Output].Columns[uniMIDAS_Address1]" />
+                        <inputColumn
+                          refId="Package\Address Info Sequence Container\Address Info Data Flow Task\ADD_Daily_Cases Excel Destination.Inputs[Excel Destination Input].Columns[uniMIDAS_Address2]"
+                          cachedDataType="wstr"
+                          cachedLength="200"
+                          cachedName="uniMIDAS_Address2"
+                          externalMetadataColumnId="Package\Address Info Sequence Container\Address Info Data Flow Task\ADD_Daily_Cases Excel Destination.Inputs[Excel Destination Input].ExternalColumns[MIDAS_Address2]"
+                          lineageId="Package\Address Info Sequence Container\Address Info Data Flow Task\Unicode Data Conversion.Outputs[Data Conversion Output].Columns[uniMIDAS_Address2]" />
+                        <inputColumn
+                          refId="Package\Address Info Sequence Container\Address Info Data Flow Task\ADD_Daily_Cases Excel Destination.Inputs[Excel Destination Input].Columns[uniMIDAS_City]"
+                          cachedDataType="wstr"
+                          cachedLength="200"
+                          cachedName="uniMIDAS_City"
+                          externalMetadataColumnId="Package\Address Info Sequence Container\Address Info Data Flow Task\ADD_Daily_Cases Excel Destination.Inputs[Excel Destination Input].ExternalColumns[MIDAS_City]"
+                          lineageId="Package\Address Info Sequence Container\Address Info Data Flow Task\Unicode Data Conversion.Outputs[Data Conversion Output].Columns[uniMIDAS_City]" />
+                        <inputColumn
+                          refId="Package\Address Info Sequence Container\Address Info Data Flow Task\ADD_Daily_Cases Excel Destination.Inputs[Excel Destination Input].Columns[uniMIDAS_State]"
+                          cachedDataType="wstr"
+                          cachedLength="2"
+                          cachedName="uniMIDAS_State"
+                          externalMetadataColumnId="Package\Address Info Sequence Container\Address Info Data Flow Task\ADD_Daily_Cases Excel Destination.Inputs[Excel Destination Input].ExternalColumns[MIDAS_State]"
+                          lineageId="Package\Address Info Sequence Container\Address Info Data Flow Task\Unicode Data Conversion.Outputs[Data Conversion Output].Columns[uniMIDAS_State]" />
+                        <inputColumn
+                          refId="Package\Address Info Sequence Container\Address Info Data Flow Task\ADD_Daily_Cases Excel Destination.Inputs[Excel Destination Input].Columns[uniMIDAS_ZipCode]"
+                          cachedDataType="wstr"
+                          cachedLength="50"
+                          cachedName="uniMIDAS_ZipCode"
+                          externalMetadataColumnId="Package\Address Info Sequence Container\Address Info Data Flow Task\ADD_Daily_Cases Excel Destination.Inputs[Excel Destination Input].ExternalColumns[MIDAS_ZipCode]"
+                          lineageId="Package\Address Info Sequence Container\Address Info Data Flow Task\Unicode Data Conversion.Outputs[Data Conversion Output].Columns[uniMIDAS_ZipCode]" />
+                      </inputColumns>
+                      <externalMetadataColumns
+                        isUsed="True">
+                        <externalMetadataColumn
+                          refId="Package\Address Info Sequence Container\Address Info Data Flow Task\ADD_Daily_Cases Excel Destination.Inputs[Excel Destination Input].ExternalColumns[CaseID]"
+                          dataType="wstr"
+                          length="255"
+                          name="CaseID" />
+                        <externalMetadataColumn
+                          refId="Package\Address Info Sequence Container\Address Info Data Flow Task\ADD_Daily_Cases Excel Destination.Inputs[Excel Destination Input].ExternalColumns[Case Type]"
+                          dataType="wstr"
+                          length="255"
+                          name="Case Type" />
+                        <externalMetadataColumn
+                          refId="Package\Address Info Sequence Container\Address Info Data Flow Task\ADD_Daily_Cases Excel Destination.Inputs[Excel Destination Input].ExternalColumns[Case Status]"
+                          dataType="wstr"
+                          length="255"
+                          name="Case Status" />
+                        <externalMetadataColumn
+                          refId="Package\Address Info Sequence Container\Address Info Data Flow Task\ADD_Daily_Cases Excel Destination.Inputs[Excel Destination Input].ExternalColumns[ApplicationID]"
+                          dataType="r8"
+                          name="ApplicationID" />
+                        <externalMetadataColumn
+                          refId="Package\Address Info Sequence Container\Address Info Data Flow Task\ADD_Daily_Cases Excel Destination.Inputs[Excel Destination Input].ExternalColumns[PolicyID]"
+                          dataType="r8"
+                          name="PolicyID" />
+                        <externalMetadataColumn
+                          refId="Package\Address Info Sequence Container\Address Info Data Flow Task\ADD_Daily_Cases Excel Destination.Inputs[Excel Destination Input].ExternalColumns[HIOS_ID]"
+                          dataType="r8"
+                          name="HIOS_ID" />
+                        <externalMetadataColumn
+                          refId="Package\Address Info Sequence Container\Address Info Data Flow Task\ADD_Daily_Cases Excel Destination.Inputs[Excel Destination Input].ExternalColumns[SubcategoryDescription]"
+                          dataType="wstr"
+                          length="255"
+                          name="SubcategoryDescription" />
+                        <externalMetadataColumn
+                          refId="Package\Address Info Sequence Container\Address Info Data Flow Task\ADD_Daily_Cases Excel Destination.Inputs[Excel Destination Input].ExternalColumns[Correlated Case]"
+                          dataType="wstr"
+                          length="255"
+                          name="Correlated Case" />
+                        <externalMetadataColumn
+                          refId="Package\Address Info Sequence Container\Address Info Data Flow Task\ADD_Daily_Cases Excel Destination.Inputs[Excel Destination Input].ExternalColumns[Policy-1095]"
+                          dataType="r8"
+                          name="Policy-1095" />
+                        <externalMetadataColumn
+                          refId="Package\Address Info Sequence Container\Address Info Data Flow Task\ADD_Daily_Cases Excel Destination.Inputs[Excel Destination Input].ExternalColumns[Policy-Preaudit]"
+                          dataType="r8"
+                          name="Policy-Preaudit" />
+                        <externalMetadataColumn
+                          refId="Package\Address Info Sequence Container\Address Info Data Flow Task\ADD_Daily_Cases Excel Destination.Inputs[Excel Destination Input].ExternalColumns[Manual1095]"
+                          dataType="r8"
+                          name="Manual1095" />
+                        <externalMetadataColumn
+                          refId="Package\Address Info Sequence Container\Address Info Data Flow Task\ADD_Daily_Cases Excel Destination.Inputs[Excel Destination Input].ExternalColumns[IRS]"
+                          dataType="r8"
+                          name="IRS" />
+                        <externalMetadataColumn
+                          refId="Package\Address Info Sequence Container\Address Info Data Flow Task\ADD_Daily_Cases Excel Destination.Inputs[Excel Destination Input].ExternalColumns[CaseNarrative]"
+                          dataType="nText"
+                          name="CaseNarrative" />
+                        <externalMetadataColumn
+                          refId="Package\Address Info Sequence Container\Address Info Data Flow Task\ADD_Daily_Cases Excel Destination.Inputs[Excel Destination Input].ExternalColumns[HICS_Address1]"
+                          dataType="wstr"
+                          length="500"
+                          name="HICS_Address1" />
+                        <externalMetadataColumn
+                          refId="Package\Address Info Sequence Container\Address Info Data Flow Task\ADD_Daily_Cases Excel Destination.Inputs[Excel Destination Input].ExternalColumns[HICS_Address2]"
+                          dataType="wstr"
+                          length="500"
+                          name="HICS_Address2" />
+                        <externalMetadataColumn
+                          refId="Package\Address Info Sequence Container\Address Info Data Flow Task\ADD_Daily_Cases Excel Destination.Inputs[Excel Destination Input].ExternalColumns[HICS_City]"
+                          dataType="wstr"
+                          length="255"
+                          name="HICS_City" />
+                        <externalMetadataColumn
+                          refId="Package\Address Info Sequence Container\Address Info Data Flow Task\ADD_Daily_Cases Excel Destination.Inputs[Excel Destination Input].ExternalColumns[HICS_State]"
+                          dataType="wstr"
+                          length="255"
+                          name="HICS_State" />
+                        <externalMetadataColumn
+                          refId="Package\Address Info Sequence Container\Address Info Data Flow Task\ADD_Daily_Cases Excel Destination.Inputs[Excel Destination Input].ExternalColumns[HICS_ZipCode]"
+                          dataType="r8"
+                          name="HICS_ZipCode" />
+                        <externalMetadataColumn
+                          refId="Package\Address Info Sequence Container\Address Info Data Flow Task\ADD_Daily_Cases Excel Destination.Inputs[Excel Destination Input].ExternalColumns[MIDAS_Address1]"
+                          dataType="wstr"
+                          length="500"
+                          name="MIDAS_Address1" />
+                        <externalMetadataColumn
+                          refId="Package\Address Info Sequence Container\Address Info Data Flow Task\ADD_Daily_Cases Excel Destination.Inputs[Excel Destination Input].ExternalColumns[MIDAS_Address2]"
+                          dataType="wstr"
+                          length="500"
+                          name="MIDAS_Address2" />
+                        <externalMetadataColumn
+                          refId="Package\Address Info Sequence Container\Address Info Data Flow Task\ADD_Daily_Cases Excel Destination.Inputs[Excel Destination Input].ExternalColumns[MIDAS_City]"
+                          dataType="wstr"
+                          length="255"
+                          name="MIDAS_City" />
+                        <externalMetadataColumn
+                          refId="Package\Address Info Sequence Container\Address Info Data Flow Task\ADD_Daily_Cases Excel Destination.Inputs[Excel Destination Input].ExternalColumns[MIDAS_State]"
+                          dataType="wstr"
+                          length="255"
+                          name="MIDAS_State" />
+                        <externalMetadataColumn
+                          refId="Package\Address Info Sequence Container\Address Info Data Flow Task\ADD_Daily_Cases Excel Destination.Inputs[Excel Destination Input].ExternalColumns[MIDAS_ZipCode]"
+                          dataType="wstr"
+                          length="255"
+                          name="MIDAS_ZipCode" />
+                      </externalMetadataColumns>
+                    </input>
+                  </inputs>
+                  <outputs>
+                    <output
+                      refId="Package\Address Info Sequence Container\Address Info Data Flow Task\ADD_Daily_Cases Excel Destination.Outputs[Excel Destination Error Output]"
+                      exclusionGroup="1"
+                      isErrorOut="true"
+                      name="Excel Destination Error Output"
+                      synchronousInputId="Package\Address Info Sequence Container\Address Info Data Flow Task\ADD_Daily_Cases Excel Destination.Inputs[Excel Destination Input]">
+                      <outputColumns>
+                        <outputColumn
+                          refId="Package\Address Info Sequence Container\Address Info Data Flow Task\ADD_Daily_Cases Excel Destination.Outputs[Excel Destination Error Output].Columns[ErrorCode]"
+                          dataType="i4"
+                          lineageId="Package\Address Info Sequence Container\Address Info Data Flow Task\ADD_Daily_Cases Excel Destination.Outputs[Excel Destination Error Output].Columns[ErrorCode]"
+                          name="ErrorCode"
+                          specialFlags="1" />
+                        <outputColumn
+                          refId="Package\Address Info Sequence Container\Address Info Data Flow Task\ADD_Daily_Cases Excel Destination.Outputs[Excel Destination Error Output].Columns[ErrorColumn]"
+                          dataType="i4"
+                          lineageId="Package\Address Info Sequence Container\Address Info Data Flow Task\ADD_Daily_Cases Excel Destination.Outputs[Excel Destination Error Output].Columns[ErrorColumn]"
+                          name="ErrorColumn"
+                          specialFlags="2" />
+                      </outputColumns>
+                      <externalMetadataColumns />
+                    </output>
+                  </outputs>
+                </component>
+                <component
+                  refId="Package\Address Info Sequence Container\Address Info Data Flow Task\Unicode Data Conversion"
+                  componentClassID="{62B1106C-7DB8-4EC8-ADD6-4C664DFFC54A}"
+                  contactInfo="Data Conversion;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;0"
+                  description="Data Conversion"
+                  name="Unicode Data Conversion"
+                  usesDispositions="true">
+                  <inputs>
+                    <input
+                      refId="Package\Address Info Sequence Container\Address Info Data Flow Task\Unicode Data Conversion.Inputs[Data Conversion Input]"
+                      name="Data Conversion Input">
+                      <inputColumns>
+                        <inputColumn
+                          refId="Package\Address Info Sequence Container\Address Info Data Flow Task\Unicode Data Conversion.Inputs[Data Conversion Input].Columns[CaseID]"
+                          cachedCodepage="1252"
+                          cachedDataType="str"
+                          cachedLength="50"
+                          cachedName="CaseID"
+                          lineageId="Package\Address Info Sequence Container\Address Info Data Flow Task\Address Query OLE DB Source.Outputs[OLE DB Source Output].Columns[CaseID]" />
+                        <inputColumn
+                          refId="Package\Address Info Sequence Container\Address Info Data Flow Task\Unicode Data Conversion.Inputs[Data Conversion Input].Columns[SubcategoryDescription]"
+                          cachedCodepage="1252"
+                          cachedDataType="str"
+                          cachedLength="255"
+                          cachedName="SubcategoryDescription"
+                          lineageId="Package\Address Info Sequence Container\Address Info Data Flow Task\Address Query OLE DB Source.Outputs[OLE DB Source Output].Columns[SubcategoryDescription]" />
+                        <inputColumn
+                          refId="Package\Address Info Sequence Container\Address Info Data Flow Task\Unicode Data Conversion.Inputs[Data Conversion Input].Columns[HICS_Address1]"
+                          cachedCodepage="1252"
+                          cachedDataType="str"
+                          cachedLength="500"
+                          cachedName="HICS_Address1"
+                          lineageId="Package\Address Info Sequence Container\Address Info Data Flow Task\Address Query OLE DB Source.Outputs[OLE DB Source Output].Columns[HICS_Address1]" />
+                        <inputColumn
+                          refId="Package\Address Info Sequence Container\Address Info Data Flow Task\Unicode Data Conversion.Inputs[Data Conversion Input].Columns[HICS_Address2]"
+                          cachedCodepage="1252"
+                          cachedDataType="str"
+                          cachedLength="500"
+                          cachedName="HICS_Address2"
+                          lineageId="Package\Address Info Sequence Container\Address Info Data Flow Task\Address Query OLE DB Source.Outputs[OLE DB Source Output].Columns[HICS_Address2]" />
+                        <inputColumn
+                          refId="Package\Address Info Sequence Container\Address Info Data Flow Task\Unicode Data Conversion.Inputs[Data Conversion Input].Columns[HICS_City]"
+                          cachedCodepage="1252"
+                          cachedDataType="str"
+                          cachedLength="100"
+                          cachedName="HICS_City"
+                          lineageId="Package\Address Info Sequence Container\Address Info Data Flow Task\Address Query OLE DB Source.Outputs[OLE DB Source Output].Columns[HICS_City]" />
+                        <inputColumn
+                          refId="Package\Address Info Sequence Container\Address Info Data Flow Task\Unicode Data Conversion.Inputs[Data Conversion Input].Columns[HICS_State]"
+                          cachedCodepage="1252"
+                          cachedDataType="str"
+                          cachedLength="2"
+                          cachedName="HICS_State"
+                          lineageId="Package\Address Info Sequence Container\Address Info Data Flow Task\Address Query OLE DB Source.Outputs[OLE DB Source Output].Columns[HICS_State]" />
+                        <inputColumn
+                          refId="Package\Address Info Sequence Container\Address Info Data Flow Task\Unicode Data Conversion.Inputs[Data Conversion Input].Columns[HICS_ZipCode]"
+                          cachedCodepage="1252"
+                          cachedDataType="str"
+                          cachedLength="20"
+                          cachedName="HICS_ZipCode"
+                          lineageId="Package\Address Info Sequence Container\Address Info Data Flow Task\Address Query OLE DB Source.Outputs[OLE DB Source Output].Columns[HICS_ZipCode]" />
+                        <inputColumn
+                          refId="Package\Address Info Sequence Container\Address Info Data Flow Task\Unicode Data Conversion.Inputs[Data Conversion Input].Columns[MIDAS_Address1]"
+                          cachedCodepage="1252"
+                          cachedDataType="str"
+                          cachedLength="200"
+                          cachedName="MIDAS_Address1"
+                          lineageId="Package\Address Info Sequence Container\Address Info Data Flow Task\Address Query OLE DB Source.Outputs[OLE DB Source Output].Columns[MIDAS_Address1]" />
+                        <inputColumn
+                          refId="Package\Address Info Sequence Container\Address Info Data Flow Task\Unicode Data Conversion.Inputs[Data Conversion Input].Columns[MIDAS_Address2]"
+                          cachedCodepage="1252"
+                          cachedDataType="str"
+                          cachedLength="200"
+                          cachedName="MIDAS_Address2"
+                          lineageId="Package\Address Info Sequence Container\Address Info Data Flow Task\Address Query OLE DB Source.Outputs[OLE DB Source Output].Columns[MIDAS_Address2]" />
+                        <inputColumn
+                          refId="Package\Address Info Sequence Container\Address Info Data Flow Task\Unicode Data Conversion.Inputs[Data Conversion Input].Columns[MIDAS_City]"
+                          cachedCodepage="1252"
+                          cachedDataType="str"
+                          cachedLength="200"
+                          cachedName="MIDAS_City"
+                          lineageId="Package\Address Info Sequence Container\Address Info Data Flow Task\Address Query OLE DB Source.Outputs[OLE DB Source Output].Columns[MIDAS_City]" />
+                        <inputColumn
+                          refId="Package\Address Info Sequence Container\Address Info Data Flow Task\Unicode Data Conversion.Inputs[Data Conversion Input].Columns[MIDAS_State]"
+                          cachedCodepage="1252"
+                          cachedDataType="str"
+                          cachedLength="2"
+                          cachedName="MIDAS_State"
+                          lineageId="Package\Address Info Sequence Container\Address Info Data Flow Task\Address Query OLE DB Source.Outputs[OLE DB Source Output].Columns[MIDAS_State]" />
+                        <inputColumn
+                          refId="Package\Address Info Sequence Container\Address Info Data Flow Task\Unicode Data Conversion.Inputs[Data Conversion Input].Columns[MIDAS_ZipCode]"
+                          cachedCodepage="1252"
+                          cachedDataType="str"
+                          cachedLength="50"
+                          cachedName="MIDAS_ZipCode"
+                          lineageId="Package\Address Info Sequence Container\Address Info Data Flow Task\Address Query OLE DB Source.Outputs[OLE DB Source Output].Columns[MIDAS_ZipCode]" />
+                        <inputColumn
+                          refId="Package\Address Info Sequence Container\Address Info Data Flow Task\Unicode Data Conversion.Inputs[Data Conversion Input].Columns[Case Type]"
+                          cachedCodepage="1252"
+                          cachedDataType="str"
+                          cachedLength="50"
+                          cachedName="Case Type"
+                          lineageId="Package\Address Info Sequence Container\Address Info Data Flow Task\Address Query OLE DB Source.Outputs[OLE DB Source Output].Columns[Case Type]" />
+                        <inputColumn
+                          refId="Package\Address Info Sequence Container\Address Info Data Flow Task\Unicode Data Conversion.Inputs[Data Conversion Input].Columns[Case Status]"
+                          cachedCodepage="1252"
+                          cachedDataType="str"
+                          cachedLength="255"
+                          cachedName="Case Status"
+                          lineageId="Package\Address Info Sequence Container\Address Info Data Flow Task\Address Query OLE DB Source.Outputs[OLE DB Source Output].Columns[Case Status]" />
+                        <inputColumn
+                          refId="Package\Address Info Sequence Container\Address Info Data Flow Task\Unicode Data Conversion.Inputs[Data Conversion Input].Columns[HIOS_ID]"
+                          cachedDataType="i4"
+                          cachedName="HIOS_ID"
+                          lineageId="Package\Address Info Sequence Container\Address Info Data Flow Task\Address Query OLE DB Source.Outputs[OLE DB Source Output].Columns[HIOS_ID]" />
+                        <inputColumn
+                          refId="Package\Address Info Sequence Container\Address Info Data Flow Task\Unicode Data Conversion.Inputs[Data Conversion Input].Columns[Correlated Case]"
+                          cachedCodepage="1252"
+                          cachedDataType="str"
+                          cachedLength="50"
+                          cachedName="Correlated Case"
+                          lineageId="Package\Address Info Sequence Container\Address Info Data Flow Task\Address Query OLE DB Source.Outputs[OLE DB Source Output].Columns[Correlated Case]" />
+                      </inputColumns>
+                      <externalMetadataColumns />
+                    </input>
+                  </inputs>
+                  <outputs>
+                    <output
+                      refId="Package\Address Info Sequence Container\Address Info Data Flow Task\Unicode Data Conversion.Outputs[Data Conversion Output]"
+                      exclusionGroup="1"
+                      name="Data Conversion Output"
+                      synchronousInputId="Package\Address Info Sequence Container\Address Info Data Flow Task\Unicode Data Conversion.Inputs[Data Conversion Input]">
+                      <outputColumns>
+                        <outputColumn
+                          refId="Package\Address Info Sequence Container\Address Info Data Flow Task\Unicode Data Conversion.Outputs[Data Conversion Output].Columns[uniCaseID]"
+                          dataType="wstr"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          length="50"
+                          lineageId="Package\Address Info Sequence Container\Address Info Data Flow Task\Unicode Data Conversion.Outputs[Data Conversion Output].Columns[uniCaseID]"
+                          name="uniCaseID"
+                          truncationRowDisposition="FailComponent">
+                          <properties>
+                            <property
+                              containsID="true"
+                              dataType="System.Int32"
+                              description="Specifies the input column used as the source of data for the conversion."
+                              name="SourceInputColumnLineageID">#{Package\Address Info Sequence Container\Address Info Data Flow Task\Address Query OLE DB Source.Outputs[OLE DB Source Output].Columns[CaseID]}</property>
+                            <property
+                              dataType="System.Boolean"
+                              description="Indicates whether the column uses the faster, locale-neutral parsing routines."
+                              name="FastParse">false</property>
+                          </properties>
+                        </outputColumn>
+                        <outputColumn
+                          refId="Package\Address Info Sequence Container\Address Info Data Flow Task\Unicode Data Conversion.Outputs[Data Conversion Output].Columns[uniSubcategoryDescription]"
+                          dataType="wstr"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          length="255"
+                          lineageId="Package\Address Info Sequence Container\Address Info Data Flow Task\Unicode Data Conversion.Outputs[Data Conversion Output].Columns[uniSubcategoryDescription]"
+                          name="uniSubcategoryDescription"
+                          truncationRowDisposition="FailComponent">
+                          <properties>
+                            <property
+                              containsID="true"
+                              dataType="System.Int32"
+                              description="Specifies the input column used as the source of data for the conversion."
+                              name="SourceInputColumnLineageID">#{Package\Address Info Sequence Container\Address Info Data Flow Task\Address Query OLE DB Source.Outputs[OLE DB Source Output].Columns[SubcategoryDescription]}</property>
+                            <property
+                              dataType="System.Boolean"
+                              description="Indicates whether the column uses the faster, locale-neutral parsing routines."
+                              name="FastParse">false</property>
+                          </properties>
+                        </outputColumn>
+                        <outputColumn
+                          refId="Package\Address Info Sequence Container\Address Info Data Flow Task\Unicode Data Conversion.Outputs[Data Conversion Output].Columns[uniHICS_Address1]"
+                          dataType="wstr"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          length="500"
+                          lineageId="Package\Address Info Sequence Container\Address Info Data Flow Task\Unicode Data Conversion.Outputs[Data Conversion Output].Columns[uniHICS_Address1]"
+                          name="uniHICS_Address1"
+                          truncationRowDisposition="FailComponent">
+                          <properties>
+                            <property
+                              containsID="true"
+                              dataType="System.Int32"
+                              description="Specifies the input column used as the source of data for the conversion."
+                              name="SourceInputColumnLineageID">#{Package\Address Info Sequence Container\Address Info Data Flow Task\Address Query OLE DB Source.Outputs[OLE DB Source Output].Columns[HICS_Address1]}</property>
+                            <property
+                              dataType="System.Boolean"
+                              description="Indicates whether the column uses the faster, locale-neutral parsing routines."
+                              name="FastParse">false</property>
+                          </properties>
+                        </outputColumn>
+                        <outputColumn
+                          refId="Package\Address Info Sequence Container\Address Info Data Flow Task\Unicode Data Conversion.Outputs[Data Conversion Output].Columns[uniHICS_Address2]"
+                          dataType="wstr"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          length="500"
+                          lineageId="Package\Address Info Sequence Container\Address Info Data Flow Task\Unicode Data Conversion.Outputs[Data Conversion Output].Columns[uniHICS_Address2]"
+                          name="uniHICS_Address2"
+                          truncationRowDisposition="FailComponent">
+                          <properties>
+                            <property
+                              containsID="true"
+                              dataType="System.Int32"
+                              description="Specifies the input column used as the source of data for the conversion."
+                              name="SourceInputColumnLineageID">#{Package\Address Info Sequence Container\Address Info Data Flow Task\Address Query OLE DB Source.Outputs[OLE DB Source Output].Columns[HICS_Address2]}</property>
+                            <property
+                              dataType="System.Boolean"
+                              description="Indicates whether the column uses the faster, locale-neutral parsing routines."
+                              name="FastParse">false</property>
+                          </properties>
+                        </outputColumn>
+                        <outputColumn
+                          refId="Package\Address Info Sequence Container\Address Info Data Flow Task\Unicode Data Conversion.Outputs[Data Conversion Output].Columns[uniHICS_City]"
+                          dataType="wstr"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          length="100"
+                          lineageId="Package\Address Info Sequence Container\Address Info Data Flow Task\Unicode Data Conversion.Outputs[Data Conversion Output].Columns[uniHICS_City]"
+                          name="uniHICS_City"
+                          truncationRowDisposition="FailComponent">
+                          <properties>
+                            <property
+                              containsID="true"
+                              dataType="System.Int32"
+                              description="Specifies the input column used as the source of data for the conversion."
+                              name="SourceInputColumnLineageID">#{Package\Address Info Sequence Container\Address Info Data Flow Task\Address Query OLE DB Source.Outputs[OLE DB Source Output].Columns[HICS_City]}</property>
+                            <property
+                              dataType="System.Boolean"
+                              description="Indicates whether the column uses the faster, locale-neutral parsing routines."
+                              name="FastParse">false</property>
+                          </properties>
+                        </outputColumn>
+                        <outputColumn
+                          refId="Package\Address Info Sequence Container\Address Info Data Flow Task\Unicode Data Conversion.Outputs[Data Conversion Output].Columns[uniHICS_State]"
+                          dataType="wstr"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          length="2"
+                          lineageId="Package\Address Info Sequence Container\Address Info Data Flow Task\Unicode Data Conversion.Outputs[Data Conversion Output].Columns[uniHICS_State]"
+                          name="uniHICS_State"
+                          truncationRowDisposition="FailComponent">
+                          <properties>
+                            <property
+                              containsID="true"
+                              dataType="System.Int32"
+                              description="Specifies the input column used as the source of data for the conversion."
+                              name="SourceInputColumnLineageID">#{Package\Address Info Sequence Container\Address Info Data Flow Task\Address Query OLE DB Source.Outputs[OLE DB Source Output].Columns[HICS_State]}</property>
+                            <property
+                              dataType="System.Boolean"
+                              description="Indicates whether the column uses the faster, locale-neutral parsing routines."
+                              name="FastParse">false</property>
+                          </properties>
+                        </outputColumn>
+                        <outputColumn
+                          refId="Package\Address Info Sequence Container\Address Info Data Flow Task\Unicode Data Conversion.Outputs[Data Conversion Output].Columns[uniHICS_ZipCode]"
+                          dataType="wstr"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          length="20"
+                          lineageId="Package\Address Info Sequence Container\Address Info Data Flow Task\Unicode Data Conversion.Outputs[Data Conversion Output].Columns[uniHICS_ZipCode]"
+                          name="uniHICS_ZipCode"
+                          truncationRowDisposition="FailComponent">
+                          <properties>
+                            <property
+                              containsID="true"
+                              dataType="System.Int32"
+                              description="Specifies the input column used as the source of data for the conversion."
+                              name="SourceInputColumnLineageID">#{Package\Address Info Sequence Container\Address Info Data Flow Task\Address Query OLE DB Source.Outputs[OLE DB Source Output].Columns[HICS_ZipCode]}</property>
+                            <property
+                              dataType="System.Boolean"
+                              description="Indicates whether the column uses the faster, locale-neutral parsing routines."
+                              name="FastParse">false</property>
+                          </properties>
+                        </outputColumn>
+                        <outputColumn
+                          refId="Package\Address Info Sequence Container\Address Info Data Flow Task\Unicode Data Conversion.Outputs[Data Conversion Output].Columns[uniMIDAS_Address1]"
+                          dataType="wstr"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          length="200"
+                          lineageId="Package\Address Info Sequence Container\Address Info Data Flow Task\Unicode Data Conversion.Outputs[Data Conversion Output].Columns[uniMIDAS_Address1]"
+                          name="uniMIDAS_Address1"
+                          truncationRowDisposition="FailComponent">
+                          <properties>
+                            <property
+                              containsID="true"
+                              dataType="System.Int32"
+                              description="Specifies the input column used as the source of data for the conversion."
+                              name="SourceInputColumnLineageID">#{Package\Address Info Sequence Container\Address Info Data Flow Task\Address Query OLE DB Source.Outputs[OLE DB Source Output].Columns[MIDAS_Address1]}</property>
+                            <property
+                              dataType="System.Boolean"
+                              description="Indicates whether the column uses the faster, locale-neutral parsing routines."
+                              name="FastParse">false</property>
+                          </properties>
+                        </outputColumn>
+                        <outputColumn
+                          refId="Package\Address Info Sequence Container\Address Info Data Flow Task\Unicode Data Conversion.Outputs[Data Conversion Output].Columns[uniMIDAS_Address2]"
+                          dataType="wstr"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          length="200"
+                          lineageId="Package\Address Info Sequence Container\Address Info Data Flow Task\Unicode Data Conversion.Outputs[Data Conversion Output].Columns[uniMIDAS_Address2]"
+                          name="uniMIDAS_Address2"
+                          truncationRowDisposition="FailComponent">
+                          <properties>
+                            <property
+                              containsID="true"
+                              dataType="System.Int32"
+                              description="Specifies the input column used as the source of data for the conversion."
+                              name="SourceInputColumnLineageID">#{Package\Address Info Sequence Container\Address Info Data Flow Task\Address Query OLE DB Source.Outputs[OLE DB Source Output].Columns[MIDAS_Address2]}</property>
+                            <property
+                              dataType="System.Boolean"
+                              description="Indicates whether the column uses the faster, locale-neutral parsing routines."
+                              name="FastParse">false</property>
+                          </properties>
+                        </outputColumn>
+                        <outputColumn
+                          refId="Package\Address Info Sequence Container\Address Info Data Flow Task\Unicode Data Conversion.Outputs[Data Conversion Output].Columns[uniMIDAS_City]"
+                          dataType="wstr"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          length="200"
+                          lineageId="Package\Address Info Sequence Container\Address Info Data Flow Task\Unicode Data Conversion.Outputs[Data Conversion Output].Columns[uniMIDAS_City]"
+                          name="uniMIDAS_City"
+                          truncationRowDisposition="FailComponent">
+                          <properties>
+                            <property
+                              containsID="true"
+                              dataType="System.Int32"
+                              description="Specifies the input column used as the source of data for the conversion."
+                              name="SourceInputColumnLineageID">#{Package\Address Info Sequence Container\Address Info Data Flow Task\Address Query OLE DB Source.Outputs[OLE DB Source Output].Columns[MIDAS_City]}</property>
+                            <property
+                              dataType="System.Boolean"
+                              description="Indicates whether the column uses the faster, locale-neutral parsing routines."
+                              name="FastParse">false</property>
+                          </properties>
+                        </outputColumn>
+                        <outputColumn
+                          refId="Package\Address Info Sequence Container\Address Info Data Flow Task\Unicode Data Conversion.Outputs[Data Conversion Output].Columns[uniMIDAS_State]"
+                          dataType="wstr"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          length="2"
+                          lineageId="Package\Address Info Sequence Container\Address Info Data Flow Task\Unicode Data Conversion.Outputs[Data Conversion Output].Columns[uniMIDAS_State]"
+                          name="uniMIDAS_State"
+                          truncationRowDisposition="FailComponent">
+                          <properties>
+                            <property
+                              containsID="true"
+                              dataType="System.Int32"
+                              description="Specifies the input column used as the source of data for the conversion."
+                              name="SourceInputColumnLineageID">#{Package\Address Info Sequence Container\Address Info Data Flow Task\Address Query OLE DB Source.Outputs[OLE DB Source Output].Columns[MIDAS_State]}</property>
+                            <property
+                              dataType="System.Boolean"
+                              description="Indicates whether the column uses the faster, locale-neutral parsing routines."
+                              name="FastParse">false</property>
+                          </properties>
+                        </outputColumn>
+                        <outputColumn
+                          refId="Package\Address Info Sequence Container\Address Info Data Flow Task\Unicode Data Conversion.Outputs[Data Conversion Output].Columns[uniMIDAS_ZipCode]"
+                          dataType="wstr"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          length="50"
+                          lineageId="Package\Address Info Sequence Container\Address Info Data Flow Task\Unicode Data Conversion.Outputs[Data Conversion Output].Columns[uniMIDAS_ZipCode]"
+                          name="uniMIDAS_ZipCode"
+                          truncationRowDisposition="FailComponent">
+                          <properties>
+                            <property
+                              containsID="true"
+                              dataType="System.Int32"
+                              description="Specifies the input column used as the source of data for the conversion."
+                              name="SourceInputColumnLineageID">#{Package\Address Info Sequence Container\Address Info Data Flow Task\Address Query OLE DB Source.Outputs[OLE DB Source Output].Columns[MIDAS_ZipCode]}</property>
+                            <property
+                              dataType="System.Boolean"
+                              description="Indicates whether the column uses the faster, locale-neutral parsing routines."
+                              name="FastParse">false</property>
+                          </properties>
+                        </outputColumn>
+                        <outputColumn
+                          refId="Package\Address Info Sequence Container\Address Info Data Flow Task\Unicode Data Conversion.Outputs[Data Conversion Output].Columns[uniCaseType]"
+                          dataType="wstr"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          length="50"
+                          lineageId="Package\Address Info Sequence Container\Address Info Data Flow Task\Unicode Data Conversion.Outputs[Data Conversion Output].Columns[uniCaseType]"
+                          name="uniCaseType"
+                          truncationRowDisposition="FailComponent">
+                          <properties>
+                            <property
+                              containsID="true"
+                              dataType="System.Int32"
+                              description="Specifies the input column used as the source of data for the conversion."
+                              name="SourceInputColumnLineageID">#{Package\Address Info Sequence Container\Address Info Data Flow Task\Address Query OLE DB Source.Outputs[OLE DB Source Output].Columns[Case Type]}</property>
+                            <property
+                              dataType="System.Boolean"
+                              description="Indicates whether the column uses the faster, locale-neutral parsing routines."
+                              name="FastParse">false</property>
+                          </properties>
+                        </outputColumn>
+                        <outputColumn
+                          refId="Package\Address Info Sequence Container\Address Info Data Flow Task\Unicode Data Conversion.Outputs[Data Conversion Output].Columns[uniCaseStatus]"
+                          dataType="wstr"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          length="255"
+                          lineageId="Package\Address Info Sequence Container\Address Info Data Flow Task\Unicode Data Conversion.Outputs[Data Conversion Output].Columns[uniCaseStatus]"
+                          name="uniCaseStatus"
+                          truncationRowDisposition="FailComponent">
+                          <properties>
+                            <property
+                              containsID="true"
+                              dataType="System.Int32"
+                              description="Specifies the input column used as the source of data for the conversion."
+                              name="SourceInputColumnLineageID">#{Package\Address Info Sequence Container\Address Info Data Flow Task\Address Query OLE DB Source.Outputs[OLE DB Source Output].Columns[Case Status]}</property>
+                            <property
+                              dataType="System.Boolean"
+                              description="Indicates whether the column uses the faster, locale-neutral parsing routines."
+                              name="FastParse">false</property>
+                          </properties>
+                        </outputColumn>
+                        <outputColumn
+                          refId="Package\Address Info Sequence Container\Address Info Data Flow Task\Unicode Data Conversion.Outputs[Data Conversion Output].Columns[uniHIOS_ID]"
+                          dataType="wstr"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          length="20"
+                          lineageId="Package\Address Info Sequence Container\Address Info Data Flow Task\Unicode Data Conversion.Outputs[Data Conversion Output].Columns[uniHIOS_ID]"
+                          name="uniHIOS_ID"
+                          truncationRowDisposition="FailComponent">
+                          <properties>
+                            <property
+                              containsID="true"
+                              dataType="System.Int32"
+                              description="Specifies the input column used as the source of data for the conversion."
+                              name="SourceInputColumnLineageID">#{Package\Address Info Sequence Container\Address Info Data Flow Task\Address Query OLE DB Source.Outputs[OLE DB Source Output].Columns[HIOS_ID]}</property>
+                            <property
+                              dataType="System.Boolean"
+                              description="Indicates whether the column uses the faster, locale-neutral parsing routines."
+                              name="FastParse">false</property>
+                          </properties>
+                        </outputColumn>
+                        <outputColumn
+                          refId="Package\Address Info Sequence Container\Address Info Data Flow Task\Unicode Data Conversion.Outputs[Data Conversion Output].Columns[uniCorrelated Case]"
+                          dataType="wstr"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          length="50"
+                          lineageId="Package\Address Info Sequence Container\Address Info Data Flow Task\Unicode Data Conversion.Outputs[Data Conversion Output].Columns[uniCorrelated Case]"
+                          name="uniCorrelated Case"
+                          truncationRowDisposition="FailComponent">
+                          <properties>
+                            <property
+                              containsID="true"
+                              dataType="System.Int32"
+                              description="Specifies the input column used as the source of data for the conversion."
+                              name="SourceInputColumnLineageID">#{Package\Address Info Sequence Container\Address Info Data Flow Task\Address Query OLE DB Source.Outputs[OLE DB Source Output].Columns[Correlated Case]}</property>
+                            <property
+                              dataType="System.Boolean"
+                              description="Indicates whether the column uses the faster, locale-neutral parsing routines."
+                              name="FastParse">false</property>
+                          </properties>
+                        </outputColumn>
+                      </outputColumns>
+                      <externalMetadataColumns />
+                    </output>
+                    <output
+                      refId="Package\Address Info Sequence Container\Address Info Data Flow Task\Unicode Data Conversion.Outputs[Data Conversion Error Output]"
+                      exclusionGroup="1"
+                      isErrorOut="true"
+                      name="Data Conversion Error Output"
+                      synchronousInputId="Package\Address Info Sequence Container\Address Info Data Flow Task\Unicode Data Conversion.Inputs[Data Conversion Input]">
+                      <outputColumns>
+                        <outputColumn
+                          refId="Package\Address Info Sequence Container\Address Info Data Flow Task\Unicode Data Conversion.Outputs[Data Conversion Error Output].Columns[ErrorCode]"
+                          dataType="i4"
+                          lineageId="Package\Address Info Sequence Container\Address Info Data Flow Task\Unicode Data Conversion.Outputs[Data Conversion Error Output].Columns[ErrorCode]"
+                          name="ErrorCode"
+                          specialFlags="1" />
+                        <outputColumn
+                          refId="Package\Address Info Sequence Container\Address Info Data Flow Task\Unicode Data Conversion.Outputs[Data Conversion Error Output].Columns[ErrorColumn]"
+                          dataType="i4"
+                          lineageId="Package\Address Info Sequence Container\Address Info Data Flow Task\Unicode Data Conversion.Outputs[Data Conversion Error Output].Columns[ErrorColumn]"
+                          name="ErrorColumn"
+                          specialFlags="2" />
+                      </outputColumns>
+                      <externalMetadataColumns />
+                    </output>
+                  </outputs>
+                </component>
+              </components>
+              <paths>
+                <path
+                  refId="Package\Address Info Sequence Container\Address Info Data Flow Task.Paths[Data Conversion Output]"
+                  endId="Package\Address Info Sequence Container\Address Info Data Flow Task\ADD_Daily_Cases Excel Destination.Inputs[Excel Destination Input]"
+                  name="Data Conversion Output"
+                  startId="Package\Address Info Sequence Container\Address Info Data Flow Task\Unicode Data Conversion.Outputs[Data Conversion Output]" />
+                <path
+                  refId="Package\Address Info Sequence Container\Address Info Data Flow Task.Paths[OLE DB Source Output]"
+                  endId="Package\Address Info Sequence Container\Address Info Data Flow Task\Unicode Data Conversion.Inputs[Data Conversion Input]"
+                  name="OLE DB Source Output"
+                  startId="Package\Address Info Sequence Container\Address Info Data Flow Task\Address Query OLE DB Source.Outputs[OLE DB Source Output]" />
+              </paths>
+            </pipeline>
+          </DTS:ObjectData>
+        </DTS:Executable>
+        <DTS:Executable
+          DTS:refId="Package\Address Info Sequence Container\Create Excel Template File System Task"
+          DTS:CreationName="Microsoft.SqlServer.Dts.Tasks.FileSystemTask.FileSystemTask, Microsoft.SqlServer.FileSystemTask, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"
+          DTS:DelayValidation="True"
+          DTS:Description="File System Task"
+          DTS:DTSID="{CCAC16F3-1AE1-437C-ADA1-1C22E23318C1}"
+          DTS:ExecutableType="Microsoft.SqlServer.Dts.Tasks.FileSystemTask.FileSystemTask, Microsoft.SqlServer.FileSystemTask, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"
+          DTS:LocaleID="-1"
+          DTS:ObjectName="Create Excel Template File System Task"
+          DTS:TaskContact="File System Task;Microsoft Corporation; SQL Server 2012; © 2007 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+          DTS:ThreadHint="0">
+          <DTS:Variables />
+          <DTS:ObjectData>
+            <FileSystemData
+              TaskOverwriteDestFile="True"
+              TaskSourcePath="{AD04149B-34B3-4C9C-A5C6-31B41D27A550}"
+              TaskDestinationPath="User::OutputFilePath"
+              TaskIsDestinationVariable="True" />
+          </DTS:ObjectData>
+        </DTS:Executable>
+      </DTS:Executables>
+      <DTS:PrecedenceConstraints>
+        <DTS:PrecedenceConstraint
+          DTS:refId="Package\Address Info Sequence Container.PrecedenceConstraints[Constraint]"
+          DTS:CreationName=""
+          DTS:DTSID="{B45219F1-F25F-46D8-A024-3EE8B614ED82}"
+          DTS:From="Package\Address Info Sequence Container\Create Excel Template File System Task"
+          DTS:LogicalAnd="True"
+          DTS:ObjectName="Constraint"
+          DTS:To="Package\Address Info Sequence Container\Address Info Data Flow Task" />
+      </DTS:PrecedenceConstraints>
+    </DTS:Executable>
+  </DTS:Executables>
+  <DTS:DesignTimeProperties><![CDATA[<?xml version="1.0"?>
+<!--This CDATA section contains the layout information of the package. The section includes information such as (x,y) coordinates, width, and height.-->
+<!--If you manually edit this section and make a mistake, you can delete it. -->
+<!--The package will still be able to load normally but the previous layout information will be lost and the designer will automatically re-arrange the elements on the design surface.-->
+<Objects
+  Version="sql11">
+  <!--Each node below will contain properties that do not affect runtime behavior.-->
+  <Package
+    design-time-name="Package">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
+        <NodeLayout
+          Size="216,42"
+          Id="Package\Address Info Sequence Container\Address Info Data Flow Task"
+          TopLeft="52.2222222222223,93.8333333333334" />
+        <NodeLayout
+          Size="269,42"
+          Id="Package\Address Info Sequence Container\Create Excel Template File System Task"
+          TopLeft="40,17.3333333333334" />
+        <EdgeLayout
+          Id="Package\Address Info Sequence Container.PrecedenceConstraints[Constraint]"
+          TopLeft="174.5,59.3333333333334">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="-14.2777777777777,34.5"
+              Start="0,0"
+              End="-14.2777777777777,27">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,13.25" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,13.25"
+                    Point2="0,17.25"
+                    Point3="-4,17.25" />
+                  <mssgle:LineSegment
+                    End="-10.2777777777777,17.25" />
+                  <mssgle:CubicBezierSegment
+                    Point1="-10.2777777777777,17.25"
+                    Point2="-14.2777777777777,17.25"
+                    Point3="-14.2777777777777,21.25" />
+                  <mssgle:LineSegment
+                    End="-14.2777777777777,27" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <ContainerLayout
+          HeaderHeight="43"
+          IsExpanded="True"
+          PanelSize="349,180"
+          Size="349,223"
+          Id="Package\Address Info Sequence Container"
+          TopLeft="243.333333333333,172.666666666667" />
+      </GraphLayout>
+    </LayoutInfo>
+  </Package>
+  <TaskHost
+    design-time-name="Package\Address Info Sequence Container\Address Info Data Flow Task">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="8" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
+        <NodeLayout
+          Size="199,42"
+          Id="Package\Address Info Sequence Container\Address Info Data Flow Task\Unicode Data Conversion"
+          TopLeft="232,165" />
+        <NodeLayout
+          Size="247,42"
+          Id="Package\Address Info Sequence Container\Address Info Data Flow Task\ADD_Daily_Cases Excel Destination"
+          TopLeft="220,253" />
+        <NodeLayout
+          Size="224,42"
+          Id="Package\Address Info Sequence Container\Address Info Data Flow Task\Address Query OLE DB Source"
+          TopLeft="206,81" />
+        <EdgeLayout
+          Id="Package\Address Info Sequence Container\Address Info Data Flow Task.Paths[OLE DB Source Output]"
+          TopLeft="318,123">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="13.5,42"
+              Start="0,0"
+              End="13.5,34.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,17" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,17"
+                    Point2="0,21"
+                    Point3="4,21" />
+                  <mssgle:LineSegment
+                    End="9.5,21" />
+                  <mssgle:CubicBezierSegment
+                    Point1="9.5,21"
+                    Point2="13.5,21"
+                    Point3="13.5,25" />
+                  <mssgle:LineSegment
+                    End="13.5,34.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\Address Info Sequence Container\Address Info Data Flow Task.Paths[Data Conversion Output]"
+          TopLeft="331.5,207">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="12,46"
+              Start="0,0"
+              End="12,38.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,19" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,19"
+                    Point2="0,23"
+                    Point3="4,23" />
+                  <mssgle:LineSegment
+                    End="8,23" />
+                  <mssgle:CubicBezierSegment
+                    Point1="8,23"
+                    Point2="12,23"
+                    Point3="12,27" />
+                  <mssgle:LineSegment
+                    End="12,38.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+      </GraphLayout>
+    </LayoutInfo>
+  </TaskHost>
+  <PipelineComponentMetadata
+    design-time-name="Package\Address Info Sequence Container\Address Info Data Flow Task\ADD_Daily_Cases Excel Destination">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+      <Property>
+        <Name>TableInfoObjectType</Name>
+        <Value
+          type="q2:string">Table</Value>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+  <PipelineComponentMetadata
+    design-time-name="Package\Address Info Sequence Container\Address Info Data Flow Task\Address Query OLE DB Source">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+</Objects>]]></DTS:DesignTimeProperties>
+</DTS:Executable>

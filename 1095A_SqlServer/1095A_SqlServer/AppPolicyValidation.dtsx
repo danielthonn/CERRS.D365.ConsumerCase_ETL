@@ -1,0 +1,1051 @@
+<?xml version="1.0"?>
+<DTS:Executable xmlns:DTS="www.microsoft.com/SqlServer/Dts"
+  DTS:refId="Package"
+  DTS:CreationDate="4/16/2015 1:39:25 PM"
+  DTS:CreationName="Microsoft.Package"
+  DTS:CreatorComputerName="TCOISPJW8DB08"
+  DTS:CreatorName="ECAP\jhenningsen"
+  DTS:DTSID="{0B7F17C2-2FD4-4FCB-8E21-BB4BCD7D9A31}"
+  DTS:ExecutableType="Microsoft.Package"
+  DTS:LastModifiedProductVersion="13.0.1601.5"
+  DTS:LocaleID="1033"
+  DTS:ObjectName="AppPolicyValidation"
+  DTS:PackageType="5"
+  DTS:VersionBuild="182"
+  DTS:VersionGUID="{25BB7C9F-4252-4932-8923-719B481A0B23}">
+  <DTS:Property
+    DTS:Name="PackageFormatVersion">8</DTS:Property>
+  <DTS:ConnectionManagers>
+    <DTS:ConnectionManager
+      DTS:refId="Package.ConnectionManagers[ERR_1095A]"
+      DTS:CreationName="OLEDB"
+      DTS:DTSID="{52BEA6EF-FCF7-4BEC-9E80-CF01701FB2F1}"
+      DTS:ObjectName="ERR_1095A">
+      <DTS:ObjectData>
+        <DTS:ConnectionManager
+          DTS:ConnectionString="Data Source=localhost;Initial Catalog=ERR_1095A;Provider=SQLNCLI11.1;Integrated Security=SSPI;Auto Translate=False;" />
+      </DTS:ObjectData>
+    </DTS:ConnectionManager>
+    <DTS:ConnectionManager
+      DTS:refId="Package.ConnectionManagers[HICS Remedaition Flat File Connection Manager]"
+      DTS:CreationName="FLATFILE"
+      DTS:DTSID="{2C4E6CA2-8BEC-4AAB-9344-3E9FE295B4F6}"
+      DTS:ObjectName="HICS Remedaition Flat File Connection Manager">
+      <DTS:PropertyExpression
+        DTS:Name="ConnectionString">@[User::HICSRemediation]</DTS:PropertyExpression>
+      <DTS:ObjectData>
+        <DTS:ConnectionManager
+          DTS:Format="Delimited"
+          DTS:LocaleID="1033"
+          DTS:HeaderRowDelimiter="_x000D__x000A_"
+          DTS:ColumnNamesInFirstDataRow="True"
+          DTS:RowDelimiter=""
+          DTS:TextQualifier="_x003C_none_x003E_"
+          DTS:CodePage="1252"
+          DTS:ConnectionString="\\tcoispDw8ap22\ssis\Remediation\EDBOResearch_AppID_PolicyID_Remediation_File_06-22-2015.xlsx">
+          <DTS:FlatFileColumns>
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x002C_"
+              DTS:MaximumWidth="50"
+              DTS:DataType="129"
+              DTS:TextQualified="True"
+              DTS:ObjectName="CaseID"
+              DTS:DTSID="{AC4F3788-C31A-425C-837A-819B2FAC3473}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x002C_"
+              DTS:MaximumWidth="50"
+              DTS:DataType="129"
+              DTS:TextQualified="True"
+              DTS:ObjectName="ApplicationID"
+              DTS:DTSID="{9B3FE9C3-D654-4479-9BCB-9E0FBCBB09EB}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x000D__x000A_"
+              DTS:MaximumWidth="50"
+              DTS:DataType="129"
+              DTS:TextQualified="True"
+              DTS:ObjectName="PolicyID"
+              DTS:DTSID="{B8377BCD-125F-4516-87E5-9D168E63424B}"
+              DTS:CreationName="" />
+          </DTS:FlatFileColumns>
+        </DTS:ConnectionManager>
+      </DTS:ObjectData>
+    </DTS:ConnectionManager>
+    <DTS:ConnectionManager
+      DTS:refId="Package.ConnectionManagers[HICSRemediation Excel Connection Manager]"
+      DTS:CreationName="EXCEL"
+      DTS:DelayValidation="True"
+      DTS:DTSID="{720E0BCE-632B-4638-8823-555F2A334E9D}"
+      DTS:ObjectName="HICSRemediation Excel Connection Manager">
+      <DTS:PropertyExpression
+        DTS:Name="ConnectionString">(DT_WSTR, 200) ("Provider=Microsoft.ACE.OLEDB.12.0;Data Source=" +   @[User::HICSRemediation]  + ";Extended Properties=\"Excel 12.0 XML;HDR=YES\";")</DTS:PropertyExpression>
+      <DTS:ObjectData>
+        <DTS:ConnectionManager
+          DTS:ConnectionString="Provider=Microsoft.ACE.OLEDB.12.0;Data Source=\\tcoispDw8ap22\ssis\Remediation\EDBOResearch_AppID_PolicyID_Remediation_File_06-22-2015.xlsx;Extended Properties=&quot;EXCEL 12.0 XML;HDR=YES&quot;;" />
+      </DTS:ObjectData>
+    </DTS:ConnectionManager>
+  </DTS:ConnectionManagers>
+  <DTS:Variables>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{104C060E-008C-443F-A863-F03E60FD264B}"
+      DTS:IncludeInDebugDump="6789"
+      DTS:Namespace="User"
+      DTS:ObjectName="ErrorCount">
+      <DTS:VariableValue
+        DTS:DataType="3">0</DTS:VariableValue>
+    </DTS:Variable>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{853B5AA2-0C0B-4B20-89B5-5EB458EA28DF}"
+      DTS:IncludeInDebugDump="2345"
+      DTS:Namespace="User"
+      DTS:ObjectName="HICSRemediation">
+      <DTS:VariableValue
+        DTS:DataType="8">\\tcoispDw8ap22\ssis\Remediation\EDBOResearch_AppID_PolicyID_Remediation_File_06-22-2015.xlsx</DTS:VariableValue>
+    </DTS:Variable>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{239C9D31-D964-411E-BF5E-021064F2D10A}"
+      DTS:EvaluateAsExpression="True"
+      DTS:Expression="(DT_WSTR, 50) @[$Project::SSISFolder]  + (DT_WSTR, 20) (&quot;Remediation&quot;)"
+      DTS:IncludeInDebugDump="2345"
+      DTS:Namespace="User"
+      DTS:ObjectName="HICSRemediationDirectoryName">
+      <DTS:VariableValue
+        DTS:DataType="8">C:\Data\files\in\Remediation</DTS:VariableValue>
+    </DTS:Variable>
+  </DTS:Variables>
+  <DTS:Executables>
+    <DTS:Executable
+      DTS:refId="Package\Foreach Loop Container"
+      DTS:CreationName="STOCK:FOREACHLOOP"
+      DTS:Description="Foreach Loop Container"
+      DTS:DTSID="{F28D82A2-BEF6-4FF6-A051-08224A834F26}"
+      DTS:ExecutableType="STOCK:FOREACHLOOP"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Foreach Loop Container">
+      <DTS:ForEachEnumerator
+        DTS:CreationName="Microsoft.ForEachFileEnumerator"
+        DTS:DTSID="{81C47F0F-1A4A-4D47-90CB-E49F5E767E90}"
+        DTS:ObjectName="{81C47F0F-1A4A-4D47-90CB-E49F5E767E90}">
+        <DTS:PropertyExpression
+          DTS:Name="Directory">@[User::HICSRemediationDirectoryName]</DTS:PropertyExpression>
+        <DTS:ObjectData>
+          <ForEachFileEnumeratorProperties>
+            <FEFEProperty
+              Folder="C:\Data\files\in\Remediation" />
+            <FEFEProperty
+              FileSpec="*.csv" />
+            <FEFEProperty
+              FileNameRetrievalType="0" />
+            <FEFEProperty
+              Recurse="0" />
+          </ForEachFileEnumeratorProperties>
+        </DTS:ObjectData>
+      </DTS:ForEachEnumerator>
+      <DTS:Variables />
+      <DTS:Executables>
+        <DTS:Executable
+          DTS:refId="Package\Foreach Loop Container\Load HICSRemediation Data Flow Task"
+          DTS:CreationName="Microsoft.Pipeline"
+          DTS:DelayValidation="True"
+          DTS:Description="Data Flow Task"
+          DTS:DTSID="{12E6C997-8FF2-4397-AF95-E58BFF922003}"
+          DTS:ExecutableType="Microsoft.Pipeline"
+          DTS:LocaleID="-1"
+          DTS:ObjectName="Load HICSRemediation Data Flow Task"
+          DTS:TaskContact="Performs high-performance data extraction, transformation and loading;Microsoft Corporation; Microsoft SQL Server; (C) 2007 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1">
+          <DTS:Variables />
+          <DTS:ObjectData>
+            <pipeline
+              version="1">
+              <components>
+                <component
+                  refId="Package\Foreach Loop Container\Load HICSRemediation Data Flow Task\CaseId Data Conversion"
+                  componentClassID="Microsoft.DataConvert"
+                  contactInfo="Data Conversion;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;0"
+                  description="Data Conversion"
+                  name="CaseId Data Conversion"
+                  usesDispositions="true">
+                  <inputs>
+                    <input
+                      refId="Package\Foreach Loop Container\Load HICSRemediation Data Flow Task\CaseId Data Conversion.Inputs[Data Conversion Input]"
+                      name="Data Conversion Input">
+                      <inputColumns>
+                        <inputColumn
+                          refId="Package\Foreach Loop Container\Load HICSRemediation Data Flow Task\CaseId Data Conversion.Inputs[Data Conversion Input].Columns[CaseID]"
+                          cachedCodepage="1252"
+                          cachedDataType="str"
+                          cachedLength="50"
+                          cachedName="CaseID"
+                          lineageId="Package\Foreach Loop Container\Load HICSRemediation Data Flow Task\HICS Remediation Flat File Source.Outputs[Flat File Source Output].Columns[CaseID]" />
+                        <inputColumn
+                          refId="Package\Foreach Loop Container\Load HICSRemediation Data Flow Task\CaseId Data Conversion.Inputs[Data Conversion Input].Columns[PolicyID]"
+                          cachedCodepage="1252"
+                          cachedDataType="str"
+                          cachedLength="50"
+                          cachedName="PolicyID"
+                          lineageId="Package\Foreach Loop Container\Load HICSRemediation Data Flow Task\HICS Remediation Flat File Source.Outputs[Flat File Source Output].Columns[PolicyID]" />
+                        <inputColumn
+                          refId="Package\Foreach Loop Container\Load HICSRemediation Data Flow Task\CaseId Data Conversion.Inputs[Data Conversion Input].Columns[ApplicationID]"
+                          cachedCodepage="1252"
+                          cachedDataType="str"
+                          cachedLength="50"
+                          cachedName="ApplicationID"
+                          lineageId="Package\Foreach Loop Container\Load HICSRemediation Data Flow Task\HICS Remediation Flat File Source.Outputs[Flat File Source Output].Columns[ApplicationID]" />
+                      </inputColumns>
+                      <externalMetadataColumns />
+                    </input>
+                  </inputs>
+                  <outputs>
+                    <output
+                      refId="Package\Foreach Loop Container\Load HICSRemediation Data Flow Task\CaseId Data Conversion.Outputs[Data Conversion Output]"
+                      exclusionGroup="1"
+                      name="Data Conversion Output"
+                      synchronousInputId="Package\Foreach Loop Container\Load HICSRemediation Data Flow Task\CaseId Data Conversion.Inputs[Data Conversion Input]">
+                      <outputColumns>
+                        <outputColumn
+                          refId="Package\Foreach Loop Container\Load HICSRemediation Data Flow Task\CaseId Data Conversion.Outputs[Data Conversion Output].Columns[strCaseId]"
+                          codePage="1252"
+                          dataType="str"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          length="20"
+                          lineageId="Package\Foreach Loop Container\Load HICSRemediation Data Flow Task\CaseId Data Conversion.Outputs[Data Conversion Output].Columns[strCaseId]"
+                          name="strCaseId"
+                          truncationRowDisposition="FailComponent">
+                          <properties>
+                            <property
+                              containsID="true"
+                              dataType="System.Int32"
+                              description="Specifies the input column used as the source of data for the conversion."
+                              name="SourceInputColumnLineageID">#{Package\Foreach Loop Container\Load HICSRemediation Data Flow Task\HICS Remediation Flat File Source.Outputs[Flat File Source Output].Columns[CaseID]}</property>
+                            <property
+                              dataType="System.Boolean"
+                              description="Indicates whether the column uses the faster, locale-neutral parsing routines."
+                              name="FastParse">false</property>
+                          </properties>
+                        </outputColumn>
+                        <outputColumn
+                          refId="Package\Foreach Loop Container\Load HICSRemediation Data Flow Task\CaseId Data Conversion.Outputs[Data Conversion Output].Columns[bigintPolicyID]"
+                          dataType="i8"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          lineageId="Package\Foreach Loop Container\Load HICSRemediation Data Flow Task\CaseId Data Conversion.Outputs[Data Conversion Output].Columns[bigintPolicyID]"
+                          name="bigintPolicyID"
+                          truncationRowDisposition="FailComponent">
+                          <properties>
+                            <property
+                              containsID="true"
+                              dataType="System.Int32"
+                              description="Specifies the input column used as the source of data for the conversion."
+                              name="SourceInputColumnLineageID">#{Package\Foreach Loop Container\Load HICSRemediation Data Flow Task\HICS Remediation Flat File Source.Outputs[Flat File Source Output].Columns[PolicyID]}</property>
+                            <property
+                              dataType="System.Boolean"
+                              description="Indicates whether the column uses the faster, locale-neutral parsing routines."
+                              name="FastParse">false</property>
+                          </properties>
+                        </outputColumn>
+                        <outputColumn
+                          refId="Package\Foreach Loop Container\Load HICSRemediation Data Flow Task\CaseId Data Conversion.Outputs[Data Conversion Output].Columns[bigintApplicationID]"
+                          dataType="i8"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          lineageId="Package\Foreach Loop Container\Load HICSRemediation Data Flow Task\CaseId Data Conversion.Outputs[Data Conversion Output].Columns[bigintApplicationID]"
+                          name="bigintApplicationID"
+                          truncationRowDisposition="FailComponent">
+                          <properties>
+                            <property
+                              containsID="true"
+                              dataType="System.Int32"
+                              description="Specifies the input column used as the source of data for the conversion."
+                              name="SourceInputColumnLineageID">#{Package\Foreach Loop Container\Load HICSRemediation Data Flow Task\HICS Remediation Flat File Source.Outputs[Flat File Source Output].Columns[ApplicationID]}</property>
+                            <property
+                              dataType="System.Boolean"
+                              description="Indicates whether the column uses the faster, locale-neutral parsing routines."
+                              name="FastParse">false</property>
+                          </properties>
+                        </outputColumn>
+                      </outputColumns>
+                      <externalMetadataColumns />
+                    </output>
+                    <output
+                      refId="Package\Foreach Loop Container\Load HICSRemediation Data Flow Task\CaseId Data Conversion.Outputs[Data Conversion Error Output]"
+                      exclusionGroup="1"
+                      isErrorOut="true"
+                      name="Data Conversion Error Output"
+                      synchronousInputId="Package\Foreach Loop Container\Load HICSRemediation Data Flow Task\CaseId Data Conversion.Inputs[Data Conversion Input]">
+                      <outputColumns>
+                        <outputColumn
+                          refId="Package\Foreach Loop Container\Load HICSRemediation Data Flow Task\CaseId Data Conversion.Outputs[Data Conversion Error Output].Columns[ErrorCode]"
+                          dataType="i4"
+                          lineageId="Package\Foreach Loop Container\Load HICSRemediation Data Flow Task\CaseId Data Conversion.Outputs[Data Conversion Error Output].Columns[ErrorCode]"
+                          name="ErrorCode"
+                          specialFlags="1" />
+                        <outputColumn
+                          refId="Package\Foreach Loop Container\Load HICSRemediation Data Flow Task\CaseId Data Conversion.Outputs[Data Conversion Error Output].Columns[ErrorColumn]"
+                          dataType="i4"
+                          lineageId="Package\Foreach Loop Container\Load HICSRemediation Data Flow Task\CaseId Data Conversion.Outputs[Data Conversion Error Output].Columns[ErrorColumn]"
+                          name="ErrorColumn"
+                          specialFlags="2" />
+                      </outputColumns>
+                      <externalMetadataColumns />
+                    </output>
+                  </outputs>
+                </component>
+                <component
+                  refId="Package\Foreach Loop Container\Load HICSRemediation Data Flow Task\HICS Remediation Flat File Source"
+                  componentClassID="Microsoft.FlatFileSource"
+                  contactInfo="Flat File Source;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;1"
+                  description="Flat File Source"
+                  localeId="1033"
+                  name="HICS Remediation Flat File Source"
+                  usesDispositions="true"
+                  version="1">
+                  <properties>
+                    <property
+                      dataType="System.Boolean"
+                      description="Specifies whether zero-length columns are treated as null."
+                      name="RetainNulls">true</property>
+                    <property
+                      dataType="System.String"
+                      description="Specifies the name of an output column containing the file name. If no name is specified, no output column containing the file name will be generated."
+                      name="FileNameColumnName"></property>
+                  </properties>
+                  <connections>
+                    <connection
+                      refId="Package\Foreach Loop Container\Load HICSRemediation Data Flow Task\HICS Remediation Flat File Source.Connections[FlatFileConnection]"
+                      connectionManagerID="Package.ConnectionManagers[HICS Remedaition Flat File Connection Manager]"
+                      connectionManagerRefId="Package.ConnectionManagers[HICS Remedaition Flat File Connection Manager]"
+                      name="FlatFileConnection" />
+                  </connections>
+                  <outputs>
+                    <output
+                      refId="Package\Foreach Loop Container\Load HICSRemediation Data Flow Task\HICS Remediation Flat File Source.Outputs[Flat File Source Output]"
+                      name="Flat File Source Output">
+                      <outputColumns>
+                        <outputColumn
+                          refId="Package\Foreach Loop Container\Load HICSRemediation Data Flow Task\HICS Remediation Flat File Source.Outputs[Flat File Source Output].Columns[CaseID]"
+                          codePage="1252"
+                          dataType="str"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Foreach Loop Container\Load HICSRemediation Data Flow Task\HICS Remediation Flat File Source.Outputs[Flat File Source Output].ExternalColumns[CaseID]"
+                          length="50"
+                          lineageId="Package\Foreach Loop Container\Load HICSRemediation Data Flow Task\HICS Remediation Flat File Source.Outputs[Flat File Source Output].Columns[CaseID]"
+                          name="CaseID"
+                          truncationRowDisposition="FailComponent">
+                          <properties>
+                            <property
+                              dataType="System.Boolean"
+                              description="Indicates whether the column uses the faster, locale-neutral parsing routines."
+                              name="FastParse">false</property>
+                            <property
+                              dataType="System.Boolean"
+                              description="Indicates whether the data is in binary format."
+                              name="UseBinaryFormat">false</property>
+                          </properties>
+                        </outputColumn>
+                        <outputColumn
+                          refId="Package\Foreach Loop Container\Load HICSRemediation Data Flow Task\HICS Remediation Flat File Source.Outputs[Flat File Source Output].Columns[ApplicationID]"
+                          codePage="1252"
+                          dataType="str"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Foreach Loop Container\Load HICSRemediation Data Flow Task\HICS Remediation Flat File Source.Outputs[Flat File Source Output].ExternalColumns[ApplicationID]"
+                          length="50"
+                          lineageId="Package\Foreach Loop Container\Load HICSRemediation Data Flow Task\HICS Remediation Flat File Source.Outputs[Flat File Source Output].Columns[ApplicationID]"
+                          name="ApplicationID"
+                          truncationRowDisposition="FailComponent">
+                          <properties>
+                            <property
+                              dataType="System.Boolean"
+                              description="Indicates whether the column uses the faster, locale-neutral parsing routines."
+                              name="FastParse">false</property>
+                            <property
+                              dataType="System.Boolean"
+                              description="Indicates whether the data is in binary format."
+                              name="UseBinaryFormat">false</property>
+                          </properties>
+                        </outputColumn>
+                        <outputColumn
+                          refId="Package\Foreach Loop Container\Load HICSRemediation Data Flow Task\HICS Remediation Flat File Source.Outputs[Flat File Source Output].Columns[PolicyID]"
+                          codePage="1252"
+                          dataType="str"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Foreach Loop Container\Load HICSRemediation Data Flow Task\HICS Remediation Flat File Source.Outputs[Flat File Source Output].ExternalColumns[PolicyID]"
+                          length="50"
+                          lineageId="Package\Foreach Loop Container\Load HICSRemediation Data Flow Task\HICS Remediation Flat File Source.Outputs[Flat File Source Output].Columns[PolicyID]"
+                          name="PolicyID"
+                          truncationRowDisposition="FailComponent">
+                          <properties>
+                            <property
+                              dataType="System.Boolean"
+                              description="Indicates whether the column uses the faster, locale-neutral parsing routines."
+                              name="FastParse">false</property>
+                            <property
+                              dataType="System.Boolean"
+                              description="Indicates whether the data is in binary format."
+                              name="UseBinaryFormat">false</property>
+                          </properties>
+                        </outputColumn>
+                      </outputColumns>
+                      <externalMetadataColumns
+                        isUsed="True">
+                        <externalMetadataColumn
+                          refId="Package\Foreach Loop Container\Load HICSRemediation Data Flow Task\HICS Remediation Flat File Source.Outputs[Flat File Source Output].ExternalColumns[CaseID]"
+                          codePage="1252"
+                          dataType="str"
+                          length="50"
+                          name="CaseID" />
+                        <externalMetadataColumn
+                          refId="Package\Foreach Loop Container\Load HICSRemediation Data Flow Task\HICS Remediation Flat File Source.Outputs[Flat File Source Output].ExternalColumns[ApplicationID]"
+                          codePage="1252"
+                          dataType="str"
+                          length="50"
+                          name="ApplicationID" />
+                        <externalMetadataColumn
+                          refId="Package\Foreach Loop Container\Load HICSRemediation Data Flow Task\HICS Remediation Flat File Source.Outputs[Flat File Source Output].ExternalColumns[PolicyID]"
+                          codePage="1252"
+                          dataType="str"
+                          length="50"
+                          name="PolicyID" />
+                      </externalMetadataColumns>
+                    </output>
+                    <output
+                      refId="Package\Foreach Loop Container\Load HICSRemediation Data Flow Task\HICS Remediation Flat File Source.Outputs[Flat File Source Error Output]"
+                      isErrorOut="true"
+                      name="Flat File Source Error Output">
+                      <outputColumns>
+                        <outputColumn
+                          refId="Package\Foreach Loop Container\Load HICSRemediation Data Flow Task\HICS Remediation Flat File Source.Outputs[Flat File Source Error Output].Columns[Flat File Source Error Output Column]"
+                          codePage="1252"
+                          dataType="text"
+                          description="Flat File Source Error Output Column"
+                          lineageId="Package\Foreach Loop Container\Load HICSRemediation Data Flow Task\HICS Remediation Flat File Source.Outputs[Flat File Source Error Output].Columns[Flat File Source Error Output Column]"
+                          name="Flat File Source Error Output Column" />
+                        <outputColumn
+                          refId="Package\Foreach Loop Container\Load HICSRemediation Data Flow Task\HICS Remediation Flat File Source.Outputs[Flat File Source Error Output].Columns[ErrorCode]"
+                          dataType="i4"
+                          lineageId="Package\Foreach Loop Container\Load HICSRemediation Data Flow Task\HICS Remediation Flat File Source.Outputs[Flat File Source Error Output].Columns[ErrorCode]"
+                          name="ErrorCode"
+                          specialFlags="1" />
+                        <outputColumn
+                          refId="Package\Foreach Loop Container\Load HICSRemediation Data Flow Task\HICS Remediation Flat File Source.Outputs[Flat File Source Error Output].Columns[ErrorColumn]"
+                          dataType="i4"
+                          lineageId="Package\Foreach Loop Container\Load HICSRemediation Data Flow Task\HICS Remediation Flat File Source.Outputs[Flat File Source Error Output].Columns[ErrorColumn]"
+                          name="ErrorColumn"
+                          specialFlags="2" />
+                      </outputColumns>
+                      <externalMetadataColumns />
+                    </output>
+                  </outputs>
+                </component>
+                <component
+                  refId="Package\Foreach Loop Container\Load HICSRemediation Data Flow Task\Load HICSRemediation SQL Server Destination"
+                  componentClassID="Microsoft.SQLServerDestination"
+                  contactInfo="SQL Server Destination;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;5"
+                  description="SQL Server Destination"
+                  name="Load HICSRemediation SQL Server Destination"
+                  validateExternalMetadata="False"
+                  version="5">
+                  <properties>
+                    <property
+                      dataType="System.Int32"
+                      description="Specifies the column code page to use when code page information is unavailable from the data source."
+                      name="DefaultCodePage">1252</property>
+                    <property
+                      dataType="System.Boolean"
+                      description="Forces the use of the DefaultCodePage property value when describing character data."
+                      name="AlwaysUseDefaultCodePage">false</property>
+                    <property
+                      dataType="System.String"
+                      description="The name of the database object to copy data into."
+                      expressionType="Notify"
+                      name="BulkInsertTableName">[dbo].[HICSRemediation]</property>
+                    <property
+                      dataType="System.Boolean"
+                      description="Specifies that any constraints on the destination object are checked during the data copy operation. Corresponds to the bulk insert CHECK_CONSTRAINTS option."
+                      name="BulkInsertCheckConstraints">true</property>
+                    <property
+                      dataType="System.Int32"
+                      description="Specifies the number of the first row to copy. Corresponds to the bulk insert FIRSTROW option."
+                      expressionType="Notify"
+                      name="BulkInsertFirstRow">-1</property>
+                    <property
+                      dataType="System.Boolean"
+                      description="Specifies that any insert triggers defined on the destination object will execute during the data copy. Corresponds to the bulk insert FIRE_TRIGGERS option."
+                      name="BulkInsertFireTriggers">false</property>
+                    <property
+                      dataType="System.Boolean"
+                      description="Indicates whether the values supplied for identity columns will be copied to the destination. If false, values for identity columns will be auto-generated at the destination. Corresponds to the bulk insert KEEPIDENTITY option."
+                      name="BulkInsertKeepIdentity">false</property>
+                    <property
+                      dataType="System.Boolean"
+                      description="Indicates whether the columns containing null will have null copied to the destination. If false, columns containing null will have their default values inserted at the destination. Applies only if fast load is turned on."
+                      name="BulkInsertKeepNulls">false</property>
+                    <property
+                      dataType="System.Int32"
+                      description="Specifies the number of the last row to copy. Corresponds to the bulk insert LASTROW option."
+                      expressionType="Notify"
+                      name="BulkInsertLastRow">-1</property>
+                    <property
+                      dataType="System.Int32"
+                      description="Specifies the maximum number of syntax errors and compilation errors that can occur before the data copy operation is canceled. Each row that cannot be copied is ignored and counted as one error. Corresponds to the bulk insert MAXERRORS option."
+                      name="BulkInsertMaxErrors">-1</property>
+                    <property
+                      dataType="System.String"
+                      description="Specifies how the data to be copied is sorted. Corresponds to the bulk insert ORDER option."
+                      expressionType="Notify"
+                      name="BulkInsertOrder"></property>
+                    <property
+                      dataType="System.Boolean"
+                      description="Specifies that a table-level lock is acquired for the duration of the data copy operation. Corresponds to the bulk insert TABLOCK option."
+                      name="BulkInsertTablock">true</property>
+                    <property
+                      dataType="System.Int32"
+                      description="Specifies in seconds the amount of time the SQL Destination adapter will wait before terminating if there is no data available for insertion.  A timeout value of 0 means the SQL Destination adapter will not time out."
+                      expressionType="Notify"
+                      name="Timeout">30</property>
+                    <property
+                      dataType="System.Int32"
+                      description="Specifies when commits are issued during data insertion.  A value of 0 specifies that one commit will be issued at the end of data insertion."
+                      name="MaxInsertCommitSize">0</property>
+                  </properties>
+                  <connections>
+                    <connection
+                      refId="Package\Foreach Loop Container\Load HICSRemediation Data Flow Task\Load HICSRemediation SQL Server Destination.Connections[OleDbConnection]"
+                      connectionManagerID="Package.ConnectionManagers[ERR_1095A]"
+                      connectionManagerRefId="Package.ConnectionManagers[ERR_1095A]"
+                      description="The OLE DB runtime connection used to access the database."
+                      name="OleDbConnection" />
+                  </connections>
+                  <inputs>
+                    <input
+                      refId="Package\Foreach Loop Container\Load HICSRemediation Data Flow Task\Load HICSRemediation SQL Server Destination.Inputs[SQL Server Destination Input]"
+                      hasSideEffects="true"
+                      name="SQL Server Destination Input">
+                      <inputColumns>
+                        <inputColumn
+                          refId="Package\Foreach Loop Container\Load HICSRemediation Data Flow Task\Load HICSRemediation SQL Server Destination.Inputs[SQL Server Destination Input].Columns[bigintApplicationID]"
+                          cachedDataType="i8"
+                          cachedName="bigintApplicationID"
+                          externalMetadataColumnId="Package\Foreach Loop Container\Load HICSRemediation Data Flow Task\Load HICSRemediation SQL Server Destination.Inputs[SQL Server Destination Input].ExternalColumns[ApplicationID]"
+                          lineageId="Package\Foreach Loop Container\Load HICSRemediation Data Flow Task\CaseId Data Conversion.Outputs[Data Conversion Output].Columns[bigintApplicationID]" />
+                        <inputColumn
+                          refId="Package\Foreach Loop Container\Load HICSRemediation Data Flow Task\Load HICSRemediation SQL Server Destination.Inputs[SQL Server Destination Input].Columns[strCaseId]"
+                          cachedCodepage="1252"
+                          cachedDataType="str"
+                          cachedLength="20"
+                          cachedName="strCaseId"
+                          externalMetadataColumnId="Package\Foreach Loop Container\Load HICSRemediation Data Flow Task\Load HICSRemediation SQL Server Destination.Inputs[SQL Server Destination Input].ExternalColumns[CaseID]"
+                          lineageId="Package\Foreach Loop Container\Load HICSRemediation Data Flow Task\CaseId Data Conversion.Outputs[Data Conversion Output].Columns[strCaseId]" />
+                        <inputColumn
+                          refId="Package\Foreach Loop Container\Load HICSRemediation Data Flow Task\Load HICSRemediation SQL Server Destination.Inputs[SQL Server Destination Input].Columns[bigintPolicyID]"
+                          cachedDataType="i8"
+                          cachedName="bigintPolicyID"
+                          externalMetadataColumnId="Package\Foreach Loop Container\Load HICSRemediation Data Flow Task\Load HICSRemediation SQL Server Destination.Inputs[SQL Server Destination Input].ExternalColumns[PolicyID]"
+                          lineageId="Package\Foreach Loop Container\Load HICSRemediation Data Flow Task\CaseId Data Conversion.Outputs[Data Conversion Output].Columns[bigintPolicyID]" />
+                      </inputColumns>
+                      <externalMetadataColumns
+                        isUsed="True">
+                        <externalMetadataColumn
+                          refId="Package\Foreach Loop Container\Load HICSRemediation Data Flow Task\Load HICSRemediation SQL Server Destination.Inputs[SQL Server Destination Input].ExternalColumns[CaseID]"
+                          codePage="1252"
+                          dataType="str"
+                          length="20"
+                          name="CaseID" />
+                        <externalMetadataColumn
+                          refId="Package\Foreach Loop Container\Load HICSRemediation Data Flow Task\Load HICSRemediation SQL Server Destination.Inputs[SQL Server Destination Input].ExternalColumns[ApplicationID]"
+                          dataType="i8"
+                          name="ApplicationID" />
+                        <externalMetadataColumn
+                          refId="Package\Foreach Loop Container\Load HICSRemediation Data Flow Task\Load HICSRemediation SQL Server Destination.Inputs[SQL Server Destination Input].ExternalColumns[PolicyID]"
+                          dataType="i8"
+                          name="PolicyID" />
+                        <externalMetadataColumn
+                          refId="Package\Foreach Loop Container\Load HICSRemediation Data Flow Task\Load HICSRemediation SQL Server Destination.Inputs[SQL Server Destination Input].ExternalColumns[CreateDate]"
+                          dataType="dbTimeStamp2"
+                          name="CreateDate"
+                          scale="2" />
+                      </externalMetadataColumns>
+                    </input>
+                  </inputs>
+                </component>
+              </components>
+              <paths>
+                <path
+                  refId="Package\Foreach Loop Container\Load HICSRemediation Data Flow Task.Paths[Data Conversion Output]"
+                  endId="Package\Foreach Loop Container\Load HICSRemediation Data Flow Task\Load HICSRemediation SQL Server Destination.Inputs[SQL Server Destination Input]"
+                  name="Data Conversion Output"
+                  startId="Package\Foreach Loop Container\Load HICSRemediation Data Flow Task\CaseId Data Conversion.Outputs[Data Conversion Output]" />
+                <path
+                  refId="Package\Foreach Loop Container\Load HICSRemediation Data Flow Task.Paths[Flat File Source Output]"
+                  endId="Package\Foreach Loop Container\Load HICSRemediation Data Flow Task\CaseId Data Conversion.Inputs[Data Conversion Input]"
+                  name="Flat File Source Output"
+                  startId="Package\Foreach Loop Container\Load HICSRemediation Data Flow Task\HICS Remediation Flat File Source.Outputs[Flat File Source Output]" />
+              </paths>
+            </pipeline>
+          </DTS:ObjectData>
+        </DTS:Executable>
+      </DTS:Executables>
+      <DTS:ForEachVariableMappings>
+        <DTS:ForEachVariableMapping
+          DTS:CreationName=""
+          DTS:DTSID="{46A7AEF0-AE0D-4551-92D5-33D49B7A3824}"
+          DTS:ObjectName="{46A7AEF0-AE0D-4551-92D5-33D49B7A3824}"
+          DTS:ValueIndex="0"
+          DTS:VariableName="User::HICSRemediation" />
+      </DTS:ForEachVariableMappings>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\Load Validated Application Ids Execute SQL Task"
+      DTS:CreationName="Microsoft.ExecuteSQLTask"
+      DTS:Description="Execute SQL Task"
+      DTS:DTSID="{2433611C-C875-4AE8-B270-743773740E2B}"
+      DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Load Validated Application Ids Execute SQL Task"
+      DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2012; © 2007 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+      DTS:ThreadHint="0">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <SQLTask:SqlTaskData
+          SQLTask:Connection="{52BEA6EF-FCF7-4BEC-9E80-CF01701FB2F1}"
+          SQLTask:SqlStatementSource="WITH UpdateValues AS (&#xA;SELECT DISTINCT hr.CaseID, hr.ApplicationID &#xA;FROM [dbo].[HICSRemediation] hr&#xA;LEFT OUTER JOIN (SELECT DISTINCT CaseID, ApplicationID FROM HICSApp) ha&#xA;ON hr.CaseID = ha.CaseID AND hr.ApplicationID = ha.ApplicationID&#xA;WHERE ha.ApplicationID IS NULL)&#xA;INSERT [dbo].[HICSValidatedApp] ([CaseID], [ApplicationID])&#xA;SELECT uv.CaseID, uv.ApplicationID FROM UpdateValues uv&#xA;LEFT OUTER JOIN [dbo].[HICSValidatedApp] hva &#xA;&#x9;ON uv.CaseId = hva.CaseID AND uv.ApplicationID = hva.ApplicationID&#xA;WHERE hva.ApplicationID IS NULL&#xA;AND uv.ApplicationId IS NOT NULL" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\Load Validated Policy Ids Execute SQL Task"
+      DTS:CreationName="Microsoft.ExecuteSQLTask"
+      DTS:Description="Execute SQL Task"
+      DTS:DTSID="{8CB0AA1D-6230-493C-A043-87DF645329FC}"
+      DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Load Validated Policy Ids Execute SQL Task"
+      DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2012; © 2007 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+      DTS:ThreadHint="0">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <SQLTask:SqlTaskData
+          SQLTask:Connection="{52BEA6EF-FCF7-4BEC-9E80-CF01701FB2F1}"
+          SQLTask:SqlStatementSource="WITH UpdateValues AS (&#xA;SELECT DISTINCT hr.CaseID, hr.PolicyID &#xA;FROM [dbo].[HICSRemediation] hr&#xA;LEFT OUTER JOIN (SELECT DISTINCT CaseID, PolicyID FROM HICSPolicy) ha&#xA;ON hr.CaseID = ha.CaseID AND hr.PolicyID = ha.PolicyID&#xA;WHERE ha.PolicyID IS NULL)&#xA;INSERT [dbo].[HICSValidatedPolicy] ([CaseID], [PolicyID])&#xA;SELECT uv.CaseID, uv.PolicyID FROM UpdateValues uv&#xA;LEFT OUTER JOIN [dbo].[HICSValidatedPolicy] hvp &#xA;&#x9;ON uv.CaseId = hvp.CaseID AND uv.PolicyID = hvp.PolicyID&#xA;WHERE hvp.PolicyID IS NULL&#xA;AND uv.PolicyId IS NOT NULL" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\Log Message Execute SQL Task"
+      DTS:CreationName="Microsoft.ExecuteSQLTask"
+      DTS:Description="Execute SQL Task"
+      DTS:DTSID="{0279e749-26c8-4487-af1f-6da9d720f238}"
+      DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Log Message Execute SQL Task"
+      DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2012; © 2007 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+      DTS:ThreadHint="0">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <SQLTask:SqlTaskData
+          SQLTask:Connection="{52BEA6EF-FCF7-4BEC-9E80-CF01701FB2F1}"
+          SQLTask:SqlStatementSource="INSERT INTO [dbo].[SSIS_Execution_Log]&#xA;           ([Category]&#xA;           ,[Package]&#xA;           ,[Package_Execution_Id]&#xA;           ,[Task]&#xA;           ,[Event_Details]&#xA;           ,[Custom_Message])&#xA;     VALUES&#xA;           ('SSIS Package'&#xA;           ,?&#xA;           ,?&#xA;           ,?&#xA;           ,?&#xA;           ,'')" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask">
+          <SQLTask:ParameterBinding
+            SQLTask:ParameterName="0"
+            SQLTask:DtsVariableName="System::PackageName"
+            SQLTask:ParameterDirection="Input"
+            SQLTask:DataType="129"
+            SQLTask:ParameterSize="255" />
+          <SQLTask:ParameterBinding
+            SQLTask:ParameterName="1"
+            SQLTask:DtsVariableName="System::ExecutionInstanceGUID"
+            SQLTask:ParameterDirection="Input"
+            SQLTask:DataType="129"
+            SQLTask:ParameterSize="255" />
+          <SQLTask:ParameterBinding
+            SQLTask:ParameterName="2"
+            SQLTask:DtsVariableName="System::PackageName"
+            SQLTask:ParameterDirection="Input"
+            SQLTask:DataType="129"
+            SQLTask:ParameterSize="255" />
+          <SQLTask:ParameterBinding
+            SQLTask:ParameterName="3"
+            SQLTask:DtsVariableName="User::HICSRemediationDirectoryName"
+            SQLTask:ParameterDirection="Input"
+            SQLTask:DataType="129"
+            SQLTask:ParameterSize="255" />
+        </SQLTask:SqlTaskData>
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\Set Verified IDs"
+      DTS:CreationName="Microsoft.ExecuteSQLTask"
+      DTS:Description="Execute SQL Task"
+      DTS:DTSID="{1efe65ca-6add-43d1-9780-fda56bb2a26a}"
+      DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Set Verified IDs"
+      DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2012; © 2007 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+      DTS:ThreadHint="0">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <SQLTask:SqlTaskData
+          SQLTask:Connection="{52BEA6EF-FCF7-4BEC-9E80-CF01701FB2F1}"
+          SQLTask:SqlStatementSource="EXEC dbo.pHicsCases_UpdateDiscoveredFields" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\Truncate HICSRemediation Table Execute SQL Task"
+      DTS:CreationName="Microsoft.ExecuteSQLTask"
+      DTS:Description="Execute SQL Task"
+      DTS:DTSID="{A5A34487-EAB8-4DBC-A19F-C5B0D50E86F2}"
+      DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Truncate HICSRemediation Table Execute SQL Task"
+      DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2012; © 2007 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+      DTS:ThreadHint="0">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <SQLTask:SqlTaskData
+          SQLTask:Connection="{52BEA6EF-FCF7-4BEC-9E80-CF01701FB2F1}"
+          SQLTask:SqlStatementSource="TRUNCATE TABLE [dbo].[HICSRemediation]" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
+      </DTS:ObjectData>
+    </DTS:Executable>
+  </DTS:Executables>
+  <DTS:PrecedenceConstraints>
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint]"
+      DTS:CreationName=""
+      DTS:DTSID="{94768882-F5CE-47FD-8694-3A73C3F31A19}"
+      DTS:From="Package\Truncate HICSRemediation Table Execute SQL Task"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint"
+      DTS:To="Package\Foreach Loop Container" />
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint 1]"
+      DTS:CreationName=""
+      DTS:DTSID="{A6ABDDF3-39BC-462D-8147-3931ED8B9057}"
+      DTS:From="Package\Foreach Loop Container"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint 1"
+      DTS:To="Package\Load Validated Application Ids Execute SQL Task" />
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint 2]"
+      DTS:CreationName=""
+      DTS:DTSID="{B1E55228-5D7F-4CA8-B546-8A2719E58D8B}"
+      DTS:From="Package\Load Validated Application Ids Execute SQL Task"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint 2"
+      DTS:To="Package\Load Validated Policy Ids Execute SQL Task" />
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint 3]"
+      DTS:CreationName=""
+      DTS:DTSID="{6B68123F-CB89-4374-B720-BF5DDB2A96C1}"
+      DTS:From="Package\Log Message Execute SQL Task"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint 3"
+      DTS:To="Package\Truncate HICSRemediation Table Execute SQL Task" />
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint 4]"
+      DTS:CreationName=""
+      DTS:DTSID="{C927B7F4-731C-4C65-A436-A7196B18F905}"
+      DTS:From="Package\Load Validated Policy Ids Execute SQL Task"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint 4"
+      DTS:To="Package\Set Verified IDs" />
+  </DTS:PrecedenceConstraints>
+  <DTS:DesignTimeProperties><![CDATA[<?xml version="1.0"?>
+<!--This CDATA section contains the layout information of the package. The section includes information such as (x,y) coordinates, width, and height.-->
+<!--If you manually edit this section and make a mistake, you can delete it. -->
+<!--The package will still be able to load normally but the previous layout information will be lost and the designer will automatically re-arrange the elements on the design surface.-->
+<Objects
+  Version="8">
+  <!--Each node below will contain properties that do not affect runtime behavior.-->
+  <Package
+    design-time-name="Package">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="16" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
+        <NodeLayout
+          Size="265,42"
+          Id="Package\Foreach Loop Container\Load HICSRemediation Data Flow Task"
+          TopLeft="23,29" />
+        <ContainerLayout
+          HeaderHeight="43"
+          IsExpanded="True"
+          PanelSize="293,126"
+          Size="293,169"
+          Id="Package\Foreach Loop Container"
+          TopLeft="360,162" />
+        <NodeLayout
+          Size="311,42"
+          Id="Package\Load Validated Application Ids Execute SQL Task"
+          TopLeft="364,365" />
+        <NodeLayout
+          Size="286,42"
+          Id="Package\Load Validated Policy Ids Execute SQL Task"
+          TopLeft="377,447" />
+        <NodeLayout
+          Size="229,42"
+          Id="Package\Log Message Execute SQL Task"
+          TopLeft="378,3" />
+        <NodeLayout
+          Size="325,42"
+          Id="Package\Truncate HICSRemediation Table Execute SQL Task"
+          TopLeft="352,80" />
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint]"
+          TopLeft="514.5,122">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="-8,40"
+              Start="0,0"
+              End="-8,32.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,16" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,16"
+                    Point2="0,20"
+                    Point3="-4,20" />
+                  <mssgle:LineSegment
+                    End="-4,20" />
+                  <mssgle:CubicBezierSegment
+                    Point1="-4,20"
+                    Point2="-8,20"
+                    Point3="-8,24" />
+                  <mssgle:LineSegment
+                    End="-8,32.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint 1]"
+          TopLeft="506.5,331">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="13,34"
+              Start="0,0"
+              End="13,26.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,13" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,13"
+                    Point2="0,17"
+                    Point3="4,17" />
+                  <mssgle:LineSegment
+                    End="9,17" />
+                  <mssgle:CubicBezierSegment
+                    Point1="9,17"
+                    Point2="13,17"
+                    Point3="13,21" />
+                  <mssgle:LineSegment
+                    End="13,26.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint 2]"
+          TopLeft="519.75,407">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,40"
+              Start="0,0"
+              End="0,32.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,32.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint 3]"
+          TopLeft="492.5,45">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="22,35"
+              Start="0,0"
+              End="22,27.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,13.5" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,13.5"
+                    Point2="0,17.5"
+                    Point3="4,17.5" />
+                  <mssgle:LineSegment
+                    End="18,17.5" />
+                  <mssgle:CubicBezierSegment
+                    Point1="18,17.5"
+                    Point2="22,17.5"
+                    Point3="22,21.5" />
+                  <mssgle:LineSegment
+                    End="22,27.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <NodeLayout
+          Size="152,42"
+          Id="Package\Set Verified IDs"
+          TopLeft="445,523" />
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint 4]"
+          TopLeft="520.5,489">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,34"
+              Start="0,0"
+              End="0,26.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,26.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+      </GraphLayout>
+    </LayoutInfo>
+  </Package>
+  <TaskHost
+    design-time-name="Package\Foreach Loop Container\Load HICSRemediation Data Flow Task">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="8" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:mssgm="clr-namespace:Microsoft.SqlServer.Graph.Model;assembly=Microsoft.SqlServer.Graph">
+        <NodeLayout
+          Size="194,42"
+          Id="Package\Foreach Loop Container\Load HICSRemediation Data Flow Task\CaseId Data Conversion"
+          TopLeft="308,164" />
+        <NodeLayout
+          Size="301,42"
+          Id="Package\Foreach Loop Container\Load HICSRemediation Data Flow Task\Load HICSRemediation SQL Server Destination"
+          TopLeft="273,247" />
+        <EdgeLayout
+          Id="Package\Foreach Loop Container\Load HICSRemediation Data Flow Task.Paths[Data Conversion Output]"
+          TopLeft="405,206">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="18.5,41"
+              Start="0,0"
+              End="18.5,33.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,16.5" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,16.5"
+                    Point2="0,20.5"
+                    Point3="4,20.5" />
+                  <mssgle:LineSegment
+                    End="14.5,20.5" />
+                  <mssgle:CubicBezierSegment
+                    Point1="14.5,20.5"
+                    Point2="18.5,20.5"
+                    Point3="18.5,24.5" />
+                  <mssgle:LineSegment
+                    End="18.5,33.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <NodeLayout
+          Size="242,42"
+          Id="Package\Foreach Loop Container\Load HICSRemediation Data Flow Task\HICS Remediation Flat File Source"
+          TopLeft="254,80" />
+        <EdgeLayout
+          Id="Package\Foreach Loop Container\Load HICSRemediation Data Flow Task.Paths[Flat File Source Output]"
+          TopLeft="375,122">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="30,42"
+              Start="0,0"
+              End="30,34.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,17" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,17"
+                    Point2="0,21"
+                    Point3="4,21" />
+                  <mssgle:LineSegment
+                    End="26,21" />
+                  <mssgle:CubicBezierSegment
+                    Point1="26,21"
+                    Point2="30,21"
+                    Point3="30,25" />
+                  <mssgle:LineSegment
+                    End="30,34.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <mssgm:EdgeLabel
+              BoundingBox="7,26,16,16"
+              RelativePosition="Any" />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+      </GraphLayout>
+    </LayoutInfo>
+  </TaskHost>
+  <PipelineComponentMetadata
+    design-time-name="Package\Foreach Loop Container\Load HICSRemediation Data Flow Task\Load HICSRemediation SQL Server Destination">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+</Objects>]]></DTS:DesignTimeProperties>
+</DTS:Executable>

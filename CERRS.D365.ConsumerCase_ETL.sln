@@ -1,0 +1,43 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+VisualStudioVersion = 15.0.28307.1062
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{159641D6-6404-4A2A-AE62-294DE0FE8301}") = "ComplexCase_ETL", "ComplexCase_ETL\ComplexCase_ETL.dtproj", "{E2F62EB6-A608-43BB-993E-1392B1C98312}"
+EndProject
+Project("{159641D6-6404-4A2A-AE62-294DE0FE8301}") = "HICSCase_ETL", "HICSCase_ETL\HICSCase_ETL.dtproj", "{CAD4E30B-27F3-409C-856A-DEAC3DCE43F3}"
+EndProject
+Project("{159641D6-6404-4A2A-AE62-294DE0FE8301}") = "1095A_SqlServer", "1095A_SqlServer\1095A_SqlServer\1095A_SqlServer.dtproj", "{E005E404-ECFA-4E57-8440-37AE1484109E}"
+EndProject
+Project("{159641D6-6404-4A2A-AE62-294DE0FE8301}") = "HICSSupplementary", "HICSSupplementary\HICSSupplementary.dtproj", "{5B9D8A35-4540-4D9F-BD7D-9682F5763E3C}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Development|Default = Development|Default
+		Production|Default = Production|Default
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{E2F62EB6-A608-43BB-993E-1392B1C98312}.Development|Default.ActiveCfg = Development
+		{E2F62EB6-A608-43BB-993E-1392B1C98312}.Development|Default.Build.0 = Development
+		{E2F62EB6-A608-43BB-993E-1392B1C98312}.Production|Default.ActiveCfg = Development
+		{E2F62EB6-A608-43BB-993E-1392B1C98312}.Production|Default.Build.0 = Development
+		{CAD4E30B-27F3-409C-856A-DEAC3DCE43F3}.Development|Default.ActiveCfg = Development
+		{CAD4E30B-27F3-409C-856A-DEAC3DCE43F3}.Development|Default.Build.0 = Development
+		{CAD4E30B-27F3-409C-856A-DEAC3DCE43F3}.Production|Default.ActiveCfg = Development
+		{CAD4E30B-27F3-409C-856A-DEAC3DCE43F3}.Production|Default.Build.0 = Development
+		{E005E404-ECFA-4E57-8440-37AE1484109E}.Development|Default.ActiveCfg = Development
+		{E005E404-ECFA-4E57-8440-37AE1484109E}.Development|Default.Build.0 = Development
+		{E005E404-ECFA-4E57-8440-37AE1484109E}.Production|Default.ActiveCfg = Production
+		{E005E404-ECFA-4E57-8440-37AE1484109E}.Production|Default.Build.0 = Production
+		{5B9D8A35-4540-4D9F-BD7D-9682F5763E3C}.Development|Default.ActiveCfg = Development
+		{5B9D8A35-4540-4D9F-BD7D-9682F5763E3C}.Development|Default.Build.0 = Development
+		{5B9D8A35-4540-4D9F-BD7D-9682F5763E3C}.Production|Default.ActiveCfg = Development
+		{5B9D8A35-4540-4D9F-BD7D-9682F5763E3C}.Production|Default.Build.0 = Development
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {83938B7C-B070-44A5-8C44-4D4EB9D43D7A}
+	EndGlobalSection
+EndGlobal

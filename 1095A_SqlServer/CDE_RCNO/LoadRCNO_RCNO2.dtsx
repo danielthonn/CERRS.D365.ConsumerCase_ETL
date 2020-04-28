@@ -1,0 +1,468 @@
+﻿<?xml version="1.0"?>
+<DTS:Executable xmlns:DTS="www.microsoft.com/SqlServer/Dts"
+  DTS:refId="Package"
+  DTS:CreationDate="4/11/2018 2:13:57 PM"
+  DTS:CreationName="Microsoft.Package"
+  DTS:CreatorComputerName="CND7353H6G"
+  DTS:CreatorName="AZ\mcho"
+  DTS:DTSID="{71638184-C174-43AC-ADE0-80064D388323}"
+  DTS:ExecutableType="Microsoft.Package"
+  DTS:LastModifiedProductVersion="14.0.3026.27"
+  DTS:LocaleID="1033"
+  DTS:ObjectName="LoadRCNO_RCNO2"
+  DTS:PackageType="5"
+  DTS:ProtectionLevel="0"
+  DTS:VersionBuild="26"
+  DTS:VersionGUID="{27112B48-4B1E-4558-96E8-221545515A52}">
+  <DTS:Property
+    DTS:Name="PackageFormatVersion">8</DTS:Property>
+  <DTS:ConnectionManagers>
+    <DTS:ConnectionManager
+      DTS:refId="Package.ConnectionManagers[DisputesDB]"
+      DTS:CreationName="OLEDB"
+      DTS:DTSID="{06A7D178-F5CA-4495-AAFF-6C9D8095FB60}"
+      DTS:ObjectName="DisputesDB">
+      <DTS:ObjectData>
+        <DTS:ConnectionManager
+          DTS:ConnectionString="Data Source=localhost;Initial Catalog=DisputesDB;Provider=SQLNCLI11.1;Integrated Security=SSPI;Auto Translate=False;" />
+      </DTS:ObjectData>
+    </DTS:ConnectionManager>
+    <DTS:ConnectionManager
+      DTS:refId="Package.ConnectionManagers[RCNO]"
+      DTS:CreationName="OLEDB"
+      DTS:DTSID="{50300203-F18B-4D2D-9A2E-D145B9507342}"
+      DTS:ObjectName="RCNO">
+      <DTS:ObjectData>
+        <DTS:ConnectionManager
+          DTS:ConnectionString="Data Source=localhost;Initial Catalog=RCNO;Provider=SQLNCLI11.1;Integrated Security=SSPI;Auto Translate=False;" />
+      </DTS:ObjectData>
+    </DTS:ConnectionManager>
+    <DTS:ConnectionManager
+      DTS:refId="Package.ConnectionManagers[StagingArea]"
+      DTS:CreationName="OLEDB"
+      DTS:DTSID="{EEFD7124-5AE3-4C73-9D72-C83D156D69B1}"
+      DTS:ObjectName="StagingArea">
+      <DTS:ObjectData>
+        <DTS:ConnectionManager
+          DTS:ConnectionString="Data Source=localhost;Initial Catalog=StagingArea;Provider=SQLNCLI11.1;Integrated Security=SSPI;Auto Translate=False;" />
+      </DTS:ObjectData>
+    </DTS:ConnectionManager>
+  </DTS:ConnectionManagers>
+  <DTS:Variables>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{35DD391C-966B-4030-8707-DABB2098E9D3}"
+      DTS:IncludeInDebugDump="6789"
+      DTS:Namespace="User"
+      DTS:ObjectName="BatchID">
+      <DTS:VariableValue
+        DTS:DataType="3">0</DTS:VariableValue>
+    </DTS:Variable>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{A337E2C5-80E2-4082-B4A9-D5889098BF58}"
+      DTS:EvaluateAsExpression="True"
+      DTS:Expression="&quot;RCNO_&quot; + @[$Project::RCNO2_BatchYear] + &quot;_&quot; + (DT_WSTR, 5)@[User::BatchID]"
+      DTS:IncludeInDebugDump="2345"
+      DTS:Namespace="User"
+      DTS:ObjectName="RCNO_NewTable">
+      <DTS:VariableValue
+        DTS:DataType="8">RCNO_2019_0</DTS:VariableValue>
+    </DTS:Variable>
+  </DTS:Variables>
+  <DTS:Executables>
+    <DTS:Executable
+      DTS:refId="Package\Create Issuer Orphan CaseID"
+      DTS:CreationName="Microsoft.ExecuteSQLTask"
+      DTS:Description="Execute SQL Task"
+      DTS:DTSID="{27A3D074-0A09-440C-945D-6C8CE5884DCB}"
+      DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Create Issuer Orphan CaseID"
+      DTS:ThreadHint="0">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <SQLTask:SqlTaskData
+          SQLTask:Connection="{50300203-F18B-4D2D-9A2E-D145B9507342}"
+          SQLTask:SqlStatementSource="EXECUTE  [dbo].[pOrphanCase_CreateCases]" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\SC - Load RCNO Data from StagingArea to RCNO"
+      DTS:CreationName="STOCK:SEQUENCE"
+      DTS:Description="Sequence Container"
+      DTS:DTSID="{BF601204-5144-4596-BF4F-ACC4BAC3D2C7}"
+      DTS:ExecutableType="STOCK:SEQUENCE"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="SC - Load RCNO Data from StagingArea to RCNO">
+      <DTS:Variables />
+      <DTS:Executables>
+        <DTS:Executable
+          DTS:refId="Package\SC - Load RCNO Data from StagingArea to RCNO\Create all indexes for new RCNO table"
+          DTS:CreationName="Microsoft.ExecuteSQLTask"
+          DTS:Description="Execute SQL Task"
+          DTS:DTSID="{A3B88F25-161F-48D7-9001-D4754D381D1B}"
+          DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+          DTS:LocaleID="-1"
+          DTS:ObjectName="Create all indexes for new RCNO table"
+          DTS:ThreadHint="0">
+          <DTS:Variables />
+          <DTS:ObjectData>
+            <SQLTask:SqlTaskData
+              SQLTask:Connection="{50300203-F18B-4D2D-9A2E-D145B9507342}"
+              SQLTask:SqlStatementSource="EXEC pRCNO_CreateRcnoIndexes ?" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask">
+              <SQLTask:ParameterBinding
+                SQLTask:ParameterName="@RcnoTableName"
+                SQLTask:DtsVariableName="User::RCNO_NewTable"
+                SQLTask:ParameterDirection="Input"
+                SQLTask:DataType="130"
+                SQLTask:ParameterSize="-1" />
+            </SQLTask:SqlTaskData>
+          </DTS:ObjectData>
+        </DTS:Executable>
+        <DTS:Executable
+          DTS:refId="Package\SC - Load RCNO Data from StagingArea to RCNO\Create New RCNO Table"
+          DTS:CreationName="Microsoft.ExecuteSQLTask"
+          DTS:Description="Execute SQL Task"
+          DTS:DTSID="{394D7662-E1AB-4D35-8447-B5E6455F4C23}"
+          DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+          DTS:LocaleID="-1"
+          DTS:ObjectName="Create New RCNO Table"
+          DTS:ThreadHint="0">
+          <DTS:Variables />
+          <DTS:ObjectData>
+            <SQLTask:SqlTaskData
+              SQLTask:Connection="{50300203-F18B-4D2D-9A2E-D145B9507342}"
+              SQLTask:SqlStatementSource="EXEC [dbo].[pRCNO_CreateRcnoTable] ?" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask">
+              <SQLTask:ParameterBinding
+                SQLTask:ParameterName="@TableName"
+                SQLTask:DtsVariableName="User::RCNO_NewTable"
+                SQLTask:ParameterDirection="Input"
+                SQLTask:DataType="130"
+                SQLTask:ParameterSize="-1" />
+            </SQLTask:SqlTaskData>
+          </DTS:ObjectData>
+        </DTS:Executable>
+        <DTS:Executable
+          DTS:refId="Package\SC - Load RCNO Data from StagingArea to RCNO\Create RCNO Views"
+          DTS:CreationName="Microsoft.ExecuteSQLTask"
+          DTS:Description="Execute SQL Task"
+          DTS:DTSID="{B649AB22-41B8-4B5E-86CA-FE7789DAF371}"
+          DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+          DTS:LocaleID="-1"
+          DTS:ObjectName="Create RCNO Views"
+          DTS:ThreadHint="0">
+          <DTS:Variables />
+          <DTS:ObjectData>
+            <SQLTask:SqlTaskData
+              SQLTask:Connection="{50300203-F18B-4D2D-9A2E-D145B9507342}"
+              SQLTask:SqlStatementSource="EXECUTE  [dbo].[pRCNO_CreateRcnoViews] " xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
+          </DTS:ObjectData>
+        </DTS:Executable>
+        <DTS:Executable
+          DTS:refId="Package\SC - Load RCNO Data from StagingArea to RCNO\Get BatchID"
+          DTS:CreationName="Microsoft.ExecuteSQLTask"
+          DTS:Description="Execute SQL Task"
+          DTS:DTSID="{721029E6-EB4A-41CE-8C75-366660828E20}"
+          DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+          DTS:LocaleID="-1"
+          DTS:ObjectName="Get BatchID"
+          DTS:ThreadHint="0">
+          <DTS:Variables />
+          <DTS:ObjectData>
+            <SQLTask:SqlTaskData
+              SQLTask:Connection="{EEFD7124-5AE3-4C73-9D72-C83D156D69B1}"
+              SQLTask:BypassPrepare="False"
+              SQLTask:SqlStatementSource="SELECT     TOP (1) FTI_INTERNAL_BATCH_ID&#xA;FROM         dbo.RCNO_Opera"
+              SQLTask:ResultType="ResultSetType_SingleRow" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask">
+              <SQLTask:ResultBinding
+                SQLTask:ResultName="0"
+                SQLTask:DtsVariableName="User::BatchID" />
+            </SQLTask:SqlTaskData>
+          </DTS:ObjectData>
+        </DTS:Executable>
+        <DTS:Executable
+          DTS:refId="Package\SC - Load RCNO Data from StagingArea to RCNO\Load RCNO"
+          DTS:CreationName="Microsoft.ExecuteSQLTask"
+          DTS:Description="Execute SQL Task"
+          DTS:DTSID="{B632AB15-419A-438E-BFE1-0F3A22FAE79E}"
+          DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+          DTS:LocaleID="-1"
+          DTS:ObjectName="Load RCNO"
+          DTS:ThreadHint="0">
+          <DTS:Variables />
+          <DTS:ObjectData>
+            <SQLTask:SqlTaskData
+              SQLTask:Connection="{50300203-F18B-4D2D-9A2E-D145B9507342}"
+              SQLTask:SqlStatementSource="EXEC [dbo].[pRCNO_InsertRcno] ?" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask">
+              <SQLTask:ParameterBinding
+                SQLTask:ParameterName="@TableName"
+                SQLTask:DtsVariableName="User::RCNO_NewTable"
+                SQLTask:ParameterDirection="Input"
+                SQLTask:DataType="130"
+                SQLTask:ParameterSize="-1" />
+            </SQLTask:SqlTaskData>
+          </DTS:ObjectData>
+        </DTS:Executable>
+        <DTS:Executable
+          DTS:refId="Package\SC - Load RCNO Data from StagingArea to RCNO\Validate New RCNO Table"
+          DTS:CreationName="Microsoft.ExecuteSQLTask"
+          DTS:Description="Execute SQL Task"
+          DTS:DTSID="{88180FC0-CAF3-4CAA-98A2-23293279080D}"
+          DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+          DTS:LocaleID="-1"
+          DTS:ObjectName="Validate New RCNO Table"
+          DTS:ThreadHint="0">
+          <DTS:Variables />
+          <DTS:ObjectData>
+            <SQLTask:SqlTaskData
+              SQLTask:Connection="{50300203-F18B-4D2D-9A2E-D145B9507342}"
+              SQLTask:SqlStatementSource="EXEC [dbo].[pRCNO_ValidateRcnoTable] ?" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask">
+              <SQLTask:ParameterBinding
+                SQLTask:ParameterName="@TableName"
+                SQLTask:DtsVariableName="User::RCNO_NewTable"
+                SQLTask:ParameterDirection="Input"
+                SQLTask:DataType="129"
+                SQLTask:ParameterSize="-1" />
+            </SQLTask:SqlTaskData>
+          </DTS:ObjectData>
+        </DTS:Executable>
+      </DTS:Executables>
+      <DTS:PrecedenceConstraints>
+        <DTS:PrecedenceConstraint
+          DTS:refId="Package\SC - Load RCNO Data from StagingArea to RCNO.PrecedenceConstraints[Constraint]"
+          DTS:CreationName=""
+          DTS:DTSID="{7B5E6369-E1F7-45C8-90E5-CD2331D9580E}"
+          DTS:From="Package\SC - Load RCNO Data from StagingArea to RCNO\Get BatchID"
+          DTS:LogicalAnd="True"
+          DTS:ObjectName="Constraint"
+          DTS:To="Package\SC - Load RCNO Data from StagingArea to RCNO\Create New RCNO Table" />
+        <DTS:PrecedenceConstraint
+          DTS:refId="Package\SC - Load RCNO Data from StagingArea to RCNO.PrecedenceConstraints[Constraint 1]"
+          DTS:CreationName=""
+          DTS:DTSID="{051C3175-6C67-459C-8F09-C1E37BF22572}"
+          DTS:From="Package\SC - Load RCNO Data from StagingArea to RCNO\Create New RCNO Table"
+          DTS:LogicalAnd="True"
+          DTS:ObjectName="Constraint 1"
+          DTS:To="Package\SC - Load RCNO Data from StagingArea to RCNO\Validate New RCNO Table" />
+        <DTS:PrecedenceConstraint
+          DTS:refId="Package\SC - Load RCNO Data from StagingArea to RCNO.PrecedenceConstraints[Constraint 2]"
+          DTS:CreationName=""
+          DTS:DTSID="{D3C570C3-1FAD-41CD-B78E-272068032E07}"
+          DTS:From="Package\SC - Load RCNO Data from StagingArea to RCNO\Create all indexes for new RCNO table"
+          DTS:LogicalAnd="True"
+          DTS:ObjectName="Constraint 2"
+          DTS:To="Package\SC - Load RCNO Data from StagingArea to RCNO\Create RCNO Views" />
+        <DTS:PrecedenceConstraint
+          DTS:refId="Package\SC - Load RCNO Data from StagingArea to RCNO.PrecedenceConstraints[Constraint 3]"
+          DTS:CreationName=""
+          DTS:DTSID="{AB32C92C-FB26-484C-8DD0-44A5CD78B1E6}"
+          DTS:From="Package\SC - Load RCNO Data from StagingArea to RCNO\Validate New RCNO Table"
+          DTS:LogicalAnd="True"
+          DTS:ObjectName="Constraint 3"
+          DTS:To="Package\SC - Load RCNO Data from StagingArea to RCNO\Load RCNO" />
+        <DTS:PrecedenceConstraint
+          DTS:refId="Package\SC - Load RCNO Data from StagingArea to RCNO.PrecedenceConstraints[Constraint 4]"
+          DTS:CreationName=""
+          DTS:DTSID="{25D37E44-65A7-4C3D-AA3A-578E5D7A3811}"
+          DTS:From="Package\SC - Load RCNO Data from StagingArea to RCNO\Load RCNO"
+          DTS:LogicalAnd="True"
+          DTS:ObjectName="Constraint 4"
+          DTS:To="Package\SC - Load RCNO Data from StagingArea to RCNO\Create all indexes for new RCNO table" />
+      </DTS:PrecedenceConstraints>
+    </DTS:Executable>
+  </DTS:Executables>
+  <DTS:PrecedenceConstraints>
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint]"
+      DTS:CreationName=""
+      DTS:DTSID="{C458E917-06D2-4524-B2AE-BADF75C4CF35}"
+      DTS:From="Package\SC - Load RCNO Data from StagingArea to RCNO"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint"
+      DTS:To="Package\Create Issuer Orphan CaseID" />
+  </DTS:PrecedenceConstraints>
+  <DTS:DesignTimeProperties><![CDATA[<?xml version="1.0"?>
+<!--This CDATA section contains the layout information of the package. The section includes information such as (x,y) coordinates, width, and height.-->
+<!--If you manually edit this section and make a mistake, you can delete it. -->
+<!--The package will still be able to load normally but the previous layout information will be lost and the designer will automatically re-arrange the elements on the design surface.-->
+<Objects
+  Version="8">
+  <!--Each node below will contain properties that do not affect runtime behavior.-->
+  <Package
+    design-time-name="Package">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="16" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
+        <NodeLayout
+          Size="217,42"
+          Id="Package\Create Issuer Orphan CaseID"
+          TopLeft="678,308" />
+        <NodeLayout
+          Size="259,42"
+          Id="Package\SC - Load RCNO Data from StagingArea to RCNO\Create all indexes for new RCNO table"
+          TopLeft="82,375" />
+        <NodeLayout
+          Size="194,42"
+          Id="Package\SC - Load RCNO Data from StagingArea to RCNO\Create New RCNO Table"
+          TopLeft="108,110" />
+        <NodeLayout
+          Size="171,42"
+          Id="Package\SC - Load RCNO Data from StagingArea to RCNO\Create RCNO Views"
+          TopLeft="121,481" />
+        <NodeLayout
+          Size="136,42"
+          Id="Package\SC - Load RCNO Data from StagingArea to RCNO\Get BatchID"
+          TopLeft="132,23" />
+        <NodeLayout
+          Size="358,42"
+          Id="Package\SC - Load RCNO Data from StagingArea to RCNO\Load RCNO"
+          TopLeft="32,279" />
+        <NodeLayout
+          Size="201,42"
+          Id="Package\SC - Load RCNO Data from StagingArea to RCNO\Validate New RCNO Table"
+          TopLeft="107,196" />
+        <EdgeLayout
+          Id="Package\SC - Load RCNO Data from StagingArea to RCNO.PrecedenceConstraints[Constraint]"
+          TopLeft="202.5,65">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,45"
+              Start="0,0"
+              End="0,37.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,37.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\SC - Load RCNO Data from StagingArea to RCNO.PrecedenceConstraints[Constraint 1]"
+          TopLeft="206.25,152">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,44"
+              Start="0,0"
+              End="0,36.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,36.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\SC - Load RCNO Data from StagingArea to RCNO.PrecedenceConstraints[Constraint 2]"
+          TopLeft="209,417">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,64"
+              Start="0,0"
+              End="0,56.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,56.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\SC - Load RCNO Data from StagingArea to RCNO.PrecedenceConstraints[Constraint 3]"
+          TopLeft="209.25,238">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,41"
+              Start="0,0"
+              End="0,33.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,33.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\SC - Load RCNO Data from StagingArea to RCNO.PrecedenceConstraints[Constraint 4]"
+          TopLeft="211.25,321">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,54"
+              Start="0,0"
+              End="0,46.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,46.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <ContainerLayout
+          HeaderHeight="43"
+          IsExpanded="True"
+          PanelSize="460,578"
+          Size="460,621"
+          Id="Package\SC - Load RCNO Data from StagingArea to RCNO"
+          TopLeft="126,113" />
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint]"
+          TopLeft="586,325.166666666667">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="92,0"
+              Start="0,0"
+              End="84.5,0">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="84.5,0" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+      </GraphLayout>
+    </LayoutInfo>
+  </Package>
+</Objects>]]></DTS:DesignTimeProperties>
+</DTS:Executable>

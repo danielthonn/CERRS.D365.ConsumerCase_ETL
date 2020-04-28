@@ -1,0 +1,2441 @@
+﻿<?xml version="1.0"?>
+<DTS:Executable xmlns:DTS="www.microsoft.com/SqlServer/Dts"
+  DTS:refId="Package"
+  DTS:CreationDate="2/27/2015 11:59:08 AM"
+  DTS:CreationName="SSIS.Package.3"
+  DTS:CreatorComputerName="PF00GM6M"
+  DTS:CreatorName="PF00GM6M\Benjaming"
+  DTS:DTSID="{087D1284-1B5F-493D-BEA6-3D454E92B9DF}"
+  DTS:ExecutableType="SSIS.Package.3"
+  DTS:LastModifiedProductVersion="11.0.6020.0"
+  DTS:LocaleID="1033"
+  DTS:ObjectName="ScriptComponentTest"
+  DTS:PackageType="5"
+  DTS:ProtectionLevel="0"
+  DTS:VersionBuild="541"
+  DTS:VersionGUID="{28FE2AA9-F12D-4368-888E-4881EBBF3924}">
+  <DTS:Property
+    DTS:Name="PackageFormatVersion">6</DTS:Property>
+  <DTS:ConnectionManagers>
+    <DTS:ConnectionManager
+      DTS:refId="Package.ConnectionManagers[ERR_1095A]"
+      DTS:CreationName="OLEDB"
+      DTS:DTSID="{F23D9377-0D77-4D64-98D5-A9365D18DE81}"
+      DTS:ObjectName="ERR_1095A">
+      <DTS:PropertyExpression
+        DTS:Name="ServerName">@[User::HICSServerName]</DTS:PropertyExpression>
+      <DTS:ObjectData>
+        <DTS:ConnectionManager
+          DTS:ConnectionString="Data Source=5CG4311KKM;Initial Catalog=ERR_1095A;Provider=SQLNCLI11.1;Integrated Security=SSPI;Auto Translate=False;" />
+      </DTS:ObjectData>
+    </DTS:ConnectionManager>
+    <DTS:ConnectionManager
+      DTS:refId="Package.ConnectionManagers[HICS_Casework file]"
+      DTS:CreationName="FLATFILE"
+      DTS:DTSID="{2929D2D6-989D-4DEC-A13B-A1DD85F147D6}"
+      DTS:ObjectName="HICS_Casework file">
+      <DTS:ObjectData>
+        <DTS:ConnectionManager
+          DTS:Format="Delimited"
+          DTS:LocaleID="1033"
+          DTS:HeaderRowDelimiter="_x000D__x000A_"
+          DTS:ColumnNamesInFirstDataRow="True"
+          DTS:RowDelimiter=""
+          DTS:TextQualifier="_x003C_none_x003E_"
+          DTS:CodePage="1252"
+          DTS:ConnectionString="C:\Data\files\in\HICS\Supplementary\2014_12_Dec_casework_20160322.txt">
+          <DTS:FlatFileColumns>
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x0009_"
+              DTS:MaximumWidth="50"
+              DTS:DataType="129"
+              DTS:TextQualified="True"
+              DTS:ObjectName="Case ID"
+              DTS:DTSID="{48836424-271C-4BAB-811B-88C9AA21B957}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x0009_"
+              DTS:DataType="302"
+              DTS:TextQualified="True"
+              DTS:ObjectName="Casework Notes"
+              DTS:DTSID="{4396E09C-1E31-4C91-8352-664A6D946829}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x0009_"
+              DTS:DataType="135"
+              DTS:TextQualified="True"
+              DTS:ObjectName="Created Date"
+              DTS:DTSID="{E03F3C2F-A366-47C1-BAF3-C8DF4AC9A57A}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x0009_"
+              DTS:MaximumWidth="50"
+              DTS:DataType="129"
+              DTS:TextQualified="True"
+              DTS:ObjectName="Created By"
+              DTS:DTSID="{B1ED674C-C8D7-4422-81D5-D1EE46D425EA}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x0009_"
+              DTS:DataType="135"
+              DTS:TextQualified="True"
+              DTS:ObjectName="Updated Date"
+              DTS:DTSID="{13A132D6-2D39-4045-A2C7-3EED5DDDDC13}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x000D__x000A_"
+              DTS:MaximumWidth="50"
+              DTS:DataType="129"
+              DTS:TextQualified="True"
+              DTS:ObjectName="Updated By"
+              DTS:DTSID="{279886AD-FC66-42EB-B8A4-8FAC5C907EC5}"
+              DTS:CreationName="" />
+          </DTS:FlatFileColumns>
+        </DTS:ConnectionManager>
+      </DTS:ObjectData>
+    </DTS:ConnectionManager>
+  </DTS:ConnectionManagers>
+  <DTS:Variables>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{FB3175CD-7FBC-4819-8269-8CC8A882C2A1}"
+      DTS:IncludeInDebugDump="6789"
+      DTS:Namespace="User"
+      DTS:ObjectName="CaseWorkNoOfErrors">
+      <DTS:VariableValue
+        DTS:DataType="3">0</DTS:VariableValue>
+    </DTS:Variable>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{E5A3C8DD-19FA-45B2-81F8-00563820CC85}"
+      DTS:IncludeInDebugDump="6789"
+      DTS:Namespace="User"
+      DTS:ObjectName="CaseWorkNoOfRecords">
+      <DTS:VariableValue
+        DTS:DataType="3">0</DTS:VariableValue>
+    </DTS:Variable>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{7390550F-B664-4EB2-827B-FB85A2193792}"
+      DTS:IncludeInDebugDump="2345"
+      DTS:Namespace="User"
+      DTS:ObjectName="HICSServerName">
+      <DTS:VariableValue
+        DTS:DataType="8">5CG4311KKM</DTS:VariableValue>
+    </DTS:Variable>
+  </DTS:Variables>
+  <DTS:Executables>
+    <DTS:Executable
+      DTS:refId="Package\Load HICSCasework - Stage"
+      DTS:CreationName="SSIS.Pipeline.3"
+      DTS:Description="Data Flow Task"
+      DTS:DTSID="{93680026-B0E7-4862-958D-F2A0698B61BD}"
+      DTS:ExecutableType="SSIS.Pipeline.3"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Load HICSCasework - Stage"
+      DTS:TaskContact="Performs high-performance data extraction, transformation and loading;Microsoft Corporation; Microsoft SQL Server; (C) 2007 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <pipeline
+          version="1">
+          <components>
+            <component
+              refId="Package\Load HICSCasework - Stage\Add HICS CaseWork ImportSource"
+              componentClassID="{49928E82-9C4E-49F0-AABE-3812B82707EC}"
+              contactInfo="Derived Column;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;0"
+              description="Creates new column values by applying expressions to transformation input columns. Create new columns or overwrite existing ones. For example, concatenate the values from the 'first name' and 'last name' column to make a 'full name' column."
+              name="Add HICS CaseWork ImportSource"
+              usesDispositions="true">
+              <inputs>
+                <input
+                  refId="Package\Load HICSCasework - Stage\Add HICS CaseWork ImportSource.Inputs[Derived Column Input]"
+                  description="Input to the Derived Column Transformation"
+                  name="Derived Column Input">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\Load HICSCasework - Stage\Add HICS CaseWork ImportSource.Inputs[Derived Column Input].Columns[Casework Notes]"
+                      cachedCodepage="1252"
+                      cachedDataType="text"
+                      cachedName="Casework Notes"
+                      lineageId="Package\Load HICSCasework - Stage\HICS CaseWork.Outputs[Flat File Source Output].Columns[Casework Notes]" />
+                  </inputColumns>
+                  <externalMetadataColumns />
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\Load HICSCasework - Stage\Add HICS CaseWork ImportSource.Outputs[Derived Column Output]"
+                  description="Default Output of the Derived Column Transformation"
+                  exclusionGroup="1"
+                  name="Derived Column Output"
+                  synchronousInputId="Package\Load HICSCasework - Stage\Add HICS CaseWork ImportSource.Inputs[Derived Column Input]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Load HICSCasework - Stage\Add HICS CaseWork ImportSource.Outputs[Derived Column Output].Columns[ImportSource]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Computation"
+                      errorRowDisposition="FailComponent"
+                      length="255"
+                      lineageId="Package\Load HICSCasework - Stage\Add HICS CaseWork ImportSource.Outputs[Derived Column Output].Columns[ImportSource]"
+                      name="ImportSource"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.String"
+                          description="Derived Column Expression"
+                          name="Expression">(DT_STR,255,1252)("Testing")</property>
+                        <property
+                          containsID="true"
+                          dataType="System.String"
+                          description="Derived Column Friendly Expression"
+                          expressionType="Notify"
+                          name="FriendlyExpression">(DT_STR,255,1252)("Testing")</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\Load HICSCasework - Stage\Add HICS CaseWork ImportSource.Outputs[Derived Column Output].Columns[ImportedDate]"
+                      dataType="dbTimeStamp"
+                      errorOrTruncationOperation="Computation"
+                      errorRowDisposition="FailComponent"
+                      lineageId="Package\Load HICSCasework - Stage\Add HICS CaseWork ImportSource.Outputs[Derived Column Output].Columns[ImportedDate]"
+                      name="ImportedDate"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.String"
+                          description="Derived Column Expression"
+                          name="Expression">[GETDATE]()</property>
+                        <property
+                          containsID="true"
+                          dataType="System.String"
+                          description="Derived Column Friendly Expression"
+                          expressionType="Notify"
+                          name="FriendlyExpression">GETDATE()</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\Load HICSCasework - Stage\Add HICS CaseWork ImportSource.Outputs[Derived Column Output].Columns[CaseworkNotes]"
+                      dataType="nText"
+                      errorOrTruncationOperation="Computation"
+                      errorRowDisposition="FailComponent"
+                      lineageId="Package\Load HICSCasework - Stage\Add HICS CaseWork ImportSource.Outputs[Derived Column Output].Columns[CaseworkNotes]"
+                      name="CaseworkNotes"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.String"
+                          description="Derived Column Expression"
+                          name="Expression">(DT_NTEXT)#{Package\Load HICSCasework - Stage\HICS CaseWork.Outputs[Flat File Source Output].Columns[Casework Notes]}</property>
+                        <property
+                          containsID="true"
+                          dataType="System.String"
+                          description="Derived Column Friendly Expression"
+                          expressionType="Notify"
+                          name="FriendlyExpression">(DT_NTEXT)[Casework Notes]</property>
+                      </properties>
+                    </outputColumn>
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+                <output
+                  refId="Package\Load HICSCasework - Stage\Add HICS CaseWork ImportSource.Outputs[Derived Column Error Output]"
+                  description="Error Output of the Derived Column Transformation"
+                  exclusionGroup="1"
+                  isErrorOut="true"
+                  name="Derived Column Error Output"
+                  synchronousInputId="Package\Load HICSCasework - Stage\Add HICS CaseWork ImportSource.Inputs[Derived Column Input]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Load HICSCasework - Stage\Add HICS CaseWork ImportSource.Outputs[Derived Column Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\Load HICSCasework - Stage\Add HICS CaseWork ImportSource.Outputs[Derived Column Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\Load HICSCasework - Stage\Add HICS CaseWork ImportSource.Outputs[Derived Column Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\Load HICSCasework - Stage\Add HICS CaseWork ImportSource.Outputs[Derived Column Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\Load HICSCasework - Stage\ChangeCodeToDescription"
+              componentClassID="{874F7595-FB5F-40FF-96AF-FBFF8250E3EF}"
+              contactInfo="Includes and runs custom script code. For example, apply a business rule that limits the range of valid values in an &quot;income&quot; column or add values in two columns and calculate the average of the sum.;Microsoft Corporation; Microsoft SQL Server; Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;8"
+              description="Includes and runs custom script code. For example, apply a business rule that limits the range of valid values in an &quot;income&quot; column or add values in two columns and calculate the average of the sum."
+              name="ChangeCodeToDescription"
+              version="8">
+              <properties>
+                <property
+                  dataType="System.String"
+                  description="Stores the source code of the component"
+                  isArray="true"
+                  name="SourceCode"
+                  state="cdata">
+                  <arrayElements
+                    arrayElementCount="30">
+                    <arrayElement
+                      dataType="System.String"><![CDATA[My Project\Settings.Designer.vb]]></arrayElement>
+                    <arrayElement
+                      dataType="System.String"><![CDATA[UTF8]]></arrayElement>
+                    <arrayElement
+                      dataType="System.String"><![CDATA['------------------------------------------------------------------------------
+' <autogenerated>
+'     This code was generated by a tool.
+'
+'     Changes to this file may cause incorrect behavior and will be lost if
+'     the code is regenerated.
+' </autogenerated>
+'------------------------------------------------------------------------------
+
+Option Strict Off
+Option Explicit On
+
+
+
+Partial Friend NotInheritable Class MySettings
+    Inherits System.Configuration.ApplicationSettingsBase
+
+    Private Shared m_Value As MySettings
+
+    Private Shared m_SyncObject As Object = New Object
+
+    <System.Diagnostics.DebuggerNonUserCode()> _
+    Public Shared ReadOnly Property Value() As MySettings
+        Get
+            If (MySettings.m_Value Is Nothing) Then
+                System.Threading.Monitor.Enter(MySettings.m_SyncObject)
+                If (MySettings.m_Value Is Nothing) Then
+                    Try
+                        MySettings.m_Value = New MySettings
+                    Finally
+                        System.Threading.Monitor.Exit(MySettings.m_SyncObject)
+                    End Try
+                End If
+            End If
+            Return MySettings.m_Value
+        End Get
+    End Property
+End Class
+]]></arrayElement>
+                    <arrayElement
+                      dataType="System.String"><![CDATA[My Project\AssemblyInfo.vb]]></arrayElement>
+                    <arrayElement
+                      dataType="System.String"><![CDATA[UTF8]]></arrayElement>
+                    <arrayElement
+                      dataType="System.String"><![CDATA[Imports System
+Imports System.Reflection
+Imports System.Runtime.InteropServices
+
+' General Information about an assembly is controlled through the following 
+' set of attributes. Change these attribute values to modify the information
+' associated with an assembly.
+
+' Review the values of the assembly attributes
+
+<Assembly: AssemblyTitle("SC_d75aaa68498a4c99bea5fa845d3a73c2")> 
+<Assembly: AssemblyDescription("")> 
+<Assembly: AssemblyCompany("")> 
+<Assembly: AssemblyProduct("SC_d75aaa68498a4c99bea5fa845d3a73c2")> 
+<Assembly: AssemblyCopyright("Copyright @  2016")> 
+<Assembly: AssemblyTrademark("")> 
+<Assembly: CLSCompliant(True)> 
+
+<Assembly: ComVisible(False)> 
+
+'The following GUID is for the ID of the typelib if this project is exposed to COM
+<Assembly: Guid("0444934f-2bfc-46f1-9d33-a5ad0c4106e5")> 
+
+' Version information for an assembly consists of the following four values:
+'
+'      Major Version
+'      Minor Version 
+'      Build Number
+'      Revision
+'
+' You can specify all the values or you can default the Build and Revision Numbers 
+' by using the '*' as shown below:
+' <Assembly: AssemblyVersion("1.0.*")>
+
+<Assembly: AssemblyVersion("1.0.0.0")> 
+<Assembly: AssemblyFileVersion("1.0.0.0")> 
+]]></arrayElement>
+                    <arrayElement
+                      dataType="System.String"><![CDATA[ComponentWrapper.vb]]></arrayElement>
+                    <arrayElement
+                      dataType="System.String"><![CDATA[UTF8]]></arrayElement>
+                    <arrayElement
+                      dataType="System.String"><![CDATA[' THIS IS AUTO-GENERATED CODE THAT WILL BE OVERWRITTEN! DO NOT EDIT!
+' Microsoft SQL Server Integration Services component wrapper
+' This module defines the base class for your component
+' THIS IS AUTO-GENERATED CODE THAT WILL BE OVERWRITTEN! DO NOT EDIT!
+
+Imports System
+Imports System.Data
+Imports Microsoft.SqlServer.Dts.Pipeline
+Imports Microsoft.SqlServer.Dts.Pipeline.Wrapper
+Imports Microsoft.SqlServer.Dts.Runtime.Wrapper
+
+<CLSCompliant(False)> _
+Public Class UserComponent
+    Inherits ScriptComponent
+
+    Public Connections As New Connections(Me)
+    Public Variables As New Variables(Me)
+
+    Public Overrides Sub ProcessInput(ByVal InputID As Integer, ByVal InputName As String, ByVal Buffer As PipelineBuffer, ByVal OutputMap As OutputNameMap)
+
+        If InputName.Equals("Input 0", StringComparison.Ordinal) Then
+            Input0_ProcessInput(New Input0Buffer(Buffer, GetColumnIndexes(InputID), OutputMap))
+        End If
+
+    End Sub
+
+    Public Overridable Sub Input0_ProcessInput(ByVal Buffer As Input0Buffer)
+
+        While Buffer.NextRow()
+            Input0_ProcessInputRow(Buffer)
+        End While
+
+    End Sub
+
+    Public Overridable Sub Input0_ProcessInputRow(ByVal Row As Input0Buffer)
+
+    End Sub
+
+End Class
+
+<CLSCompliant(False)> _
+Public Class Connections
+
+    Dim ParentComponent As ScriptComponent
+
+    <CLSCompliant(False)> _
+    Public Sub New(ByVal Component As ScriptComponent)
+        ParentComponent = Component
+    End Sub
+
+    Public ReadOnly Property Connection() As IDTSConnectionManager100
+        Get
+            Return ParentComponent.ComponentMetaData.RuntimeConnectionCollection.GetRuntimeConnectionByName("Connection").ConnectionManager
+        End Get
+    End Property
+
+End Class
+
+<CLSCompliant(False)> _
+Public Class Variables
+
+    Dim ParentComponent As ScriptComponent
+
+    <CLSCompliant(False)> _
+    Public Sub New(ByVal Component As ScriptComponent)
+        ParentComponent = Component
+    End Sub
+
+End Class
+]]></arrayElement>
+                    <arrayElement
+                      dataType="System.String"><![CDATA[SC_d75aaa68498a4c99bea5fa845d3a73c2.vbproj]]></arrayElement>
+                    <arrayElement
+                      dataType="System.String"><![CDATA[UTF8]]></arrayElement>
+                    <arrayElement
+                      dataType="System.String"><![CDATA[<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <ProjectTypeGuids>{30D016F9-3734-4E33-A861-5E7D899E18F3};{F184B08F-C81C-45F6-A57F-5ABD9991F28F}</ProjectTypeGuids>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>8.0.30703</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{02b3ac10-d902-42f1-94c4-de63510d5740}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>My Project</AppDesignerFolder>
+    <RootNamespace>SC_d75aaa68498a4c99bea5fa845d3a73c2</RootNamespace>
+    <AssemblyName>SC_d75aaa68498a4c99bea5fa845d3a73c2</AssemblyName>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <ResolveAssemblyReferenceIgnoreTargetFrameworkAttributeVersionMismatch>true</ResolveAssemblyReferenceIgnoreTargetFrameworkAttributeVersionMismatch>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)' == 'Debug' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>.\bin\Debug\</OutputPath>
+    <EnableUnmanagedDebugging>false</EnableUnmanagedDebugging>
+    <DefineDebug>true</DefineDebug>
+    <DefineTrace>true</DefineTrace>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)' == 'Release' ">
+    <DebugSymbols>false</DebugSymbols>
+    <Optimize>true</Optimize>
+    <OutputPath>.\bin\Release\</OutputPath>
+    <EnableUnmanagedDebugging>false</EnableUnmanagedDebugging>
+    <DefineDebug>false</DefineDebug>
+    <DefineTrace>true</DefineTrace>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <!-- This sections specifies references for the project. -->
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml" />
+    <Reference Include="Microsoft.SqlServer.TxScript, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91" />
+    <Reference Include="Microsoft.SqlServer.DTSRuntimeWrap, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91" />
+    <Reference Include="Microsoft.SqlServer.DTSPipelineWrap, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91" />
+    <Reference Include="Microsoft.SqlServer.PipelineHost, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91" />
+    <Compile Include="main.vb" />
+    <Compile Include="BufferWrapper.vb" />
+    <Compile Include="ComponentWrapper.vb" />
+  </ItemGroup>
+  <!-- Visual Basic supports Importing namespaces (equivalent to using statements in C#).-->
+  <ItemGroup>
+    <Import Include="Microsoft.VisualBasic" />
+    <Import Include="System" />
+    <Import Include="System.Collections" />
+    <Import Include="System.Data" />
+    <Import Include="System.Diagnostics" />
+    <Import Include="System.Windows.Forms" />
+  </ItemGroup>
+  <ItemGroup>
+    <AppDesigner Include="My Project\" />
+    <Compile Include="My Project\AssemblyInfo.vb">
+      <SubType>Code</SubType>
+    </Compile>
+    <EmbeddedResource Include="My Project\Resources.resx">
+      <Generator>VbMyResourcesResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.vb</LastGenOutput>
+      <CustomToolNamespace>My.Resources</CustomToolNamespace>
+    </EmbeddedResource>
+    <Compile Include="My Project\Resources.Designer.vb">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
+      <SubType>Code</SubType>
+    </Compile>
+    <None Include="My Project\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.vb</LastGenOutput>
+    </None>
+    <Compile Include="My Project\Settings.Designer.vb">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Settings.settings</DependentUpon>
+      <SubType>Code</SubType>
+    </Compile>
+  </ItemGroup>
+  <!-- Include the build rules for a VB project.-->
+  <Import Project="$(MSBuildBinPath)\Microsoft.VisualBasic.targets" />
+  <!-- This section defines VSTA properties that describe the host-changable project properties. -->
+  <ProjectExtensions>
+    <VisualStudio>
+      <FlavorProperties GUID="{30D016F9-3734-4E33-A861-5E7D899E18F3}">
+        <ProjectProperties HostName="SSIS_SC110" HostPackage="{B3A685AA-7EAF-4BC6-9940-57959FA5AC07}" ApplicationType="usd" Language="vb" TemplatesPath="" DebugInfoExeName="" DebugInfoCommandLine="" DebugInfoWorkingDir="" IconImageList="" />
+        <Host Name="SSIS_SC110" IconIndex=""></Host>
+        <ProjectClient>
+          <HostIdentifier>SSIS_SC110</HostIdentifier>
+        </ProjectClient>
+      </FlavorProperties>
+    </VisualStudio>
+  </ProjectExtensions>
+</Project>]]></arrayElement>
+                    <arrayElement
+                      dataType="System.String"><![CDATA[My Project\Settings.settings]]></arrayElement>
+                    <arrayElement
+                      dataType="System.String"><![CDATA[UTF8]]></arrayElement>
+                    <arrayElement
+                      dataType="System.String"><![CDATA[<?xml version='1.0' encoding='iso-8859-1'?>
+<SettingsFile xmlns="uri:settings" CurrentProfile="(Default)" GeneratedClassNamespace="" GeneratedClassName="MySettings">
+  <Profiles>
+    <Profile Name="(Default)" />
+  </Profiles>
+  <Settings />
+</SettingsFile>]]></arrayElement>
+                    <arrayElement
+                      dataType="System.String"><![CDATA[main.vb]]></arrayElement>
+                    <arrayElement
+                      dataType="System.String"><![CDATA[UTF8]]></arrayElement>
+                    <arrayElement
+                      dataType="System.String"><![CDATA[#Region "Help:  Introduction to the Script Component"
+' The Script Component allows you to perform virtually any operation that can be accomplished in
+' a .Net application within the context of an Integration Services data flow.
+
+' Expand the other regions which have "Help" prefixes for examples of specific ways to use
+' Integration Services features within this script component.
+#End Region
+
+#Region "Imports"
+Imports System
+Imports System.Data
+Imports System.Math
+Imports Microsoft.SqlServer.Dts.Pipeline.Wrapper
+Imports Microsoft.SqlServer.Dts.Runtime.Wrapper
+#End Region
+
+' This is the class to which to add your code.  Do not change the name, attributes, or parent
+' of this class.
+<Microsoft.SqlServer.Dts.Pipeline.SSISScriptComponentEntryPointAttribute> _
+<CLSCompliant(False)> _
+Public Class ScriptMain
+    Inherits UserComponent
+
+#Region "Help:  Using Integration Services variables and parameters"
+    'To use a variable in this script, first ensure that the variable has been added to
+    'either the list contained in the ReadOnlyVariables property or the list contained in
+    'the ReadWriteVariables property of this script component, according to whether or not your
+    'code needs to write into the variable.  To do so, save this script, close this instance of
+    'Visual Studio, and update the ReadOnlyVariables and ReadWriteVariables properties.
+    'To use a parameter in this script, follow the same steps. Parameters are always read-only.
+
+    'Example of reading from a variable or parameter:
+    ' startTime = Variables.MyStartTime;
+
+    'Example of writing to a variable:
+    ' Variables.myStringVariable = "new value";
+#End Region
+
+#Region "Help:  Using Integration Services Connnection Managers"
+    'Some types of connection managers can be used in this script component.  See the help topic
+    '"Working with Connection Managers Programatically" for details.
+
+    'To use a connection manager in this script, first ensure that the connection manager has
+    'been added to either the list of connection managers on the Connection Managers page of the
+    'script component editor.  To add the connection manager, save this script, close this instance of
+    ' Visual Studio, and add the Connection Manager to the list.
+
+    'If the component needs to hold a connection open while processing rows, override the
+    'AcquireConnections and ReleaseConnections methods.
+
+    'Example of using an ADO.Net connection manager to acquire a SqlConnection:
+    ' Dim rawConnection As Object = Connections.SalesDB.AcquireConnection(Transaction)
+    ' Dim salesDBConn As SqlConnection = CType(rawConnection, SqlConnection)
+
+    'Example of using a File connection manager to acquire a file path:
+    ' Dim rawConnection As Object = Connections.Prices_zip.AcquireConnection(Transaction)
+    ' Dim filePath As String = CType(rawConnection, String)
+
+    'Example of releasing a connection manager:
+    ' Connections.SalesDB.ReleaseConnection(rawConnection)
+#End Region
+
+#Region "Help:  Firing Integration Services Events"
+    'This script component can fire events.
+
+    'Example of firing an error event:
+    ' ComponentMetaData.FireError(10, "Process Values", "Bad value", "", 0, cancel)
+
+    'Example of firing an information event:
+    ' ComponentMetaData.FireInformation(10, "Process Values", "Processing has started", "", 0, fireAgain)
+
+    'Example of firing a warning event:
+    ' ComponentMetaData.FireWarning(10, "Process Values", "No rows were received", "", 0)
+
+#End Region
+
+    'This method is called once, before rows begin to be processed in the data flow.
+    '
+    'You can remove this method if you don't need to do anything here.
+    Public Overrides Sub PreExecute()
+        MyBase.PreExecute()
+        '
+        ' Add your code here
+        
+
+    End Sub
+
+    ' This method is called after all the rows have passed through this component.
+    '
+    ' You can delete this method if you don't need to do anything here.
+    Public Overrides Sub PostExecute()
+        MyBase.PostExecute()
+        '
+        ' Add your code here
+        '
+    End Sub
+
+    'This method is called once for every row that passes through the component from Input0.
+    '
+    'Example of reading a value from a column in the the row:
+    ' zipCode = Row.ZipCode
+    '
+    'Example of writing a value to a column in the row:
+    ' Row.ZipCode = zipCode
+    Public Overrides Sub Input0_ProcessInputRow(ByVal Row As Input0Buffer)
+        '
+        ' Add your code here
+        '
+        Row.ImportSource = Me.Connections.Connection.ConnectionString
+        Row.ErrorCodeDescription = _
+        Me.ComponentMetaData.GetErrorDescription(Row.ErrorCode)
+
+        Row.ErrorColumnDescription = _
+        Me.ComponentMetaData.GetErrorDescription(Row.ErrorColumn)
+
+    End Sub
+
+    Public Sub CreateNewOutputRows()
+        '
+        ' Add rows by calling the AddRow method on the member variable named "<Output Name>Buffer".
+        ' For example, call MyOutputBuffer.AddRow() if your output was named "MyOutput".
+        '
+    End Sub
+
+End Class
+]]></arrayElement>
+                    <arrayElement
+                      dataType="System.String"><![CDATA[BufferWrapper.vb]]></arrayElement>
+                    <arrayElement
+                      dataType="System.String"><![CDATA[UTF8]]></arrayElement>
+                    <arrayElement
+                      dataType="System.String"><![CDATA[' THIS IS AUTO-GENERATED CODE THAT WILL BE OVERWRITTEN! DO NOT EDIT!
+' Microsoft SQL Server Integration Services buffer wrappers
+' This module defines classes for accessing data flow buffers
+' THIS IS AUTO-GENERATED CODE THAT WILL BE OVERWRITTEN! DO NOT EDIT!
+
+
+Option Strict Off   ' This allows usage of PipelineBuffer typed accessors.
+
+Imports System
+Imports System.Data
+Imports Microsoft.SqlServer.Dts.Pipeline
+Imports Microsoft.SqlServer.Dts.Pipeline.Wrapper
+
+<CLSCompliant(False)> _
+Public Class Input0Buffer
+    Inherits ScriptBuffer
+
+    Public Sub New(ByVal Buffer As PipelineBuffer, ByVal BufferColumnIndexes As Integer(), ByVal OutputMap As OutputNameMap)
+        MyBase.New(Buffer, BufferColumnIndexes, OutputMap)
+    End Sub
+
+    Public ReadOnly Property [ErrorCode]() As Int32
+        Get
+            Return Buffer.GetInt32(Me.BufferColumnIndexes(0))
+        End Get
+    End Property
+    Public ReadOnly Property [ErrorCode_IsNull] As Boolean
+        Get
+            Return IsNull(0)
+        End Get
+    End Property
+
+    Public ReadOnly Property [ErrorColumn]() As Int32
+        Get
+            Return Buffer.GetInt32(Me.BufferColumnIndexes(1))
+        End Get
+    End Property
+    Public ReadOnly Property [ErrorColumn_IsNull] As Boolean
+        Get
+            Return IsNull(1)
+        End Get
+    End Property
+
+    Public WriteOnly Property [ErrorCodeDescription]() As String
+        Set
+            Me(2) = Value
+        End Set
+    End Property
+    Public WriteOnly Property [ErrorCodeDescription_IsNull] As Boolean
+        Set
+            If (value)
+                SetNull(2)
+            Else
+                Throw new InvalidOperationException("IsNull property cannot be set to False. Assign a value to the column instead.")
+            End If
+        End Set
+    End Property
+
+    Public WriteOnly Property [ErrorColumnDescription]() As String
+        Set
+            Me(3) = Value
+        End Set
+    End Property
+    Public WriteOnly Property [ErrorColumnDescription_IsNull] As Boolean
+        Set
+            If (value)
+                SetNull(3)
+            Else
+                Throw new InvalidOperationException("IsNull property cannot be set to False. Assign a value to the column instead.")
+            End If
+        End Set
+    End Property
+
+    Public WriteOnly Property [ImportSource]() As String
+        Set
+            Me(4) = Value
+        End Set
+    End Property
+    Public WriteOnly Property [ImportSource_IsNull] As Boolean
+        Set
+            If (value)
+                SetNull(4)
+            Else
+                Throw new InvalidOperationException("IsNull property cannot be set to False. Assign a value to the column instead.")
+            End If
+        End Set
+    End Property
+
+    Public Overloads Function NextRow() As Boolean
+        NextRow = MyBase.NextRow()
+    End Function
+
+    Public Overloads Function EndOfRowset() As Boolean
+        EndOfRowset = MyBase.EndOfRowset
+    End Function
+
+End Class
+]]></arrayElement>
+                    <arrayElement
+                      dataType="System.String"><![CDATA[Project]]></arrayElement>
+                    <arrayElement
+                      dataType="System.String"><![CDATA[UTF16LE]]></arrayElement>
+                    <arrayElement
+                      dataType="System.String"><![CDATA[<?xml version="1.0" encoding="UTF-16" standalone="yes"?>
+<c:Project xmlns:c="http://schemas.microsoft.com/codeprojectml/2010/08/main" xmlns:msb="http://schemas.microsoft.com/developer/msbuild/2003" runtimeVersion="3.0" schemaVersion="1.0">
+	<msb:PropertyGroup>
+		<msb:CodeName>SC_d75aaa68498a4c99bea5fa845d3a73c2</msb:CodeName>
+		<msb:Language>msBuild</msb:Language>
+		<msb:DisplayName>SC_d75aaa68498a4c99bea5fa845d3a73c2</msb:DisplayName>
+		<msb:ProjectId>{4059B038-858D-45DF-8EF3-93E161A0B2F7}</msb:ProjectId>
+	</msb:PropertyGroup>
+	<msb:ItemGroup>
+		<msb:Project Include="SC_d75aaa68498a4c99bea5fa845d3a73c2.vbproj"/>
+		<msb:File Include="My Project\AssemblyInfo.vb"/>
+		<msb:File Include="My Project\Resources.resx"/>
+		<msb:File Include="ComponentWrapper.vb"/>
+		<msb:File Include="My Project\Resources.Designer.vb"/>
+		<msb:File Include="My Project\Settings.settings"/>
+		<msb:File Include="My Project\Settings.Designer.vb"/>
+		<msb:File Include="main.vb"/>
+		<msb:File Include="BufferWrapper.vb"/>
+	</msb:ItemGroup>
+</c:Project>]]></arrayElement>
+                    <arrayElement
+                      dataType="System.String"><![CDATA[My Project\Resources.resx]]></arrayElement>
+                    <arrayElement
+                      dataType="System.String"><![CDATA[UTF8]]></arrayElement>
+                    <arrayElement
+                      dataType="System.String"><![CDATA[<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+</root>]]></arrayElement>
+                    <arrayElement
+                      dataType="System.String"><![CDATA[My Project\Resources.Designer.vb]]></arrayElement>
+                    <arrayElement
+                      dataType="System.String"><![CDATA[UTF8]]></arrayElement>
+                    <arrayElement
+                      dataType="System.String"><![CDATA['------------------------------------------------------------------------------
+' <autogenerated>
+'     This code was generated by a tool.
+'
+'     Changes to this file may cause incorrect behavior and will be lost if
+'     the code is regenerated.
+' </autogenerated>
+'------------------------------------------------------------------------------
+
+Option Strict Off
+Option Explicit On
+
+
+Namespace My.Resources
+    
+    '''<summary>
+    '''   A strongly-typed resource class, for looking up localized strings, etc.
+    '''</summary>
+    'This class was auto-generated by the Strongly Typed Resource Builder
+    'class via a tool like ResGen or Visual Studio.NET.
+    'To add or remove a member, edit your .ResX file then rerun ResGen
+    'with the /str option, or rebuild your VS project.
+    Class MyResources
+        
+        Private Shared _resMgr As System.Resources.ResourceManager
+        
+        Private Shared _resCulture As System.Globalization.CultureInfo
+        
+        Friend Sub New()
+            MyBase.New
+        End Sub
+        
+        '''<summary>
+        '''   Returns the cached ResourceManager instance used by this class.
+        '''</summary>
+        <System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)>  _
+        Public Shared ReadOnly Property ResourceManager() As System.Resources.ResourceManager
+            Get
+                If (_resMgr Is Nothing) Then
+                    Dim temp As System.Resources.ResourceManager = New System.Resources.ResourceManager("My.Resources.MyResources", GetType(MyResources).Assembly)
+                    _resMgr = temp
+                End If
+                Return _resMgr
+            End Get
+        End Property
+        
+        '''<summary>
+        '''   Overrides the current thread's CurrentUICulture property for all
+        '''   resource lookups using this strongly typed resource class.
+        '''</summary>
+        <System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)>  _
+        Public Shared Property Culture() As System.Globalization.CultureInfo
+            Get
+                Return _resCulture
+            End Get
+            Set
+                _resCulture = value
+            End Set
+        End Property
+    End Class
+End Namespace
+]]></arrayElement>
+                  </arrayElements>
+                </property>
+                <property
+                  dataType="System.String"
+                  description="Stores the binary representation of the component"
+                  isArray="true"
+                  name="BinaryCode"
+                  state="cdata">
+                  <arrayElements
+                    arrayElementCount="2">
+                    <arrayElement
+                      dataType="System.String"><![CDATA[SC_d75aaa68498a4c99bea5fa845d3a73c2.dll]]></arrayElement>
+                    <arrayElement
+                      dataType="System.String"><![CDATA[TVqQAAMAAAAEAAAA//8AALgAAAAAAAAAQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAgAAAAA4fug4AtAnNIbgBTM0hVGhpcyBwcm9ncmFtIGNhbm5vdCBiZSBydW4gaW4gRE9TIG1v
+ZGUuDQ0KJAAAAAAAAABQRQAATAEDABST+lYAAAAAAAAAAOAAAiELAQsAACQAAAAGAAAAAAAAjkMA
+AAAgAAAAYAAAAAAAEAAgAAAAAgAABAAAAAAAAAAEAAAAAAAAAACgAAAAAgAAAAAAAAIAQIUAABAA
+ABAAAAAAEAAAEAAAAAAAABAAAAAAAAAAAAAAADxDAABPAAAAAGAAANgDAAAAAAAAAAAAAAAAAAAA
+AAAAAIAAAAwAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAIAAACAAAAAAAAAAAAAAACCAAAEgAAAAAAAAAAAAAAC50ZXh0AAAAlCMAAAAgAAAAJAAAAAIA
+AAAAAAAAAAAAAAAAACAAAGAucnNyYwAAANgDAAAAYAAAAAQAAAAmAAAAAAAAAAAAAAAAAABAAABA
+LnJlbG9jAAAMAAAAAIAAAAACAAAAKgAAAAAAAAAAAAAAAAAAQAAAQgAAAAAAAAAAAAAAAAAAAABw
+QwAAAAAAAEgAAAACAAUAmCUAAKQdAAABAAAAAAAAAOAkAAC4AAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAB4CKAEAAAoqHgIoBAAACiqmcwYAAAqAAQAABHMHAAAKgAIA
+AARzCAAACoADAAAEcwkAAAqABAAABCoAABMwAQALAAAAAQAAEX4BAAAEbwoAAAoqABMwAQALAAAA
+AgAAEX4CAAAEbwsAAAoqABMwAQALAAAAAwAAEX4DAAAEbwwAAAoqABMwAQALAAAABAAAEX4EAAAE
+bw0AAAoqABMwAgANAAAABQAAEQIDKBEAAAooEgAACioAAAATMAEABwAAAAYAABECKBMAAAoqABMw
+AQALAAAABwAAEdAFAAACKBQAAAoqABMwAQAHAAAACAAAEQIoFQAACioAEzABABAAAAAJAAARAowB
+AAAbLQYoAQAAKyoCKhMwAgAQAAAACgAAEQMSAP4VAgAAGwaBAgAAGyoeAigXAAAKKhMwAgAoAAAA
+CwAAEQJ7GQAACm8aAAAKCweMAwAAGy0SKAIAACsLAnsZAAAKB28bAAAKBypKAigXAAAKAnMcAAAK
+fRkAAAoqACoCAwQFKB4AAAoqABMwAwAUAAAADAAAEQJ7HwAACgJ7IAAAChaUbyEAAAoqEzACAAgA
+AAANAAARAhZvIgAACioTMAMAFAAAAA4AABECex8AAAoCeyAAAAoXlG8hAAAKKhMwAgAIAAAADwAA
+EQIXbyIAAAoqJgIYA28jAAAKKgAAYgMsCQIYbyQAAAorC3IBAABwcyUAAAp6KgAAACYCGQNvIwAA
+CioAAGIDLAkCGW8kAAAKKwtyAQAAcHMlAAAKeioAAAAmAhoDbyMAAAoqAABiAywJAhpvJAAACisL
+cgEAAHBzJQAACnoqAAAAEzABAAkAAAAQAAARAigmAAAKCgYqAAAAEzABAAkAAAARAAARAignAAAK
+CgYqAAAAfgIoKQAACgICcyIAAAZ9BgAABAICcyQAAAZ9BwAABCqSBHKeAABwGm8qAAAKLBUCBQID
+bysAAAoOBHMRAAAGbyAAAAYqAAAASisHAgNvIQAABgNvHAAABi3xKgAGKgAAOgIoFwAACgIDfQgA
+AAQqABMwAgAgAAAAEgAAEQJ7CAAABG8sAAAKby0AAApyrgAAcG8uAAAKby8AAAoqOgIoFwAACgID
+fQkAAAQqAB4CKB4AAAYqHgIoMAAACioeAigxAAAKKhMwAwBFAAAAAAAAAAMCewYAAARvIwAABm8y
+AAAKbxoAAAYDAm8sAAAKA28SAAAGbzMAAApvFgAABgMCbywAAAoDbxQAAAZvMwAACm8YAAAGKgAA
+AAYqAAAeAigXAAAKKhMwAgAtAAAAEwAAEX4KAAAELSByxAAAcNAMAAACKBQAAApvNQAACnM2AAAK
+CweACgAABH4KAAAEKgAAABMwAQAGAAAAFAAAEX4LAAAEKgAAHgKACwAABCpCcxcAAAooEQAACoAN
+AAAEKgAAAB4CKDcAAAoqGzABAD8AAAAVAAARfgwAAAQtMn4NAAAEKBEAAAooOAAACn4MAAAELRxz
+LwAABoAMAAAE3hB+DQAABCgRAAAKKDkAAArcfgwAAAQqAAEQAAACAB0ADCkAEAAAAAC0AAAAzsrv
+vgEAAACRAAAAbFN5c3RlbS5SZXNvdXJjZXMuUmVzb3VyY2VSZWFkZXIsIG1zY29ybGliLCBWZXJz
+aW9uPTQuMC4wLjAsIEN1bHR1cmU9bmV1dHJhbCwgUHVibGljS2V5VG9rZW49Yjc3YTVjNTYxOTM0
+ZTA4OSNTeXN0ZW0uUmVzb3VyY2VzLlJ1bnRpbWVSZXNvdXJjZVNldAIAAAAAAAAAAAAAAFBBRFBB
+RFC0AAAAQlNKQgEAAQAAAAAADAAAAHY0LjAuMzAzMTkAAAAABQBsAAAA1AoAACN+AABACwAAaA0A
+ACNTdHJpbmdzAAAAAKgYAAD4AAAAI1VTAKAZAAAQAAAAI0dVSUQAAACwGQAA9AMAACNCbG9iAAAA
+AAAAAAIAAAFXFaIJCQ8AAAD6JTMAFgAAAQAAADAAAAANAAAADQAAADAAAAAWAAAARQAAADwAAAAV
+AAAABgAAABMAAAAUAAAACQAAAAEAAAAHAAAAAQAAAAIAAAADAAAAAgAAAAAAPg0BAAAAAAAKAG4B
+RAEKAKIBhAEGALIBqwEKAAoCRAEGAIgCqwEKAAoD4AIOAG0DTAMSAJsDTAMOAKoDTAMOAKEFTAMW
+AGQGPAYGANMGwgYGAAAH6wYaAGEHTAcaAK4HmAcaAMcHmAcaAPQH3AcGAB4ICwgKAF0INggKAHUI
+EwAaAKoIjQgGAN8IvwgGAP0IqwEGACEJqwEKADoJEwAGAH4JXwkGALMJqwEGAM0JqwEGAOMJqwEG
+AOoJqwEeAFkKMAoeAIgKMAoeAMsKMAoOAD4LTAMGAHcLZQsGAJ4LjQsGALELCwgGAAYMvwgGACYM
+vwgGAF4MRAwGAHcMZQsGAJQMXwkGAKIMZQsGAL0MZQsGANgMZQsGAPEMZQsGAAoNZQsGACcNZQsA
+AAAAAQAAAAAAAQABAAAAAAApADcABQABAAEAAAAAAF4ANwAJAAEAAgAAARAAaQA3AA0AAQADAAUB
+AABzAAAADQAFAAgABQEAAIEAAAANAAUADwABAAAAnACpAB0ABgARAAEAAADNAKkAKQAGAB4AAQAA
+ANsAqQANAAgAIgABAAAA5wCpAA0ACQAkAAEAAADxAKkAIAAKACUAAAAAAPwACAENAAoAKgAAARAA
+OQGpADkADAAuADEAzQEgADEA9gEtADEAGAI6ADEAPQJHACEAGQOQAAYA2wDKAAYA5wDOAAEA/wXi
+AAEA/wXiABEA4wb2ABEADAf6ABEAeQcYAREAgQccAVAgAAAAAAYYfgETAAEAWCAAAAAABhh+ARMA
+AQBgIAAAAAARGLkBFwABAIwgAAAAABMIwAEbAAEApCAAAAAAEwjmASgAAQC8IAAAAAATCA8CNQAB
+ANQgAAAAABMILQJCAAEA7CAAAAAARgJzAmMAAQAIIQAAAABGAnwCaAACABwhAAAAAIMAjQJsAAIA
+NCEAAAAARgKVAnEAAgBIIQAAAAARAJ4CeAACAGQhAAAAAAEAvAKAAAMAgCEAAAAABhh+ARMABACI
+IQAAAAADCNACiwAEALwhAAAAAAYYfgETAAQA0CEAAAAABhh+AaYABADcIQAAAAAGCN0DaAAHAPwh
+AAAAAAYI6wOwAAcAECIAAAAABggABGgABwAwIgAAAAAGCBAEsAAHAEQiAAAAAAYIJwS0AAcAUCIA
+AAAABghGBLkACABsIgAAAAAGCGYEtAAJAHgiAAAAAAYIgQS5AAoAlCIAAAAABgijBLQACwCgIgAA
+AAAGCLQEuQAMALwiAAAAAIYAzASwAA0A1CIAAAAAhgDUBLAADQDsIgAAAAAGGH4BEwANAAwjAAAA
+AEYCsQXSAA0ANCMAAAAARgPQBdwAEQBIIwAAAABGA+QF3AASAEwjAAAAAAYYfgHmABMAXCMAAAAA
+Bgh9BuwAFACIIwAAAAAGGH4B5gAUAJgjAAAAAAYYfgETABUAoCMAAAAARgKXBhMAFQCoIwAAAABG
+AqIGEwAVALAjAAAAAEYC5AXcABUABCQAAAAABgCuBhMAFgAIJAAAAAADGH4BEwAWABAkAAAAABYI
+GAf+ABYATCQAAAAAFggsBwMBFgBgJAAAAAAWCDgHCAEWAGgkAAAAABEYuQEXABcAfCQAAAAABhh+
+ARMAFwCEJAAAAAAWCI4HHwEXAAAAAQB6AgAAAQCzAgAAAQCzAgAAAQC4AwAAAgC/AwAAAwDTAwAA
+AQBABAAAAQBABAAAAQBABAAAAQBABAAAAQBABAAAAQBABAAAAQC+BQAAAgDGBQAAAwC4AwAABADT
+AwAAAQC4AwAAAQD7BQAAAQAPBgAAAQAPBgAAAQD7BQAAAQBABAkAfgETAHkAfgEpAYkAfgE4AREA
+fgETAJEAfgETACQAfgETACwAfgETADQAfgETADwAfgETACQA0AKLACwA0AKLADQA0AKLADwA0AKL
+AJkAfgETAKEAfgETAKkAfgG0ALEA7gjSARkAcwJjABkAfAJoACkADwnfARkAlQJxAMEAKwnvARkA
+fgETAMkAfgH/AUQAGQOQAEwAjgeLAEwAVQl8AkwAfgETANEAfgG5ADkAfgGmADkAuAORAjkAvwOV
+AkEAkgmZAjkAmwmeAjkAogmjAjkAqwmpAtkAfgG0ADkAzASwADkA1ASwAOEAfgG5AFEAfgETAOkA
+cwKuAlEA+wm1AlEAcgq7AvkAqwrAAgEB5ArGAgkB/wrsAFEAlwYTAFEAogYTAFkAFQtxAPkAKgvS
+AhEBfgETACkAgAvXAmEAfgHdAnEAfgETACEBpgv6AiEBrAv6AikBfgETADEBfgGpAjkBfgETAEEB
+fgG0AEkBfgG0AFEBfgG0AFkBfgG0AGEBfgG0AGkBfgG0AHEBfgG0AHkBfgG0AIEBfgG0ACkAgwCg
+AS4AEwLIAy4ACwKxAy4AKwLIAy4AQwGrAy4A2wEEAy4A6wCLAi4AIwKLAi4AAwKLAi4AGwKLAi4A
+4wENAy4A6wEsAy4A8wF0Ay4A+wGBA0AAKwBXAUAAEwAvAUMAEwAvAUMAGwA+AUkAgwCMAWMAGwA+
+AWMAEwAvAWkAgwCxAYAAKwBXAYMAGwA+AYMAewBXAYMAcwBXAYkAgwC+AaAAKwBXAaMAwwAHAqMA
+EwAvAcAAKwBXAcMAEwAvAcMA6wCLAuAAKwBXAeMAQwGLAgABKwBXAQABEwAvAQMBQwGLAiABKwBX
+ASABEwAvASMBQwGLAkABEwAvAUABKwBXAUMBQwGLAmABEwAvAWABKwBXAWMBowFXAWMBQwGLAoAB
+KwBXAaABKwBXAcABEwAvAcABKwBXAeABKwBXAQACEwAvAQACKwBXASkCEwDxAkkCEwDxAmkC0wFX
+AUAEQwGLAoAEQwGLAngBfQGCAYcB1wHbAeYB6wH6AfoBggLbAdcB2wHXAdcB1wHNAuUC7AL/AgQA
+AQAGAAUABwAGAAkAEAAMABEADQATAAAAogFPAAAAWwJUAAAACgJZAAAAZwJeAAAAIwOYAAAA4AS+
+AAAA6gTCAAAA+wS+AAAABwXCAAAAGgXGAAAALwXCAAAASwXGAAAAYgXCAAAAgAXGAAAAjQXCAAAA
+jAbxAAAA0wYOAQAARAcTAQAAQAQkAQIABAADAAIABQAFAAIABgAHAAIABwAJAAIADwALAAIAEgAN
+AAIAEwAPAAIAFAARAAIAFQATAAEAFgAVAAEAFwAXAAEAGAAZAAEAGQAbAAEAGgAdAAEAGwAfAAIA
+IwAhAAIAKwAjAAIALAAlAAEALQAlAAIAMAAnAHUAdQCIAFwBYwFqAXEBaQJwAgSAAAABAAAAAAAA
+AAAAAAAAAKkAAAAEAAAAAAAAAAAAAAABAAoAAAAAAAoAAAAAAAAAAAAAAAoAEwAAAAAACwAAAAAA
+AAAAAAAAnQAvAwAAAAALAAAAAAAAAAAAAACdAHoDAAAAAAsAAAAAAAAAAAAAAJ0AGQYAAAAABAAA
+AAAAAAAAAAAAAQCrAQAAAAALAAAAAAAAAAAAAACdAAwKAAAAAAAAAAABAAAAzgsAAAUABAAGAAQA
+AAAQAAwAsQIAABAAGQCxAgAAAAAbALECLQD1AS0AdwIAAAAAADxNb2R1bGU+AG1zY29ybGliAE1p
+Y3Jvc29mdC5WaXN1YWxCYXNpYwBNeUFwcGxpY2F0aW9uAFNDX2Q3NWFhYTY4NDk4YTRjOTliZWE1
+ZmE4NDVkM2E3M2MyLk15AE15Q29tcHV0ZXIATXlQcm9qZWN0AE15V2ViU2VydmljZXMAVGhyZWFk
+U2FmZU9iamVjdFByb3ZpZGVyYDEASW5wdXQwQnVmZmVyAFNDX2Q3NWFhYTY4NDk4YTRjOTliZWE1
+ZmE4NDVkM2E3M2MyAFVzZXJDb21wb25lbnQAQ29ubmVjdGlvbnMAVmFyaWFibGVzAFNjcmlwdE1h
+aW4ATXlSZXNvdXJjZXMAU0NfZDc1YWFhNjg0OThhNGM5OWJlYTVmYTg0NWQzYTczYzIuTXkuUmVz
+b3VyY2VzAE15U2V0dGluZ3MATWljcm9zb2Z0LlZpc3VhbEJhc2ljLkFwcGxpY2F0aW9uU2Vydmlj
+ZXMAQXBwbGljYXRpb25CYXNlAC5jdG9yAE1pY3Jvc29mdC5WaXN1YWxCYXNpYy5EZXZpY2VzAENv
+bXB1dGVyAFN5c3RlbQBPYmplY3QALmNjdG9yAGdldF9Db21wdXRlcgBtX0NvbXB1dGVyT2JqZWN0
+UHJvdmlkZXIAZ2V0X0FwcGxpY2F0aW9uAG1fQXBwT2JqZWN0UHJvdmlkZXIAVXNlcgBnZXRfVXNl
+cgBtX1VzZXJPYmplY3RQcm92aWRlcgBnZXRfV2ViU2VydmljZXMAbV9NeVdlYlNlcnZpY2VzT2Jq
+ZWN0UHJvdmlkZXIAQXBwbGljYXRpb24AV2ViU2VydmljZXMARXF1YWxzAG8AR2V0SGFzaENvZGUA
+VHlwZQBHZXRUeXBlAFRvU3RyaW5nAENyZWF0ZV9fSW5zdGFuY2VfXwBUAGluc3RhbmNlAERpc3Bv
+c2VfX0luc3RhbmNlX18AZ2V0X0dldEluc3RhbmNlAE1pY3Jvc29mdC5WaXN1YWxCYXNpYy5NeVNl
+cnZpY2VzLkludGVybmFsAENvbnRleHRWYWx1ZWAxAG1fQ29udGV4dABHZXRJbnN0YW5jZQBNaWNy
+b3NvZnQuU3FsU2VydmVyLlR4U2NyaXB0AE1pY3Jvc29mdC5TcWxTZXJ2ZXIuRHRzLlBpcGVsaW5l
+AFNjcmlwdEJ1ZmZlcgBNaWNyb3NvZnQuU3FsU2VydmVyLlBpcGVsaW5lSG9zdABQaXBlbGluZUJ1
+ZmZlcgBPdXRwdXROYW1lTWFwAEJ1ZmZlcgBCdWZmZXJDb2x1bW5JbmRleGVzAE91dHB1dE1hcABn
+ZXRfRXJyb3JDb2RlAGdldF9FcnJvckNvZGVfSXNOdWxsAGdldF9FcnJvckNvbHVtbgBnZXRfRXJy
+b3JDb2x1bW5fSXNOdWxsAHNldF9FcnJvckNvZGVEZXNjcmlwdGlvbgBWYWx1ZQBzZXRfRXJyb3JD
+b2RlRGVzY3JpcHRpb25fSXNOdWxsAHNldF9FcnJvckNvbHVtbkRlc2NyaXB0aW9uAHNldF9FcnJv
+ckNvbHVtbkRlc2NyaXB0aW9uX0lzTnVsbABzZXRfSW1wb3J0U291cmNlAHNldF9JbXBvcnRTb3Vy
+Y2VfSXNOdWxsAE5leHRSb3cARW5kT2ZSb3dzZXQARXJyb3JDb2RlAEVycm9yQ29kZV9Jc051bGwA
+RXJyb3JDb2x1bW4ARXJyb3JDb2x1bW5fSXNOdWxsAEVycm9yQ29kZURlc2NyaXB0aW9uAEVycm9y
+Q29kZURlc2NyaXB0aW9uX0lzTnVsbABFcnJvckNvbHVtbkRlc2NyaXB0aW9uAEVycm9yQ29sdW1u
+RGVzY3JpcHRpb25fSXNOdWxsAEltcG9ydFNvdXJjZQBJbXBvcnRTb3VyY2VfSXNOdWxsAFNjcmlw
+dENvbXBvbmVudABQcm9jZXNzSW5wdXQASW5wdXRJRABJbnB1dE5hbWUASW5wdXQwX1Byb2Nlc3NJ
+bnB1dABJbnB1dDBfUHJvY2Vzc0lucHV0Um93AFJvdwBQYXJlbnRDb21wb25lbnQAQ29tcG9uZW50
+AE1pY3Jvc29mdC5TcWxTZXJ2ZXIuRFRTUnVudGltZVdyYXAATWljcm9zb2Z0LlNxbFNlcnZlci5E
+dHMuUnVudGltZS5XcmFwcGVyAElEVFNDb25uZWN0aW9uTWFuYWdlcjEwMABnZXRfQ29ubmVjdGlv
+bgBDb25uZWN0aW9uAFByZUV4ZWN1dGUAUG9zdEV4ZWN1dGUAQ3JlYXRlTmV3T3V0cHV0Um93cwBT
+eXN0ZW0uUmVzb3VyY2VzAFJlc291cmNlTWFuYWdlcgBfcmVzTWdyAFN5c3RlbS5HbG9iYWxpemF0
+aW9uAEN1bHR1cmVJbmZvAF9yZXNDdWx0dXJlAGdldF9SZXNvdXJjZU1hbmFnZXIAZ2V0X0N1bHR1
+cmUAc2V0X0N1bHR1cmUAQ3VsdHVyZQBTeXN0ZW0uQ29uZmlndXJhdGlvbgBBcHBsaWNhdGlvblNl
+dHRpbmdzQmFzZQBtX1ZhbHVlAG1fU3luY09iamVjdABnZXRfVmFsdWUAU3lzdGVtLkNvbXBvbmVu
+dE1vZGVsAEVkaXRvckJyb3dzYWJsZUF0dHJpYnV0ZQBFZGl0b3JCcm93c2FibGVTdGF0ZQBTeXN0
+ZW0uQ29kZURvbS5Db21waWxlcgBHZW5lcmF0ZWRDb2RlQXR0cmlidXRlAFN5c3RlbS5EaWFnbm9z
+dGljcwBEZWJ1Z2dlckhpZGRlbkF0dHJpYnV0ZQBNaWNyb3NvZnQuVmlzdWFsQmFzaWMuQ29tcGls
+ZXJTZXJ2aWNlcwBTdGFuZGFyZE1vZHVsZUF0dHJpYnV0ZQBIaWRlTW9kdWxlTmFtZUF0dHJpYnV0
+ZQBTeXN0ZW0uQ29tcG9uZW50TW9kZWwuRGVzaWduAEhlbHBLZXl3b3JkQXR0cmlidXRlAFN5c3Rl
+bS5SdW50aW1lLkNvbXBpbGVyU2VydmljZXMAUnVudGltZUhlbHBlcnMAR2V0T2JqZWN0VmFsdWUA
+UnVudGltZVR5cGVIYW5kbGUAR2V0VHlwZUZyb21IYW5kbGUAQWN0aXZhdG9yAENyZWF0ZUluc3Rh
+bmNlAE15R3JvdXBDb2xsZWN0aW9uQXR0cmlidXRlAHNldF9WYWx1ZQBTeXN0ZW0uUnVudGltZS5J
+bnRlcm9wU2VydmljZXMAQ29tVmlzaWJsZUF0dHJpYnV0ZQBHZXRJbnQzMgBJc051bGwAc2V0X0l0
+ZW0AU2V0TnVsbABJbnZhbGlkT3BlcmF0aW9uRXhjZXB0aW9uAENMU0NvbXBsaWFudEF0dHJpYnV0
+ZQBTdHJpbmcAU3RyaW5nQ29tcGFyaXNvbgBHZXRDb2x1bW5JbmRleGVzAE1pY3Jvc29mdC5TcWxT
+ZXJ2ZXIuRFRTUGlwZWxpbmVXcmFwAE1pY3Jvc29mdC5TcWxTZXJ2ZXIuRHRzLlBpcGVsaW5lLldy
+YXBwZXIASURUU0NvbXBvbmVudE1ldGFEYXRhMTAwAGdldF9Db21wb25lbnRNZXRhRGF0YQBJRFRT
+UnVudGltZUNvbm5lY3Rpb25Db2xsZWN0aW9uMTAwAGdldF9SdW50aW1lQ29ubmVjdGlvbkNvbGxl
+Y3Rpb24ASURUU1J1bnRpbWVDb25uZWN0aW9uMTAwAEdldFJ1bnRpbWVDb25uZWN0aW9uQnlOYW1l
+AGdldF9Db25uZWN0aW9uTWFuYWdlcgBnZXRfQ29ubmVjdGlvblN0cmluZwBHZXRFcnJvckRlc2Ny
+aXB0aW9uAFNTSVNTY3JpcHRDb21wb25lbnRFbnRyeVBvaW50QXR0cmlidXRlAFN5c3RlbS5SZWZs
+ZWN0aW9uAEFzc2VtYmx5AGdldF9Bc3NlbWJseQBTeXN0ZW0uVGhyZWFkaW5nAE1vbml0b3IARW50
+ZXIARXhpdABEZWJ1Z2dlck5vblVzZXJDb2RlQXR0cmlidXRlAFNDX2Q3NWFhYTY4NDk4YTRjOTli
+ZWE1ZmE4NDVkM2E3M2MyLlJlc291cmNlcy5yZXNvdXJjZXMAQ29tcGlsYXRpb25SZWxheGF0aW9u
+c0F0dHJpYnV0ZQBSdW50aW1lQ29tcGF0aWJpbGl0eUF0dHJpYnV0ZQBTeXN0ZW0uUnVudGltZS5W
+ZXJzaW9uaW5nAFRhcmdldEZyYW1ld29ya0F0dHJpYnV0ZQBBc3NlbWJseUZpbGVWZXJzaW9uQXR0
+cmlidXRlAEd1aWRBdHRyaWJ1dGUAQXNzZW1ibHlUcmFkZW1hcmtBdHRyaWJ1dGUAQXNzZW1ibHlD
+b3B5cmlnaHRBdHRyaWJ1dGUAQXNzZW1ibHlQcm9kdWN0QXR0cmlidXRlAEFzc2VtYmx5Q29tcGFu
+eUF0dHJpYnV0ZQBBc3NlbWJseURlc2NyaXB0aW9uQXR0cmlidXRlAEFzc2VtYmx5VGl0bGVBdHRy
+aWJ1dGUAU0NfZDc1YWFhNjg0OThhNGM5OWJlYTVmYTg0NWQzYTczYzIuZGxsAAAAAICbSQBzAE4A
+dQBsAGwAIABwAHIAbwBwAGUAcgB0AHkAIABjAGEAbgBuAG8AdAAgAGIAZQAgAHMAZQB0ACAAdABv
+ACAARgBhAGwAcwBlAC4AIABBAHMAcwBpAGcAbgAgAGEAIAB2AGEAbAB1AGUAIAB0AG8AIAB0AGgA
+ZQAgAGMAbwBsAHUAbQBuACAAaQBuAHMAdABlAGEAZAAuAAAPSQBuAHAAdQB0ACAAMAAAFUMAbwBu
+AG4AZQBjAHQAaQBvAG4AADFNAHkALgBSAGUAcwBvAHUAcgBjAGUAcwAuAE0AeQBSAGUAcwBvAHUA
+cgBjAGUAcwAAAADRH1vStodZRL1suwcwBKGqAAi3elxWGTTgiQiwP19/EdUKOgMgAAEDAAABBAAA
+EgwHBhUSGAESDAQAABIIBwYVEhgBEggEAAASEQcGFRIYARIRBAAAEhQHBhUSGAESFAQIABIMBAgA
+EggECAASEQQIABIUBCABAhwDIAAIBCAAEhUDIAAOAh4ABxABAR4AHgAHMAEBARAeAAITAAQgABMA
+BwYVEhkBEwAEKAATAAiJhF3NgIDMkQkgAwESIR0IEiUDIAACBCABAQ4EIAEBAgMoAAgDKAACAygA
+DgMGEiQDBhIoCSAEAQgOEiESJQUgAQESHAMGEikFIAEBEikEIAASLQQoABItAwYSMQMGEjUEAAAS
+MQQAABI1BQABARI1BAgAEjEECAASNQMGEjQCBhwEAAASNAQIABI0BSABARFBCAEAAQAAAAAABSAC
+AQ4OGAEACk15VGVtcGxhdGUIMTAuMC4wLjAAAAQBAAAABhUSGAESDAYVEhgBEggGFRIYARIRBhUS
+GAESFAQHARIMBAcBEggEBwESEQQHARIUEwEADk15LkFwcGxpY2F0aW9uAAAQAQALTXkuQ29tcHV0
+ZXIAAAwBAAdNeS5Vc2VyAAATAQAOTXkuV2ViU2VydmljZXMAAAQAARwcAwcBAgMHAQgGAAESFRFd
+BAcBEhUDBwEOBRABAB4ABAoBHgAEBwEeAAcgBAEODg4OYQEANFN5c3RlbS5XZWIuU2VydmljZXMu
+UHJvdG9jb2xzLlNvYXBIdHRwQ2xpZW50UHJvdG9jb2wSQ3JlYXRlX19JbnN0YW5jZV9fE0Rpc3Bv
+c2VfX0luc3RhbmNlX18AAAAGFRIYARMABhUSGQETAAQKARMABSABARMACAcDEwATABMABQEAAAAA
+AwYSIQMGHQgEIAEICAQgAQIIBSACAQgcBCABAQgGIAICDhF5BSABHQgIBCAAEn0FIAASgIEGIAES
+gIUOBAcBEi0EIAEOCAUgABKAjQcgAgEOEoCNBgcCEjESMQQHARI1CAEAAgAAAAAABAABARwEBwES
+NAgBAAgAAAAAAB4BAAEAVAIWV3JhcE5vbkV4Y2VwdGlvblRocm93cwFHAQAaLk5FVEZyYW1ld29y
+ayxWZXJzaW9uPXY0LjABAFQOFEZyYW1ld29ya0Rpc3BsYXlOYW1lEC5ORVQgRnJhbWV3b3JrIDQM
+AQAHMS4wLjAuMAAAKQEAJDA0NDQ5MzRmLTJiZmMtNDZmMS05ZDMzLWE1YWQwYzQxMDZlNQAABQEA
+AQAAFgEAEUNvcHlyaWdodCBAICAyMDE2AAAoAQAjU0NfZDc1YWFhNjg0OThhNGM5OWJlYTVmYTg0
+NWQzYTczYzIAAAAAAGRDAAAAAAAAAAAAAH5DAAAAIAAAAAAAAAAAAAAAAAAAAAAAAAAAAABwQwAA
+AAAAAAAAAAAAAF9Db3JEbGxNYWluAG1zY29yZWUuZGxsAAAAAAD/JQAgABAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAEAEAAA
+ABgAAIAAAAAAAAAAAAAAAAAAAAEAAQAAADAAAIAAAAAAAAAAAAAAAAAAAAEAAAAAAEgAAABYYAAA
+gAMAAAAAAAAAAAAAgAM0AAAAVgBTAF8AVgBFAFIAUwBJAE8ATgBfAEkATgBGAE8AAAAAAL0E7/4A
+AAEAAAABAAAAAAAAAAEAAAAAAD8AAAAAAAAABAAAAAIAAAAAAAAAAAAAAAAAAABEAAAAAQBWAGEA
+cgBGAGkAbABlAEkAbgBmAG8AAAAAACQABAAAAFQAcgBhAG4AcwBsAGEAdABpAG8AbgAAAAAAAACw
+BOACAAABAFMAdAByAGkAbgBnAEYAaQBsAGUASQBuAGYAbwAAALwCAAABADAAMAAwADAAMAA0AGIA
+MAAAAHAAJAABAEYAaQBsAGUARABlAHMAYwByAGkAcAB0AGkAbwBuAAAAAABTAEMAXwBkADcANQBh
+AGEAYQA2ADgANAA5ADgAYQA0AGMAOQA5AGIAZQBhADUAZgBhADgANAA1AGQAMwBhADcAMwBjADIA
+AAAwAAgAAQBGAGkAbABlAFYAZQByAHMAaQBvAG4AAAAAADEALgAwAC4AMAAuADAAAABwACgAAQBJ
+AG4AdABlAHIAbgBhAGwATgBhAG0AZQAAAFMAQwBfAGQANwA1AGEAYQBhADYAOAA0ADkAOABhADQA
+YwA5ADkAYgBlAGEANQBmAGEAOAA0ADUAZAAzAGEANwAzAGMAMgAuAGQAbABsAAAASAASAAEATABl
+AGcAYQBsAEMAbwBwAHkAcgBpAGcAaAB0AAAAQwBvAHAAeQByAGkAZwBoAHQAIABAACAAIAAyADAA
+MQA2AAAAeAAoAAEATwByAGkAZwBpAG4AYQBsAEYAaQBsAGUAbgBhAG0AZQAAAFMAQwBfAGQANwA1
+AGEAYQBhADYAOAA0ADkAOABhADQAYwA5ADkAYgBlAGEANQBmAGEAOAA0ADUAZAAzAGEANwAzAGMA
+MgAuAGQAbABsAAAAaAAkAAEAUAByAG8AZAB1AGMAdABOAGEAbQBlAAAAAABTAEMAXwBkADcANQBh
+AGEAYQA2ADgANAA5ADgAYQA0AGMAOQA5AGIAZQBhADUAZgBhADgANAA1AGQAMwBhADcAMwBjADIA
+AAA0AAgAAQBQAHIAbwBkAHUAYwB0AFYAZQByAHMAaQBvAG4AAAAxAC4AMAAuADAALgAwAAAAOAAI
+AAEAQQBzAHMAZQBtAGIAbAB5ACAAVgBlAHIAcwBpAG8AbgAAADEALgAwAC4AMAAuADAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAEAAAAwAAACQMwAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=]]></arrayElement>
+                  </arrayElements>
+                </property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the name of the Microsoft Visual Studio Tools for Applications project. Project names must be unique within a package."
+                  name="VSTAProjectName"
+                  typeConverter="NOTBROWSABLE">SC_d75aaa68498a4c99bea5fa845d3a73c2</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the programming language used by the script."
+                  name="ScriptLanguage"
+                  typeConverter="Microsoft.SqlServer.VSTAHosting.ScriptingLanguages, Microsoft.SqlServer.VSTAScriptingLib, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91">VisualBasic</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies a comma-separated list of read-only variables."
+                  name="ReadOnlyVariables"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ScriptUIVariablePickerDlg, Microsoft.DataTransformationServices.Controls, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"></property>
+                <property
+                  dataType="System.String"
+                  description="Specifies a comma-separated list of read/write variables."
+                  name="ReadWriteVariables"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ScriptUIWriteableVariablePickerDlg, Microsoft.DataTransformationServices.Controls, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"></property>
+                <property
+                  dataType="System.String"
+                  description="List of breakpoints present on the script."
+                  isArray="true"
+                  name="BreakpointCollection"
+                  typeConverter="NOTBROWSABLE">
+                  <arrayElements
+                    arrayElementCount="0" />
+                </property>
+                <property
+                  dataType="System.String"
+                  description="Checksum to match component metedata against compiled codes."
+                  name="MetadataChecksum"
+                  typeConverter="NOTBROWSABLE">d13d23ca554c20730cdd4e6ea4b32292</property>
+                <property
+                  dataType="System.String"
+                  description="Checksum to match component metedata against compiled codes."
+                  name="MetadataShaChecksum"
+                  typeConverter="NOTBROWSABLE">5e8f7c72642639a4755235ff2de96459bd4173a1</property>
+                <property
+                  dataType="System.String"
+                  name="UserComponentTypeName">Microsoft.SqlServer.Dts.Pipeline.ScriptComponentHost, Microsoft.SqlServer.TxScript, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91</property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\Load HICSCasework - Stage\ChangeCodeToDescription.Connections[Connection]"
+                  connectionManagerID="Package.ConnectionManagers[HICS_Casework file]"
+                  connectionManagerRefId="Package.ConnectionManagers[HICS_Casework file]"
+                  name="Connection" />
+              </connections>
+              <inputs>
+                <input
+                  refId="Package\Load HICSCasework - Stage\ChangeCodeToDescription.Inputs[Input 0]"
+                  hasSideEffects="true"
+                  name="Input 0">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\Load HICSCasework - Stage\ChangeCodeToDescription.Inputs[Input 0].Columns[ErrorCode]"
+                      cachedDataType="i4"
+                      cachedName="ErrorCode"
+                      lineageId="Package\Load HICSCasework - Stage\HICS CaseWork.Outputs[Flat File Source Error Output].Columns[ErrorCode]" />
+                    <inputColumn
+                      refId="Package\Load HICSCasework - Stage\ChangeCodeToDescription.Inputs[Input 0].Columns[ErrorColumn]"
+                      cachedDataType="i4"
+                      cachedName="ErrorColumn"
+                      lineageId="Package\Load HICSCasework - Stage\HICS CaseWork.Outputs[Flat File Source Error Output].Columns[ErrorColumn]" />
+                  </inputColumns>
+                  <externalMetadataColumns />
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\Load HICSCasework - Stage\ChangeCodeToDescription.Outputs[Output 0]"
+                  name="Output 0"
+                  synchronousInputId="Package\Load HICSCasework - Stage\ChangeCodeToDescription.Inputs[Input 0]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Load HICSCasework - Stage\ChangeCodeToDescription.Outputs[Output 0].Columns[ErrorCodeDescription]"
+                      codePage="1252"
+                      dataType="str"
+                      length="255"
+                      lineageId="Package\Load HICSCasework - Stage\ChangeCodeToDescription.Outputs[Output 0].Columns[ErrorCodeDescription]"
+                      name="ErrorCodeDescription" />
+                    <outputColumn
+                      refId="Package\Load HICSCasework - Stage\ChangeCodeToDescription.Outputs[Output 0].Columns[ErrorColumnDescription]"
+                      codePage="1252"
+                      dataType="str"
+                      length="255"
+                      lineageId="Package\Load HICSCasework - Stage\ChangeCodeToDescription.Outputs[Output 0].Columns[ErrorColumnDescription]"
+                      name="ErrorColumnDescription" />
+                    <outputColumn
+                      refId="Package\Load HICSCasework - Stage\ChangeCodeToDescription.Outputs[Output 0].Columns[ImportSource]"
+                      codePage="1252"
+                      dataType="str"
+                      length="200"
+                      lineageId="Package\Load HICSCasework - Stage\ChangeCodeToDescription.Outputs[Output 0].Columns[ImportSource]"
+                      name="ImportSource" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\Load HICSCasework - Stage\CourseWork ErrorCount"
+              componentClassID="{E2697D8C-70DA-42B2-8208-A19CE3A9FE41}"
+              contactInfo="Row Count;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;0"
+              description="Counts rows as they pass through a data flow. For example, use the number of rows processed to determine whether or not to perform cleanup operations, or update text in an e-mail message to communicate processing status."
+              name="CourseWork ErrorCount">
+              <properties>
+                <property
+                  dataType="System.String"
+                  description="Specifies the variable to hold the row count."
+                  name="VariableName">User::CaseWorkNoOfErrors</property>
+              </properties>
+              <inputs>
+                <input
+                  refId="Package\Load HICSCasework - Stage\CourseWork ErrorCount.Inputs[Row Count Input 1]"
+                  hasSideEffects="true"
+                  name="Row Count Input 1">
+                  <externalMetadataColumns />
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\Load HICSCasework - Stage\CourseWork ErrorCount.Outputs[Row Count Output 1]"
+                  name="Row Count Output 1"
+                  synchronousInputId="Package\Load HICSCasework - Stage\CourseWork ErrorCount.Inputs[Row Count Input 1]">
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\Load HICSCasework - Stage\Derived Column"
+              componentClassID="{49928E82-9C4E-49F0-AABE-3812B82707EC}"
+              contactInfo="Derived Column;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;0"
+              description="Creates new column values by applying expressions to transformation input columns. Create new columns or overwrite existing ones. For example, concatenate the values from the 'first name' and 'last name' column to make a 'full name' column."
+              name="Derived Column"
+              usesDispositions="true">
+              <inputs>
+                <input
+                  refId="Package\Load HICSCasework - Stage\Derived Column.Inputs[Derived Column Input]"
+                  description="Input to the Derived Column Transformation"
+                  name="Derived Column Input">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\Load HICSCasework - Stage\Derived Column.Inputs[Derived Column Input].Columns[Flat File Source Error Output Column]"
+                      cachedCodepage="1252"
+                      cachedDataType="text"
+                      cachedName="Flat File Source Error Output Column"
+                      lineageId="Package\Load HICSCasework - Stage\HICS CaseWork.Outputs[Flat File Source Error Output].Columns[Flat File Source Error Output Column]" />
+                  </inputColumns>
+                  <externalMetadataColumns />
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\Load HICSCasework - Stage\Derived Column.Outputs[Derived Column Output]"
+                  description="Default Output of the Derived Column Transformation"
+                  exclusionGroup="1"
+                  name="Derived Column Output"
+                  synchronousInputId="Package\Load HICSCasework - Stage\Derived Column.Inputs[Derived Column Input]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Load HICSCasework - Stage\Derived Column.Outputs[Derived Column Output].Columns[ErrorOutput]"
+                      dataType="nText"
+                      errorOrTruncationOperation="Computation"
+                      errorRowDisposition="FailComponent"
+                      lineageId="Package\Load HICSCasework - Stage\Derived Column.Outputs[Derived Column Output].Columns[ErrorOutput]"
+                      name="ErrorOutput"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.String"
+                          description="Derived Column Expression"
+                          name="Expression">(DT_NTEXT)#{Package\Load HICSCasework - Stage\HICS CaseWork.Outputs[Flat File Source Error Output].Columns[Flat File Source Error Output Column]}</property>
+                        <property
+                          containsID="true"
+                          dataType="System.String"
+                          description="Derived Column Friendly Expression"
+                          expressionType="Notify"
+                          name="FriendlyExpression">(DT_NTEXT)[Flat File Source Error Output Column]</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\Load HICSCasework - Stage\Derived Column.Outputs[Derived Column Output].Columns[ImportedDate]"
+                      dataType="dbTimeStamp"
+                      errorOrTruncationOperation="Computation"
+                      errorRowDisposition="FailComponent"
+                      lineageId="Package\Load HICSCasework - Stage\Derived Column.Outputs[Derived Column Output].Columns[ImportedDate]"
+                      name="ImportedDate"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.String"
+                          description="Derived Column Expression"
+                          name="Expression">[GETDATE]()</property>
+                        <property
+                          containsID="true"
+                          dataType="System.String"
+                          description="Derived Column Friendly Expression"
+                          expressionType="Notify"
+                          name="FriendlyExpression">GETDATE()</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\Load HICSCasework - Stage\Derived Column.Outputs[Derived Column Output].Columns[Addoper]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Computation"
+                      errorRowDisposition="FailComponent"
+                      length="255"
+                      lineageId="Package\Load HICSCasework - Stage\Derived Column.Outputs[Derived Column Output].Columns[Addoper]"
+                      name="Addoper"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.String"
+                          description="Derived Column Expression"
+                          name="Expression">(DT_STR,255,1252)@[System::UserName]</property>
+                        <property
+                          containsID="true"
+                          dataType="System.String"
+                          description="Derived Column Friendly Expression"
+                          expressionType="Notify"
+                          name="FriendlyExpression">(DT_STR,255,1252)@[System::UserName]</property>
+                      </properties>
+                    </outputColumn>
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+                <output
+                  refId="Package\Load HICSCasework - Stage\Derived Column.Outputs[Derived Column Error Output]"
+                  description="Error Output of the Derived Column Transformation"
+                  exclusionGroup="1"
+                  isErrorOut="true"
+                  name="Derived Column Error Output"
+                  synchronousInputId="Package\Load HICSCasework - Stage\Derived Column.Inputs[Derived Column Input]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Load HICSCasework - Stage\Derived Column.Outputs[Derived Column Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\Load HICSCasework - Stage\Derived Column.Outputs[Derived Column Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\Load HICSCasework - Stage\Derived Column.Outputs[Derived Column Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\Load HICSCasework - Stage\Derived Column.Outputs[Derived Column Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\Load HICSCasework - Stage\Error Table"
+              componentClassID="{4ADA7EAA-136C-4215-8098-D7A7C27FC0D1}"
+              contactInfo="OLE DB Destination;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;4"
+              description="OLE DB Destination"
+              name="Error Table"
+              usesDispositions="true"
+              version="4">
+              <properties>
+                <property
+                  dataType="System.Int32"
+                  description="The number of seconds before a command times out.  A value of 0 indicates an infinite time-out."
+                  name="CommandTimeout">0</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the name of the database object used to open a rowset."
+                  name="OpenRowset">[stage].[HICSSupplementarty_Errors]</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the variable that contains the name of the database object used to open a rowset."
+                  name="OpenRowsetVariable"></property>
+                <property
+                  dataType="System.String"
+                  description="The SQL command to be executed."
+                  name="SqlCommand"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor, Microsoft.DataTransformationServices.Controls, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"></property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the column code page to use when code page information is unavailable from the data source."
+                  name="DefaultCodePage">1252</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Forces the use of the DefaultCodePage property value when describing character data."
+                  name="AlwaysUseDefaultCodePage">false</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the mode used to access the database."
+                  name="AccessMode"
+                  typeConverter="AccessMode">3</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Indicates whether the values supplied for identity columns will be copied to the destination. If false, values for identity columns will be auto-generated at the destination. Applies only if fast load is turned on."
+                  name="FastLoadKeepIdentity">false</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Indicates whether the columns containing null will have null inserted in the destination. If false, columns containing null will have their default values inserted at the destination. Applies only if fast load is turned on."
+                  name="FastLoadKeepNulls">false</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies options to be used with fast load.  Applies only if fast load is turned on."
+                  name="FastLoadOptions">TABLOCK,CHECK_CONSTRAINTS</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies when commits are issued during data insertion.  A value of 0 specifies that one commit will be issued at the end of data insertion.  Applies only if fast load is turned on."
+                  name="FastLoadMaxInsertCommitSize">2147483647</property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\Load HICSCasework - Stage\Error Table.Connections[OleDbConnection]"
+                  connectionManagerID="Package.ConnectionManagers[ERR_1095A]"
+                  connectionManagerRefId="Package.ConnectionManagers[ERR_1095A]"
+                  description="The OLE DB runtime connection used to access the database."
+                  name="OleDbConnection" />
+              </connections>
+              <inputs>
+                <input
+                  refId="Package\Load HICSCasework - Stage\Error Table.Inputs[OLE DB Destination Input]"
+                  errorOrTruncationOperation="Insert"
+                  errorRowDisposition="FailComponent"
+                  hasSideEffects="true"
+                  name="OLE DB Destination Input">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\Load HICSCasework - Stage\Error Table.Inputs[OLE DB Destination Input].Columns[ImportSource]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="200"
+                      cachedName="ImportSource"
+                      externalMetadataColumnId="Package\Load HICSCasework - Stage\Error Table.Inputs[OLE DB Destination Input].ExternalColumns[ImportSource]"
+                      lineageId="Package\Load HICSCasework - Stage\ChangeCodeToDescription.Outputs[Output 0].Columns[ImportSource]" />
+                    <inputColumn
+                      refId="Package\Load HICSCasework - Stage\Error Table.Inputs[OLE DB Destination Input].Columns[ImportedDate]"
+                      cachedDataType="dbTimeStamp"
+                      cachedName="ImportedDate"
+                      externalMetadataColumnId="Package\Load HICSCasework - Stage\Error Table.Inputs[OLE DB Destination Input].ExternalColumns[ImportedDate]"
+                      lineageId="Package\Load HICSCasework - Stage\Derived Column.Outputs[Derived Column Output].Columns[ImportedDate]" />
+                    <inputColumn
+                      refId="Package\Load HICSCasework - Stage\Error Table.Inputs[OLE DB Destination Input].Columns[ErrorOutput]"
+                      cachedDataType="nText"
+                      cachedName="ErrorOutput"
+                      externalMetadataColumnId="Package\Load HICSCasework - Stage\Error Table.Inputs[OLE DB Destination Input].ExternalColumns[ErrorRow]"
+                      lineageId="Package\Load HICSCasework - Stage\Derived Column.Outputs[Derived Column Output].Columns[ErrorOutput]" />
+                    <inputColumn
+                      refId="Package\Load HICSCasework - Stage\Error Table.Inputs[OLE DB Destination Input].Columns[ErrorCodeDescription]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="255"
+                      cachedName="ErrorCodeDescription"
+                      externalMetadataColumnId="Package\Load HICSCasework - Stage\Error Table.Inputs[OLE DB Destination Input].ExternalColumns[ErrorCode]"
+                      lineageId="Package\Load HICSCasework - Stage\ChangeCodeToDescription.Outputs[Output 0].Columns[ErrorCodeDescription]" />
+                    <inputColumn
+                      refId="Package\Load HICSCasework - Stage\Error Table.Inputs[OLE DB Destination Input].Columns[ErrorColumnDescription]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="255"
+                      cachedName="ErrorColumnDescription"
+                      externalMetadataColumnId="Package\Load HICSCasework - Stage\Error Table.Inputs[OLE DB Destination Input].ExternalColumns[ErrorColumn]"
+                      lineageId="Package\Load HICSCasework - Stage\ChangeCodeToDescription.Outputs[Output 0].Columns[ErrorColumnDescription]" />
+                    <inputColumn
+                      refId="Package\Load HICSCasework - Stage\Error Table.Inputs[OLE DB Destination Input].Columns[Addoper]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="255"
+                      cachedName="Addoper"
+                      externalMetadataColumnId="Package\Load HICSCasework - Stage\Error Table.Inputs[OLE DB Destination Input].ExternalColumns[Addoper]"
+                      lineageId="Package\Load HICSCasework - Stage\Derived Column.Outputs[Derived Column Output].Columns[Addoper]" />
+                  </inputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\Load HICSCasework - Stage\Error Table.Inputs[OLE DB Destination Input].ExternalColumns[ImportSource]"
+                      codePage="1252"
+                      dataType="str"
+                      length="255"
+                      name="ImportSource" />
+                    <externalMetadataColumn
+                      refId="Package\Load HICSCasework - Stage\Error Table.Inputs[OLE DB Destination Input].ExternalColumns[ErrorRow]"
+                      dataType="nText"
+                      name="ErrorRow" />
+                    <externalMetadataColumn
+                      refId="Package\Load HICSCasework - Stage\Error Table.Inputs[OLE DB Destination Input].ExternalColumns[ImportedDate]"
+                      dataType="dbTimeStamp"
+                      name="ImportedDate" />
+                    <externalMetadataColumn
+                      refId="Package\Load HICSCasework - Stage\Error Table.Inputs[OLE DB Destination Input].ExternalColumns[ErrorCode]"
+                      codePage="1252"
+                      dataType="str"
+                      length="255"
+                      name="ErrorCode" />
+                    <externalMetadataColumn
+                      refId="Package\Load HICSCasework - Stage\Error Table.Inputs[OLE DB Destination Input].ExternalColumns[ErrorColumn]"
+                      codePage="1252"
+                      dataType="str"
+                      length="255"
+                      name="ErrorColumn" />
+                    <externalMetadataColumn
+                      refId="Package\Load HICSCasework - Stage\Error Table.Inputs[OLE DB Destination Input].ExternalColumns[ErrorLogId]"
+                      dataType="i4"
+                      name="ErrorLogId" />
+                    <externalMetadataColumn
+                      refId="Package\Load HICSCasework - Stage\Error Table.Inputs[OLE DB Destination Input].ExternalColumns[Addoper]"
+                      codePage="1252"
+                      dataType="str"
+                      length="255"
+                      name="Addoper" />
+                  </externalMetadataColumns>
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\Load HICSCasework - Stage\Error Table.Outputs[OLE DB Destination Error Output]"
+                  exclusionGroup="1"
+                  isErrorOut="true"
+                  name="OLE DB Destination Error Output"
+                  synchronousInputId="Package\Load HICSCasework - Stage\Error Table.Inputs[OLE DB Destination Input]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Load HICSCasework - Stage\Error Table.Outputs[OLE DB Destination Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\Load HICSCasework - Stage\Error Table.Outputs[OLE DB Destination Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\Load HICSCasework - Stage\Error Table.Outputs[OLE DB Destination Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\Load HICSCasework - Stage\Error Table.Outputs[OLE DB Destination Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\Load HICSCasework - Stage\ERR_1095A Casework  OLE Destination"
+              componentClassID="{4ADA7EAA-136C-4215-8098-D7A7C27FC0D1}"
+              contactInfo="OLE DB Destination;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;4"
+              description="OLE DB Destination"
+              name="ERR_1095A Casework  OLE Destination"
+              usesDispositions="true"
+              version="4">
+              <properties>
+                <property
+                  dataType="System.Int32"
+                  description="The number of seconds before a command times out.  A value of 0 indicates an infinite time-out."
+                  name="CommandTimeout">0</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the name of the database object used to open a rowset."
+                  name="OpenRowset">[stage].[HICSCasework]</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the variable that contains the name of the database object used to open a rowset."
+                  name="OpenRowsetVariable"></property>
+                <property
+                  dataType="System.String"
+                  description="The SQL command to be executed."
+                  name="SqlCommand"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor, Microsoft.DataTransformationServices.Controls, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91">SELECT        CaseID, CaseNarrative, ReceivedDate, IssuerAssignmentDate, CaseworkerAssignmentDate, IssuerID, IssuerName, IssuerState, OtherIssuerPlanID, PlanID, 
+                         PlanName, CaseSource, CaseSourceDescription, IssueLevel, IssueLevelDescription, Caseworker, CaseworkerName, Category, CategoryDescription, Subcategory, 
+                         SubcategoryDescription, OtherSubcategory, MarketPlaceModel, MarketPlaceModelDescription, COOP, PCIP, SHOP, SWIFT, MediaInterest, ElectedOfficial, 
+                         AgentBroker, CMSIssue, Resolved, ResolutionDate, DateOfResolutionNotification, Region, Component, AppealsDecisionMade, WhiteHouseCorrespondence,
+						 CasePendingXOSCHelpdesk, DateCaseReferred, SEPDecisionMade, ApplicationID, ReservedDate, ImportSource
+FROM            stage.HICSCases_TempTest</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the column code page to use when code page information is unavailable from the data source."
+                  name="DefaultCodePage">1252</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Forces the use of the DefaultCodePage property value when describing character data."
+                  name="AlwaysUseDefaultCodePage">false</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the mode used to access the database."
+                  name="AccessMode"
+                  typeConverter="AccessMode">3</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Indicates whether the values supplied for identity columns will be copied to the destination. If false, values for identity columns will be auto-generated at the destination. Applies only if fast load is turned on."
+                  name="FastLoadKeepIdentity">false</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Indicates whether the columns containing null will have null inserted in the destination. If false, columns containing null will have their default values inserted at the destination. Applies only if fast load is turned on."
+                  name="FastLoadKeepNulls">true</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies options to be used with fast load.  Applies only if fast load is turned on."
+                  name="FastLoadOptions">TABLOCK</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies when commits are issued during data insertion.  A value of 0 specifies that one commit will be issued at the end of data insertion.  Applies only if fast load is turned on."
+                  name="FastLoadMaxInsertCommitSize">2147483647</property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\Load HICSCasework - Stage\ERR_1095A Casework  OLE Destination.Connections[OleDbConnection]"
+                  connectionManagerID="Package.ConnectionManagers[ERR_1095A]"
+                  connectionManagerRefId="Package.ConnectionManagers[ERR_1095A]"
+                  description="The OLE DB runtime connection used to access the database."
+                  name="OleDbConnection" />
+              </connections>
+              <inputs>
+                <input
+                  refId="Package\Load HICSCasework - Stage\ERR_1095A Casework  OLE Destination.Inputs[OLE DB Destination Input]"
+                  errorOrTruncationOperation="Insert"
+                  errorRowDisposition="FailComponent"
+                  hasSideEffects="true"
+                  name="OLE DB Destination Input">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\Load HICSCasework - Stage\ERR_1095A Casework  OLE Destination.Inputs[OLE DB Destination Input].Columns[ImportSource]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="255"
+                      cachedName="ImportSource"
+                      externalMetadataColumnId="Package\Load HICSCasework - Stage\ERR_1095A Casework  OLE Destination.Inputs[OLE DB Destination Input].ExternalColumns[ImportSource]"
+                      lineageId="Package\Load HICSCasework - Stage\Add HICS CaseWork ImportSource.Outputs[Derived Column Output].Columns[ImportSource]" />
+                    <inputColumn
+                      refId="Package\Load HICSCasework - Stage\ERR_1095A Casework  OLE Destination.Inputs[OLE DB Destination Input].Columns[Created Date]"
+                      cachedDataType="dbTimeStamp"
+                      cachedName="Created Date"
+                      externalMetadataColumnId="Package\Load HICSCasework - Stage\ERR_1095A Casework  OLE Destination.Inputs[OLE DB Destination Input].ExternalColumns[CreatedDate]"
+                      lineageId="Package\Load HICSCasework - Stage\HICS CaseWork.Outputs[Flat File Source Output].Columns[Created Date]" />
+                    <inputColumn
+                      refId="Package\Load HICSCasework - Stage\ERR_1095A Casework  OLE Destination.Inputs[OLE DB Destination Input].Columns[Created By]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="50"
+                      cachedName="Created By"
+                      externalMetadataColumnId="Package\Load HICSCasework - Stage\ERR_1095A Casework  OLE Destination.Inputs[OLE DB Destination Input].ExternalColumns[CreatedBy]"
+                      lineageId="Package\Load HICSCasework - Stage\HICS CaseWork.Outputs[Flat File Source Output].Columns[Created By]" />
+                    <inputColumn
+                      refId="Package\Load HICSCasework - Stage\ERR_1095A Casework  OLE Destination.Inputs[OLE DB Destination Input].Columns[Updated Date]"
+                      cachedDataType="dbTimeStamp"
+                      cachedName="Updated Date"
+                      externalMetadataColumnId="Package\Load HICSCasework - Stage\ERR_1095A Casework  OLE Destination.Inputs[OLE DB Destination Input].ExternalColumns[UpdatedDate]"
+                      lineageId="Package\Load HICSCasework - Stage\HICS CaseWork.Outputs[Flat File Source Output].Columns[Updated Date]" />
+                    <inputColumn
+                      refId="Package\Load HICSCasework - Stage\ERR_1095A Casework  OLE Destination.Inputs[OLE DB Destination Input].Columns[Updated By]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="50"
+                      cachedName="Updated By"
+                      externalMetadataColumnId="Package\Load HICSCasework - Stage\ERR_1095A Casework  OLE Destination.Inputs[OLE DB Destination Input].ExternalColumns[UpdatedBy]"
+                      lineageId="Package\Load HICSCasework - Stage\HICS CaseWork.Outputs[Flat File Source Output].Columns[Updated By]" />
+                    <inputColumn
+                      refId="Package\Load HICSCasework - Stage\ERR_1095A Casework  OLE Destination.Inputs[OLE DB Destination Input].Columns[ImportedDate]"
+                      cachedDataType="dbTimeStamp"
+                      cachedName="ImportedDate"
+                      externalMetadataColumnId="Package\Load HICSCasework - Stage\ERR_1095A Casework  OLE Destination.Inputs[OLE DB Destination Input].ExternalColumns[ImportedDate]"
+                      lineageId="Package\Load HICSCasework - Stage\Add HICS CaseWork ImportSource.Outputs[Derived Column Output].Columns[ImportedDate]" />
+                    <inputColumn
+                      refId="Package\Load HICSCasework - Stage\ERR_1095A Casework  OLE Destination.Inputs[OLE DB Destination Input].Columns[CaseworkNotes]"
+                      cachedDataType="nText"
+                      cachedName="CaseworkNotes"
+                      externalMetadataColumnId="Package\Load HICSCasework - Stage\ERR_1095A Casework  OLE Destination.Inputs[OLE DB Destination Input].ExternalColumns[CaseworkNotes]"
+                      lineageId="Package\Load HICSCasework - Stage\Add HICS CaseWork ImportSource.Outputs[Derived Column Output].Columns[CaseworkNotes]" />
+                    <inputColumn
+                      refId="Package\Load HICSCasework - Stage\ERR_1095A Casework  OLE Destination.Inputs[OLE DB Destination Input].Columns[CaseID]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="50"
+                      cachedName="CaseID"
+                      externalMetadataColumnId="Package\Load HICSCasework - Stage\ERR_1095A Casework  OLE Destination.Inputs[OLE DB Destination Input].ExternalColumns[CaseId]"
+                      lineageId="Package\Load HICSCasework - Stage\HICS CaseWork.Outputs[Flat File Source Output].Columns[CaseID]" />
+                  </inputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\Load HICSCasework - Stage\ERR_1095A Casework  OLE Destination.Inputs[OLE DB Destination Input].ExternalColumns[ImportSource]"
+                      codePage="1252"
+                      dataType="str"
+                      length="255"
+                      name="ImportSource" />
+                    <externalMetadataColumn
+                      refId="Package\Load HICSCasework - Stage\ERR_1095A Casework  OLE Destination.Inputs[OLE DB Destination Input].ExternalColumns[CaseworkNotes]"
+                      dataType="nText"
+                      name="CaseworkNotes" />
+                    <externalMetadataColumn
+                      refId="Package\Load HICSCasework - Stage\ERR_1095A Casework  OLE Destination.Inputs[OLE DB Destination Input].ExternalColumns[CreatedDate]"
+                      dataType="dbTimeStamp"
+                      name="CreatedDate" />
+                    <externalMetadataColumn
+                      refId="Package\Load HICSCasework - Stage\ERR_1095A Casework  OLE Destination.Inputs[OLE DB Destination Input].ExternalColumns[CreatedBy]"
+                      codePage="1252"
+                      dataType="str"
+                      length="50"
+                      name="CreatedBy" />
+                    <externalMetadataColumn
+                      refId="Package\Load HICSCasework - Stage\ERR_1095A Casework  OLE Destination.Inputs[OLE DB Destination Input].ExternalColumns[UpdatedDate]"
+                      dataType="dbTimeStamp"
+                      name="UpdatedDate" />
+                    <externalMetadataColumn
+                      refId="Package\Load HICSCasework - Stage\ERR_1095A Casework  OLE Destination.Inputs[OLE DB Destination Input].ExternalColumns[UpdatedBy]"
+                      codePage="1252"
+                      dataType="str"
+                      length="50"
+                      name="UpdatedBy" />
+                    <externalMetadataColumn
+                      refId="Package\Load HICSCasework - Stage\ERR_1095A Casework  OLE Destination.Inputs[OLE DB Destination Input].ExternalColumns[ImportedDate]"
+                      dataType="dbTimeStamp"
+                      name="ImportedDate" />
+                    <externalMetadataColumn
+                      refId="Package\Load HICSCasework - Stage\ERR_1095A Casework  OLE Destination.Inputs[OLE DB Destination Input].ExternalColumns[CaseWorkId]"
+                      dataType="i4"
+                      name="CaseWorkId" />
+                    <externalMetadataColumn
+                      refId="Package\Load HICSCasework - Stage\ERR_1095A Casework  OLE Destination.Inputs[OLE DB Destination Input].ExternalColumns[CaseId]"
+                      codePage="1252"
+                      dataType="str"
+                      length="50"
+                      name="CaseId" />
+                  </externalMetadataColumns>
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\Load HICSCasework - Stage\ERR_1095A Casework  OLE Destination.Outputs[OLE DB Destination Error Output]"
+                  exclusionGroup="1"
+                  isErrorOut="true"
+                  name="OLE DB Destination Error Output"
+                  synchronousInputId="Package\Load HICSCasework - Stage\ERR_1095A Casework  OLE Destination.Inputs[OLE DB Destination Input]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Load HICSCasework - Stage\ERR_1095A Casework  OLE Destination.Outputs[OLE DB Destination Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\Load HICSCasework - Stage\ERR_1095A Casework  OLE Destination.Outputs[OLE DB Destination Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\Load HICSCasework - Stage\ERR_1095A Casework  OLE Destination.Outputs[OLE DB Destination Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\Load HICSCasework - Stage\ERR_1095A Casework  OLE Destination.Outputs[OLE DB Destination Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\Load HICSCasework - Stage\HICS CaseWork"
+              componentClassID="{D23FD76B-F51D-420F-BBCB-19CBF6AC1AB4}"
+              contactInfo="Flat File Source;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;1"
+              description="Flat File Source"
+              localeId="1033"
+              name="HICS CaseWork"
+              usesDispositions="true"
+              version="1">
+              <properties>
+                <property
+                  dataType="System.Boolean"
+                  description="Specifies whether zero-length columns are treated as null."
+                  name="RetainNulls">false</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the name of an output column containing the file name. If no name is specified, no output column containing the file name will be generated."
+                  name="FileNameColumnName"></property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\Load HICSCasework - Stage\HICS CaseWork.Connections[FlatFileConnection]"
+                  connectionManagerID="Package.ConnectionManagers[HICS_Casework file]"
+                  connectionManagerRefId="Package.ConnectionManagers[HICS_Casework file]"
+                  name="FlatFileConnection" />
+              </connections>
+              <outputs>
+                <output
+                  refId="Package\Load HICSCasework - Stage\HICS CaseWork.Outputs[Flat File Source Output]"
+                  name="Flat File Source Output">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Load HICSCasework - Stage\HICS CaseWork.Outputs[Flat File Source Output].Columns[CaseID]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="RedirectRow"
+                      externalMetadataColumnId="Package\Load HICSCasework - Stage\HICS CaseWork.Outputs[Flat File Source Output].ExternalColumns[Case ID]"
+                      length="50"
+                      lineageId="Package\Load HICSCasework - Stage\HICS CaseWork.Outputs[Flat File Source Output].Columns[CaseID]"
+                      name="CaseID"
+                      truncationRowDisposition="RedirectRow">
+                      <properties>
+                        <property
+                          dataType="System.Boolean"
+                          description="Indicates whether the column uses the faster, locale-neutral parsing routines."
+                          name="FastParse">false</property>
+                        <property
+                          dataType="System.Boolean"
+                          description="Indicates whether the data is in binary format."
+                          name="UseBinaryFormat">false</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\Load HICSCasework - Stage\HICS CaseWork.Outputs[Flat File Source Output].Columns[Casework Notes]"
+                      codePage="1252"
+                      dataType="text"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="RedirectRow"
+                      externalMetadataColumnId="Package\Load HICSCasework - Stage\HICS CaseWork.Outputs[Flat File Source Output].ExternalColumns[Casework Notes]"
+                      lineageId="Package\Load HICSCasework - Stage\HICS CaseWork.Outputs[Flat File Source Output].Columns[Casework Notes]"
+                      name="Casework Notes"
+                      truncationRowDisposition="RedirectRow">
+                      <properties>
+                        <property
+                          dataType="System.Boolean"
+                          description="Indicates whether the column uses the faster, locale-neutral parsing routines."
+                          name="FastParse">false</property>
+                        <property
+                          dataType="System.Boolean"
+                          description="Indicates whether the data is in binary format."
+                          name="UseBinaryFormat">false</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\Load HICSCasework - Stage\HICS CaseWork.Outputs[Flat File Source Output].Columns[Created Date]"
+                      dataType="dbTimeStamp"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="RedirectRow"
+                      externalMetadataColumnId="Package\Load HICSCasework - Stage\HICS CaseWork.Outputs[Flat File Source Output].ExternalColumns[Created Date]"
+                      lineageId="Package\Load HICSCasework - Stage\HICS CaseWork.Outputs[Flat File Source Output].Columns[Created Date]"
+                      name="Created Date"
+                      truncationRowDisposition="RedirectRow">
+                      <properties>
+                        <property
+                          dataType="System.Boolean"
+                          description="Indicates whether the column uses the faster, locale-neutral parsing routines."
+                          name="FastParse">false</property>
+                        <property
+                          dataType="System.Boolean"
+                          description="Indicates whether the data is in binary format."
+                          name="UseBinaryFormat">false</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\Load HICSCasework - Stage\HICS CaseWork.Outputs[Flat File Source Output].Columns[Created By]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="RedirectRow"
+                      externalMetadataColumnId="Package\Load HICSCasework - Stage\HICS CaseWork.Outputs[Flat File Source Output].ExternalColumns[Created By]"
+                      length="50"
+                      lineageId="Package\Load HICSCasework - Stage\HICS CaseWork.Outputs[Flat File Source Output].Columns[Created By]"
+                      name="Created By"
+                      truncationRowDisposition="RedirectRow">
+                      <properties>
+                        <property
+                          dataType="System.Boolean"
+                          description="Indicates whether the column uses the faster, locale-neutral parsing routines."
+                          name="FastParse">false</property>
+                        <property
+                          dataType="System.Boolean"
+                          description="Indicates whether the data is in binary format."
+                          name="UseBinaryFormat">false</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\Load HICSCasework - Stage\HICS CaseWork.Outputs[Flat File Source Output].Columns[Updated Date]"
+                      dataType="dbTimeStamp"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="RedirectRow"
+                      externalMetadataColumnId="Package\Load HICSCasework - Stage\HICS CaseWork.Outputs[Flat File Source Output].ExternalColumns[Updated Date]"
+                      lineageId="Package\Load HICSCasework - Stage\HICS CaseWork.Outputs[Flat File Source Output].Columns[Updated Date]"
+                      name="Updated Date"
+                      truncationRowDisposition="RedirectRow">
+                      <properties>
+                        <property
+                          dataType="System.Boolean"
+                          description="Indicates whether the column uses the faster, locale-neutral parsing routines."
+                          name="FastParse">false</property>
+                        <property
+                          dataType="System.Boolean"
+                          description="Indicates whether the data is in binary format."
+                          name="UseBinaryFormat">false</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\Load HICSCasework - Stage\HICS CaseWork.Outputs[Flat File Source Output].Columns[Updated By]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="RedirectRow"
+                      externalMetadataColumnId="Package\Load HICSCasework - Stage\HICS CaseWork.Outputs[Flat File Source Output].ExternalColumns[Updated By]"
+                      length="50"
+                      lineageId="Package\Load HICSCasework - Stage\HICS CaseWork.Outputs[Flat File Source Output].Columns[Updated By]"
+                      name="Updated By"
+                      truncationRowDisposition="RedirectRow">
+                      <properties>
+                        <property
+                          dataType="System.Boolean"
+                          description="Indicates whether the column uses the faster, locale-neutral parsing routines."
+                          name="FastParse">false</property>
+                        <property
+                          dataType="System.Boolean"
+                          description="Indicates whether the data is in binary format."
+                          name="UseBinaryFormat">false</property>
+                      </properties>
+                    </outputColumn>
+                  </outputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\Load HICSCasework - Stage\HICS CaseWork.Outputs[Flat File Source Output].ExternalColumns[Case ID]"
+                      codePage="1252"
+                      dataType="str"
+                      length="50"
+                      name="Case ID" />
+                    <externalMetadataColumn
+                      refId="Package\Load HICSCasework - Stage\HICS CaseWork.Outputs[Flat File Source Output].ExternalColumns[Casework Notes]"
+                      codePage="1252"
+                      dataType="text"
+                      name="Casework Notes" />
+                    <externalMetadataColumn
+                      refId="Package\Load HICSCasework - Stage\HICS CaseWork.Outputs[Flat File Source Output].ExternalColumns[Created Date]"
+                      dataType="dbTimeStamp"
+                      name="Created Date" />
+                    <externalMetadataColumn
+                      refId="Package\Load HICSCasework - Stage\HICS CaseWork.Outputs[Flat File Source Output].ExternalColumns[Created By]"
+                      codePage="1252"
+                      dataType="str"
+                      length="50"
+                      name="Created By" />
+                    <externalMetadataColumn
+                      refId="Package\Load HICSCasework - Stage\HICS CaseWork.Outputs[Flat File Source Output].ExternalColumns[Updated Date]"
+                      dataType="dbTimeStamp"
+                      name="Updated Date" />
+                    <externalMetadataColumn
+                      refId="Package\Load HICSCasework - Stage\HICS CaseWork.Outputs[Flat File Source Output].ExternalColumns[Updated By]"
+                      codePage="1252"
+                      dataType="str"
+                      length="50"
+                      name="Updated By" />
+                  </externalMetadataColumns>
+                </output>
+                <output
+                  refId="Package\Load HICSCasework - Stage\HICS CaseWork.Outputs[Flat File Source Error Output]"
+                  isErrorOut="true"
+                  name="Flat File Source Error Output">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Load HICSCasework - Stage\HICS CaseWork.Outputs[Flat File Source Error Output].Columns[Flat File Source Error Output Column]"
+                      codePage="1252"
+                      dataType="text"
+                      description="Flat File Source Error Output Column"
+                      lineageId="Package\Load HICSCasework - Stage\HICS CaseWork.Outputs[Flat File Source Error Output].Columns[Flat File Source Error Output Column]"
+                      name="Flat File Source Error Output Column" />
+                    <outputColumn
+                      refId="Package\Load HICSCasework - Stage\HICS CaseWork.Outputs[Flat File Source Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\Load HICSCasework - Stage\HICS CaseWork.Outputs[Flat File Source Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\Load HICSCasework - Stage\HICS CaseWork.Outputs[Flat File Source Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\Load HICSCasework - Stage\HICS CaseWork.Outputs[Flat File Source Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\Load HICSCasework - Stage\Source Row Count"
+              componentClassID="{E2697D8C-70DA-42B2-8208-A19CE3A9FE41}"
+              contactInfo="Row Count;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;0"
+              description="Counts rows as they pass through a data flow. For example, use the number of rows processed to determine whether or not to perform cleanup operations, or update text in an e-mail message to communicate processing status."
+              name="Source Row Count">
+              <properties>
+                <property
+                  dataType="System.String"
+                  description="Specifies the variable to hold the row count."
+                  name="VariableName">User::CaseWorkNoOfRecords</property>
+              </properties>
+              <inputs>
+                <input
+                  refId="Package\Load HICSCasework - Stage\Source Row Count.Inputs[Row Count Input 1]"
+                  hasSideEffects="true"
+                  name="Row Count Input 1">
+                  <externalMetadataColumns />
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\Load HICSCasework - Stage\Source Row Count.Outputs[Row Count Output 1]"
+                  name="Row Count Output 1"
+                  synchronousInputId="Package\Load HICSCasework - Stage\Source Row Count.Inputs[Row Count Input 1]">
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+          </components>
+          <paths>
+            <path
+              refId="Package\Load HICSCasework - Stage.Paths[Derived Column Output]"
+              endId="Package\Load HICSCasework - Stage\ERR_1095A Casework  OLE Destination.Inputs[OLE DB Destination Input]"
+              name="Derived Column Output"
+              startId="Package\Load HICSCasework - Stage\Add HICS CaseWork ImportSource.Outputs[Derived Column Output]" />
+            <path
+              refId="Package\Load HICSCasework - Stage.Paths[Derived Column Output1]"
+              endId="Package\Load HICSCasework - Stage\Error Table.Inputs[OLE DB Destination Input]"
+              name="Derived Column Output"
+              startId="Package\Load HICSCasework - Stage\Derived Column.Outputs[Derived Column Output]" />
+            <path
+              refId="Package\Load HICSCasework - Stage.Paths[Flat File Source Error Output]"
+              endId="Package\Load HICSCasework - Stage\CourseWork ErrorCount.Inputs[Row Count Input 1]"
+              name="Flat File Source Error Output"
+              startId="Package\Load HICSCasework - Stage\HICS CaseWork.Outputs[Flat File Source Error Output]" />
+            <path
+              refId="Package\Load HICSCasework - Stage.Paths[Flat File Source Output]"
+              endId="Package\Load HICSCasework - Stage\Source Row Count.Inputs[Row Count Input 1]"
+              name="Flat File Source Output"
+              startId="Package\Load HICSCasework - Stage\HICS CaseWork.Outputs[Flat File Source Output]" />
+            <path
+              refId="Package\Load HICSCasework - Stage.Paths[Output 0]"
+              endId="Package\Load HICSCasework - Stage\Derived Column.Inputs[Derived Column Input]"
+              name="Output 0"
+              startId="Package\Load HICSCasework - Stage\ChangeCodeToDescription.Outputs[Output 0]" />
+            <path
+              refId="Package\Load HICSCasework - Stage.Paths[Row Count Output 1]"
+              endId="Package\Load HICSCasework - Stage\Add HICS CaseWork ImportSource.Inputs[Derived Column Input]"
+              name="Row Count Output 1"
+              startId="Package\Load HICSCasework - Stage\Source Row Count.Outputs[Row Count Output 1]" />
+            <path
+              refId="Package\Load HICSCasework - Stage.Paths[Row Count Output 11]"
+              endId="Package\Load HICSCasework - Stage\ChangeCodeToDescription.Inputs[Input 0]"
+              name="Row Count Output 1"
+              startId="Package\Load HICSCasework - Stage\CourseWork ErrorCount.Outputs[Row Count Output 1]" />
+          </paths>
+        </pipeline>
+      </DTS:ObjectData>
+    </DTS:Executable>
+  </DTS:Executables>
+  <DTS:DesignTimeProperties><![CDATA[<?xml version="1.0"?>
+<!--This CDATA section contains the layout information of the package. The section includes information such as (x,y) coordinates, width, and height.-->
+<!--If you manually edit this section and make a mistake, you can delete it. -->
+<!--The package will still be able to load normally but the previous layout information will be lost and the designer will automatically re-arrange the elements on the design surface.-->
+<Objects
+  Version="sql11">
+  <!--Each node below will contain properties that do not affect runtime behavior.-->
+  <Package
+    design-time-name="Package">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph">
+        <NodeLayout
+          Size="211,42"
+          Id="Package\Load HICSCasework - Stage"
+          TopLeft="141.166666666667,126.833333333333" />
+      </GraphLayout>
+    </LayoutInfo>
+  </Package>
+  <TaskHost
+    design-time-name="Package\Load HICSCasework - Stage">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="16" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:mssgm="clr-namespace:Microsoft.SqlServer.Graph.Model;assembly=Microsoft.SqlServer.Graph">
+        <NodeLayout
+          Size="144,42"
+          Id="Package\Load HICSCasework - Stage\ChangeCodeToDescription"
+          TopLeft="399,141" />
+        <NodeLayout
+          Size="166,42"
+          Id="Package\Load HICSCasework - Stage\Source Row Count"
+          TopLeft="94,129" />
+        <NodeLayout
+          Size="144,42"
+          Id="Package\Load HICSCasework - Stage\Error Table"
+          TopLeft="401,300" />
+        <NodeLayout
+          Size="153,42"
+          Id="Package\Load HICSCasework - Stage\HICS CaseWork"
+          TopLeft="92.5,43.4999999999999" />
+        <NodeLayout
+          Size="144,42"
+          Id="Package\Load HICSCasework - Stage\Derived Column"
+          TopLeft="399,215" />
+        <NodeLayout
+          Size="154,55"
+          Id="Package\Load HICSCasework - Stage\ERR_1095A Casework  OLE Destination"
+          TopLeft="93,308" />
+        <NodeLayout
+          Size="154,52"
+          Id="Package\Load HICSCasework - Stage\Add HICS CaseWork ImportSource"
+          TopLeft="93,203" />
+        <NodeLayout
+          Size="145,42"
+          Id="Package\Load HICSCasework - Stage\CourseWork ErrorCount"
+          TopLeft="312,43" />
+        <EdgeLayout
+          Id="Package\Load HICSCasework - Stage.Paths[Row Count Output 11]"
+          TopLeft="384.5,85">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="86.5,56"
+              Start="0,0"
+              End="86.5,48.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,24" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,24"
+                    Point2="0,28"
+                    Point3="4,28" />
+                  <mssgle:LineSegment
+                    End="82.5,28" />
+                  <mssgle:CubicBezierSegment
+                    Point1="82.5,28"
+                    Point2="86.5,28"
+                    Point3="86.5,32" />
+                  <mssgle:LineSegment
+                    End="86.5,48.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\Load HICSCasework - Stage.Paths[Row Count Output 1]"
+          TopLeft="173.5,171">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,32"
+              Start="0,0"
+              End="0,24.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,24.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\Load HICSCasework - Stage.Paths[Output 0]"
+          TopLeft="471,183">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,32"
+              Start="0,0"
+              End="0,24.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,24.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\Load HICSCasework - Stage.Paths[Flat File Source Output]"
+          TopLeft="169,85.4999999999999">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="8,43.5000000000001"
+              Start="0,0"
+              End="8,36.0000000000001">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,17.7500000000001" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,17.7500000000001"
+                    Point2="0,21.7500000000001"
+                    Point3="4,21.7500000000001" />
+                  <mssgle:LineSegment
+                    End="4,21.7500000000001" />
+                  <mssgle:CubicBezierSegment
+                    Point1="4,21.7500000000001"
+                    Point2="8,21.7500000000001"
+                    Point3="8,25.7500000000001" />
+                  <mssgle:LineSegment
+                    End="8,36.0000000000001" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\Load HICSCasework - Stage.Paths[Flat File Source Error Output]"
+          TopLeft="245.5,64.2499999999999">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="66.5,0"
+              Start="0,0"
+              End="59,0">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="59,0" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <mssgm:EdgeLabel
+              BoundingBox="-34.12638671875,5,127.2527734375,11.609375"
+              RelativePosition="Any" />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\Load HICSCasework - Stage.Paths[Derived Column Output1]"
+          TopLeft="472,257">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,43"
+              Start="0,0"
+              End="0,35.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,35.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\Load HICSCasework - Stage.Paths[Derived Column Output]"
+          TopLeft="170,255">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,53"
+              Start="0,0"
+              End="0,45.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,45.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+      </GraphLayout>
+    </LayoutInfo>
+  </TaskHost>
+  <PipelineComponentMetadata
+    design-time-name="Package\Load HICSCasework - Stage\ERR_1095A Casework  OLE Destination">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+      <Property>
+        <Name>TableInfoObjectType</Name>
+        <Value
+          type="q2:string">Table</Value>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+  <PipelineComponentMetadata
+    design-time-name="Package\Load HICSCasework - Stage\Error Table">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+      <Property>
+        <Name>TableInfoObjectType</Name>
+        <Value
+          type="q2:string">Table</Value>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+</Objects>]]></DTS:DesignTimeProperties>
+</DTS:Executable>

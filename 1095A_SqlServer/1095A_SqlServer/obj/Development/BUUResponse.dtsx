@@ -1,0 +1,1769 @@
+<?xml version="1.0"?>
+<DTS:Executable xmlns:DTS="www.microsoft.com/SqlServer/Dts"
+  DTS:refId="Package"
+  DTS:CreationDate="4/16/2015 1:39:25 PM"
+  DTS:CreationName="Microsoft.Package"
+  DTS:CreatorComputerName="TCOISPJW8DB08"
+  DTS:CreatorName="ECAP\jhenningsen"
+  DTS:DTSID="{20A94204-9A75-4171-9974-1F13DA806190}"
+  DTS:ExecutableType="Microsoft.Package"
+  DTS:LastModifiedProductVersion="14.0.1000.169"
+  DTS:LocaleID="1033"
+  DTS:ObjectName="BUUResponse"
+  DTS:PackageType="5"
+  DTS:VersionBuild="94"
+  DTS:VersionGUID="{466C8E94-EFAD-4B93-8F53-9376D8E96C11}">
+  <DTS:Property
+    DTS:Name="PackageFormatVersion">8</DTS:Property>
+  <DTS:ConnectionManagers>
+    <DTS:ConnectionManager
+      DTS:refId="Package.ConnectionManagers[BUU Excel Connection Manager]"
+      DTS:CreationName="EXCEL"
+      DTS:DelayValidation="True"
+      DTS:DTSID="{B18F6CA2-3258-40B2-9D64-04DB3D6B2C1E}"
+      DTS:ObjectName="BUU Excel Connection Manager">
+      <DTS:PropertyExpression
+        DTS:Name="ConnectionString">(DT_WSTR, 200) ("Provider=Microsoft.ACE.OLEDB.12.0;Data Source=" + @[User::BUUFileName] + ";Extended Properties=\"Excel 12.0 XML;HDR=YES\";")</DTS:PropertyExpression>
+      <DTS:ObjectData>
+        <DTS:ConnectionManager
+          DTS:ConnectionString="Provider=Microsoft.ACE.OLEDB.12.0;Data Source=\\tcoispDw8ap22\ssis\BUUResponse\ERR_Exclusion_report_D150415_T12_20150416 (1).xlsx;Extended Properties=&quot;EXCEL 12.0 XML;HDR=YES&quot;;" />
+      </DTS:ObjectData>
+    </DTS:ConnectionManager>
+    <DTS:ConnectionManager
+      DTS:refId="Package.ConnectionManagers[ERR_1095A]"
+      DTS:CreationName="OLEDB"
+      DTS:DTSID="{AF3F95D4-9E29-4EE5-8FAB-20DDC626CE50}"
+      DTS:ObjectName="ERR_1095A">
+      <DTS:ObjectData>
+        <DTS:ConnectionManager
+          DTS:ConnectionString="Data Source=localhost;Initial Catalog=ERR_1095A;Provider=SQLNCLI11.1;Integrated Security=SSPI;Auto Translate=False;" />
+      </DTS:ObjectData>
+    </DTS:ConnectionManager>
+    <DTS:ConnectionManager
+      DTS:refId="Package.ConnectionManagers[HICSCaseTyping.xlsx]"
+      DTS:CreationName="FILE"
+      DTS:DTSID="{34258683-2563-4F10-A54D-ECF8AB169D97}"
+      DTS:ObjectName="HICSCaseTyping.xlsx">
+      <DTS:ObjectData>
+        <DTS:ConnectionManager
+          DTS:ConnectionString="\\TCOISPDW8WS03\data\files\out\CaseTyping\HICSCaseTyping.xlsx" />
+      </DTS:ObjectData>
+    </DTS:ConnectionManager>
+  </DTS:ConnectionManagers>
+  <DTS:Variables>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{C0EFAB94-457F-4AFB-81F1-004460205407}"
+      DTS:IncludeInDebugDump="2345"
+      DTS:Namespace="User"
+      DTS:ObjectName="BUUFileName">
+      <DTS:VariableValue
+        DTS:DataType="8">\\tcoispDw8ap22\ssis\BUUResponse\ERR_Exclusion_report_D150415_T12_20150416 (1).xlsx</DTS:VariableValue>
+    </DTS:Variable>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{6A008F1A-B354-4F5E-9D0E-79C02439F03D}"
+      DTS:IncludeInDebugDump="2345"
+      DTS:Namespace="User"
+      DTS:ObjectName="BUUFolder">
+      <DTS:VariableValue
+        DTS:DataType="8">\\tcoispDw8ap22\ssis\BUUResponse</DTS:VariableValue>
+    </DTS:Variable>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{52547253-F4E6-4E60-B51C-924327B30545}"
+      DTS:IncludeInDebugDump="6789"
+      DTS:Namespace="User"
+      DTS:ObjectName="ErrorCount">
+      <DTS:VariableValue
+        DTS:DataType="3">0</DTS:VariableValue>
+    </DTS:Variable>
+  </DTS:Variables>
+  <DTS:Executables>
+    <DTS:Executable
+      DTS:refId="Package\Foreach Loop Container"
+      DTS:CreationName="STOCK:FOREACHLOOP"
+      DTS:Description="Foreach Loop Container"
+      DTS:DTSID="{9B82D4C2-8662-444A-AC6F-815810F16450}"
+      DTS:ExecutableType="STOCK:FOREACHLOOP"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Foreach Loop Container">
+      <DTS:ForEachEnumerator
+        DTS:CreationName="Microsoft.ForEachFileEnumerator"
+        DTS:DTSID="{4984194D-6B74-4E20-8A25-EC56E51D3650}"
+        DTS:ObjectName="{4984194D-6B74-4E20-8A25-EC56E51D3650}">
+        <DTS:PropertyExpression
+          DTS:Name="Directory">@[User::BUUFolder]</DTS:PropertyExpression>
+        <DTS:ObjectData>
+          <ForEachFileEnumeratorProperties>
+            <FEFEProperty
+              Folder="\\tcoispDw8ap22\ssis\BUUResponse" />
+            <FEFEProperty
+              FileSpec="*.xlsx" />
+            <FEFEProperty
+              FileNameRetrievalType="0" />
+            <FEFEProperty
+              Recurse="0" />
+          </ForEachFileEnumeratorProperties>
+        </DTS:ObjectData>
+      </DTS:ForEachEnumerator>
+      <DTS:Variables />
+      <DTS:Executables>
+        <DTS:Executable
+          DTS:refId="Package\Foreach Loop Container\Stage BUUResponse Data Flow Task"
+          DTS:CreationName="Microsoft.Pipeline"
+          DTS:DelayValidation="True"
+          DTS:Description="Data Flow Task"
+          DTS:DTSID="{16752B47-CA10-4775-A2A3-B5F87B9B803D}"
+          DTS:ExecutableType="Microsoft.Pipeline"
+          DTS:LocaleID="-1"
+          DTS:ObjectName="Stage BUUResponse Data Flow Task"
+          DTS:TaskContact="Performs high-performance data extraction, transformation and loading;Microsoft Corporation; Microsoft SQL Server; (C) 2007 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1">
+          <DTS:Variables />
+          <DTS:ObjectData>
+            <pipeline
+              version="1">
+              <components>
+                <component
+                  refId="Package\Foreach Loop Container\Stage BUUResponse Data Flow Task\BUUResponse Excel Source"
+                  componentClassID="Microsoft.ExcelSource"
+                  contactInfo="Excel Source;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;1"
+                  description="Excel Source"
+                  name="BUUResponse Excel Source"
+                  usesDispositions="true"
+                  validateExternalMetadata="False"
+                  version="1">
+                  <properties>
+                    <property
+                      dataType="System.Int32"
+                      description="The number of seconds before a command times out.  A value of 0 indicates an infinite time-out."
+                      name="CommandTimeout">0</property>
+                    <property
+                      dataType="System.String"
+                      description="Specifies the name of the database object used to open a rowset."
+                      name="OpenRowset">Sheet1$</property>
+                    <property
+                      dataType="System.String"
+                      description="Specifies the variable that contains the name of the database object used to open a rowset."
+                      name="OpenRowsetVariable">User::SheetName</property>
+                    <property
+                      dataType="System.String"
+                      description="The SQL command to be executed."
+                      name="SqlCommand"
+                      UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor, Microsoft.DataTransformationServices.Controls, Version=14.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"></property>
+                    <property
+                      dataType="System.String"
+                      description="The variable that contains the SQL command to be executed."
+                      name="SqlCommandVariable"></property>
+                    <property
+                      dataType="System.Int32"
+                      description="Specifies the mode used to access the database."
+                      name="AccessMode"
+                      typeConverter="AccessMode">0</property>
+                    <property
+                      dataType="System.String"
+                      description="The mapping from parameters in the SQL command to variables."
+                      name="ParameterMapping"></property>
+                  </properties>
+                  <connections>
+                    <connection
+                      refId="Package\Foreach Loop Container\Stage BUUResponse Data Flow Task\BUUResponse Excel Source.Connections[OleDbConnection]"
+                      connectionManagerID="Package.ConnectionManagers[BUU Excel Connection Manager]"
+                      connectionManagerRefId="Package.ConnectionManagers[BUU Excel Connection Manager]"
+                      description="The OLE DB runtime connection used to access the database."
+                      name="OleDbConnection" />
+                  </connections>
+                  <outputs>
+                    <output
+                      refId="Package\Foreach Loop Container\Stage BUUResponse Data Flow Task\BUUResponse Excel Source.Outputs[Excel Source Output]"
+                      name="Excel Source Output">
+                      <outputColumns>
+                        <outputColumn
+                          refId="Package\Foreach Loop Container\Stage BUUResponse Data Flow Task\BUUResponse Excel Source.Outputs[Excel Source Output].Columns[FIL_NAME]"
+                          dataType="wstr"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Foreach Loop Container\Stage BUUResponse Data Flow Task\BUUResponse Excel Source.Outputs[Excel Source Output].ExternalColumns[FIL_NAME]"
+                          length="255"
+                          lineageId="Package\Foreach Loop Container\Stage BUUResponse Data Flow Task\BUUResponse Excel Source.Outputs[Excel Source Output].Columns[FIL_NAME]"
+                          name="FIL_NAME"
+                          truncationRowDisposition="FailComponent" />
+                        <outputColumn
+                          refId="Package\Foreach Loop Container\Stage BUUResponse Data Flow Task\BUUResponse Excel Source.Outputs[Excel Source Output].Columns[ETL_LD_DT]"
+                          dataType="date"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Foreach Loop Container\Stage BUUResponse Data Flow Task\BUUResponse Excel Source.Outputs[Excel Source Output].ExternalColumns[ETL_LD_DT]"
+                          lineageId="Package\Foreach Loop Container\Stage BUUResponse Data Flow Task\BUUResponse Excel Source.Outputs[Excel Source Output].Columns[ETL_LD_DT]"
+                          name="ETL_LD_DT"
+                          truncationRowDisposition="FailComponent" />
+                        <outputColumn
+                          refId="Package\Foreach Loop Container\Stage BUUResponse Data Flow Task\BUUResponse Excel Source.Outputs[Excel Source Output].Columns[FFM_INTRNL_INV_REC]"
+                          dataType="r8"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Foreach Loop Container\Stage BUUResponse Data Flow Task\BUUResponse Excel Source.Outputs[Excel Source Output].ExternalColumns[FFM_INTRNL_INV_REC]"
+                          lineageId="Package\Foreach Loop Container\Stage BUUResponse Data Flow Task\BUUResponse Excel Source.Outputs[Excel Source Output].Columns[FFM_INTRNL_INV_REC]"
+                          name="FFM_INTRNL_INV_REC"
+                          truncationRowDisposition="FailComponent" />
+                        <outputColumn
+                          refId="Package\Foreach Loop Container\Stage BUUResponse Data Flow Task\BUUResponse Excel Source.Outputs[Excel Source Output].Columns[HIOS_ID]"
+                          dataType="r8"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Foreach Loop Container\Stage BUUResponse Data Flow Task\BUUResponse Excel Source.Outputs[Excel Source Output].ExternalColumns[HIOS_ID]"
+                          lineageId="Package\Foreach Loop Container\Stage BUUResponse Data Flow Task\BUUResponse Excel Source.Outputs[Excel Source Output].Columns[HIOS_ID]"
+                          name="HIOS_ID"
+                          truncationRowDisposition="FailComponent" />
+                        <outputColumn
+                          refId="Package\Foreach Loop Container\Stage BUUResponse Data Flow Task\BUUResponse Excel Source.Outputs[Excel Source Output].Columns[FFM_PLAN_BNFT_STRT_DT]"
+                          dataType="r8"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Foreach Loop Container\Stage BUUResponse Data Flow Task\BUUResponse Excel Source.Outputs[Excel Source Output].ExternalColumns[FFM_PLAN_BNFT_STRT_DT]"
+                          lineageId="Package\Foreach Loop Container\Stage BUUResponse Data Flow Task\BUUResponse Excel Source.Outputs[Excel Source Output].Columns[FFM_PLAN_BNFT_STRT_DT]"
+                          name="FFM_PLAN_BNFT_STRT_DT"
+                          truncationRowDisposition="FailComponent" />
+                        <outputColumn
+                          refId="Package\Foreach Loop Container\Stage BUUResponse Data Flow Task\BUUResponse Excel Source.Outputs[Excel Source Output].Columns[ISSR_PLAN_BNFT_STRT_DT]"
+                          dataType="r8"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Foreach Loop Container\Stage BUUResponse Data Flow Task\BUUResponse Excel Source.Outputs[Excel Source Output].ExternalColumns[ISSR_PLAN_BNFT_STRT_DT]"
+                          lineageId="Package\Foreach Loop Container\Stage BUUResponse Data Flow Task\BUUResponse Excel Source.Outputs[Excel Source Output].Columns[ISSR_PLAN_BNFT_STRT_DT]"
+                          name="ISSR_PLAN_BNFT_STRT_DT"
+                          truncationRowDisposition="FailComponent" />
+                        <outputColumn
+                          refId="Package\Foreach Loop Container\Stage BUUResponse Data Flow Task\BUUResponse Excel Source.Outputs[Excel Source Output].Columns[FTI_PLAN_BNFT_STRT_DT_FLG]"
+                          dataType="wstr"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Foreach Loop Container\Stage BUUResponse Data Flow Task\BUUResponse Excel Source.Outputs[Excel Source Output].ExternalColumns[FTI_PLAN_BNFT_STRT_DT_FLG]"
+                          length="255"
+                          lineageId="Package\Foreach Loop Container\Stage BUUResponse Data Flow Task\BUUResponse Excel Source.Outputs[Excel Source Output].Columns[FTI_PLAN_BNFT_STRT_DT_FLG]"
+                          name="FTI_PLAN_BNFT_STRT_DT_FLG"
+                          truncationRowDisposition="FailComponent" />
+                        <outputColumn
+                          refId="Package\Foreach Loop Container\Stage BUUResponse Data Flow Task\BUUResponse Excel Source.Outputs[Excel Source Output].Columns[FFM_PLAN_BNFT_END_DT]"
+                          dataType="r8"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Foreach Loop Container\Stage BUUResponse Data Flow Task\BUUResponse Excel Source.Outputs[Excel Source Output].ExternalColumns[FFM_PLAN_BNFT_END_DT]"
+                          lineageId="Package\Foreach Loop Container\Stage BUUResponse Data Flow Task\BUUResponse Excel Source.Outputs[Excel Source Output].Columns[FFM_PLAN_BNFT_END_DT]"
+                          name="FFM_PLAN_BNFT_END_DT"
+                          truncationRowDisposition="FailComponent" />
+                        <outputColumn
+                          refId="Package\Foreach Loop Container\Stage BUUResponse Data Flow Task\BUUResponse Excel Source.Outputs[Excel Source Output].Columns[ISSR_PLAN_BNFT_END_DT]"
+                          dataType="r8"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Foreach Loop Container\Stage BUUResponse Data Flow Task\BUUResponse Excel Source.Outputs[Excel Source Output].ExternalColumns[ISSR_PLAN_BNFT_END_DT]"
+                          lineageId="Package\Foreach Loop Container\Stage BUUResponse Data Flow Task\BUUResponse Excel Source.Outputs[Excel Source Output].Columns[ISSR_PLAN_BNFT_END_DT]"
+                          name="ISSR_PLAN_BNFT_END_DT"
+                          truncationRowDisposition="FailComponent" />
+                        <outputColumn
+                          refId="Package\Foreach Loop Container\Stage BUUResponse Data Flow Task\BUUResponse Excel Source.Outputs[Excel Source Output].Columns[FTI_PLAN_BNFT_END_DT_FLG]"
+                          dataType="wstr"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Foreach Loop Container\Stage BUUResponse Data Flow Task\BUUResponse Excel Source.Outputs[Excel Source Output].ExternalColumns[FTI_PLAN_BNFT_END_DT_FLG]"
+                          length="255"
+                          lineageId="Package\Foreach Loop Container\Stage BUUResponse Data Flow Task\BUUResponse Excel Source.Outputs[Excel Source Output].Columns[FTI_PLAN_BNFT_END_DT_FLG]"
+                          name="FTI_PLAN_BNFT_END_DT_FLG"
+                          truncationRowDisposition="FailComponent" />
+                        <outputColumn
+                          refId="Package\Foreach Loop Container\Stage BUUResponse Data Flow Task\BUUResponse Excel Source.Outputs[Excel Source Output].Columns[FTI_PLCY_APTC_AMT_FLG]"
+                          dataType="wstr"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Foreach Loop Container\Stage BUUResponse Data Flow Task\BUUResponse Excel Source.Outputs[Excel Source Output].ExternalColumns[FTI_PLCY_APTC_AMT_FLG]"
+                          length="255"
+                          lineageId="Package\Foreach Loop Container\Stage BUUResponse Data Flow Task\BUUResponse Excel Source.Outputs[Excel Source Output].Columns[FTI_PLCY_APTC_AMT_FLG]"
+                          name="FTI_PLCY_APTC_AMT_FLG"
+                          truncationRowDisposition="FailComponent" />
+                        <outputColumn
+                          refId="Package\Foreach Loop Container\Stage BUUResponse Data Flow Task\BUUResponse Excel Source.Outputs[Excel Source Output].Columns[FTI_PLCY_TOT_PRM_AMT_FLG]"
+                          dataType="wstr"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Foreach Loop Container\Stage BUUResponse Data Flow Task\BUUResponse Excel Source.Outputs[Excel Source Output].ExternalColumns[FTI_PLCY_TOT_PRM_AMT_FLG]"
+                          length="255"
+                          lineageId="Package\Foreach Loop Container\Stage BUUResponse Data Flow Task\BUUResponse Excel Source.Outputs[Excel Source Output].Columns[FTI_PLCY_TOT_PRM_AMT_FLG]"
+                          name="FTI_PLCY_TOT_PRM_AMT_FLG"
+                          truncationRowDisposition="FailComponent" />
+                        <outputColumn
+                          refId="Package\Foreach Loop Container\Stage BUUResponse Data Flow Task\BUUResponse Excel Source.Outputs[Excel Source Output].Columns[FTI_PRSN_MLG_ADR_LNE_1_TXT_FLG]"
+                          dataType="wstr"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Foreach Loop Container\Stage BUUResponse Data Flow Task\BUUResponse Excel Source.Outputs[Excel Source Output].ExternalColumns[FTI_PRSN_MLG_ADR_LNE_1_TXT_FLG]"
+                          length="255"
+                          lineageId="Package\Foreach Loop Container\Stage BUUResponse Data Flow Task\BUUResponse Excel Source.Outputs[Excel Source Output].Columns[FTI_PRSN_MLG_ADR_LNE_1_TXT_FLG]"
+                          name="FTI_PRSN_MLG_ADR_LNE_1_TXT_FLG"
+                          truncationRowDisposition="FailComponent" />
+                        <outputColumn
+                          refId="Package\Foreach Loop Container\Stage BUUResponse Data Flow Task\BUUResponse Excel Source.Outputs[Excel Source Output].Columns[FTI_PRSN_MLG_ADR_LNE_2_TXT_FLG]"
+                          dataType="wstr"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Foreach Loop Container\Stage BUUResponse Data Flow Task\BUUResponse Excel Source.Outputs[Excel Source Output].ExternalColumns[FTI_PRSN_MLG_ADR_LNE_2_TXT_FLG]"
+                          length="255"
+                          lineageId="Package\Foreach Loop Container\Stage BUUResponse Data Flow Task\BUUResponse Excel Source.Outputs[Excel Source Output].Columns[FTI_PRSN_MLG_ADR_LNE_2_TXT_FLG]"
+                          name="FTI_PRSN_MLG_ADR_LNE_2_TXT_FLG"
+                          truncationRowDisposition="FailComponent" />
+                        <outputColumn
+                          refId="Package\Foreach Loop Container\Stage BUUResponse Data Flow Task\BUUResponse Excel Source.Outputs[Excel Source Output].Columns[FTI_PRSN_MLG_ADR_CITY_NAME_FLG]"
+                          dataType="wstr"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Foreach Loop Container\Stage BUUResponse Data Flow Task\BUUResponse Excel Source.Outputs[Excel Source Output].ExternalColumns[FTI_PRSN_MLG_ADR_CITY_NAME_FLG]"
+                          length="255"
+                          lineageId="Package\Foreach Loop Container\Stage BUUResponse Data Flow Task\BUUResponse Excel Source.Outputs[Excel Source Output].Columns[FTI_PRSN_MLG_ADR_CITY_NAME_FLG]"
+                          name="FTI_PRSN_MLG_ADR_CITY_NAME_FLG"
+                          truncationRowDisposition="FailComponent" />
+                        <outputColumn
+                          refId="Package\Foreach Loop Container\Stage BUUResponse Data Flow Task\BUUResponse Excel Source.Outputs[Excel Source Output].Columns[FTI_PRSN_MLG_ADR_STATE_CD_FLG]"
+                          dataType="wstr"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Foreach Loop Container\Stage BUUResponse Data Flow Task\BUUResponse Excel Source.Outputs[Excel Source Output].ExternalColumns[FTI_PRSN_MLG_ADR_STATE_CD_FLG]"
+                          length="255"
+                          lineageId="Package\Foreach Loop Container\Stage BUUResponse Data Flow Task\BUUResponse Excel Source.Outputs[Excel Source Output].Columns[FTI_PRSN_MLG_ADR_STATE_CD_FLG]"
+                          name="FTI_PRSN_MLG_ADR_STATE_CD_FLG"
+                          truncationRowDisposition="FailComponent" />
+                        <outputColumn
+                          refId="Package\Foreach Loop Container\Stage BUUResponse Data Flow Task\BUUResponse Excel Source.Outputs[Excel Source Output].Columns[FTI_PRSN_MLG_ADR_ZIP_CD_FLG]"
+                          dataType="wstr"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Foreach Loop Container\Stage BUUResponse Data Flow Task\BUUResponse Excel Source.Outputs[Excel Source Output].ExternalColumns[FTI_PRSN_MLG_ADR_ZIP_CD_FLG]"
+                          length="255"
+                          lineageId="Package\Foreach Loop Container\Stage BUUResponse Data Flow Task\BUUResponse Excel Source.Outputs[Excel Source Output].Columns[FTI_PRSN_MLG_ADR_ZIP_CD_FLG]"
+                          name="FTI_PRSN_MLG_ADR_ZIP_CD_FLG"
+                          truncationRowDisposition="FailComponent" />
+                        <outputColumn
+                          refId="Package\Foreach Loop Container\Stage BUUResponse Data Flow Task\BUUResponse Excel Source.Outputs[Excel Source Output].Columns[FTI_ISSR_OVRL_REC_FLAG]"
+                          dataType="r8"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Foreach Loop Container\Stage BUUResponse Data Flow Task\BUUResponse Excel Source.Outputs[Excel Source Output].ExternalColumns[FTI_ISSR_OVRL_REC_FLAG]"
+                          lineageId="Package\Foreach Loop Container\Stage BUUResponse Data Flow Task\BUUResponse Excel Source.Outputs[Excel Source Output].Columns[FTI_ISSR_OVRL_REC_FLAG]"
+                          name="FTI_ISSR_OVRL_REC_FLAG"
+                          truncationRowDisposition="FailComponent" />
+                        <outputColumn
+                          refId="Package\Foreach Loop Container\Stage BUUResponse Data Flow Task\BUUResponse Excel Source.Outputs[Excel Source Output].Columns[EXCLUDE_REASON_IND]"
+                          dataType="r8"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Foreach Loop Container\Stage BUUResponse Data Flow Task\BUUResponse Excel Source.Outputs[Excel Source Output].ExternalColumns[EXCLUDE_REASON_IND]"
+                          lineageId="Package\Foreach Loop Container\Stage BUUResponse Data Flow Task\BUUResponse Excel Source.Outputs[Excel Source Output].Columns[EXCLUDE_REASON_IND]"
+                          name="EXCLUDE_REASON_IND"
+                          truncationRowDisposition="FailComponent" />
+                        <outputColumn
+                          refId="Package\Foreach Loop Container\Stage BUUResponse Data Flow Task\BUUResponse Excel Source.Outputs[Excel Source Output].Columns[EXCLUDE_REASON_DISC]"
+                          dataType="wstr"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Foreach Loop Container\Stage BUUResponse Data Flow Task\BUUResponse Excel Source.Outputs[Excel Source Output].ExternalColumns[EXCLUDE_REASON_DISC]"
+                          length="255"
+                          lineageId="Package\Foreach Loop Container\Stage BUUResponse Data Flow Task\BUUResponse Excel Source.Outputs[Excel Source Output].Columns[EXCLUDE_REASON_DISC]"
+                          name="EXCLUDE_REASON_DISC"
+                          truncationRowDisposition="FailComponent" />
+                        <outputColumn
+                          refId="Package\Foreach Loop Container\Stage BUUResponse Data Flow Task\BUUResponse Excel Source.Outputs[Excel Source Output].Columns[DATES_OVERLAP_FLAG]"
+                          dataType="r8"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Foreach Loop Container\Stage BUUResponse Data Flow Task\BUUResponse Excel Source.Outputs[Excel Source Output].ExternalColumns[DATES_OVERLAP_FLAG]"
+                          lineageId="Package\Foreach Loop Container\Stage BUUResponse Data Flow Task\BUUResponse Excel Source.Outputs[Excel Source Output].Columns[DATES_OVERLAP_FLAG]"
+                          name="DATES_OVERLAP_FLAG"
+                          truncationRowDisposition="FailComponent" />
+                        <outputColumn
+                          refId="Package\Foreach Loop Container\Stage BUUResponse Data Flow Task\BUUResponse Excel Source.Outputs[Excel Source Output].Columns[OVERLAP_PLCY_LIST]"
+                          dataType="r8"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Foreach Loop Container\Stage BUUResponse Data Flow Task\BUUResponse Excel Source.Outputs[Excel Source Output].ExternalColumns[OVERLAP_PLCY_LIST]"
+                          lineageId="Package\Foreach Loop Container\Stage BUUResponse Data Flow Task\BUUResponse Excel Source.Outputs[Excel Source Output].Columns[OVERLAP_PLCY_LIST]"
+                          name="OVERLAP_PLCY_LIST"
+                          truncationRowDisposition="FailComponent" />
+                      </outputColumns>
+                      <externalMetadataColumns
+                        isUsed="True">
+                        <externalMetadataColumn
+                          refId="Package\Foreach Loop Container\Stage BUUResponse Data Flow Task\BUUResponse Excel Source.Outputs[Excel Source Output].ExternalColumns[FIL_NAME]"
+                          dataType="wstr"
+                          length="255"
+                          name="FIL_NAME" />
+                        <externalMetadataColumn
+                          refId="Package\Foreach Loop Container\Stage BUUResponse Data Flow Task\BUUResponse Excel Source.Outputs[Excel Source Output].ExternalColumns[ETL_LD_DT]"
+                          dataType="date"
+                          name="ETL_LD_DT" />
+                        <externalMetadataColumn
+                          refId="Package\Foreach Loop Container\Stage BUUResponse Data Flow Task\BUUResponse Excel Source.Outputs[Excel Source Output].ExternalColumns[FFM_INTRNL_INV_REC]"
+                          dataType="r8"
+                          name="FFM_INTRNL_INV_REC" />
+                        <externalMetadataColumn
+                          refId="Package\Foreach Loop Container\Stage BUUResponse Data Flow Task\BUUResponse Excel Source.Outputs[Excel Source Output].ExternalColumns[HIOS_ID]"
+                          dataType="r8"
+                          name="HIOS_ID" />
+                        <externalMetadataColumn
+                          refId="Package\Foreach Loop Container\Stage BUUResponse Data Flow Task\BUUResponse Excel Source.Outputs[Excel Source Output].ExternalColumns[FFM_PLAN_BNFT_STRT_DT]"
+                          dataType="r8"
+                          name="FFM_PLAN_BNFT_STRT_DT" />
+                        <externalMetadataColumn
+                          refId="Package\Foreach Loop Container\Stage BUUResponse Data Flow Task\BUUResponse Excel Source.Outputs[Excel Source Output].ExternalColumns[ISSR_PLAN_BNFT_STRT_DT]"
+                          dataType="r8"
+                          name="ISSR_PLAN_BNFT_STRT_DT" />
+                        <externalMetadataColumn
+                          refId="Package\Foreach Loop Container\Stage BUUResponse Data Flow Task\BUUResponse Excel Source.Outputs[Excel Source Output].ExternalColumns[FTI_PLAN_BNFT_STRT_DT_FLG]"
+                          dataType="wstr"
+                          length="255"
+                          name="FTI_PLAN_BNFT_STRT_DT_FLG" />
+                        <externalMetadataColumn
+                          refId="Package\Foreach Loop Container\Stage BUUResponse Data Flow Task\BUUResponse Excel Source.Outputs[Excel Source Output].ExternalColumns[FFM_PLAN_BNFT_END_DT]"
+                          dataType="r8"
+                          name="FFM_PLAN_BNFT_END_DT" />
+                        <externalMetadataColumn
+                          refId="Package\Foreach Loop Container\Stage BUUResponse Data Flow Task\BUUResponse Excel Source.Outputs[Excel Source Output].ExternalColumns[ISSR_PLAN_BNFT_END_DT]"
+                          dataType="r8"
+                          name="ISSR_PLAN_BNFT_END_DT" />
+                        <externalMetadataColumn
+                          refId="Package\Foreach Loop Container\Stage BUUResponse Data Flow Task\BUUResponse Excel Source.Outputs[Excel Source Output].ExternalColumns[FTI_PLAN_BNFT_END_DT_FLG]"
+                          dataType="wstr"
+                          length="255"
+                          name="FTI_PLAN_BNFT_END_DT_FLG" />
+                        <externalMetadataColumn
+                          refId="Package\Foreach Loop Container\Stage BUUResponse Data Flow Task\BUUResponse Excel Source.Outputs[Excel Source Output].ExternalColumns[FTI_PLCY_APTC_AMT_FLG]"
+                          dataType="wstr"
+                          length="255"
+                          name="FTI_PLCY_APTC_AMT_FLG" />
+                        <externalMetadataColumn
+                          refId="Package\Foreach Loop Container\Stage BUUResponse Data Flow Task\BUUResponse Excel Source.Outputs[Excel Source Output].ExternalColumns[FTI_PLCY_TOT_PRM_AMT_FLG]"
+                          dataType="wstr"
+                          length="255"
+                          name="FTI_PLCY_TOT_PRM_AMT_FLG" />
+                        <externalMetadataColumn
+                          refId="Package\Foreach Loop Container\Stage BUUResponse Data Flow Task\BUUResponse Excel Source.Outputs[Excel Source Output].ExternalColumns[FTI_PRSN_MLG_ADR_LNE_1_TXT_FLG]"
+                          dataType="wstr"
+                          length="255"
+                          name="FTI_PRSN_MLG_ADR_LNE_1_TXT_FLG" />
+                        <externalMetadataColumn
+                          refId="Package\Foreach Loop Container\Stage BUUResponse Data Flow Task\BUUResponse Excel Source.Outputs[Excel Source Output].ExternalColumns[FTI_PRSN_MLG_ADR_LNE_2_TXT_FLG]"
+                          dataType="wstr"
+                          length="255"
+                          name="FTI_PRSN_MLG_ADR_LNE_2_TXT_FLG" />
+                        <externalMetadataColumn
+                          refId="Package\Foreach Loop Container\Stage BUUResponse Data Flow Task\BUUResponse Excel Source.Outputs[Excel Source Output].ExternalColumns[FTI_PRSN_MLG_ADR_CITY_NAME_FLG]"
+                          dataType="wstr"
+                          length="255"
+                          name="FTI_PRSN_MLG_ADR_CITY_NAME_FLG" />
+                        <externalMetadataColumn
+                          refId="Package\Foreach Loop Container\Stage BUUResponse Data Flow Task\BUUResponse Excel Source.Outputs[Excel Source Output].ExternalColumns[FTI_PRSN_MLG_ADR_STATE_CD_FLG]"
+                          dataType="wstr"
+                          length="255"
+                          name="FTI_PRSN_MLG_ADR_STATE_CD_FLG" />
+                        <externalMetadataColumn
+                          refId="Package\Foreach Loop Container\Stage BUUResponse Data Flow Task\BUUResponse Excel Source.Outputs[Excel Source Output].ExternalColumns[FTI_PRSN_MLG_ADR_ZIP_CD_FLG]"
+                          dataType="wstr"
+                          length="255"
+                          name="FTI_PRSN_MLG_ADR_ZIP_CD_FLG" />
+                        <externalMetadataColumn
+                          refId="Package\Foreach Loop Container\Stage BUUResponse Data Flow Task\BUUResponse Excel Source.Outputs[Excel Source Output].ExternalColumns[FTI_ISSR_OVRL_REC_FLAG]"
+                          dataType="r8"
+                          name="FTI_ISSR_OVRL_REC_FLAG" />
+                        <externalMetadataColumn
+                          refId="Package\Foreach Loop Container\Stage BUUResponse Data Flow Task\BUUResponse Excel Source.Outputs[Excel Source Output].ExternalColumns[EXCLUDE_REASON_IND]"
+                          dataType="r8"
+                          name="EXCLUDE_REASON_IND" />
+                        <externalMetadataColumn
+                          refId="Package\Foreach Loop Container\Stage BUUResponse Data Flow Task\BUUResponse Excel Source.Outputs[Excel Source Output].ExternalColumns[EXCLUDE_REASON_DISC]"
+                          dataType="wstr"
+                          length="255"
+                          name="EXCLUDE_REASON_DISC" />
+                        <externalMetadataColumn
+                          refId="Package\Foreach Loop Container\Stage BUUResponse Data Flow Task\BUUResponse Excel Source.Outputs[Excel Source Output].ExternalColumns[DATES_OVERLAP_FLAG]"
+                          dataType="r8"
+                          name="DATES_OVERLAP_FLAG" />
+                        <externalMetadataColumn
+                          refId="Package\Foreach Loop Container\Stage BUUResponse Data Flow Task\BUUResponse Excel Source.Outputs[Excel Source Output].ExternalColumns[OVERLAP_PLCY_LIST]"
+                          dataType="r8"
+                          name="OVERLAP_PLCY_LIST" />
+                        <externalMetadataColumn
+                          refId="Package\Foreach Loop Container\Stage BUUResponse Data Flow Task\BUUResponse Excel Source.Outputs[Excel Source Output].ExternalColumns[F23]"
+                          dataType="wstr"
+                          length="255"
+                          name="F23" />
+                        <externalMetadataColumn
+                          refId="Package\Foreach Loop Container\Stage BUUResponse Data Flow Task\BUUResponse Excel Source.Outputs[Excel Source Output].ExternalColumns[F24]"
+                          dataType="wstr"
+                          length="255"
+                          name="F24" />
+                        <externalMetadataColumn
+                          refId="Package\Foreach Loop Container\Stage BUUResponse Data Flow Task\BUUResponse Excel Source.Outputs[Excel Source Output].ExternalColumns[F25]"
+                          dataType="wstr"
+                          length="255"
+                          name="F25" />
+                        <externalMetadataColumn
+                          refId="Package\Foreach Loop Container\Stage BUUResponse Data Flow Task\BUUResponse Excel Source.Outputs[Excel Source Output].ExternalColumns[F26]"
+                          dataType="wstr"
+                          length="255"
+                          name="F26" />
+                        <externalMetadataColumn
+                          refId="Package\Foreach Loop Container\Stage BUUResponse Data Flow Task\BUUResponse Excel Source.Outputs[Excel Source Output].ExternalColumns[F27]"
+                          dataType="wstr"
+                          length="255"
+                          name="F27" />
+                        <externalMetadataColumn
+                          refId="Package\Foreach Loop Container\Stage BUUResponse Data Flow Task\BUUResponse Excel Source.Outputs[Excel Source Output].ExternalColumns[F28]"
+                          dataType="r8"
+                          name="F28" />
+                      </externalMetadataColumns>
+                    </output>
+                    <output
+                      refId="Package\Foreach Loop Container\Stage BUUResponse Data Flow Task\BUUResponse Excel Source.Outputs[Excel Source Error Output]"
+                      isErrorOut="true"
+                      name="Excel Source Error Output">
+                      <outputColumns>
+                        <outputColumn
+                          refId="Package\Foreach Loop Container\Stage BUUResponse Data Flow Task\BUUResponse Excel Source.Outputs[Excel Source Error Output].Columns[FIL_NAME]"
+                          dataType="wstr"
+                          length="255"
+                          lineageId="Package\Foreach Loop Container\Stage BUUResponse Data Flow Task\BUUResponse Excel Source.Outputs[Excel Source Error Output].Columns[FIL_NAME]"
+                          name="FIL_NAME" />
+                        <outputColumn
+                          refId="Package\Foreach Loop Container\Stage BUUResponse Data Flow Task\BUUResponse Excel Source.Outputs[Excel Source Error Output].Columns[ETL_LD_DT]"
+                          dataType="date"
+                          lineageId="Package\Foreach Loop Container\Stage BUUResponse Data Flow Task\BUUResponse Excel Source.Outputs[Excel Source Error Output].Columns[ETL_LD_DT]"
+                          name="ETL_LD_DT" />
+                        <outputColumn
+                          refId="Package\Foreach Loop Container\Stage BUUResponse Data Flow Task\BUUResponse Excel Source.Outputs[Excel Source Error Output].Columns[FFM_INTRNL_INV_REC]"
+                          dataType="r8"
+                          lineageId="Package\Foreach Loop Container\Stage BUUResponse Data Flow Task\BUUResponse Excel Source.Outputs[Excel Source Error Output].Columns[FFM_INTRNL_INV_REC]"
+                          name="FFM_INTRNL_INV_REC" />
+                        <outputColumn
+                          refId="Package\Foreach Loop Container\Stage BUUResponse Data Flow Task\BUUResponse Excel Source.Outputs[Excel Source Error Output].Columns[HIOS_ID]"
+                          dataType="r8"
+                          lineageId="Package\Foreach Loop Container\Stage BUUResponse Data Flow Task\BUUResponse Excel Source.Outputs[Excel Source Error Output].Columns[HIOS_ID]"
+                          name="HIOS_ID" />
+                        <outputColumn
+                          refId="Package\Foreach Loop Container\Stage BUUResponse Data Flow Task\BUUResponse Excel Source.Outputs[Excel Source Error Output].Columns[FFM_PLAN_BNFT_STRT_DT]"
+                          dataType="r8"
+                          lineageId="Package\Foreach Loop Container\Stage BUUResponse Data Flow Task\BUUResponse Excel Source.Outputs[Excel Source Error Output].Columns[FFM_PLAN_BNFT_STRT_DT]"
+                          name="FFM_PLAN_BNFT_STRT_DT" />
+                        <outputColumn
+                          refId="Package\Foreach Loop Container\Stage BUUResponse Data Flow Task\BUUResponse Excel Source.Outputs[Excel Source Error Output].Columns[ISSR_PLAN_BNFT_STRT_DT]"
+                          dataType="r8"
+                          lineageId="Package\Foreach Loop Container\Stage BUUResponse Data Flow Task\BUUResponse Excel Source.Outputs[Excel Source Error Output].Columns[ISSR_PLAN_BNFT_STRT_DT]"
+                          name="ISSR_PLAN_BNFT_STRT_DT" />
+                        <outputColumn
+                          refId="Package\Foreach Loop Container\Stage BUUResponse Data Flow Task\BUUResponse Excel Source.Outputs[Excel Source Error Output].Columns[FTI_PLAN_BNFT_STRT_DT_FLG]"
+                          dataType="wstr"
+                          length="255"
+                          lineageId="Package\Foreach Loop Container\Stage BUUResponse Data Flow Task\BUUResponse Excel Source.Outputs[Excel Source Error Output].Columns[FTI_PLAN_BNFT_STRT_DT_FLG]"
+                          name="FTI_PLAN_BNFT_STRT_DT_FLG" />
+                        <outputColumn
+                          refId="Package\Foreach Loop Container\Stage BUUResponse Data Flow Task\BUUResponse Excel Source.Outputs[Excel Source Error Output].Columns[FFM_PLAN_BNFT_END_DT]"
+                          dataType="r8"
+                          lineageId="Package\Foreach Loop Container\Stage BUUResponse Data Flow Task\BUUResponse Excel Source.Outputs[Excel Source Error Output].Columns[FFM_PLAN_BNFT_END_DT]"
+                          name="FFM_PLAN_BNFT_END_DT" />
+                        <outputColumn
+                          refId="Package\Foreach Loop Container\Stage BUUResponse Data Flow Task\BUUResponse Excel Source.Outputs[Excel Source Error Output].Columns[ISSR_PLAN_BNFT_END_DT]"
+                          dataType="r8"
+                          lineageId="Package\Foreach Loop Container\Stage BUUResponse Data Flow Task\BUUResponse Excel Source.Outputs[Excel Source Error Output].Columns[ISSR_PLAN_BNFT_END_DT]"
+                          name="ISSR_PLAN_BNFT_END_DT" />
+                        <outputColumn
+                          refId="Package\Foreach Loop Container\Stage BUUResponse Data Flow Task\BUUResponse Excel Source.Outputs[Excel Source Error Output].Columns[FTI_PLAN_BNFT_END_DT_FLG]"
+                          dataType="wstr"
+                          length="255"
+                          lineageId="Package\Foreach Loop Container\Stage BUUResponse Data Flow Task\BUUResponse Excel Source.Outputs[Excel Source Error Output].Columns[FTI_PLAN_BNFT_END_DT_FLG]"
+                          name="FTI_PLAN_BNFT_END_DT_FLG" />
+                        <outputColumn
+                          refId="Package\Foreach Loop Container\Stage BUUResponse Data Flow Task\BUUResponse Excel Source.Outputs[Excel Source Error Output].Columns[FTI_PLCY_APTC_AMT_FLG]"
+                          dataType="wstr"
+                          length="255"
+                          lineageId="Package\Foreach Loop Container\Stage BUUResponse Data Flow Task\BUUResponse Excel Source.Outputs[Excel Source Error Output].Columns[FTI_PLCY_APTC_AMT_FLG]"
+                          name="FTI_PLCY_APTC_AMT_FLG" />
+                        <outputColumn
+                          refId="Package\Foreach Loop Container\Stage BUUResponse Data Flow Task\BUUResponse Excel Source.Outputs[Excel Source Error Output].Columns[FTI_PLCY_TOT_PRM_AMT_FLG]"
+                          dataType="wstr"
+                          length="255"
+                          lineageId="Package\Foreach Loop Container\Stage BUUResponse Data Flow Task\BUUResponse Excel Source.Outputs[Excel Source Error Output].Columns[FTI_PLCY_TOT_PRM_AMT_FLG]"
+                          name="FTI_PLCY_TOT_PRM_AMT_FLG" />
+                        <outputColumn
+                          refId="Package\Foreach Loop Container\Stage BUUResponse Data Flow Task\BUUResponse Excel Source.Outputs[Excel Source Error Output].Columns[FTI_PRSN_MLG_ADR_LNE_1_TXT_FLG]"
+                          dataType="wstr"
+                          length="255"
+                          lineageId="Package\Foreach Loop Container\Stage BUUResponse Data Flow Task\BUUResponse Excel Source.Outputs[Excel Source Error Output].Columns[FTI_PRSN_MLG_ADR_LNE_1_TXT_FLG]"
+                          name="FTI_PRSN_MLG_ADR_LNE_1_TXT_FLG" />
+                        <outputColumn
+                          refId="Package\Foreach Loop Container\Stage BUUResponse Data Flow Task\BUUResponse Excel Source.Outputs[Excel Source Error Output].Columns[FTI_PRSN_MLG_ADR_LNE_2_TXT_FLG]"
+                          dataType="wstr"
+                          length="255"
+                          lineageId="Package\Foreach Loop Container\Stage BUUResponse Data Flow Task\BUUResponse Excel Source.Outputs[Excel Source Error Output].Columns[FTI_PRSN_MLG_ADR_LNE_2_TXT_FLG]"
+                          name="FTI_PRSN_MLG_ADR_LNE_2_TXT_FLG" />
+                        <outputColumn
+                          refId="Package\Foreach Loop Container\Stage BUUResponse Data Flow Task\BUUResponse Excel Source.Outputs[Excel Source Error Output].Columns[FTI_PRSN_MLG_ADR_CITY_NAME_FLG]"
+                          dataType="wstr"
+                          length="255"
+                          lineageId="Package\Foreach Loop Container\Stage BUUResponse Data Flow Task\BUUResponse Excel Source.Outputs[Excel Source Error Output].Columns[FTI_PRSN_MLG_ADR_CITY_NAME_FLG]"
+                          name="FTI_PRSN_MLG_ADR_CITY_NAME_FLG" />
+                        <outputColumn
+                          refId="Package\Foreach Loop Container\Stage BUUResponse Data Flow Task\BUUResponse Excel Source.Outputs[Excel Source Error Output].Columns[FTI_PRSN_MLG_ADR_STATE_CD_FLG]"
+                          dataType="wstr"
+                          length="255"
+                          lineageId="Package\Foreach Loop Container\Stage BUUResponse Data Flow Task\BUUResponse Excel Source.Outputs[Excel Source Error Output].Columns[FTI_PRSN_MLG_ADR_STATE_CD_FLG]"
+                          name="FTI_PRSN_MLG_ADR_STATE_CD_FLG" />
+                        <outputColumn
+                          refId="Package\Foreach Loop Container\Stage BUUResponse Data Flow Task\BUUResponse Excel Source.Outputs[Excel Source Error Output].Columns[FTI_PRSN_MLG_ADR_ZIP_CD_FLG]"
+                          dataType="wstr"
+                          length="255"
+                          lineageId="Package\Foreach Loop Container\Stage BUUResponse Data Flow Task\BUUResponse Excel Source.Outputs[Excel Source Error Output].Columns[FTI_PRSN_MLG_ADR_ZIP_CD_FLG]"
+                          name="FTI_PRSN_MLG_ADR_ZIP_CD_FLG" />
+                        <outputColumn
+                          refId="Package\Foreach Loop Container\Stage BUUResponse Data Flow Task\BUUResponse Excel Source.Outputs[Excel Source Error Output].Columns[FTI_ISSR_OVRL_REC_FLAG]"
+                          dataType="r8"
+                          lineageId="Package\Foreach Loop Container\Stage BUUResponse Data Flow Task\BUUResponse Excel Source.Outputs[Excel Source Error Output].Columns[FTI_ISSR_OVRL_REC_FLAG]"
+                          name="FTI_ISSR_OVRL_REC_FLAG" />
+                        <outputColumn
+                          refId="Package\Foreach Loop Container\Stage BUUResponse Data Flow Task\BUUResponse Excel Source.Outputs[Excel Source Error Output].Columns[EXCLUDE_REASON_IND]"
+                          dataType="r8"
+                          lineageId="Package\Foreach Loop Container\Stage BUUResponse Data Flow Task\BUUResponse Excel Source.Outputs[Excel Source Error Output].Columns[EXCLUDE_REASON_IND]"
+                          name="EXCLUDE_REASON_IND" />
+                        <outputColumn
+                          refId="Package\Foreach Loop Container\Stage BUUResponse Data Flow Task\BUUResponse Excel Source.Outputs[Excel Source Error Output].Columns[EXCLUDE_REASON_DISC]"
+                          dataType="wstr"
+                          length="255"
+                          lineageId="Package\Foreach Loop Container\Stage BUUResponse Data Flow Task\BUUResponse Excel Source.Outputs[Excel Source Error Output].Columns[EXCLUDE_REASON_DISC]"
+                          name="EXCLUDE_REASON_DISC" />
+                        <outputColumn
+                          refId="Package\Foreach Loop Container\Stage BUUResponse Data Flow Task\BUUResponse Excel Source.Outputs[Excel Source Error Output].Columns[DATES_OVERLAP_FLAG]"
+                          dataType="r8"
+                          lineageId="Package\Foreach Loop Container\Stage BUUResponse Data Flow Task\BUUResponse Excel Source.Outputs[Excel Source Error Output].Columns[DATES_OVERLAP_FLAG]"
+                          name="DATES_OVERLAP_FLAG" />
+                        <outputColumn
+                          refId="Package\Foreach Loop Container\Stage BUUResponse Data Flow Task\BUUResponse Excel Source.Outputs[Excel Source Error Output].Columns[OVERLAP_PLCY_LIST]"
+                          dataType="r8"
+                          lineageId="Package\Foreach Loop Container\Stage BUUResponse Data Flow Task\BUUResponse Excel Source.Outputs[Excel Source Error Output].Columns[OVERLAP_PLCY_LIST]"
+                          name="OVERLAP_PLCY_LIST" />
+                        <outputColumn
+                          refId="Package\Foreach Loop Container\Stage BUUResponse Data Flow Task\BUUResponse Excel Source.Outputs[Excel Source Error Output].Columns[ErrorCode]"
+                          dataType="i4"
+                          lineageId="Package\Foreach Loop Container\Stage BUUResponse Data Flow Task\BUUResponse Excel Source.Outputs[Excel Source Error Output].Columns[ErrorCode]"
+                          name="ErrorCode"
+                          specialFlags="1" />
+                        <outputColumn
+                          refId="Package\Foreach Loop Container\Stage BUUResponse Data Flow Task\BUUResponse Excel Source.Outputs[Excel Source Error Output].Columns[ErrorColumn]"
+                          dataType="i4"
+                          lineageId="Package\Foreach Loop Container\Stage BUUResponse Data Flow Task\BUUResponse Excel Source.Outputs[Excel Source Error Output].Columns[ErrorColumn]"
+                          name="ErrorColumn"
+                          specialFlags="2" />
+                      </outputColumns>
+                      <externalMetadataColumns />
+                    </output>
+                  </outputs>
+                </component>
+                <component
+                  refId="Package\Foreach Loop Container\Stage BUUResponse Data Flow Task\BUUResponse Import Data Conversion"
+                  componentClassID="Microsoft.DataConvert"
+                  contactInfo="Data Conversion;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;0"
+                  description="Data Conversion"
+                  name="BUUResponse Import Data Conversion"
+                  usesDispositions="true">
+                  <inputs>
+                    <input
+                      refId="Package\Foreach Loop Container\Stage BUUResponse Data Flow Task\BUUResponse Import Data Conversion.Inputs[Data Conversion Input]"
+                      name="Data Conversion Input">
+                      <inputColumns>
+                        <inputColumn
+                          refId="Package\Foreach Loop Container\Stage BUUResponse Data Flow Task\BUUResponse Import Data Conversion.Inputs[Data Conversion Input].Columns[ETL_LD_DT]"
+                          cachedDataType="date"
+                          cachedName="ETL_LD_DT"
+                          lineageId="Package\Foreach Loop Container\Stage BUUResponse Data Flow Task\BUUResponse Excel Source.Outputs[Excel Source Output].Columns[ETL_LD_DT]" />
+                        <inputColumn
+                          refId="Package\Foreach Loop Container\Stage BUUResponse Data Flow Task\BUUResponse Import Data Conversion.Inputs[Data Conversion Input].Columns[FFM_INTRNL_INV_REC]"
+                          cachedDataType="r8"
+                          cachedName="FFM_INTRNL_INV_REC"
+                          lineageId="Package\Foreach Loop Container\Stage BUUResponse Data Flow Task\BUUResponse Excel Source.Outputs[Excel Source Output].Columns[FFM_INTRNL_INV_REC]" />
+                        <inputColumn
+                          refId="Package\Foreach Loop Container\Stage BUUResponse Data Flow Task\BUUResponse Import Data Conversion.Inputs[Data Conversion Input].Columns[HIOS_ID]"
+                          cachedDataType="r8"
+                          cachedName="HIOS_ID"
+                          lineageId="Package\Foreach Loop Container\Stage BUUResponse Data Flow Task\BUUResponse Excel Source.Outputs[Excel Source Output].Columns[HIOS_ID]" />
+                        <inputColumn
+                          refId="Package\Foreach Loop Container\Stage BUUResponse Data Flow Task\BUUResponse Import Data Conversion.Inputs[Data Conversion Input].Columns[FFM_PLAN_BNFT_STRT_DT]"
+                          cachedDataType="r8"
+                          cachedName="FFM_PLAN_BNFT_STRT_DT"
+                          lineageId="Package\Foreach Loop Container\Stage BUUResponse Data Flow Task\BUUResponse Excel Source.Outputs[Excel Source Output].Columns[FFM_PLAN_BNFT_STRT_DT]" />
+                        <inputColumn
+                          refId="Package\Foreach Loop Container\Stage BUUResponse Data Flow Task\BUUResponse Import Data Conversion.Inputs[Data Conversion Input].Columns[ISSR_PLAN_BNFT_STRT_DT]"
+                          cachedDataType="r8"
+                          cachedName="ISSR_PLAN_BNFT_STRT_DT"
+                          lineageId="Package\Foreach Loop Container\Stage BUUResponse Data Flow Task\BUUResponse Excel Source.Outputs[Excel Source Output].Columns[ISSR_PLAN_BNFT_STRT_DT]" />
+                        <inputColumn
+                          refId="Package\Foreach Loop Container\Stage BUUResponse Data Flow Task\BUUResponse Import Data Conversion.Inputs[Data Conversion Input].Columns[FFM_PLAN_BNFT_END_DT]"
+                          cachedDataType="r8"
+                          cachedName="FFM_PLAN_BNFT_END_DT"
+                          lineageId="Package\Foreach Loop Container\Stage BUUResponse Data Flow Task\BUUResponse Excel Source.Outputs[Excel Source Output].Columns[FFM_PLAN_BNFT_END_DT]" />
+                        <inputColumn
+                          refId="Package\Foreach Loop Container\Stage BUUResponse Data Flow Task\BUUResponse Import Data Conversion.Inputs[Data Conversion Input].Columns[ISSR_PLAN_BNFT_END_DT]"
+                          cachedDataType="r8"
+                          cachedName="ISSR_PLAN_BNFT_END_DT"
+                          lineageId="Package\Foreach Loop Container\Stage BUUResponse Data Flow Task\BUUResponse Excel Source.Outputs[Excel Source Output].Columns[ISSR_PLAN_BNFT_END_DT]" />
+                        <inputColumn
+                          refId="Package\Foreach Loop Container\Stage BUUResponse Data Flow Task\BUUResponse Import Data Conversion.Inputs[Data Conversion Input].Columns[EXCLUDE_REASON_IND]"
+                          cachedDataType="r8"
+                          cachedName="EXCLUDE_REASON_IND"
+                          lineageId="Package\Foreach Loop Container\Stage BUUResponse Data Flow Task\BUUResponse Excel Source.Outputs[Excel Source Output].Columns[EXCLUDE_REASON_IND]" />
+                        <inputColumn
+                          refId="Package\Foreach Loop Container\Stage BUUResponse Data Flow Task\BUUResponse Import Data Conversion.Inputs[Data Conversion Input].Columns[DATES_OVERLAP_FLAG]"
+                          cachedDataType="r8"
+                          cachedName="DATES_OVERLAP_FLAG"
+                          lineageId="Package\Foreach Loop Container\Stage BUUResponse Data Flow Task\BUUResponse Excel Source.Outputs[Excel Source Output].Columns[DATES_OVERLAP_FLAG]" />
+                        <inputColumn
+                          refId="Package\Foreach Loop Container\Stage BUUResponse Data Flow Task\BUUResponse Import Data Conversion.Inputs[Data Conversion Input].Columns[OVERLAP_PLCY_LIST]"
+                          cachedDataType="r8"
+                          cachedName="OVERLAP_PLCY_LIST"
+                          lineageId="Package\Foreach Loop Container\Stage BUUResponse Data Flow Task\BUUResponse Excel Source.Outputs[Excel Source Output].Columns[OVERLAP_PLCY_LIST]" />
+                        <inputColumn
+                          refId="Package\Foreach Loop Container\Stage BUUResponse Data Flow Task\BUUResponse Import Data Conversion.Inputs[Data Conversion Input].Columns[FTI_ISSR_OVRL_REC_FLAG]"
+                          cachedDataType="r8"
+                          cachedName="FTI_ISSR_OVRL_REC_FLAG"
+                          lineageId="Package\Foreach Loop Container\Stage BUUResponse Data Flow Task\BUUResponse Excel Source.Outputs[Excel Source Output].Columns[FTI_ISSR_OVRL_REC_FLAG]" />
+                      </inputColumns>
+                      <externalMetadataColumns />
+                    </input>
+                  </inputs>
+                  <outputs>
+                    <output
+                      refId="Package\Foreach Loop Container\Stage BUUResponse Data Flow Task\BUUResponse Import Data Conversion.Outputs[Data Conversion Output]"
+                      exclusionGroup="1"
+                      name="Data Conversion Output"
+                      synchronousInputId="Package\Foreach Loop Container\Stage BUUResponse Data Flow Task\BUUResponse Import Data Conversion.Inputs[Data Conversion Input]">
+                      <outputColumns>
+                        <outputColumn
+                          refId="Package\Foreach Loop Container\Stage BUUResponse Data Flow Task\BUUResponse Import Data Conversion.Outputs[Data Conversion Output].Columns[dateETL_LD_DT]"
+                          dataType="dbDate"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          lineageId="Package\Foreach Loop Container\Stage BUUResponse Data Flow Task\BUUResponse Import Data Conversion.Outputs[Data Conversion Output].Columns[dateETL_LD_DT]"
+                          name="dateETL_LD_DT"
+                          truncationRowDisposition="FailComponent">
+                          <properties>
+                            <property
+                              containsID="true"
+                              dataType="System.Int32"
+                              description="Specifies the input column used as the source of data for the conversion."
+                              name="SourceInputColumnLineageID">#{Package\Foreach Loop Container\Stage BUUResponse Data Flow Task\BUUResponse Excel Source.Outputs[Excel Source Output].Columns[ETL_LD_DT]}</property>
+                            <property
+                              dataType="System.Boolean"
+                              description="Indicates whether the column uses the faster, locale-neutral parsing routines."
+                              name="FastParse">false</property>
+                          </properties>
+                        </outputColumn>
+                        <outputColumn
+                          refId="Package\Foreach Loop Container\Stage BUUResponse Data Flow Task\BUUResponse Import Data Conversion.Outputs[Data Conversion Output].Columns[strFFM_INTRNL_INV_REC]"
+                          dataType="wstr"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          length="255"
+                          lineageId="Package\Foreach Loop Container\Stage BUUResponse Data Flow Task\BUUResponse Import Data Conversion.Outputs[Data Conversion Output].Columns[strFFM_INTRNL_INV_REC]"
+                          name="strFFM_INTRNL_INV_REC"
+                          truncationRowDisposition="FailComponent">
+                          <properties>
+                            <property
+                              containsID="true"
+                              dataType="System.Int32"
+                              description="Specifies the input column used as the source of data for the conversion."
+                              name="SourceInputColumnLineageID">#{Package\Foreach Loop Container\Stage BUUResponse Data Flow Task\BUUResponse Excel Source.Outputs[Excel Source Output].Columns[FFM_INTRNL_INV_REC]}</property>
+                            <property
+                              dataType="System.Boolean"
+                              description="Indicates whether the column uses the faster, locale-neutral parsing routines."
+                              name="FastParse">false</property>
+                          </properties>
+                        </outputColumn>
+                        <outputColumn
+                          refId="Package\Foreach Loop Container\Stage BUUResponse Data Flow Task\BUUResponse Import Data Conversion.Outputs[Data Conversion Output].Columns[strHIOS_ID]"
+                          dataType="wstr"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          length="255"
+                          lineageId="Package\Foreach Loop Container\Stage BUUResponse Data Flow Task\BUUResponse Import Data Conversion.Outputs[Data Conversion Output].Columns[strHIOS_ID]"
+                          name="strHIOS_ID"
+                          truncationRowDisposition="FailComponent">
+                          <properties>
+                            <property
+                              containsID="true"
+                              dataType="System.Int32"
+                              description="Specifies the input column used as the source of data for the conversion."
+                              name="SourceInputColumnLineageID">#{Package\Foreach Loop Container\Stage BUUResponse Data Flow Task\BUUResponse Excel Source.Outputs[Excel Source Output].Columns[HIOS_ID]}</property>
+                            <property
+                              dataType="System.Boolean"
+                              description="Indicates whether the column uses the faster, locale-neutral parsing routines."
+                              name="FastParse">false</property>
+                          </properties>
+                        </outputColumn>
+                        <outputColumn
+                          refId="Package\Foreach Loop Container\Stage BUUResponse Data Flow Task\BUUResponse Import Data Conversion.Outputs[Data Conversion Output].Columns[strFFM_PLAN_BNFT_STRT_DT]"
+                          dataType="wstr"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          length="255"
+                          lineageId="Package\Foreach Loop Container\Stage BUUResponse Data Flow Task\BUUResponse Import Data Conversion.Outputs[Data Conversion Output].Columns[strFFM_PLAN_BNFT_STRT_DT]"
+                          name="strFFM_PLAN_BNFT_STRT_DT"
+                          truncationRowDisposition="FailComponent">
+                          <properties>
+                            <property
+                              containsID="true"
+                              dataType="System.Int32"
+                              description="Specifies the input column used as the source of data for the conversion."
+                              name="SourceInputColumnLineageID">#{Package\Foreach Loop Container\Stage BUUResponse Data Flow Task\BUUResponse Excel Source.Outputs[Excel Source Output].Columns[FFM_PLAN_BNFT_STRT_DT]}</property>
+                            <property
+                              dataType="System.Boolean"
+                              description="Indicates whether the column uses the faster, locale-neutral parsing routines."
+                              name="FastParse">false</property>
+                          </properties>
+                        </outputColumn>
+                        <outputColumn
+                          refId="Package\Foreach Loop Container\Stage BUUResponse Data Flow Task\BUUResponse Import Data Conversion.Outputs[Data Conversion Output].Columns[strISSR_PLAN_BNFT_STRT_DT]"
+                          dataType="wstr"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          length="255"
+                          lineageId="Package\Foreach Loop Container\Stage BUUResponse Data Flow Task\BUUResponse Import Data Conversion.Outputs[Data Conversion Output].Columns[strISSR_PLAN_BNFT_STRT_DT]"
+                          name="strISSR_PLAN_BNFT_STRT_DT"
+                          truncationRowDisposition="FailComponent">
+                          <properties>
+                            <property
+                              containsID="true"
+                              dataType="System.Int32"
+                              description="Specifies the input column used as the source of data for the conversion."
+                              name="SourceInputColumnLineageID">#{Package\Foreach Loop Container\Stage BUUResponse Data Flow Task\BUUResponse Excel Source.Outputs[Excel Source Output].Columns[ISSR_PLAN_BNFT_STRT_DT]}</property>
+                            <property
+                              dataType="System.Boolean"
+                              description="Indicates whether the column uses the faster, locale-neutral parsing routines."
+                              name="FastParse">false</property>
+                          </properties>
+                        </outputColumn>
+                        <outputColumn
+                          refId="Package\Foreach Loop Container\Stage BUUResponse Data Flow Task\BUUResponse Import Data Conversion.Outputs[Data Conversion Output].Columns[strFFM_PLAN_BNFT_END_DT]"
+                          dataType="wstr"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          length="255"
+                          lineageId="Package\Foreach Loop Container\Stage BUUResponse Data Flow Task\BUUResponse Import Data Conversion.Outputs[Data Conversion Output].Columns[strFFM_PLAN_BNFT_END_DT]"
+                          name="strFFM_PLAN_BNFT_END_DT"
+                          truncationRowDisposition="FailComponent">
+                          <properties>
+                            <property
+                              containsID="true"
+                              dataType="System.Int32"
+                              description="Specifies the input column used as the source of data for the conversion."
+                              name="SourceInputColumnLineageID">#{Package\Foreach Loop Container\Stage BUUResponse Data Flow Task\BUUResponse Excel Source.Outputs[Excel Source Output].Columns[FFM_PLAN_BNFT_END_DT]}</property>
+                            <property
+                              dataType="System.Boolean"
+                              description="Indicates whether the column uses the faster, locale-neutral parsing routines."
+                              name="FastParse">false</property>
+                          </properties>
+                        </outputColumn>
+                        <outputColumn
+                          refId="Package\Foreach Loop Container\Stage BUUResponse Data Flow Task\BUUResponse Import Data Conversion.Outputs[Data Conversion Output].Columns[strISSR_PLAN_BNFT_END_DT]"
+                          dataType="wstr"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          length="255"
+                          lineageId="Package\Foreach Loop Container\Stage BUUResponse Data Flow Task\BUUResponse Import Data Conversion.Outputs[Data Conversion Output].Columns[strISSR_PLAN_BNFT_END_DT]"
+                          name="strISSR_PLAN_BNFT_END_DT"
+                          truncationRowDisposition="FailComponent">
+                          <properties>
+                            <property
+                              containsID="true"
+                              dataType="System.Int32"
+                              description="Specifies the input column used as the source of data for the conversion."
+                              name="SourceInputColumnLineageID">#{Package\Foreach Loop Container\Stage BUUResponse Data Flow Task\BUUResponse Excel Source.Outputs[Excel Source Output].Columns[ISSR_PLAN_BNFT_END_DT]}</property>
+                            <property
+                              dataType="System.Boolean"
+                              description="Indicates whether the column uses the faster, locale-neutral parsing routines."
+                              name="FastParse">false</property>
+                          </properties>
+                        </outputColumn>
+                        <outputColumn
+                          refId="Package\Foreach Loop Container\Stage BUUResponse Data Flow Task\BUUResponse Import Data Conversion.Outputs[Data Conversion Output].Columns[strEXCLUDE_REASON_IND]"
+                          dataType="wstr"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          length="255"
+                          lineageId="Package\Foreach Loop Container\Stage BUUResponse Data Flow Task\BUUResponse Import Data Conversion.Outputs[Data Conversion Output].Columns[strEXCLUDE_REASON_IND]"
+                          name="strEXCLUDE_REASON_IND"
+                          truncationRowDisposition="FailComponent">
+                          <properties>
+                            <property
+                              containsID="true"
+                              dataType="System.Int32"
+                              description="Specifies the input column used as the source of data for the conversion."
+                              name="SourceInputColumnLineageID">#{Package\Foreach Loop Container\Stage BUUResponse Data Flow Task\BUUResponse Excel Source.Outputs[Excel Source Output].Columns[EXCLUDE_REASON_IND]}</property>
+                            <property
+                              dataType="System.Boolean"
+                              description="Indicates whether the column uses the faster, locale-neutral parsing routines."
+                              name="FastParse">false</property>
+                          </properties>
+                        </outputColumn>
+                        <outputColumn
+                          refId="Package\Foreach Loop Container\Stage BUUResponse Data Flow Task\BUUResponse Import Data Conversion.Outputs[Data Conversion Output].Columns[strDATES_OVERLAP_FLAG]"
+                          dataType="wstr"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          length="255"
+                          lineageId="Package\Foreach Loop Container\Stage BUUResponse Data Flow Task\BUUResponse Import Data Conversion.Outputs[Data Conversion Output].Columns[strDATES_OVERLAP_FLAG]"
+                          name="strDATES_OVERLAP_FLAG"
+                          truncationRowDisposition="FailComponent">
+                          <properties>
+                            <property
+                              containsID="true"
+                              dataType="System.Int32"
+                              description="Specifies the input column used as the source of data for the conversion."
+                              name="SourceInputColumnLineageID">#{Package\Foreach Loop Container\Stage BUUResponse Data Flow Task\BUUResponse Excel Source.Outputs[Excel Source Output].Columns[DATES_OVERLAP_FLAG]}</property>
+                            <property
+                              dataType="System.Boolean"
+                              description="Indicates whether the column uses the faster, locale-neutral parsing routines."
+                              name="FastParse">false</property>
+                          </properties>
+                        </outputColumn>
+                        <outputColumn
+                          refId="Package\Foreach Loop Container\Stage BUUResponse Data Flow Task\BUUResponse Import Data Conversion.Outputs[Data Conversion Output].Columns[strOVERLAP_PLCY_LIST]"
+                          dataType="wstr"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          length="255"
+                          lineageId="Package\Foreach Loop Container\Stage BUUResponse Data Flow Task\BUUResponse Import Data Conversion.Outputs[Data Conversion Output].Columns[strOVERLAP_PLCY_LIST]"
+                          name="strOVERLAP_PLCY_LIST"
+                          truncationRowDisposition="FailComponent">
+                          <properties>
+                            <property
+                              containsID="true"
+                              dataType="System.Int32"
+                              description="Specifies the input column used as the source of data for the conversion."
+                              name="SourceInputColumnLineageID">#{Package\Foreach Loop Container\Stage BUUResponse Data Flow Task\BUUResponse Excel Source.Outputs[Excel Source Output].Columns[OVERLAP_PLCY_LIST]}</property>
+                            <property
+                              dataType="System.Boolean"
+                              description="Indicates whether the column uses the faster, locale-neutral parsing routines."
+                              name="FastParse">false</property>
+                          </properties>
+                        </outputColumn>
+                        <outputColumn
+                          refId="Package\Foreach Loop Container\Stage BUUResponse Data Flow Task\BUUResponse Import Data Conversion.Outputs[Data Conversion Output].Columns[strFTI_ISSR_OVRL_REC_FLAG]"
+                          dataType="wstr"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          length="255"
+                          lineageId="Package\Foreach Loop Container\Stage BUUResponse Data Flow Task\BUUResponse Import Data Conversion.Outputs[Data Conversion Output].Columns[strFTI_ISSR_OVRL_REC_FLAG]"
+                          name="strFTI_ISSR_OVRL_REC_FLAG"
+                          truncationRowDisposition="FailComponent">
+                          <properties>
+                            <property
+                              containsID="true"
+                              dataType="System.Int32"
+                              description="Specifies the input column used as the source of data for the conversion."
+                              name="SourceInputColumnLineageID">#{Package\Foreach Loop Container\Stage BUUResponse Data Flow Task\BUUResponse Excel Source.Outputs[Excel Source Output].Columns[FTI_ISSR_OVRL_REC_FLAG]}</property>
+                            <property
+                              dataType="System.Boolean"
+                              description="Indicates whether the column uses the faster, locale-neutral parsing routines."
+                              name="FastParse">false</property>
+                          </properties>
+                        </outputColumn>
+                      </outputColumns>
+                      <externalMetadataColumns />
+                    </output>
+                    <output
+                      refId="Package\Foreach Loop Container\Stage BUUResponse Data Flow Task\BUUResponse Import Data Conversion.Outputs[Data Conversion Error Output]"
+                      exclusionGroup="1"
+                      isErrorOut="true"
+                      name="Data Conversion Error Output"
+                      synchronousInputId="Package\Foreach Loop Container\Stage BUUResponse Data Flow Task\BUUResponse Import Data Conversion.Inputs[Data Conversion Input]">
+                      <outputColumns>
+                        <outputColumn
+                          refId="Package\Foreach Loop Container\Stage BUUResponse Data Flow Task\BUUResponse Import Data Conversion.Outputs[Data Conversion Error Output].Columns[ErrorCode]"
+                          dataType="i4"
+                          lineageId="Package\Foreach Loop Container\Stage BUUResponse Data Flow Task\BUUResponse Import Data Conversion.Outputs[Data Conversion Error Output].Columns[ErrorCode]"
+                          name="ErrorCode"
+                          specialFlags="1" />
+                        <outputColumn
+                          refId="Package\Foreach Loop Container\Stage BUUResponse Data Flow Task\BUUResponse Import Data Conversion.Outputs[Data Conversion Error Output].Columns[ErrorColumn]"
+                          dataType="i4"
+                          lineageId="Package\Foreach Loop Container\Stage BUUResponse Data Flow Task\BUUResponse Import Data Conversion.Outputs[Data Conversion Error Output].Columns[ErrorColumn]"
+                          name="ErrorColumn"
+                          specialFlags="2" />
+                      </outputColumns>
+                      <externalMetadataColumns />
+                    </output>
+                  </outputs>
+                </component>
+                <component
+                  refId="Package\Foreach Loop Container\Stage BUUResponse Data Flow Task\Import Source Derived Column"
+                  componentClassID="Microsoft.DerivedColumn"
+                  contactInfo="Derived Column;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;0"
+                  description="Creates new column values by applying expressions to transformation input columns. Create new columns or overwrite existing ones. For example, concatenate the values from the 'first name' and 'last name' column to make a 'full name' column."
+                  name="Import Source Derived Column"
+                  usesDispositions="true">
+                  <inputs>
+                    <input
+                      refId="Package\Foreach Loop Container\Stage BUUResponse Data Flow Task\Import Source Derived Column.Inputs[Derived Column Input]"
+                      description="Input to the Derived Column Transformation"
+                      name="Derived Column Input">
+                      <externalMetadataColumns />
+                    </input>
+                  </inputs>
+                  <outputs>
+                    <output
+                      refId="Package\Foreach Loop Container\Stage BUUResponse Data Flow Task\Import Source Derived Column.Outputs[Derived Column Output]"
+                      description="Default Output of the Derived Column Transformation"
+                      exclusionGroup="1"
+                      name="Derived Column Output"
+                      synchronousInputId="Package\Foreach Loop Container\Stage BUUResponse Data Flow Task\Import Source Derived Column.Inputs[Derived Column Input]">
+                      <outputColumns>
+                        <outputColumn
+                          refId="Package\Foreach Loop Container\Stage BUUResponse Data Flow Task\Import Source Derived Column.Outputs[Derived Column Output].Columns[ImportSource]"
+                          dataType="wstr"
+                          errorOrTruncationOperation="Computation"
+                          errorRowDisposition="FailComponent"
+                          length="255"
+                          lineageId="Package\Foreach Loop Container\Stage BUUResponse Data Flow Task\Import Source Derived Column.Outputs[Derived Column Output].Columns[ImportSource]"
+                          name="ImportSource"
+                          truncationRowDisposition="FailComponent">
+                          <properties>
+                            <property
+                              containsID="true"
+                              dataType="System.String"
+                              description="Derived Column Expression"
+                              name="Expression">(DT_WSTR,255)@[User::BUUFileName]</property>
+                            <property
+                              containsID="true"
+                              dataType="System.String"
+                              description="Derived Column Friendly Expression"
+                              expressionType="Notify"
+                              name="FriendlyExpression">(DT_WSTR,255)@[User::BUUFileName]</property>
+                          </properties>
+                        </outputColumn>
+                      </outputColumns>
+                      <externalMetadataColumns />
+                    </output>
+                    <output
+                      refId="Package\Foreach Loop Container\Stage BUUResponse Data Flow Task\Import Source Derived Column.Outputs[Derived Column Error Output]"
+                      description="Error Output of the Derived Column Transformation"
+                      exclusionGroup="1"
+                      isErrorOut="true"
+                      name="Derived Column Error Output"
+                      synchronousInputId="Package\Foreach Loop Container\Stage BUUResponse Data Flow Task\Import Source Derived Column.Inputs[Derived Column Input]">
+                      <outputColumns>
+                        <outputColumn
+                          refId="Package\Foreach Loop Container\Stage BUUResponse Data Flow Task\Import Source Derived Column.Outputs[Derived Column Error Output].Columns[ErrorCode]"
+                          dataType="i4"
+                          lineageId="Package\Foreach Loop Container\Stage BUUResponse Data Flow Task\Import Source Derived Column.Outputs[Derived Column Error Output].Columns[ErrorCode]"
+                          name="ErrorCode"
+                          specialFlags="1" />
+                        <outputColumn
+                          refId="Package\Foreach Loop Container\Stage BUUResponse Data Flow Task\Import Source Derived Column.Outputs[Derived Column Error Output].Columns[ErrorColumn]"
+                          dataType="i4"
+                          lineageId="Package\Foreach Loop Container\Stage BUUResponse Data Flow Task\Import Source Derived Column.Outputs[Derived Column Error Output].Columns[ErrorColumn]"
+                          name="ErrorColumn"
+                          specialFlags="2" />
+                      </outputColumns>
+                      <externalMetadataColumns />
+                    </output>
+                  </outputs>
+                </component>
+                <component
+                  refId="Package\Foreach Loop Container\Stage BUUResponse Data Flow Task\Load BUUResponse SQL Server Destination"
+                  componentClassID="Microsoft.SQLServerDestination"
+                  contactInfo="SQL Server Destination;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;5"
+                  description="SQL Server Destination"
+                  name="Load BUUResponse SQL Server Destination"
+                  version="5">
+                  <properties>
+                    <property
+                      dataType="System.Int32"
+                      description="Specifies the column code page to use when code page information is unavailable from the data source."
+                      name="DefaultCodePage">1252</property>
+                    <property
+                      dataType="System.Boolean"
+                      description="Forces the use of the DefaultCodePage property value when describing character data."
+                      name="AlwaysUseDefaultCodePage">false</property>
+                    <property
+                      dataType="System.String"
+                      description="The name of the database object to copy data into."
+                      expressionType="Notify"
+                      name="BulkInsertTableName">[stage].[BUUResponse]</property>
+                    <property
+                      dataType="System.Boolean"
+                      description="Specifies that any constraints on the destination object are checked during the data copy operation. Corresponds to the bulk insert CHECK_CONSTRAINTS option."
+                      name="BulkInsertCheckConstraints">true</property>
+                    <property
+                      dataType="System.Int32"
+                      description="Specifies the number of the first row to copy. Corresponds to the bulk insert FIRSTROW option."
+                      expressionType="Notify"
+                      name="BulkInsertFirstRow">-1</property>
+                    <property
+                      dataType="System.Boolean"
+                      description="Specifies that any insert triggers defined on the destination object will execute during the data copy. Corresponds to the bulk insert FIRE_TRIGGERS option."
+                      name="BulkInsertFireTriggers">false</property>
+                    <property
+                      dataType="System.Boolean"
+                      description="Indicates whether the values supplied for identity columns will be copied to the destination. If false, values for identity columns will be auto-generated at the destination. Corresponds to the bulk insert KEEPIDENTITY option."
+                      name="BulkInsertKeepIdentity">false</property>
+                    <property
+                      dataType="System.Boolean"
+                      description="Indicates whether the columns containing null will have null copied to the destination. If false, columns containing null will have their default values inserted at the destination. Applies only if fast load is turned on."
+                      name="BulkInsertKeepNulls">false</property>
+                    <property
+                      dataType="System.Int32"
+                      description="Specifies the number of the last row to copy. Corresponds to the bulk insert LASTROW option."
+                      expressionType="Notify"
+                      name="BulkInsertLastRow">-1</property>
+                    <property
+                      dataType="System.Int32"
+                      description="Specifies the maximum number of syntax errors and compilation errors that can occur before the data copy operation is canceled. Each row that cannot be copied is ignored and counted as one error. Corresponds to the bulk insert MAXERRORS option."
+                      name="BulkInsertMaxErrors">-1</property>
+                    <property
+                      dataType="System.String"
+                      description="Specifies how the data to be copied is sorted. Corresponds to the bulk insert ORDER option."
+                      expressionType="Notify"
+                      name="BulkInsertOrder"></property>
+                    <property
+                      dataType="System.Boolean"
+                      description="Specifies that a table-level lock is acquired for the duration of the data copy operation. Corresponds to the bulk insert TABLOCK option."
+                      name="BulkInsertTablock">true</property>
+                    <property
+                      dataType="System.Int32"
+                      description="Specifies in seconds the amount of time the SQL Destination adapter will wait before terminating if there is no data available for insertion.  A timeout value of 0 means the SQL Destination adapter will not time out."
+                      expressionType="Notify"
+                      name="Timeout">30</property>
+                    <property
+                      dataType="System.Int32"
+                      description="Specifies when commits are issued during data insertion.  A value of 0 specifies that one commit will be issued at the end of data insertion."
+                      name="MaxInsertCommitSize">0</property>
+                  </properties>
+                  <connections>
+                    <connection
+                      refId="Package\Foreach Loop Container\Stage BUUResponse Data Flow Task\Load BUUResponse SQL Server Destination.Connections[OleDbConnection]"
+                      connectionManagerID="Package.ConnectionManagers[ERR_1095A]"
+                      connectionManagerRefId="Package.ConnectionManagers[ERR_1095A]"
+                      description="The OLE DB runtime connection used to access the database."
+                      name="OleDbConnection" />
+                  </connections>
+                  <inputs>
+                    <input
+                      refId="Package\Foreach Loop Container\Stage BUUResponse Data Flow Task\Load BUUResponse SQL Server Destination.Inputs[SQL Server Destination Input]"
+                      hasSideEffects="true"
+                      name="SQL Server Destination Input">
+                      <inputColumns>
+                        <inputColumn
+                          refId="Package\Foreach Loop Container\Stage BUUResponse Data Flow Task\Load BUUResponse SQL Server Destination.Inputs[SQL Server Destination Input].Columns[FIL_NAME]"
+                          cachedDataType="wstr"
+                          cachedLength="255"
+                          cachedName="FIL_NAME"
+                          externalMetadataColumnId="Package\Foreach Loop Container\Stage BUUResponse Data Flow Task\Load BUUResponse SQL Server Destination.Inputs[SQL Server Destination Input].ExternalColumns[FIL_NAME]"
+                          lineageId="Package\Foreach Loop Container\Stage BUUResponse Data Flow Task\BUUResponse Excel Source.Outputs[Excel Source Output].Columns[FIL_NAME]" />
+                        <inputColumn
+                          refId="Package\Foreach Loop Container\Stage BUUResponse Data Flow Task\Load BUUResponse SQL Server Destination.Inputs[SQL Server Destination Input].Columns[FTI_PLAN_BNFT_STRT_DT_FLG]"
+                          cachedDataType="wstr"
+                          cachedLength="255"
+                          cachedName="FTI_PLAN_BNFT_STRT_DT_FLG"
+                          externalMetadataColumnId="Package\Foreach Loop Container\Stage BUUResponse Data Flow Task\Load BUUResponse SQL Server Destination.Inputs[SQL Server Destination Input].ExternalColumns[FTI_PLAN_BNFT_STRT_DT_FLG]"
+                          lineageId="Package\Foreach Loop Container\Stage BUUResponse Data Flow Task\BUUResponse Excel Source.Outputs[Excel Source Output].Columns[FTI_PLAN_BNFT_STRT_DT_FLG]" />
+                        <inputColumn
+                          refId="Package\Foreach Loop Container\Stage BUUResponse Data Flow Task\Load BUUResponse SQL Server Destination.Inputs[SQL Server Destination Input].Columns[FTI_PLAN_BNFT_END_DT_FLG]"
+                          cachedDataType="wstr"
+                          cachedLength="255"
+                          cachedName="FTI_PLAN_BNFT_END_DT_FLG"
+                          externalMetadataColumnId="Package\Foreach Loop Container\Stage BUUResponse Data Flow Task\Load BUUResponse SQL Server Destination.Inputs[SQL Server Destination Input].ExternalColumns[FTI_PLAN_BNFT_END_DT_FLG]"
+                          lineageId="Package\Foreach Loop Container\Stage BUUResponse Data Flow Task\BUUResponse Excel Source.Outputs[Excel Source Output].Columns[FTI_PLAN_BNFT_END_DT_FLG]" />
+                        <inputColumn
+                          refId="Package\Foreach Loop Container\Stage BUUResponse Data Flow Task\Load BUUResponse SQL Server Destination.Inputs[SQL Server Destination Input].Columns[FTI_PLCY_APTC_AMT_FLG]"
+                          cachedDataType="wstr"
+                          cachedLength="255"
+                          cachedName="FTI_PLCY_APTC_AMT_FLG"
+                          externalMetadataColumnId="Package\Foreach Loop Container\Stage BUUResponse Data Flow Task\Load BUUResponse SQL Server Destination.Inputs[SQL Server Destination Input].ExternalColumns[FTI_PLCY_APTC_AMT_FLG]"
+                          lineageId="Package\Foreach Loop Container\Stage BUUResponse Data Flow Task\BUUResponse Excel Source.Outputs[Excel Source Output].Columns[FTI_PLCY_APTC_AMT_FLG]" />
+                        <inputColumn
+                          refId="Package\Foreach Loop Container\Stage BUUResponse Data Flow Task\Load BUUResponse SQL Server Destination.Inputs[SQL Server Destination Input].Columns[FTI_PLCY_TOT_PRM_AMT_FLG]"
+                          cachedDataType="wstr"
+                          cachedLength="255"
+                          cachedName="FTI_PLCY_TOT_PRM_AMT_FLG"
+                          externalMetadataColumnId="Package\Foreach Loop Container\Stage BUUResponse Data Flow Task\Load BUUResponse SQL Server Destination.Inputs[SQL Server Destination Input].ExternalColumns[FTI_PLCY_TOT_PRM_AMT_FLG]"
+                          lineageId="Package\Foreach Loop Container\Stage BUUResponse Data Flow Task\BUUResponse Excel Source.Outputs[Excel Source Output].Columns[FTI_PLCY_TOT_PRM_AMT_FLG]" />
+                        <inputColumn
+                          refId="Package\Foreach Loop Container\Stage BUUResponse Data Flow Task\Load BUUResponse SQL Server Destination.Inputs[SQL Server Destination Input].Columns[FTI_PRSN_MLG_ADR_LNE_1_TXT_FLG]"
+                          cachedDataType="wstr"
+                          cachedLength="255"
+                          cachedName="FTI_PRSN_MLG_ADR_LNE_1_TXT_FLG"
+                          externalMetadataColumnId="Package\Foreach Loop Container\Stage BUUResponse Data Flow Task\Load BUUResponse SQL Server Destination.Inputs[SQL Server Destination Input].ExternalColumns[FTI_PRSN_MLG_ADR_LNE_1_TXT_FLG]"
+                          lineageId="Package\Foreach Loop Container\Stage BUUResponse Data Flow Task\BUUResponse Excel Source.Outputs[Excel Source Output].Columns[FTI_PRSN_MLG_ADR_LNE_1_TXT_FLG]" />
+                        <inputColumn
+                          refId="Package\Foreach Loop Container\Stage BUUResponse Data Flow Task\Load BUUResponse SQL Server Destination.Inputs[SQL Server Destination Input].Columns[FTI_PRSN_MLG_ADR_LNE_2_TXT_FLG]"
+                          cachedDataType="wstr"
+                          cachedLength="255"
+                          cachedName="FTI_PRSN_MLG_ADR_LNE_2_TXT_FLG"
+                          externalMetadataColumnId="Package\Foreach Loop Container\Stage BUUResponse Data Flow Task\Load BUUResponse SQL Server Destination.Inputs[SQL Server Destination Input].ExternalColumns[FTI_PRSN_MLG_ADR_LNE_2_TXT_FLG]"
+                          lineageId="Package\Foreach Loop Container\Stage BUUResponse Data Flow Task\BUUResponse Excel Source.Outputs[Excel Source Output].Columns[FTI_PRSN_MLG_ADR_LNE_2_TXT_FLG]" />
+                        <inputColumn
+                          refId="Package\Foreach Loop Container\Stage BUUResponse Data Flow Task\Load BUUResponse SQL Server Destination.Inputs[SQL Server Destination Input].Columns[FTI_PRSN_MLG_ADR_CITY_NAME_FLG]"
+                          cachedDataType="wstr"
+                          cachedLength="255"
+                          cachedName="FTI_PRSN_MLG_ADR_CITY_NAME_FLG"
+                          externalMetadataColumnId="Package\Foreach Loop Container\Stage BUUResponse Data Flow Task\Load BUUResponse SQL Server Destination.Inputs[SQL Server Destination Input].ExternalColumns[FTI_PRSN_MLG_ADR_CITY_NAME_FLG]"
+                          lineageId="Package\Foreach Loop Container\Stage BUUResponse Data Flow Task\BUUResponse Excel Source.Outputs[Excel Source Output].Columns[FTI_PRSN_MLG_ADR_CITY_NAME_FLG]" />
+                        <inputColumn
+                          refId="Package\Foreach Loop Container\Stage BUUResponse Data Flow Task\Load BUUResponse SQL Server Destination.Inputs[SQL Server Destination Input].Columns[FTI_PRSN_MLG_ADR_STATE_CD_FLG]"
+                          cachedDataType="wstr"
+                          cachedLength="255"
+                          cachedName="FTI_PRSN_MLG_ADR_STATE_CD_FLG"
+                          externalMetadataColumnId="Package\Foreach Loop Container\Stage BUUResponse Data Flow Task\Load BUUResponse SQL Server Destination.Inputs[SQL Server Destination Input].ExternalColumns[FTI_PRSN_MLG_ADR_STATE_CD_FLG]"
+                          lineageId="Package\Foreach Loop Container\Stage BUUResponse Data Flow Task\BUUResponse Excel Source.Outputs[Excel Source Output].Columns[FTI_PRSN_MLG_ADR_STATE_CD_FLG]" />
+                        <inputColumn
+                          refId="Package\Foreach Loop Container\Stage BUUResponse Data Flow Task\Load BUUResponse SQL Server Destination.Inputs[SQL Server Destination Input].Columns[FTI_PRSN_MLG_ADR_ZIP_CD_FLG]"
+                          cachedDataType="wstr"
+                          cachedLength="255"
+                          cachedName="FTI_PRSN_MLG_ADR_ZIP_CD_FLG"
+                          externalMetadataColumnId="Package\Foreach Loop Container\Stage BUUResponse Data Flow Task\Load BUUResponse SQL Server Destination.Inputs[SQL Server Destination Input].ExternalColumns[FTI_PRSN_MLG_ADR_ZIP_CD_FLG]"
+                          lineageId="Package\Foreach Loop Container\Stage BUUResponse Data Flow Task\BUUResponse Excel Source.Outputs[Excel Source Output].Columns[FTI_PRSN_MLG_ADR_ZIP_CD_FLG]" />
+                        <inputColumn
+                          refId="Package\Foreach Loop Container\Stage BUUResponse Data Flow Task\Load BUUResponse SQL Server Destination.Inputs[SQL Server Destination Input].Columns[EXCLUDE_REASON_DISC]"
+                          cachedDataType="wstr"
+                          cachedLength="255"
+                          cachedName="EXCLUDE_REASON_DISC"
+                          externalMetadataColumnId="Package\Foreach Loop Container\Stage BUUResponse Data Flow Task\Load BUUResponse SQL Server Destination.Inputs[SQL Server Destination Input].ExternalColumns[EXCLUDE_REASON_DISC]"
+                          lineageId="Package\Foreach Loop Container\Stage BUUResponse Data Flow Task\BUUResponse Excel Source.Outputs[Excel Source Output].Columns[EXCLUDE_REASON_DISC]" />
+                        <inputColumn
+                          refId="Package\Foreach Loop Container\Stage BUUResponse Data Flow Task\Load BUUResponse SQL Server Destination.Inputs[SQL Server Destination Input].Columns[ImportSource]"
+                          cachedDataType="wstr"
+                          cachedLength="255"
+                          cachedName="ImportSource"
+                          externalMetadataColumnId="Package\Foreach Loop Container\Stage BUUResponse Data Flow Task\Load BUUResponse SQL Server Destination.Inputs[SQL Server Destination Input].ExternalColumns[ImportSource]"
+                          lineageId="Package\Foreach Loop Container\Stage BUUResponse Data Flow Task\Import Source Derived Column.Outputs[Derived Column Output].Columns[ImportSource]" />
+                        <inputColumn
+                          refId="Package\Foreach Loop Container\Stage BUUResponse Data Flow Task\Load BUUResponse SQL Server Destination.Inputs[SQL Server Destination Input].Columns[dateETL_LD_DT]"
+                          cachedDataType="dbDate"
+                          cachedName="dateETL_LD_DT"
+                          externalMetadataColumnId="Package\Foreach Loop Container\Stage BUUResponse Data Flow Task\Load BUUResponse SQL Server Destination.Inputs[SQL Server Destination Input].ExternalColumns[ETL_LD_DT]"
+                          lineageId="Package\Foreach Loop Container\Stage BUUResponse Data Flow Task\BUUResponse Import Data Conversion.Outputs[Data Conversion Output].Columns[dateETL_LD_DT]" />
+                        <inputColumn
+                          refId="Package\Foreach Loop Container\Stage BUUResponse Data Flow Task\Load BUUResponse SQL Server Destination.Inputs[SQL Server Destination Input].Columns[strFFM_PLAN_BNFT_STRT_DT]"
+                          cachedCodepage="1252"
+                          cachedDataType="str"
+                          cachedLength="255"
+                          cachedName="strFFM_PLAN_BNFT_STRT_DT"
+                          externalMetadataColumnId="Package\Foreach Loop Container\Stage BUUResponse Data Flow Task\Load BUUResponse SQL Server Destination.Inputs[SQL Server Destination Input].ExternalColumns[FFM_PLAN_BNFT_STRT_DT]"
+                          lineageId="Package\Foreach Loop Container\Stage BUUResponse Data Flow Task\BUUResponse Import Data Conversion.Outputs[Data Conversion Output].Columns[strFFM_PLAN_BNFT_STRT_DT]" />
+                        <inputColumn
+                          refId="Package\Foreach Loop Container\Stage BUUResponse Data Flow Task\Load BUUResponse SQL Server Destination.Inputs[SQL Server Destination Input].Columns[strISSR_PLAN_BNFT_STRT_DT]"
+                          cachedCodepage="1252"
+                          cachedDataType="str"
+                          cachedLength="255"
+                          cachedName="strISSR_PLAN_BNFT_STRT_DT"
+                          externalMetadataColumnId="Package\Foreach Loop Container\Stage BUUResponse Data Flow Task\Load BUUResponse SQL Server Destination.Inputs[SQL Server Destination Input].ExternalColumns[ISSR_PLAN_BNFT_STRT_DT]"
+                          lineageId="Package\Foreach Loop Container\Stage BUUResponse Data Flow Task\BUUResponse Import Data Conversion.Outputs[Data Conversion Output].Columns[strISSR_PLAN_BNFT_STRT_DT]" />
+                        <inputColumn
+                          refId="Package\Foreach Loop Container\Stage BUUResponse Data Flow Task\Load BUUResponse SQL Server Destination.Inputs[SQL Server Destination Input].Columns[strFFM_PLAN_BNFT_END_DT]"
+                          cachedCodepage="1252"
+                          cachedDataType="str"
+                          cachedLength="255"
+                          cachedName="strFFM_PLAN_BNFT_END_DT"
+                          externalMetadataColumnId="Package\Foreach Loop Container\Stage BUUResponse Data Flow Task\Load BUUResponse SQL Server Destination.Inputs[SQL Server Destination Input].ExternalColumns[FFM_PLAN_BNFT_END_DT]"
+                          lineageId="Package\Foreach Loop Container\Stage BUUResponse Data Flow Task\BUUResponse Import Data Conversion.Outputs[Data Conversion Output].Columns[strFFM_PLAN_BNFT_END_DT]" />
+                        <inputColumn
+                          refId="Package\Foreach Loop Container\Stage BUUResponse Data Flow Task\Load BUUResponse SQL Server Destination.Inputs[SQL Server Destination Input].Columns[strISSR_PLAN_BNFT_END_DT]"
+                          cachedCodepage="1252"
+                          cachedDataType="str"
+                          cachedLength="255"
+                          cachedName="strISSR_PLAN_BNFT_END_DT"
+                          externalMetadataColumnId="Package\Foreach Loop Container\Stage BUUResponse Data Flow Task\Load BUUResponse SQL Server Destination.Inputs[SQL Server Destination Input].ExternalColumns[ISSR_PLAN_BNFT_END_DT]"
+                          lineageId="Package\Foreach Loop Container\Stage BUUResponse Data Flow Task\BUUResponse Import Data Conversion.Outputs[Data Conversion Output].Columns[strISSR_PLAN_BNFT_END_DT]" />
+                        <inputColumn
+                          refId="Package\Foreach Loop Container\Stage BUUResponse Data Flow Task\Load BUUResponse SQL Server Destination.Inputs[SQL Server Destination Input].Columns[strEXCLUDE_REASON_IND]"
+                          cachedCodepage="1252"
+                          cachedDataType="str"
+                          cachedLength="255"
+                          cachedName="strEXCLUDE_REASON_IND"
+                          externalMetadataColumnId="Package\Foreach Loop Container\Stage BUUResponse Data Flow Task\Load BUUResponse SQL Server Destination.Inputs[SQL Server Destination Input].ExternalColumns[EXCLUDE_REASON_IND]"
+                          lineageId="Package\Foreach Loop Container\Stage BUUResponse Data Flow Task\BUUResponse Import Data Conversion.Outputs[Data Conversion Output].Columns[strEXCLUDE_REASON_IND]" />
+                        <inputColumn
+                          refId="Package\Foreach Loop Container\Stage BUUResponse Data Flow Task\Load BUUResponse SQL Server Destination.Inputs[SQL Server Destination Input].Columns[strDATES_OVERLAP_FLAG]"
+                          cachedCodepage="1252"
+                          cachedDataType="str"
+                          cachedLength="255"
+                          cachedName="strDATES_OVERLAP_FLAG"
+                          externalMetadataColumnId="Package\Foreach Loop Container\Stage BUUResponse Data Flow Task\Load BUUResponse SQL Server Destination.Inputs[SQL Server Destination Input].ExternalColumns[DATES_OVERLAP_FLAG]"
+                          lineageId="Package\Foreach Loop Container\Stage BUUResponse Data Flow Task\BUUResponse Import Data Conversion.Outputs[Data Conversion Output].Columns[strDATES_OVERLAP_FLAG]" />
+                        <inputColumn
+                          refId="Package\Foreach Loop Container\Stage BUUResponse Data Flow Task\Load BUUResponse SQL Server Destination.Inputs[SQL Server Destination Input].Columns[strOVERLAP_PLCY_LIST]"
+                          cachedCodepage="1252"
+                          cachedDataType="str"
+                          cachedLength="255"
+                          cachedName="strOVERLAP_PLCY_LIST"
+                          externalMetadataColumnId="Package\Foreach Loop Container\Stage BUUResponse Data Flow Task\Load BUUResponse SQL Server Destination.Inputs[SQL Server Destination Input].ExternalColumns[OVERLAP_PLCY_LIST]"
+                          lineageId="Package\Foreach Loop Container\Stage BUUResponse Data Flow Task\BUUResponse Import Data Conversion.Outputs[Data Conversion Output].Columns[strOVERLAP_PLCY_LIST]" />
+                        <inputColumn
+                          refId="Package\Foreach Loop Container\Stage BUUResponse Data Flow Task\Load BUUResponse SQL Server Destination.Inputs[SQL Server Destination Input].Columns[strHIOS_ID]"
+                          cachedCodepage="1252"
+                          cachedDataType="str"
+                          cachedLength="255"
+                          cachedName="strHIOS_ID"
+                          externalMetadataColumnId="Package\Foreach Loop Container\Stage BUUResponse Data Flow Task\Load BUUResponse SQL Server Destination.Inputs[SQL Server Destination Input].ExternalColumns[HIOS_ID]"
+                          lineageId="Package\Foreach Loop Container\Stage BUUResponse Data Flow Task\BUUResponse Import Data Conversion.Outputs[Data Conversion Output].Columns[strHIOS_ID]" />
+                        <inputColumn
+                          refId="Package\Foreach Loop Container\Stage BUUResponse Data Flow Task\Load BUUResponse SQL Server Destination.Inputs[SQL Server Destination Input].Columns[strFFM_INTRNL_INV_REC]"
+                          cachedCodepage="1252"
+                          cachedDataType="str"
+                          cachedLength="255"
+                          cachedName="strFFM_INTRNL_INV_REC"
+                          externalMetadataColumnId="Package\Foreach Loop Container\Stage BUUResponse Data Flow Task\Load BUUResponse SQL Server Destination.Inputs[SQL Server Destination Input].ExternalColumns[FFM_INTRNL_INV_REC]"
+                          lineageId="Package\Foreach Loop Container\Stage BUUResponse Data Flow Task\BUUResponse Import Data Conversion.Outputs[Data Conversion Output].Columns[strFFM_INTRNL_INV_REC]" />
+                        <inputColumn
+                          refId="Package\Foreach Loop Container\Stage BUUResponse Data Flow Task\Load BUUResponse SQL Server Destination.Inputs[SQL Server Destination Input].Columns[strFTI_ISSR_OVRL_REC_FLAG]"
+                          cachedCodepage="1252"
+                          cachedDataType="str"
+                          cachedLength="255"
+                          cachedName="strFTI_ISSR_OVRL_REC_FLAG"
+                          externalMetadataColumnId="Package\Foreach Loop Container\Stage BUUResponse Data Flow Task\Load BUUResponse SQL Server Destination.Inputs[SQL Server Destination Input].ExternalColumns[FTI_ISSR_OVRL_REC_FLAG]"
+                          lineageId="Package\Foreach Loop Container\Stage BUUResponse Data Flow Task\BUUResponse Import Data Conversion.Outputs[Data Conversion Output].Columns[strFTI_ISSR_OVRL_REC_FLAG]" />
+                      </inputColumns>
+                      <externalMetadataColumns
+                        isUsed="True">
+                        <externalMetadataColumn
+                          refId="Package\Foreach Loop Container\Stage BUUResponse Data Flow Task\Load BUUResponse SQL Server Destination.Inputs[SQL Server Destination Input].ExternalColumns[BUUResponseID]"
+                          dataType="i4"
+                          name="BUUResponseID" />
+                        <externalMetadataColumn
+                          refId="Package\Foreach Loop Container\Stage BUUResponse Data Flow Task\Load BUUResponse SQL Server Destination.Inputs[SQL Server Destination Input].ExternalColumns[FIL_NAME]"
+                          dataType="wstr"
+                          length="255"
+                          name="FIL_NAME" />
+                        <externalMetadataColumn
+                          refId="Package\Foreach Loop Container\Stage BUUResponse Data Flow Task\Load BUUResponse SQL Server Destination.Inputs[SQL Server Destination Input].ExternalColumns[ETL_LD_DT]"
+                          dataType="dbDate"
+                          name="ETL_LD_DT" />
+                        <externalMetadataColumn
+                          refId="Package\Foreach Loop Container\Stage BUUResponse Data Flow Task\Load BUUResponse SQL Server Destination.Inputs[SQL Server Destination Input].ExternalColumns[FFM_INTRNL_INV_REC]"
+                          dataType="wstr"
+                          length="255"
+                          name="FFM_INTRNL_INV_REC" />
+                        <externalMetadataColumn
+                          refId="Package\Foreach Loop Container\Stage BUUResponse Data Flow Task\Load BUUResponse SQL Server Destination.Inputs[SQL Server Destination Input].ExternalColumns[HIOS_ID]"
+                          dataType="wstr"
+                          length="255"
+                          name="HIOS_ID" />
+                        <externalMetadataColumn
+                          refId="Package\Foreach Loop Container\Stage BUUResponse Data Flow Task\Load BUUResponse SQL Server Destination.Inputs[SQL Server Destination Input].ExternalColumns[FFM_PLAN_BNFT_STRT_DT]"
+                          dataType="wstr"
+                          length="255"
+                          name="FFM_PLAN_BNFT_STRT_DT" />
+                        <externalMetadataColumn
+                          refId="Package\Foreach Loop Container\Stage BUUResponse Data Flow Task\Load BUUResponse SQL Server Destination.Inputs[SQL Server Destination Input].ExternalColumns[ISSR_PLAN_BNFT_STRT_DT]"
+                          dataType="wstr"
+                          length="255"
+                          name="ISSR_PLAN_BNFT_STRT_DT" />
+                        <externalMetadataColumn
+                          refId="Package\Foreach Loop Container\Stage BUUResponse Data Flow Task\Load BUUResponse SQL Server Destination.Inputs[SQL Server Destination Input].ExternalColumns[FTI_PLAN_BNFT_STRT_DT_FLG]"
+                          dataType="wstr"
+                          length="255"
+                          name="FTI_PLAN_BNFT_STRT_DT_FLG" />
+                        <externalMetadataColumn
+                          refId="Package\Foreach Loop Container\Stage BUUResponse Data Flow Task\Load BUUResponse SQL Server Destination.Inputs[SQL Server Destination Input].ExternalColumns[FFM_PLAN_BNFT_END_DT]"
+                          dataType="wstr"
+                          length="255"
+                          name="FFM_PLAN_BNFT_END_DT" />
+                        <externalMetadataColumn
+                          refId="Package\Foreach Loop Container\Stage BUUResponse Data Flow Task\Load BUUResponse SQL Server Destination.Inputs[SQL Server Destination Input].ExternalColumns[ISSR_PLAN_BNFT_END_DT]"
+                          dataType="wstr"
+                          length="255"
+                          name="ISSR_PLAN_BNFT_END_DT" />
+                        <externalMetadataColumn
+                          refId="Package\Foreach Loop Container\Stage BUUResponse Data Flow Task\Load BUUResponse SQL Server Destination.Inputs[SQL Server Destination Input].ExternalColumns[FTI_PLAN_BNFT_END_DT_FLG]"
+                          dataType="wstr"
+                          length="255"
+                          name="FTI_PLAN_BNFT_END_DT_FLG" />
+                        <externalMetadataColumn
+                          refId="Package\Foreach Loop Container\Stage BUUResponse Data Flow Task\Load BUUResponse SQL Server Destination.Inputs[SQL Server Destination Input].ExternalColumns[FTI_PLCY_APTC_AMT_FLG]"
+                          dataType="wstr"
+                          length="255"
+                          name="FTI_PLCY_APTC_AMT_FLG" />
+                        <externalMetadataColumn
+                          refId="Package\Foreach Loop Container\Stage BUUResponse Data Flow Task\Load BUUResponse SQL Server Destination.Inputs[SQL Server Destination Input].ExternalColumns[FTI_PLCY_TOT_PRM_AMT_FLG]"
+                          dataType="wstr"
+                          length="255"
+                          name="FTI_PLCY_TOT_PRM_AMT_FLG" />
+                        <externalMetadataColumn
+                          refId="Package\Foreach Loop Container\Stage BUUResponse Data Flow Task\Load BUUResponse SQL Server Destination.Inputs[SQL Server Destination Input].ExternalColumns[FTI_PRSN_MLG_ADR_LNE_1_TXT_FLG]"
+                          dataType="wstr"
+                          length="255"
+                          name="FTI_PRSN_MLG_ADR_LNE_1_TXT_FLG" />
+                        <externalMetadataColumn
+                          refId="Package\Foreach Loop Container\Stage BUUResponse Data Flow Task\Load BUUResponse SQL Server Destination.Inputs[SQL Server Destination Input].ExternalColumns[FTI_PRSN_MLG_ADR_LNE_2_TXT_FLG]"
+                          dataType="wstr"
+                          length="255"
+                          name="FTI_PRSN_MLG_ADR_LNE_2_TXT_FLG" />
+                        <externalMetadataColumn
+                          refId="Package\Foreach Loop Container\Stage BUUResponse Data Flow Task\Load BUUResponse SQL Server Destination.Inputs[SQL Server Destination Input].ExternalColumns[FTI_PRSN_MLG_ADR_CITY_NAME_FLG]"
+                          dataType="wstr"
+                          length="255"
+                          name="FTI_PRSN_MLG_ADR_CITY_NAME_FLG" />
+                        <externalMetadataColumn
+                          refId="Package\Foreach Loop Container\Stage BUUResponse Data Flow Task\Load BUUResponse SQL Server Destination.Inputs[SQL Server Destination Input].ExternalColumns[FTI_PRSN_MLG_ADR_STATE_CD_FLG]"
+                          dataType="wstr"
+                          length="255"
+                          name="FTI_PRSN_MLG_ADR_STATE_CD_FLG" />
+                        <externalMetadataColumn
+                          refId="Package\Foreach Loop Container\Stage BUUResponse Data Flow Task\Load BUUResponse SQL Server Destination.Inputs[SQL Server Destination Input].ExternalColumns[FTI_PRSN_MLG_ADR_ZIP_CD_FLG]"
+                          dataType="wstr"
+                          length="255"
+                          name="FTI_PRSN_MLG_ADR_ZIP_CD_FLG" />
+                        <externalMetadataColumn
+                          refId="Package\Foreach Loop Container\Stage BUUResponse Data Flow Task\Load BUUResponse SQL Server Destination.Inputs[SQL Server Destination Input].ExternalColumns[FTI_ISSR_OVRL_REC_FLAG]"
+                          dataType="wstr"
+                          length="255"
+                          name="FTI_ISSR_OVRL_REC_FLAG" />
+                        <externalMetadataColumn
+                          refId="Package\Foreach Loop Container\Stage BUUResponse Data Flow Task\Load BUUResponse SQL Server Destination.Inputs[SQL Server Destination Input].ExternalColumns[EXCLUDE_REASON_IND]"
+                          dataType="wstr"
+                          length="255"
+                          name="EXCLUDE_REASON_IND" />
+                        <externalMetadataColumn
+                          refId="Package\Foreach Loop Container\Stage BUUResponse Data Flow Task\Load BUUResponse SQL Server Destination.Inputs[SQL Server Destination Input].ExternalColumns[EXCLUDE_REASON_DISC]"
+                          dataType="wstr"
+                          length="255"
+                          name="EXCLUDE_REASON_DISC" />
+                        <externalMetadataColumn
+                          refId="Package\Foreach Loop Container\Stage BUUResponse Data Flow Task\Load BUUResponse SQL Server Destination.Inputs[SQL Server Destination Input].ExternalColumns[DATES_OVERLAP_FLAG]"
+                          dataType="wstr"
+                          length="255"
+                          name="DATES_OVERLAP_FLAG" />
+                        <externalMetadataColumn
+                          refId="Package\Foreach Loop Container\Stage BUUResponse Data Flow Task\Load BUUResponse SQL Server Destination.Inputs[SQL Server Destination Input].ExternalColumns[OVERLAP_PLCY_LIST]"
+                          dataType="wstr"
+                          length="255"
+                          name="OVERLAP_PLCY_LIST" />
+                        <externalMetadataColumn
+                          refId="Package\Foreach Loop Container\Stage BUUResponse Data Flow Task\Load BUUResponse SQL Server Destination.Inputs[SQL Server Destination Input].ExternalColumns[ImportSource]"
+                          dataType="wstr"
+                          length="255"
+                          name="ImportSource" />
+                        <externalMetadataColumn
+                          refId="Package\Foreach Loop Container\Stage BUUResponse Data Flow Task\Load BUUResponse SQL Server Destination.Inputs[SQL Server Destination Input].ExternalColumns[ImportTransaction]"
+                          dataType="wstr"
+                          length="100"
+                          name="ImportTransaction" />
+                      </externalMetadataColumns>
+                    </input>
+                  </inputs>
+                </component>
+              </components>
+              <paths>
+                <path
+                  refId="Package\Foreach Loop Container\Stage BUUResponse Data Flow Task.Paths[Data Conversion Output]"
+                  endId="Package\Foreach Loop Container\Stage BUUResponse Data Flow Task\Import Source Derived Column.Inputs[Derived Column Input]"
+                  name="Data Conversion Output"
+                  startId="Package\Foreach Loop Container\Stage BUUResponse Data Flow Task\BUUResponse Import Data Conversion.Outputs[Data Conversion Output]" />
+                <path
+                  refId="Package\Foreach Loop Container\Stage BUUResponse Data Flow Task.Paths[Derived Column Output]"
+                  endId="Package\Foreach Loop Container\Stage BUUResponse Data Flow Task\Load BUUResponse SQL Server Destination.Inputs[SQL Server Destination Input]"
+                  name="Derived Column Output"
+                  startId="Package\Foreach Loop Container\Stage BUUResponse Data Flow Task\Import Source Derived Column.Outputs[Derived Column Output]" />
+                <path
+                  refId="Package\Foreach Loop Container\Stage BUUResponse Data Flow Task.Paths[Excel Source Output]"
+                  endId="Package\Foreach Loop Container\Stage BUUResponse Data Flow Task\BUUResponse Import Data Conversion.Inputs[Data Conversion Input]"
+                  name="Excel Source Output"
+                  startId="Package\Foreach Loop Container\Stage BUUResponse Data Flow Task\BUUResponse Excel Source.Outputs[Excel Source Output]" />
+              </paths>
+            </pipeline>
+          </DTS:ObjectData>
+        </DTS:Executable>
+      </DTS:Executables>
+      <DTS:ForEachVariableMappings>
+        <DTS:ForEachVariableMapping
+          DTS:CreationName=""
+          DTS:DTSID="{D96360FD-0AAA-4942-9770-B770C28F078F}"
+          DTS:ObjectName="{D96360FD-0AAA-4942-9770-B770C28F078F}"
+          DTS:ValueIndex="0"
+          DTS:VariableName="User::BUUFileName" />
+      </DTS:ForEachVariableMappings>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\Merge BUUResponse Execute SQL Task"
+      DTS:CreationName="Microsoft.ExecuteSQLTask"
+      DTS:Description="Execute SQL Task"
+      DTS:DTSID="{B3284726-22C5-428E-BC40-6CF69CB7866C}"
+      DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Merge BUUResponse Execute SQL Task"
+      DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2012; © 2007 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+      DTS:ThreadHint="0">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <SQLTask:SqlTaskData
+          SQLTask:Connection="{AF3F95D4-9E29-4EE5-8FAB-20DDC626CE50}"
+          SQLTask:SqlStatementSource="MERGE [dbo].[BUUResponse] AS target&#xA;USING &#xA;(SELECT DISTINCT [FIL_NAME],[ETL_LD_DT],[FFM_INTRNL_INV_REC],[HIOS_ID],[FFM_PLAN_BNFT_STRT_DT]&#xA;&#x9;,[ISSR_PLAN_BNFT_STRT_DT],[FTI_PLAN_BNFT_STRT_DT_FLG],[FFM_PLAN_BNFT_END_DT]&#xA;&#x9;,[ISSR_PLAN_BNFT_END_DT],[FTI_PLAN_BNFT_END_DT_FLG],[FTI_PLCY_APTC_AMT_FLG]&#xA;&#x9;,[FTI_PLCY_TOT_PRM_AMT_FLG],[FTI_PRSN_MLG_ADR_LNE_1_TXT_FLG],[FTI_PRSN_MLG_ADR_LNE_2_TXT_FLG]&#xA;&#x9;,[FTI_PRSN_MLG_ADR_CITY_NAME_FLG],[FTI_PRSN_MLG_ADR_STATE_CD_FLG],[FTI_PRSN_MLG_ADR_ZIP_CD_FLG]&#xA;&#x9;,[FTI_ISSR_OVRL_REC_FLAG],[EXCLUDE_REASON_IND],[EXCLUDE_REASON_DISC],[DATES_OVERLAP_FLAG]&#xA;&#x9;,[OVERLAP_PLCY_LIST]&#xA;&#x9;FROM [stage].[BUUResponse]) AS Source&#xA;&#x9;([FIL_NAME],[ETL_LD_DT],[FFM_INTRNL_INV_REC],[HIOS_ID],[FFM_PLAN_BNFT_STRT_DT]&#xA;&#x9;,[ISSR_PLAN_BNFT_STRT_DT],[FTI_PLAN_BNFT_STRT_DT_FLG],[FFM_PLAN_BNFT_END_DT]&#xA;&#x9;,[ISSR_PLAN_BNFT_END_DT],[FTI_PLAN_BNFT_END_DT_FLG],[FTI_PLCY_APTC_AMT_FLG]&#xA;&#x9;,[FTI_PLCY_TOT_PRM_AMT_FLG],[FTI_PRSN_MLG_ADR_LNE_1_TXT_FLG],[FTI_PRSN_MLG_ADR_LNE_2_TXT_FLG]&#xA;&#x9;,[FTI_PRSN_MLG_ADR_CITY_NAME_FLG],[FTI_PRSN_MLG_ADR_STATE_CD_FLG],[FTI_PRSN_MLG_ADR_ZIP_CD_FLG]&#xA;&#x9;,[FTI_ISSR_OVRL_REC_FLAG],[EXCLUDE_REASON_IND],[EXCLUDE_REASON_DISC],[DATES_OVERLAP_FLAG]&#xA;&#x9;,[OVERLAP_PLCY_LIST])&#xA;ON (target.[FFM_INTRNL_INV_REC] = source.[FFM_INTRNL_INV_REC]&#xA;&#x9;AND target.[FIL_NAME] = source.[FIL_NAME]&#xA;&#x9;AND target.[HIOS_ID] = source.[HIOS_ID]&#xA;&#x9;)&#xA;WHEN MATCHED AND &#xA;&#x9;(target.[ETL_LD_DT] &lt;&gt; source.[ETL_LD_DT]&#xA;&#x9;OR target.[FFM_PLAN_BNFT_STRT_DT] &lt;&gt; source.[FFM_PLAN_BNFT_STRT_DT]&#xA;&#x9;OR target.[ISSR_PLAN_BNFT_STRT_DT] &lt;&gt; source.[ISSR_PLAN_BNFT_STRT_DT]&#xA;&#x9;OR target.[FTI_PLAN_BNFT_STRT_DT_FLG] &lt;&gt; source.[FTI_PLAN_BNFT_STRT_DT_FLG]&#xA;&#x9;OR target.[FFM_PLAN_BNFT_END_DT] &lt;&gt; source.[FFM_PLAN_BNFT_END_DT]&#xA;&#x9;OR target.[ISSR_PLAN_BNFT_END_DT] &lt;&gt; source.[ISSR_PLAN_BNFT_END_DT]&#xA;&#x9;OR target.[FTI_PLAN_BNFT_END_DT_FLG] &lt;&gt; source.[FTI_PLAN_BNFT_END_DT_FLG]&#xA;&#x9;OR target.[FTI_PLCY_APTC_AMT_FLG] &lt;&gt; source.[FTI_PLCY_APTC_AMT_FLG]&#xA;&#x9;OR target.[FTI_PLCY_TOT_PRM_AMT_FLG] &lt;&gt; source.[FTI_PLCY_TOT_PRM_AMT_FLG]&#xA;&#x9;OR target.[FTI_PRSN_MLG_ADR_LNE_1_TXT_FLG] &lt;&gt; source.[FTI_PRSN_MLG_ADR_LNE_1_TXT_FLG]&#xA;&#x9;OR target.[FTI_PRSN_MLG_ADR_LNE_2_TXT_FLG] &lt;&gt; source.[FTI_PRSN_MLG_ADR_LNE_2_TXT_FLG]&#xA;&#x9;OR target.[FTI_PRSN_MLG_ADR_CITY_NAME_FLG] &lt;&gt; source.[FTI_PRSN_MLG_ADR_CITY_NAME_FLG]&#xA;&#x9;OR target.[FTI_PRSN_MLG_ADR_STATE_CD_FLG] &lt;&gt; source.[FTI_PRSN_MLG_ADR_STATE_CD_FLG]&#xA;&#x9;OR target.[FTI_PRSN_MLG_ADR_ZIP_CD_FLG] &lt;&gt; source.[FTI_PRSN_MLG_ADR_ZIP_CD_FLG]&#xA;&#x9;OR target.[FTI_ISSR_OVRL_REC_FLAG] &lt;&gt; source.[FTI_ISSR_OVRL_REC_FLAG]&#xA;&#x9;OR target.[EXCLUDE_REASON_IND] &lt;&gt; source.[EXCLUDE_REASON_IND]&#xA;&#x9;OR target.[EXCLUDE_REASON_DISC] &lt;&gt; source.[EXCLUDE_REASON_DISC]&#xA;&#x9;OR target.[DATES_OVERLAP_FLAG] &lt;&gt; source.[DATES_OVERLAP_FLAG]&#xA;&#x9;OR target.[OVERLAP_PLCY_LIST] &lt;&gt; source.[OVERLAP_PLCY_LIST]&#xA;&#x9;)&#x9;&#xA;&#x9;THEN UPDATE SET target.[ETL_LD_DT] = source.[ETL_LD_DT]&#xA;&#x9;,target.[FFM_PLAN_BNFT_STRT_DT] = source.[FFM_PLAN_BNFT_STRT_DT]&#xA;&#x9;,target.[ISSR_PLAN_BNFT_STRT_DT] = source.[ISSR_PLAN_BNFT_STRT_DT]&#xA;&#x9;,target.[FTI_PLAN_BNFT_STRT_DT_FLG] = source.[FTI_PLAN_BNFT_STRT_DT_FLG]&#xA;&#x9;,target.[FFM_PLAN_BNFT_END_DT] = source.[FFM_PLAN_BNFT_END_DT]&#xA;&#x9;,target.[ISSR_PLAN_BNFT_END_DT] = source.[ISSR_PLAN_BNFT_END_DT]&#xA;&#x9;,target.[FTI_PLAN_BNFT_END_DT_FLG] = source.[FTI_PLAN_BNFT_END_DT_FLG]&#xA;&#x9;,target.[FTI_PLCY_APTC_AMT_FLG] = source.[FTI_PLCY_APTC_AMT_FLG]&#xA;&#x9;,target.[FTI_PLCY_TOT_PRM_AMT_FLG] = source.[FTI_PLCY_TOT_PRM_AMT_FLG]&#xA;&#x9;,target.[FTI_PRSN_MLG_ADR_LNE_1_TXT_FLG] = source.[FTI_PRSN_MLG_ADR_LNE_1_TXT_FLG]&#xA;&#x9;,target.[FTI_PRSN_MLG_ADR_LNE_2_TXT_FLG] = source.[FTI_PRSN_MLG_ADR_LNE_2_TXT_FLG]&#xA;&#x9;,target.[FTI_PRSN_MLG_ADR_CITY_NAME_FLG] = source.[FTI_PRSN_MLG_ADR_CITY_NAME_FLG]&#xA;&#x9;,target.[FTI_PRSN_MLG_ADR_STATE_CD_FLG] = source.[FTI_PRSN_MLG_ADR_STATE_CD_FLG]&#xA;&#x9;,target.[FTI_PRSN_MLG_ADR_ZIP_CD_FLG] = source.[FTI_PRSN_MLG_ADR_ZIP_CD_FLG]&#xA;&#x9;,target.[FTI_ISSR_OVRL_REC_FLAG] = source.[FTI_ISSR_OVRL_REC_FLAG]&#xA;&#x9;,target.[EXCLUDE_REASON_IND] = source.[EXCLUDE_REASON_IND]&#xA;&#x9;,target.[EXCLUDE_REASON_DISC] = source.[EXCLUDE_REASON_DISC]&#xA;&#x9;,target.[DATES_OVERLAP_FLAG] = source.[DATES_OVERLAP_FLAG]&#xA;&#x9;,target.[OVERLAP_PLCY_LIST] = source.[OVERLAP_PLCY_LIST]&#xA;&#x9;,target.[UpdateDate] = GETDATE()&#xA;WHEN NOT MATCHED BY TARGET THEN&#xA;&#x9;INSERT ([FIL_NAME]&#xA;&#x9;  ,[ETL_LD_DT]&#xA;&#x9;  ,[FFM_INTRNL_INV_REC]&#xA;      ,[HIOS_ID]&#xA;      ,[FFM_PLAN_BNFT_STRT_DT]&#xA;      ,[ISSR_PLAN_BNFT_STRT_DT]&#xA;      ,[FTI_PLAN_BNFT_STRT_DT_FLG]&#xA;      ,[FFM_PLAN_BNFT_END_DT]&#xA;      ,[ISSR_PLAN_BNFT_END_DT]&#xA;      ,[FTI_PLAN_BNFT_END_DT_FLG]&#xA;      ,[FTI_PLCY_APTC_AMT_FLG]&#xA;      ,[FTI_PLCY_TOT_PRM_AMT_FLG]&#xA;      ,[FTI_PRSN_MLG_ADR_LNE_1_TXT_FLG]&#xA;      ,[FTI_PRSN_MLG_ADR_LNE_2_TXT_FLG]&#xA;      ,[FTI_PRSN_MLG_ADR_CITY_NAME_FLG]&#xA;      ,[FTI_PRSN_MLG_ADR_STATE_CD_FLG]&#xA;      ,[FTI_PRSN_MLG_ADR_ZIP_CD_FLG]&#xA;      ,[FTI_ISSR_OVRL_REC_FLAG]&#xA;      ,[EXCLUDE_REASON_IND]&#xA;      ,[EXCLUDE_REASON_DISC]&#xA;      ,[DATES_OVERLAP_FLAG]&#xA;      ,[OVERLAP_PLCY_LIST]&#xA;&#x9;  ,[IMPORTSOURCE]) &#xA;&#x9;VALUES ([FIL_NAME]&#xA;&#x9;  ,[ETL_LD_DT]&#xA;&#x9;  ,[FFM_INTRNL_INV_REC]&#xA;      ,[HIOS_ID]&#xA;      ,[FFM_PLAN_BNFT_STRT_DT]&#xA;      ,[ISSR_PLAN_BNFT_STRT_DT]&#xA;      ,[FTI_PLAN_BNFT_STRT_DT_FLG]&#xA;      ,[FFM_PLAN_BNFT_END_DT]&#xA;      ,[ISSR_PLAN_BNFT_END_DT]&#xA;      ,[FTI_PLAN_BNFT_END_DT_FLG]&#xA;      ,[FTI_PLCY_APTC_AMT_FLG]&#xA;      ,[FTI_PLCY_TOT_PRM_AMT_FLG]&#xA;      ,[FTI_PRSN_MLG_ADR_LNE_1_TXT_FLG]&#xA;      ,[FTI_PRSN_MLG_ADR_LNE_2_TXT_FLG]&#xA;      ,[FTI_PRSN_MLG_ADR_CITY_NAME_FLG]&#xA;      ,[FTI_PRSN_MLG_ADR_STATE_CD_FLG]&#xA;      ,[FTI_PRSN_MLG_ADR_ZIP_CD_FLG]&#xA;      ,[FTI_ISSR_OVRL_REC_FLAG]&#xA;      ,[EXCLUDE_REASON_IND]&#xA;      ,[EXCLUDE_REASON_DISC]&#xA;      ,[DATES_OVERLAP_FLAG]&#xA;      ,[OVERLAP_PLCY_LIST]&#xA;&#x9;  ,[FIL_NAME]);" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\Truncate BUUResponse Table Execute SQL Task"
+      DTS:CreationName="Microsoft.ExecuteSQLTask"
+      DTS:Description="Execute SQL Task"
+      DTS:DTSID="{FF05F5C4-B7A6-45EC-9210-EE1F4B57A1FB}"
+      DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Truncate BUUResponse Table Execute SQL Task"
+      DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2012; © 2007 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+      DTS:ThreadHint="0">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <SQLTask:SqlTaskData
+          SQLTask:Connection="{AF3F95D4-9E29-4EE5-8FAB-20DDC626CE50}"
+          SQLTask:SqlStatementSource="TRUNCATE TABLE [stage].[BUUResponse]" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
+      </DTS:ObjectData>
+    </DTS:Executable>
+  </DTS:Executables>
+  <DTS:PrecedenceConstraints>
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint]"
+      DTS:CreationName=""
+      DTS:DTSID="{9E3FB61B-807B-4D75-81C4-D15E3D07ED4C}"
+      DTS:From="Package\Truncate BUUResponse Table Execute SQL Task"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint"
+      DTS:To="Package\Foreach Loop Container" />
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint 1]"
+      DTS:CreationName=""
+      DTS:DTSID="{C80AF2F6-141E-4DE1-A4B7-8656524977AE}"
+      DTS:From="Package\Foreach Loop Container"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint 1"
+      DTS:To="Package\Merge BUUResponse Execute SQL Task" />
+  </DTS:PrecedenceConstraints>
+  <DTS:DesignTimeProperties><![CDATA[<?xml version="1.0"?>
+<!--This CDATA section contains the layout information of the package. The section includes information such as (x,y) coordinates, width, and height.-->
+<!--If you manually edit this section and make a mistake, you can delete it. -->
+<!--The package will still be able to load normally but the previous layout information will be lost and the designer will automatically re-arrange the elements on the design surface.-->
+<Objects
+  Version="8">
+  <!--Each node below will contain properties that do not affect runtime behavior.-->
+  <Package
+    design-time-name="Package">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="8" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
+        <NodeLayout
+          Size="252,42"
+          Id="Package\Foreach Loop Container\Stage BUUResponse Data Flow Task"
+          TopLeft="23,29" />
+        <ContainerLayout
+          HeaderHeight="43"
+          IsExpanded="True"
+          PanelSize="290,126"
+          Size="290,169"
+          Id="Package\Foreach Loop Container"
+          TopLeft="361,130" />
+        <NodeLayout
+          Size="266,42"
+          Id="Package\Merge BUUResponse Execute SQL Task"
+          TopLeft="382,347" />
+        <NodeLayout
+          Size="308,42"
+          Id="Package\Truncate BUUResponse Table Execute SQL Task"
+          TopLeft="352,48" />
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint]"
+          TopLeft="506,90">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,40"
+              Start="0,0"
+              End="0,32.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,32.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint 1]"
+          TopLeft="506,299">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="9,48"
+              Start="0,0"
+              End="9,40.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,20" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,20"
+                    Point2="0,24"
+                    Point3="4,24" />
+                  <mssgle:LineSegment
+                    End="5,24" />
+                  <mssgle:CubicBezierSegment
+                    Point1="5,24"
+                    Point2="9,24"
+                    Point3="9,28" />
+                  <mssgle:LineSegment
+                    End="9,40.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+      </GraphLayout>
+    </LayoutInfo>
+  </Package>
+  <TaskHost
+    design-time-name="Package\Foreach Loop Container\Stage BUUResponse Data Flow Task">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="8" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
+        <NodeLayout
+          Size="284,42"
+          Id="Package\Foreach Loop Container\Stage BUUResponse Data Flow Task\Load BUUResponse SQL Server Destination"
+          TopLeft="375,279" />
+        <NodeLayout
+          Size="227,42"
+          Id="Package\Foreach Loop Container\Stage BUUResponse Data Flow Task\Import Source Derived Column"
+          TopLeft="331,212" />
+        <NodeLayout
+          Size="262,42"
+          Id="Package\Foreach Loop Container\Stage BUUResponse Data Flow Task\BUUResponse Import Data Conversion"
+          TopLeft="310,140" />
+        <NodeLayout
+          Size="209,42"
+          Id="Package\Foreach Loop Container\Stage BUUResponse Data Flow Task\BUUResponse Excel Source"
+          TopLeft="277,67" />
+        <EdgeLayout
+          Id="Package\Foreach Loop Container\Stage BUUResponse Data Flow Task.Paths[Excel Source Output]"
+          TopLeft="381.5,109">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="59.5,31"
+              Start="0,0"
+              End="59.5,23.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,11.5" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,11.5"
+                    Point2="0,15.5"
+                    Point3="4,15.5" />
+                  <mssgle:LineSegment
+                    End="55.5,15.5" />
+                  <mssgle:CubicBezierSegment
+                    Point1="55.5,15.5"
+                    Point2="59.5,15.5"
+                    Point3="59.5,19.5" />
+                  <mssgle:LineSegment
+                    End="59.5,23.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\Foreach Loop Container\Stage BUUResponse Data Flow Task.Paths[Derived Column Output]"
+          TopLeft="444.5,254">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="50,25"
+              Start="0,0"
+              End="50,17.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,8.5" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,8.5"
+                    Point2="0,12.5"
+                    Point3="4,12.5" />
+                  <mssgle:LineSegment
+                    End="46,12.5" />
+                  <mssgle:CubicBezierSegment
+                    Point1="46,12.5"
+                    Point2="50,12.5"
+                    Point3="50,16.5" />
+                  <mssgle:LineSegment
+                    End="50,17.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\Foreach Loop Container\Stage BUUResponse Data Flow Task.Paths[Data Conversion Output]"
+          TopLeft="442.75,182">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,30"
+              Start="0,0"
+              End="0,22.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,22.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+      </GraphLayout>
+    </LayoutInfo>
+  </TaskHost>
+  <PipelineComponentMetadata
+    design-time-name="Package\Foreach Loop Container\Stage BUUResponse Data Flow Task\Load BUUResponse SQL Server Destination">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+  <PipelineComponentMetadata
+    design-time-name="Package\Foreach Loop Container\Stage BUUResponse Data Flow Task\BUUResponse Excel Source">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+      <Property>
+        <Name>TableInfoObjectType</Name>
+        <Value
+          type="q2:string">Table</Value>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+</Objects>]]></DTS:DesignTimeProperties>
+</DTS:Executable>

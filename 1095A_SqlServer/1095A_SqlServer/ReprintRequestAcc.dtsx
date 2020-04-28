@@ -1,0 +1,1042 @@
+<?xml version="1.0"?>
+<DTS:Executable xmlns:DTS="www.microsoft.com/SqlServer/Dts"
+  DTS:refId="Package"
+  DTS:CreationDate="4/16/2015 1:39:25 PM"
+  DTS:CreationName="Microsoft.Package"
+  DTS:CreatorComputerName="TCOISPJW8DB08"
+  DTS:CreatorName="ECAP\jhenningsen"
+  DTS:DTSID="{FA782598-2DCD-4840-949C-DB9F32EC24BA}"
+  DTS:ExecutableType="Microsoft.Package"
+  DTS:LastModifiedProductVersion="13.0.1601.5"
+  DTS:LocaleID="1033"
+  DTS:ObjectName="ReprintRequestAcc"
+  DTS:PackageType="5"
+  DTS:VersionBuild="167"
+  DTS:VersionGUID="{073EB21B-BE66-466A-9270-3E39E575EB52}">
+  <DTS:Property
+    DTS:Name="PackageFormatVersion">8</DTS:Property>
+  <DTS:ConnectionManagers>
+    <DTS:ConnectionManager
+      DTS:refId="Package.ConnectionManagers[Case Typing Excel Connection Manager]"
+      DTS:CreationName="EXCEL"
+      DTS:DelayValidation="True"
+      DTS:DTSID="{496C3C64-BE70-4C93-9E55-002D681A34F6}"
+      DTS:ObjectName="Case Typing Excel Connection Manager">
+      <DTS:PropertyExpression
+        DTS:Name="ConnectionString">(DT_WSTR, 200) ("Provider=Microsoft.ACE.OLEDB.12.0;Data Source=" +  @[User::OutputFilePath] + ";Extended Properties=\"Excel 12.0 XML;HDR=YES\";")</DTS:PropertyExpression>
+      <DTS:ObjectData>
+        <DTS:ConnectionManager
+          DTS:ConnectionString="Provider=Microsoft.ACE.OLEDB.12.0;Data Source=\\TCOISPDW8WS03\data\files\out\ReprintRequest\Reprint_Request_201706141538.xlsx;Extended Properties=&quot;EXCEL 12.0 XML;HDR=YES&quot;;" />
+      </DTS:ObjectData>
+    </DTS:ConnectionManager>
+    <DTS:ConnectionManager
+      DTS:refId="Package.ConnectionManagers[ERR_1095A]"
+      DTS:CreationName="OLEDB"
+      DTS:DTSID="{CAFFD85F-8A6A-4704-8E76-B07B5982FF79}"
+      DTS:ObjectName="ERR_1095A">
+      <DTS:ObjectData>
+        <DTS:ConnectionManager
+          DTS:ConnectionString="Data Source=localhost;Initial Catalog=ERR_1095A;Provider=SQLNCLI11.1;Integrated Security=SSPI;Auto Translate=False;" />
+      </DTS:ObjectData>
+    </DTS:ConnectionManager>
+    <DTS:ConnectionManager
+      DTS:refId="Package.ConnectionManagers[HICSCaseTyping.xlsx]"
+      DTS:CreationName="FILE"
+      DTS:DTSID="{49EDC968-2130-4E82-BC08-176095B4695D}"
+      DTS:ObjectName="HICSCaseTyping.xlsx">
+      <DTS:ObjectData>
+        <DTS:ConnectionManager
+          DTS:FileUsageType="1"
+          DTS:ConnectionString="\\TCOISPDW8WS03\data\files\out\ReprintRequest\Template\Reprint_Request_ mmddyyyy.xlsx" />
+      </DTS:ObjectData>
+    </DTS:ConnectionManager>
+  </DTS:ConnectionManagers>
+  <DTS:Variables>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{720CF95E-38BE-4155-B478-94D78A9B3677}"
+      DTS:IncludeInDebugDump="6789"
+      DTS:Namespace="User"
+      DTS:ObjectName="BacthId">
+      <DTS:VariableValue
+        DTS:DataType="3">0</DTS:VariableValue>
+    </DTS:Variable>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{CD58264D-5651-4BAD-B9B4-95D637011018}"
+      DTS:EvaluateAsExpression="True"
+      DTS:Expression="(DT_WSTR, 150) (&quot;\\\\TCOISPDW8WS03\\data\\files\\out\\ReprintRequest\\Reprint_Request_&quot;)+ (DT_WSTR, 4) DATEPART( &quot;YYYY&quot;, GETDATE())+ RIGHT(&quot;0&quot; + (DT_WSTR, 2)DATEPART( &quot;MM&quot;, GETDATE()),2)+ RIGHT(&quot;0&quot; + (DT_WSTR,2)DATEPART( &quot;dd&quot;, GETDATE()),2)+RIGHT(&quot;0&quot; + (DT_WSTR,2)DATEPART( &quot;HH&quot;, GETDATE()),2)+RIGHT(&quot;0&quot; + (DT_WSTR,2)DATEPART( &quot;mi&quot;, GETDATE()),2)+(DT_WSTR, 5)(&quot;.xlsx&quot;)"
+      DTS:IncludeInDebugDump="2345"
+      DTS:Namespace="User"
+      DTS:ObjectName="OutputFilePath">
+      <DTS:VariableValue
+        DTS:DataType="8">\\TCOISPDW8WS03\data\files\out\ReprintRequest\Reprint_Request_201706141538.xlsx</DTS:VariableValue>
+    </DTS:Variable>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{DCEF80AC-92EC-4366-9A52-5887D60429DE}"
+      DTS:IncludeInDebugDump="2345"
+      DTS:Namespace="User"
+      DTS:ObjectName="ReprintTemplateDirectoryName">
+      <DTS:VariableValue
+        DTS:DataType="8">\\TCOISPDW8WS03\data\files\out\ReprintRequest\Template</DTS:VariableValue>
+    </DTS:Variable>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{576952EF-DA4D-40A8-97F0-BE8BE579CB00}"
+      DTS:IncludeInDebugDump="2345"
+      DTS:Namespace="User"
+      DTS:ObjectName="SheetName">
+      <DTS:VariableValue
+        DTS:DataType="8">Reprint_Requested</DTS:VariableValue>
+    </DTS:Variable>
+  </DTS:Variables>
+  <DTS:Executables>
+    <DTS:Executable
+      DTS:refId="Package\Create Output File Data Flow Task"
+      DTS:CreationName="Microsoft.Pipeline"
+      DTS:DelayValidation="True"
+      DTS:Description="Data Flow Task"
+      DTS:DTSID="{B8F0A93B-7177-423F-A341-28DD91B28B41}"
+      DTS:ExecutableType="Microsoft.Pipeline"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Create Output File Data Flow Task"
+      DTS:TaskContact="Performs high-performance data extraction, transformation and loading;Microsoft Corporation; Microsoft SQL Server; (C) 2007 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <pipeline
+          version="1">
+          <components>
+            <component
+              refId="Package\Create Output File Data Flow Task\Batch Values Derived Columns"
+              componentClassID="Microsoft.DerivedColumn"
+              contactInfo="Derived Column;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;0"
+              description="Creates new column values by applying expressions to transformation input columns. Create new columns or overwrite existing ones. For example, concatenate the values from the 'first name' and 'last name' column to make a 'full name' column."
+              name="Batch Values Derived Columns"
+              usesDispositions="true">
+              <inputs>
+                <input
+                  refId="Package\Create Output File Data Flow Task\Batch Values Derived Columns.Inputs[Derived Column Input]"
+                  description="Input to the Derived Column Transformation"
+                  name="Derived Column Input">
+                  <externalMetadataColumns />
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\Create Output File Data Flow Task\Batch Values Derived Columns.Outputs[Derived Column Output]"
+                  description="Default Output of the Derived Column Transformation"
+                  exclusionGroup="1"
+                  name="Derived Column Output"
+                  synchronousInputId="Package\Create Output File Data Flow Task\Batch Values Derived Columns.Inputs[Derived Column Input]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Create Output File Data Flow Task\Batch Values Derived Columns.Outputs[Derived Column Output].Columns[ImportSource]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Computation"
+                      errorRowDisposition="FailComponent"
+                      length="255"
+                      lineageId="Package\Create Output File Data Flow Task\Batch Values Derived Columns.Outputs[Derived Column Output].Columns[ImportSource]"
+                      name="ImportSource"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.String"
+                          description="Derived Column Expression"
+                          name="Expression">(DT_STR,255,1252)@[User::OutputFilePath]</property>
+                        <property
+                          containsID="true"
+                          dataType="System.String"
+                          description="Derived Column Friendly Expression"
+                          expressionType="Notify"
+                          name="FriendlyExpression">(DT_STR,255,1252)@[User::OutputFilePath]</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\Create Output File Data Flow Task\Batch Values Derived Columns.Outputs[Derived Column Output].Columns[DateRequested]"
+                      dataType="dbDate"
+                      errorOrTruncationOperation="Computation"
+                      errorRowDisposition="FailComponent"
+                      lineageId="Package\Create Output File Data Flow Task\Batch Values Derived Columns.Outputs[Derived Column Output].Columns[DateRequested]"
+                      name="DateRequested"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.String"
+                          description="Derived Column Expression"
+                          name="Expression">(DT_DBDATE)[GETDATE]()</property>
+                        <property
+                          containsID="true"
+                          dataType="System.String"
+                          description="Derived Column Friendly Expression"
+                          expressionType="Notify"
+                          name="FriendlyExpression">(DT_DBDATE)GETDATE()</property>
+                      </properties>
+                    </outputColumn>
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+                <output
+                  refId="Package\Create Output File Data Flow Task\Batch Values Derived Columns.Outputs[Derived Column Error Output]"
+                  description="Error Output of the Derived Column Transformation"
+                  exclusionGroup="1"
+                  isErrorOut="true"
+                  name="Derived Column Error Output"
+                  synchronousInputId="Package\Create Output File Data Flow Task\Batch Values Derived Columns.Inputs[Derived Column Input]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Create Output File Data Flow Task\Batch Values Derived Columns.Outputs[Derived Column Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\Create Output File Data Flow Task\Batch Values Derived Columns.Outputs[Derived Column Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\Create Output File Data Flow Task\Batch Values Derived Columns.Outputs[Derived Column Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\Create Output File Data Flow Task\Batch Values Derived Columns.Outputs[Derived Column Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\Create Output File Data Flow Task\Case Typing Excel Destination"
+              componentClassID="Microsoft.ExcelDestination"
+              contactInfo="Excel Destination;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;0"
+              description="Excel Destination"
+              name="Case Typing Excel Destination"
+              usesDispositions="true"
+              validateExternalMetadata="False">
+              <properties>
+                <property
+                  dataType="System.Int32"
+                  description="The number of seconds before a command times out.  A value of 0 indicates an infinite time-out."
+                  name="CommandTimeout">0</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the name of the database object used to open a rowset."
+                  name="OpenRowset">HICS_Output_Excel_Destination$</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the variable that contains the name of the database object used to open a rowset."
+                  name="OpenRowsetVariable">User::OutputFilePath</property>
+                <property
+                  dataType="System.String"
+                  description="The SQL command to be executed."
+                  name="SqlCommand"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor"></property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the mode used to access the database."
+                  name="AccessMode"
+                  typeConverter="AccessMode">0</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Indicates whether the values supplied for identity columns will be copied to the destination. If false, values for identity columns will be auto-generated at the destination. Applies only if fast load is turned on."
+                  name="FastLoadKeepIdentity">false</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Indicates whether the columns containing null will have null inserted in the destination. If false, columns containing null will have their default values inserted at the destination. Applies only if fast load is turned on."
+                  name="FastLoadKeepNulls">false</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies options to be used with fast load.  Applies only if fast load is turned on."
+                  name="FastLoadOptions"></property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies when commits are issued during data insertion.  A value of 0 specifies that one commit will be issued at the end of data insertion.  Applies only if fast load is turned on."
+                  name="FastLoadMaxInsertCommitSize">2147483647</property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\Create Output File Data Flow Task\Case Typing Excel Destination.Connections[OleDbConnection]"
+                  connectionManagerID="Package.ConnectionManagers[Case Typing Excel Connection Manager]"
+                  connectionManagerRefId="Package.ConnectionManagers[Case Typing Excel Connection Manager]"
+                  description="The OLE DB runtime connection used to access the database."
+                  name="OleDbConnection" />
+              </connections>
+              <inputs>
+                <input
+                  refId="Package\Create Output File Data Flow Task\Case Typing Excel Destination.Inputs[Excel Destination Input]"
+                  errorOrTruncationOperation="Insert"
+                  errorRowDisposition="FailComponent"
+                  hasSideEffects="true"
+                  name="Excel Destination Input">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\Create Output File Data Flow Task\Case Typing Excel Destination.Inputs[Excel Destination Input].Columns[uni HICS Case Number]"
+                      cachedDataType="wstr"
+                      cachedLength="50"
+                      cachedName="uni HICS Case Number"
+                      externalMetadataColumnId="Package\Create Output File Data Flow Task\Case Typing Excel Destination.Inputs[Excel Destination Input].ExternalColumns[HICS Case Number]"
+                      lineageId="Package\Create Output File Data Flow Task\Unicode Data Conversion.Outputs[Data Conversion Output].Columns[uni HICS Case Number]" />
+                    <inputColumn
+                      refId="Package\Create Output File Data Flow Task\Case Typing Excel Destination.Inputs[Excel Destination Input].Columns[uni AppID]"
+                      cachedDataType="wstr"
+                      cachedLength="50"
+                      cachedName="uni AppID"
+                      externalMetadataColumnId="Package\Create Output File Data Flow Task\Case Typing Excel Destination.Inputs[Excel Destination Input].ExternalColumns[AppID]"
+                      lineageId="Package\Create Output File Data Flow Task\Unicode Data Conversion.Outputs[Data Conversion Output].Columns[uni AppID]" />
+                    <inputColumn
+                      refId="Package\Create Output File Data Flow Task\Case Typing Excel Destination.Inputs[Excel Destination Input].Columns[uni Case Type]"
+                      cachedDataType="wstr"
+                      cachedLength="50"
+                      cachedName="uni Case Type"
+                      externalMetadataColumnId="Package\Create Output File Data Flow Task\Case Typing Excel Destination.Inputs[Excel Destination Input].ExternalColumns[Case Type]"
+                      lineageId="Package\Create Output File Data Flow Task\Unicode Data Conversion.Outputs[Data Conversion Output].Columns[uni Case Type]" />
+                    <inputColumn
+                      refId="Package\Create Output File Data Flow Task\Case Typing Excel Destination.Inputs[Excel Destination Input].Columns[uni Case Status]"
+                      cachedDataType="wstr"
+                      cachedLength="255"
+                      cachedName="uni Case Status"
+                      externalMetadataColumnId="Package\Create Output File Data Flow Task\Case Typing Excel Destination.Inputs[Excel Destination Input].ExternalColumns[Case Status]"
+                      lineageId="Package\Create Output File Data Flow Task\Unicode Data Conversion.Outputs[Data Conversion Output].Columns[uni Case Status]" />
+                    <inputColumn
+                      refId="Package\Create Output File Data Flow Task\Case Typing Excel Destination.Inputs[Excel Destination Input].Columns[uni Correlated Case]"
+                      cachedDataType="wstr"
+                      cachedLength="50"
+                      cachedName="uni Correlated Case"
+                      externalMetadataColumnId="Package\Create Output File Data Flow Task\Case Typing Excel Destination.Inputs[Excel Destination Input].ExternalColumns[Correlated Case]"
+                      lineageId="Package\Create Output File Data Flow Task\Unicode Data Conversion.Outputs[Data Conversion Output].Columns[uni Correlated Case]" />
+                    <inputColumn
+                      refId="Package\Create Output File Data Flow Task\Case Typing Excel Destination.Inputs[Excel Destination Input].Columns[Policy-1095]"
+                      cachedDataType="i4"
+                      cachedName="Policy-1095"
+                      externalMetadataColumnId="Package\Create Output File Data Flow Task\Case Typing Excel Destination.Inputs[Excel Destination Input].ExternalColumns[Policy-1095]"
+                      lineageId="Package\Create Output File Data Flow Task\1487:invalid" />
+                    <inputColumn
+                      refId="Package\Create Output File Data Flow Task\Case Typing Excel Destination.Inputs[Excel Destination Input].Columns[Policy-Preaudit]"
+                      cachedDataType="i4"
+                      cachedName="Policy-Preaudit"
+                      externalMetadataColumnId="Package\Create Output File Data Flow Task\Case Typing Excel Destination.Inputs[Excel Destination Input].ExternalColumns[Policy-Preaudit]"
+                      lineageId="Package\Create Output File Data Flow Task\1488:invalid" />
+                    <inputColumn
+                      refId="Package\Create Output File Data Flow Task\Case Typing Excel Destination.Inputs[Excel Destination Input].Columns[Manual1095]"
+                      cachedDataType="i4"
+                      cachedName="Manual1095"
+                      externalMetadataColumnId="Package\Create Output File Data Flow Task\Case Typing Excel Destination.Inputs[Excel Destination Input].ExternalColumns[Manual1095]"
+                      lineageId="Package\Create Output File Data Flow Task\1489:invalid" />
+                  </inputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\Create Output File Data Flow Task\Case Typing Excel Destination.Inputs[Excel Destination Input].ExternalColumns[HICS Case Number]"
+                      dataType="wstr"
+                      length="255"
+                      name="HICS Case Number" />
+                    <externalMetadataColumn
+                      refId="Package\Create Output File Data Flow Task\Case Typing Excel Destination.Inputs[Excel Destination Input].ExternalColumns[AppID]"
+                      dataType="wstr"
+                      length="255"
+                      name="AppID" />
+                    <externalMetadataColumn
+                      refId="Package\Create Output File Data Flow Task\Case Typing Excel Destination.Inputs[Excel Destination Input].ExternalColumns[Case Type]"
+                      dataType="wstr"
+                      length="255"
+                      name="Case Type" />
+                    <externalMetadataColumn
+                      refId="Package\Create Output File Data Flow Task\Case Typing Excel Destination.Inputs[Excel Destination Input].ExternalColumns[Case Status]"
+                      dataType="wstr"
+                      length="255"
+                      name="Case Status" />
+                    <externalMetadataColumn
+                      refId="Package\Create Output File Data Flow Task\Case Typing Excel Destination.Inputs[Excel Destination Input].ExternalColumns[Correlated Case]"
+                      dataType="wstr"
+                      length="255"
+                      name="Correlated Case" />
+                    <externalMetadataColumn
+                      refId="Package\Create Output File Data Flow Task\Case Typing Excel Destination.Inputs[Excel Destination Input].ExternalColumns[Policy-1095]"
+                      dataType="wstr"
+                      length="255"
+                      name="Policy-1095" />
+                    <externalMetadataColumn
+                      refId="Package\Create Output File Data Flow Task\Case Typing Excel Destination.Inputs[Excel Destination Input].ExternalColumns[Policy-Preaudit]"
+                      dataType="wstr"
+                      length="255"
+                      name="Policy-Preaudit" />
+                    <externalMetadataColumn
+                      refId="Package\Create Output File Data Flow Task\Case Typing Excel Destination.Inputs[Excel Destination Input].ExternalColumns[Manual1095]"
+                      dataType="wstr"
+                      length="255"
+                      name="Manual1095" />
+                  </externalMetadataColumns>
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\Create Output File Data Flow Task\Case Typing Excel Destination.Outputs[Excel Destination Error Output]"
+                  exclusionGroup="1"
+                  isErrorOut="true"
+                  name="Excel Destination Error Output"
+                  synchronousInputId="Package\Create Output File Data Flow Task\Case Typing Excel Destination.Inputs[Excel Destination Input]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Create Output File Data Flow Task\Case Typing Excel Destination.Outputs[Excel Destination Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\Create Output File Data Flow Task\Case Typing Excel Destination.Outputs[Excel Destination Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\Create Output File Data Flow Task\Case Typing Excel Destination.Outputs[Excel Destination Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\Create Output File Data Flow Task\Case Typing Excel Destination.Outputs[Excel Destination Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\Create Output File Data Flow Task\Multicast"
+              componentClassID="Microsoft.Multicast"
+              contactInfo="Multicast;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;0"
+              description="Distributes every input row to every row in one or more outputs. For example, branch your data flow to make a copy of data so that some values can be masked before sharing with external partners."
+              name="Multicast">
+              <inputs>
+                <input
+                  refId="Package\Create Output File Data Flow Task\Multicast.Inputs[Multicast Input 1]"
+                  name="Multicast Input 1">
+                  <externalMetadataColumns />
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\Create Output File Data Flow Task\Multicast.Outputs[Multicast Output 1]"
+                  deleteOutputOnPathDetached="true"
+                  name="Multicast Output 1"
+                  synchronousInputId="Package\Create Output File Data Flow Task\Multicast.Inputs[Multicast Input 1]">
+                  <externalMetadataColumns />
+                </output>
+                <output
+                  refId="Package\Create Output File Data Flow Task\Multicast.Outputs[Multicast Output 2]"
+                  dangling="true"
+                  deleteOutputOnPathDetached="true"
+                  name="Multicast Output 2"
+                  synchronousInputId="Package\Create Output File Data Flow Task\Multicast.Inputs[Multicast Input 1]">
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\Create Output File Data Flow Task\Reprint Request OLE DB Source"
+              componentClassID="Microsoft.OLEDBSource"
+              contactInfo="OLE DB Source;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;7"
+              description="OLE DB Source"
+              name="Reprint Request OLE DB Source"
+              usesDispositions="true"
+              version="7">
+              <properties>
+                <property
+                  dataType="System.Int32"
+                  description="The number of seconds before a command times out.  A value of 0 indicates an infinite time-out."
+                  name="CommandTimeout">0</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the name of the database object used to open a rowset."
+                  name="OpenRowset">[dbo].[HICSNewCaseOutput]</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the variable that contains the name of the database object used to open a rowset."
+                  name="OpenRowsetVariable"></property>
+                <property
+                  dataType="System.String"
+                  description="The SQL command to be executed."
+                  name="SqlCommand"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor">EXEC  [dbo].[pGenerateReprintRequest]</property>
+                <property
+                  dataType="System.String"
+                  description="The variable that contains the SQL command to be executed."
+                  name="SqlCommandVariable"></property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the column code page to use when code page information is unavailable from the data source."
+                  name="DefaultCodePage">1252</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Forces the use of the DefaultCodePage property value when describing character data."
+                  name="AlwaysUseDefaultCodePage">false</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the mode used to access the database."
+                  name="AccessMode"
+                  typeConverter="AccessMode">2</property>
+                <property
+                  dataType="System.String"
+                  description="The mappings between the parameters in the SQL command and variables."
+                  name="ParameterMapping"></property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\Create Output File Data Flow Task\Reprint Request OLE DB Source.Connections[OleDbConnection]"
+                  connectionManagerID="Package.ConnectionManagers[ERR_1095A]"
+                  connectionManagerRefId="Package.ConnectionManagers[ERR_1095A]"
+                  description="The OLE DB runtime connection used to access the database."
+                  name="OleDbConnection" />
+              </connections>
+              <outputs>
+                <output
+                  refId="Package\Create Output File Data Flow Task\Reprint Request OLE DB Source.Outputs[OLE DB Source Output]"
+                  name="OLE DB Source Output">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Create Output File Data Flow Task\Reprint Request OLE DB Source.Outputs[OLE DB Source Output].Columns[CaseID]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Create Output File Data Flow Task\Reprint Request OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[CaseID]"
+                      length="20"
+                      lineageId="Package\Create Output File Data Flow Task\Reprint Request OLE DB Source.Outputs[OLE DB Source Output].Columns[CaseID]"
+                      name="CaseID"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Create Output File Data Flow Task\Reprint Request OLE DB Source.Outputs[OLE DB Source Output].Columns[ApplicationID]"
+                      dataType="i8"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Create Output File Data Flow Task\Reprint Request OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[ApplicationID]"
+                      lineageId="Package\Create Output File Data Flow Task\Reprint Request OLE DB Source.Outputs[OLE DB Source Output].Columns[ApplicationID]"
+                      name="ApplicationID"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Create Output File Data Flow Task\Reprint Request OLE DB Source.Outputs[OLE DB Source Output].Columns[PolicyID]"
+                      dataType="i8"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Create Output File Data Flow Task\Reprint Request OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[PolicyID]"
+                      lineageId="Package\Create Output File Data Flow Task\Reprint Request OLE DB Source.Outputs[OLE DB Source Output].Columns[PolicyID]"
+                      name="PolicyID"
+                      truncationRowDisposition="FailComponent" />
+                  </outputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\Create Output File Data Flow Task\Reprint Request OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[CaseID]"
+                      codePage="1252"
+                      dataType="str"
+                      length="20"
+                      name="CaseID" />
+                    <externalMetadataColumn
+                      refId="Package\Create Output File Data Flow Task\Reprint Request OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[ApplicationID]"
+                      dataType="i8"
+                      name="ApplicationID" />
+                    <externalMetadataColumn
+                      refId="Package\Create Output File Data Flow Task\Reprint Request OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[PolicyID]"
+                      dataType="i8"
+                      name="PolicyID" />
+                  </externalMetadataColumns>
+                </output>
+                <output
+                  refId="Package\Create Output File Data Flow Task\Reprint Request OLE DB Source.Outputs[OLE DB Source Error Output]"
+                  isErrorOut="true"
+                  name="OLE DB Source Error Output">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Create Output File Data Flow Task\Reprint Request OLE DB Source.Outputs[OLE DB Source Error Output].Columns[CaseID]"
+                      codePage="1252"
+                      dataType="str"
+                      length="20"
+                      lineageId="Package\Create Output File Data Flow Task\Reprint Request OLE DB Source.Outputs[OLE DB Source Error Output].Columns[CaseID]"
+                      name="CaseID" />
+                    <outputColumn
+                      refId="Package\Create Output File Data Flow Task\Reprint Request OLE DB Source.Outputs[OLE DB Source Error Output].Columns[ApplicationID]"
+                      dataType="i8"
+                      lineageId="Package\Create Output File Data Flow Task\Reprint Request OLE DB Source.Outputs[OLE DB Source Error Output].Columns[ApplicationID]"
+                      name="ApplicationID" />
+                    <outputColumn
+                      refId="Package\Create Output File Data Flow Task\Reprint Request OLE DB Source.Outputs[OLE DB Source Error Output].Columns[PolicyID]"
+                      dataType="i8"
+                      lineageId="Package\Create Output File Data Flow Task\Reprint Request OLE DB Source.Outputs[OLE DB Source Error Output].Columns[PolicyID]"
+                      name="PolicyID" />
+                    <outputColumn
+                      refId="Package\Create Output File Data Flow Task\Reprint Request OLE DB Source.Outputs[OLE DB Source Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\Create Output File Data Flow Task\Reprint Request OLE DB Source.Outputs[OLE DB Source Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\Create Output File Data Flow Task\Reprint Request OLE DB Source.Outputs[OLE DB Source Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\Create Output File Data Flow Task\Reprint Request OLE DB Source.Outputs[OLE DB Source Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\Create Output File Data Flow Task\Unicode Data Conversion"
+              componentClassID="Microsoft.DataConvert"
+              contactInfo="Data Conversion;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;0"
+              description="Data Conversion"
+              name="Unicode Data Conversion"
+              usesDispositions="true">
+              <inputs>
+                <input
+                  refId="Package\Create Output File Data Flow Task\Unicode Data Conversion.Inputs[Data Conversion Input]"
+                  name="Data Conversion Input">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\Create Output File Data Flow Task\Unicode Data Conversion.Inputs[Data Conversion Input].Columns[HICS Case Number]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="50"
+                      cachedName="HICS Case Number"
+                      lineageId="Package\Create Output File Data Flow Task\1490:invalid" />
+                    <inputColumn
+                      refId="Package\Create Output File Data Flow Task\Unicode Data Conversion.Inputs[Data Conversion Input].Columns[AppID]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="50"
+                      cachedName="AppID"
+                      lineageId="Package\Create Output File Data Flow Task\1491:invalid" />
+                    <inputColumn
+                      refId="Package\Create Output File Data Flow Task\Unicode Data Conversion.Inputs[Data Conversion Input].Columns[Case Type]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="50"
+                      cachedName="Case Type"
+                      lineageId="Package\Create Output File Data Flow Task\1492:invalid" />
+                    <inputColumn
+                      refId="Package\Create Output File Data Flow Task\Unicode Data Conversion.Inputs[Data Conversion Input].Columns[Case Status]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="255"
+                      cachedName="Case Status"
+                      lineageId="Package\Create Output File Data Flow Task\1493:invalid" />
+                    <inputColumn
+                      refId="Package\Create Output File Data Flow Task\Unicode Data Conversion.Inputs[Data Conversion Input].Columns[Correlated Case]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="50"
+                      cachedName="Correlated Case"
+                      lineageId="Package\Create Output File Data Flow Task\1494:invalid" />
+                  </inputColumns>
+                  <externalMetadataColumns />
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\Create Output File Data Flow Task\Unicode Data Conversion.Outputs[Data Conversion Output]"
+                  exclusionGroup="1"
+                  name="Data Conversion Output"
+                  synchronousInputId="Package\Create Output File Data Flow Task\Unicode Data Conversion.Inputs[Data Conversion Input]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Create Output File Data Flow Task\Unicode Data Conversion.Outputs[Data Conversion Output].Columns[uni HICS Case Number]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      length="50"
+                      lineageId="Package\Create Output File Data Flow Task\Unicode Data Conversion.Outputs[Data Conversion Output].Columns[uni HICS Case Number]"
+                      name="uni HICS Case Number"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Specifies the input column used as the source of data for the conversion."
+                          name="SourceInputColumnLineageID">#{Package\Create Output File Data Flow Task\1490:invalid}</property>
+                        <property
+                          dataType="System.Boolean"
+                          description="Indicates whether the column uses the faster, locale-neutral parsing routines."
+                          name="FastParse">false</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\Create Output File Data Flow Task\Unicode Data Conversion.Outputs[Data Conversion Output].Columns[uni AppID]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      length="50"
+                      lineageId="Package\Create Output File Data Flow Task\Unicode Data Conversion.Outputs[Data Conversion Output].Columns[uni AppID]"
+                      name="uni AppID"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Specifies the input column used as the source of data for the conversion."
+                          name="SourceInputColumnLineageID">#{Package\Create Output File Data Flow Task\1491:invalid}</property>
+                        <property
+                          dataType="System.Boolean"
+                          description="Indicates whether the column uses the faster, locale-neutral parsing routines."
+                          name="FastParse">false</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\Create Output File Data Flow Task\Unicode Data Conversion.Outputs[Data Conversion Output].Columns[uni Case Type]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      length="50"
+                      lineageId="Package\Create Output File Data Flow Task\Unicode Data Conversion.Outputs[Data Conversion Output].Columns[uni Case Type]"
+                      name="uni Case Type"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Specifies the input column used as the source of data for the conversion."
+                          name="SourceInputColumnLineageID">#{Package\Create Output File Data Flow Task\1492:invalid}</property>
+                        <property
+                          dataType="System.Boolean"
+                          description="Indicates whether the column uses the faster, locale-neutral parsing routines."
+                          name="FastParse">false</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\Create Output File Data Flow Task\Unicode Data Conversion.Outputs[Data Conversion Output].Columns[uni Case Status]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      length="255"
+                      lineageId="Package\Create Output File Data Flow Task\Unicode Data Conversion.Outputs[Data Conversion Output].Columns[uni Case Status]"
+                      name="uni Case Status"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Specifies the input column used as the source of data for the conversion."
+                          name="SourceInputColumnLineageID">#{Package\Create Output File Data Flow Task\1493:invalid}</property>
+                        <property
+                          dataType="System.Boolean"
+                          description="Indicates whether the column uses the faster, locale-neutral parsing routines."
+                          name="FastParse">false</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\Create Output File Data Flow Task\Unicode Data Conversion.Outputs[Data Conversion Output].Columns[uni Correlated Case]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      length="50"
+                      lineageId="Package\Create Output File Data Flow Task\Unicode Data Conversion.Outputs[Data Conversion Output].Columns[uni Correlated Case]"
+                      name="uni Correlated Case"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Specifies the input column used as the source of data for the conversion."
+                          name="SourceInputColumnLineageID">#{Package\Create Output File Data Flow Task\1494:invalid}</property>
+                        <property
+                          dataType="System.Boolean"
+                          description="Indicates whether the column uses the faster, locale-neutral parsing routines."
+                          name="FastParse">false</property>
+                      </properties>
+                    </outputColumn>
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+                <output
+                  refId="Package\Create Output File Data Flow Task\Unicode Data Conversion.Outputs[Data Conversion Error Output]"
+                  exclusionGroup="1"
+                  isErrorOut="true"
+                  name="Data Conversion Error Output"
+                  synchronousInputId="Package\Create Output File Data Flow Task\Unicode Data Conversion.Inputs[Data Conversion Input]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Create Output File Data Flow Task\Unicode Data Conversion.Outputs[Data Conversion Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\Create Output File Data Flow Task\Unicode Data Conversion.Outputs[Data Conversion Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\Create Output File Data Flow Task\Unicode Data Conversion.Outputs[Data Conversion Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\Create Output File Data Flow Task\Unicode Data Conversion.Outputs[Data Conversion Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+          </components>
+          <paths>
+            <path
+              refId="Package\Create Output File Data Flow Task.Paths[Data Conversion Output]"
+              endId="Package\Create Output File Data Flow Task\Case Typing Excel Destination.Inputs[Excel Destination Input]"
+              name="Data Conversion Output"
+              startId="Package\Create Output File Data Flow Task\Unicode Data Conversion.Outputs[Data Conversion Output]" />
+            <path
+              refId="Package\Create Output File Data Flow Task.Paths[Derived Column Output]"
+              endId="Package\Create Output File Data Flow Task\Multicast.Inputs[Multicast Input 1]"
+              name="Derived Column Output"
+              startId="Package\Create Output File Data Flow Task\Batch Values Derived Columns.Outputs[Derived Column Output]" />
+            <path
+              refId="Package\Create Output File Data Flow Task.Paths[Multicast Output 1]"
+              endId="Package\Create Output File Data Flow Task\Unicode Data Conversion.Inputs[Data Conversion Input]"
+              name="Multicast Output 1"
+              startId="Package\Create Output File Data Flow Task\Multicast.Outputs[Multicast Output 1]" />
+            <path
+              refId="Package\Create Output File Data Flow Task.Paths[OLE DB Source Output]"
+              endId="Package\Create Output File Data Flow Task\Batch Values Derived Columns.Inputs[Derived Column Input]"
+              name="OLE DB Source Output"
+              startId="Package\Create Output File Data Flow Task\Reprint Request OLE DB Source.Outputs[OLE DB Source Output]" />
+          </paths>
+        </pipeline>
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\Create Reprint_Request Excel Template File System Task"
+      DTS:CreationName="Microsoft.FileSystemTask"
+      DTS:DelayValidation="True"
+      DTS:Description="File System Task"
+      DTS:DTSID="{1F3C4A81-4FFD-4F9C-8D3C-200A8C182070}"
+      DTS:ExecutableType="Microsoft.FileSystemTask"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Create Reprint_Request Excel Template File System Task"
+      DTS:TaskContact="File System Task;Microsoft Corporation; SQL Server 2012; © 2007 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+      DTS:ThreadHint="0">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <FileSystemData
+          TaskSourcePath="{49EDC968-2130-4E82-BC08-176095B4695D}"
+          TaskDestinationPath="User::OutputFilePath"
+          TaskIsDestinationVariable="True" />
+      </DTS:ObjectData>
+    </DTS:Executable>
+  </DTS:Executables>
+  <DTS:PrecedenceConstraints>
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint 3]"
+      DTS:CreationName=""
+      DTS:DTSID="{B801333F-8F72-4A34-99AC-98F87DFE1660}"
+      DTS:From="Package\Create Reprint_Request Excel Template File System Task"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint 3"
+      DTS:To="Package\Create Output File Data Flow Task" />
+  </DTS:PrecedenceConstraints>
+  <DTS:DesignTimeProperties><![CDATA[<?xml version="1.0"?>
+<!--This CDATA section contains the layout information of the package. The section includes information such as (x,y) coordinates, width, and height.-->
+<!--If you manually edit this section and make a mistake, you can delete it. -->
+<!--The package will still be able to load normally but the previous layout information will be lost and the designer will automatically re-arrange the elements on the design surface.-->
+<Objects
+  Version="8">
+  <!--Each node below will contain properties that do not affect runtime behavior.-->
+  <Package
+    design-time-name="Package">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
+        <NodeLayout
+          Size="242,42"
+          Id="Package\Create Output File Data Flow Task"
+          TopLeft="328,253" />
+        <NodeLayout
+          Size="350,42"
+          Id="Package\Create Reprint_Request Excel Template File System Task"
+          TopLeft="272,137" />
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint 3]"
+          TopLeft="448,179">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,74"
+              Start="0,0"
+              End="0,66.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,66.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+      </GraphLayout>
+    </LayoutInfo>
+  </Package>
+  <TaskHost
+    design-time-name="Package\Create Output File Data Flow Task">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="16" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:mssgm="clr-namespace:Microsoft.SqlServer.Graph.Model;assembly=Microsoft.SqlServer.Graph">
+        <NodeLayout
+          Size="222,42"
+          Id="Package\Create Output File Data Flow Task\Case Typing Excel Destination"
+          TopLeft="163.5,313" />
+        <NodeLayout
+          Size="199,42"
+          Id="Package\Create Output File Data Flow Task\Unicode Data Conversion"
+          TopLeft="175,233" />
+        <NodeLayout
+          Size="231,42"
+          Id="Package\Create Output File Data Flow Task\Reprint Request OLE DB Source"
+          TopLeft="181,20" />
+        <EdgeLayout
+          Id="Package\Create Output File Data Flow Task.Paths[Data Conversion Output]"
+          TopLeft="274.5,275">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,38"
+              Start="0,0"
+              End="0,30.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,30.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <mssgm:EdgeLabel
+              BoundingBox="-8,7.25,16,16"
+              RelativePosition="Any" />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <NodeLayout
+          Size="122,42"
+          Id="Package\Create Output File Data Flow Task\Multicast"
+          TopLeft="301,151" />
+        <EdgeLayout
+          Id="Package\Create Output File Data Flow Task.Paths[Multicast Output 1]"
+          TopLeft="362,193">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="-87.5,40"
+              Start="0,0"
+              End="-87.5,32.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,16" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,16"
+                    Point2="0,20"
+                    Point3="-4,20" />
+                  <mssgle:LineSegment
+                    End="-83.5,20" />
+                  <mssgle:CubicBezierSegment
+                    Point1="-83.5,20"
+                    Point2="-87.5,20"
+                    Point3="-87.5,24" />
+                  <mssgle:LineSegment
+                    End="-87.5,32.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <mssgm:EdgeLabel
+              BoundingBox="-51.75,25,16,16"
+              RelativePosition="Any" />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <NodeLayout
+          Size="224,42"
+          Id="Package\Create Output File Data Flow Task\Batch Values Derived Columns"
+          TopLeft="276,88" />
+        <EdgeLayout
+          Id="Package\Create Output File Data Flow Task.Paths[OLE DB Source Output]"
+          TopLeft="296.5,62">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="91.5,26"
+              Start="0,0"
+              End="91.5,18.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,9" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,9"
+                    Point2="0,13"
+                    Point3="4,13" />
+                  <mssgle:LineSegment
+                    End="87.5,13" />
+                  <mssgle:CubicBezierSegment
+                    Point1="87.5,13"
+                    Point2="91.5,13"
+                    Point3="91.5,17" />
+                  <mssgle:LineSegment
+                    End="91.5,18.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\Create Output File Data Flow Task.Paths[Derived Column Output]"
+          TopLeft="388,130">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="35,42"
+              Start="0,0"
+              End="27.5,42">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,38" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,38"
+                    Point2="0,42"
+                    Point3="4,42" />
+                  <mssgle:LineSegment
+                    End="27.5,42" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+      </GraphLayout>
+    </LayoutInfo>
+  </TaskHost>
+  <PipelineComponentMetadata
+    design-time-name="Package\Create Output File Data Flow Task\Case Typing Excel Destination">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+      <Property>
+        <Name>TableInfoObjectType</Name>
+        <Value
+          type="q2:string">Table</Value>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+  <PipelineComponentMetadata
+    design-time-name="Package\Create Output File Data Flow Task\Reprint Request OLE DB Source">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+      <Property>
+        <Name>TableInfoObjectType</Name>
+        <Value
+          type="q2:string">Table</Value>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+</Objects>]]></DTS:DesignTimeProperties>
+</DTS:Executable>

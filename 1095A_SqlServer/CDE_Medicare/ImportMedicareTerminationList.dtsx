@@ -1,0 +1,1076 @@
+<?xml version="1.0"?>
+<DTS:Executable xmlns:DTS="www.microsoft.com/SqlServer/Dts"
+  DTS:refId="Package"
+  DTS:CreationDate="10/9/2017 8:18:38 AM"
+  DTS:CreationName="Microsoft.Package"
+  DTS:CreatorComputerName="5CG5388ZRW"
+  DTS:CreatorName="AZ\mcho"
+  DTS:DTSID="{4BFDF99C-32BF-4F34-87A3-7870F8D59B33}"
+  DTS:ExecutableType="Microsoft.Package"
+  DTS:LastModifiedProductVersion="14.0.3006.16"
+  DTS:LocaleID="1033"
+  DTS:ObjectName="ImportMedicareTerminationList"
+  DTS:PackageType="5"
+  DTS:VersionBuild="20"
+  DTS:VersionGUID="{9BAE680D-0D31-4E14-8D84-A8C399831D6C}">
+  <DTS:Property
+    DTS:Name="PackageFormatVersion">8</DTS:Property>
+  <DTS:ConnectionManagers>
+    <DTS:ConnectionManager
+      DTS:refId="Package.ConnectionManagers[ERR_1095A]"
+      DTS:CreationName="OLEDB"
+      DTS:DTSID="{6A801D80-9FBB-4595-93E2-C4BD4ED6D7C6}"
+      DTS:ObjectName="ERR_1095A">
+      <DTS:ObjectData>
+        <DTS:ConnectionManager
+          DTS:ConnectionString="Data Source=localhost;Initial Catalog=ERR_1095A;Provider=SQLNCLI11.1;Integrated Security=SSPI;Auto Translate=False;" />
+      </DTS:ObjectData>
+    </DTS:ConnectionManager>
+    <DTS:ConnectionManager
+      DTS:refId="Package.ConnectionManagers[Source File]"
+      DTS:CreationName="FLATFILE"
+      DTS:DTSID="{A4BFE133-3C79-4BAE-A5FC-B5761337C4E8}"
+      DTS:ObjectName="Source File">
+      <DTS:PropertyExpression
+        DTS:Name="ConnectionString">@[User::FullSourceFile]</DTS:PropertyExpression>
+      <DTS:ObjectData>
+        <DTS:ConnectionManager
+          DTS:Format="Delimited"
+          DTS:LocaleID="1033"
+          DTS:HeaderRowDelimiter="_x000D__x000A_"
+          DTS:ColumnNamesInFirstDataRow="True"
+          DTS:RowDelimiter=""
+          DTS:TextQualifier="_x003C_none_x003E_"
+          DTS:CodePage="1252"
+          DTS:ConnectionString="C:\Data\files\in\EPS\MedicareTerminationLists\New\">
+          <DTS:FlatFileColumns>
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x007C_"
+              DTS:MaximumWidth="100"
+              DTS:DataType="129"
+              DTS:TextQualified="True"
+              DTS:ObjectName="Point of Contact"
+              DTS:DTSID="{6F57ED71-E753-4BEB-A3E4-F9781204D72B}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x007C_"
+              DTS:MaximumWidth="50"
+              DTS:DataType="129"
+              DTS:TextQualified="True"
+              DTS:ObjectName="Telephone Number"
+              DTS:DTSID="{24FCA8D9-9A18-40A0-B377-30EB1A247C8E}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x007C_"
+              DTS:MaximumWidth="100"
+              DTS:DataType="129"
+              DTS:TextQualified="True"
+              DTS:ObjectName="Email address"
+              DTS:DTSID="{F78E3DF1-C6AB-426A-972A-2BF821F492B4}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x007C_"
+              DTS:MaximumWidth="50"
+              DTS:DataType="129"
+              DTS:TextQualified="True"
+              DTS:ObjectName="HIOS ID"
+              DTS:DTSID="{33FBC2BF-562E-4063-9897-224399B84BCF}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x007C_"
+              DTS:MaximumWidth="50"
+              DTS:DataType="129"
+              DTS:TextQualified="True"
+              DTS:ObjectName="Coverage Year"
+              DTS:DTSID="{7DA34562-ADA2-46B3-ACFC-165D2AE14450}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x007C_"
+              DTS:MaximumWidth="50"
+              DTS:DataType="129"
+              DTS:TextQualified="True"
+              DTS:ObjectName="Exchange Assigned Policy ID"
+              DTS:DTSID="{CD5E019E-FC39-483D-A6C2-B6E6975D1366}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x007C_"
+              DTS:MaximumWidth="50"
+              DTS:DataType="129"
+              DTS:TextQualified="True"
+              DTS:ObjectName="Exchange Assigned Member ID"
+              DTS:DTSID="{56E71CFF-24E2-4D33-A8AF-0E06FE2F2787}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x000D__x000A_"
+              DTS:MaximumWidth="100"
+              DTS:DataType="129"
+              DTS:TextQualified="True"
+              DTS:ObjectName="Filename"
+              DTS:DTSID="{81D2D6F5-670D-4C3A-BEF4-E7BB60F42C65}"
+              DTS:CreationName="" />
+          </DTS:FlatFileColumns>
+        </DTS:ConnectionManager>
+      </DTS:ObjectData>
+    </DTS:ConnectionManager>
+  </DTS:ConnectionManagers>
+  <DTS:Variables>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{C4E60641-659D-4BA9-A5C3-A4EA9D3728F3}"
+      DTS:EvaluateAsExpression="True"
+      DTS:Expression="@[$Project::IMTL1_SourceFilePath] + &quot;\\&quot; +  @[User::SourceFileName]"
+      DTS:IncludeInDebugDump="2345"
+      DTS:Namespace="User"
+      DTS:ObjectName="FullSourceFile">
+      <DTS:VariableValue
+        DTS:DataType="8">C:\Data\files\in\EPS\MedicareTerminationLists\New\</DTS:VariableValue>
+    </DTS:Variable>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{DD1A10E9-4A66-49A9-9D4F-029C8A01A4D2}"
+      DTS:IncludeInDebugDump="2345"
+      DTS:Namespace="User"
+      DTS:ObjectName="SourceFileName">
+      <DTS:VariableValue
+        DTS:DataType="8"
+        xml:space="preserve"></DTS:VariableValue>
+    </DTS:Variable>
+  </DTS:Variables>
+  <DTS:Executables>
+    <DTS:Executable
+      DTS:refId="Package\FLC - Load Source File Continuously"
+      DTS:CreationName="STOCK:FOREACHLOOP"
+      DTS:Description="Foreach Loop Container"
+      DTS:DTSID="{E3D8B411-B98F-4189-9808-12EEFAF2BC14}"
+      DTS:ExecutableType="STOCK:FOREACHLOOP"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="FLC - Load Source File Continuously">
+      <DTS:ForEachEnumerator
+        DTS:CreationName="Microsoft.ForEachFileEnumerator"
+        DTS:DTSID="{9690F129-BF12-4B70-B209-448F731368F8}"
+        DTS:ObjectName="{9690F129-BF12-4B70-B209-448F731368F8}">
+        <DTS:PropertyExpression
+          DTS:Name="Directory">@[$Project::IMTL1_SourceFilePath]+"\\"</DTS:PropertyExpression>
+        <DTS:PropertyExpression
+          DTS:Name="FileSpec">@[$Project::IMTL1_FileName]</DTS:PropertyExpression>
+        <DTS:ObjectData>
+          <ForEachFileEnumeratorProperties>
+            <FEFEProperty
+              Folder="C:\Data\files\in\EPS\MedicareTerminationLists\New\" />
+            <FEFEProperty
+              FileSpec="*.ERRM.*" />
+            <FEFEProperty
+              FileNameRetrievalType="1" />
+            <FEFEProperty
+              Recurse="0" />
+          </ForEachFileEnumeratorProperties>
+        </DTS:ObjectData>
+      </DTS:ForEachEnumerator>
+      <DTS:Variables />
+      <DTS:Executables>
+        <DTS:Executable
+          DTS:refId="Package\FLC - Load Source File Continuously\DFT - Stage Data"
+          DTS:CreationName="Microsoft.Pipeline"
+          DTS:Description="Data Flow Task"
+          DTS:DTSID="{B6F5EB5B-472B-4DA2-8B49-614AA711E726}"
+          DTS:ExecutableType="Microsoft.Pipeline"
+          DTS:LocaleID="-1"
+          DTS:ObjectName="DFT - Stage Data"
+          DTS:TaskContact="Performs high-performance data extraction, transformation and loading;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1">
+          <DTS:Variables />
+          <DTS:ObjectData>
+            <pipeline
+              version="1">
+              <components>
+                <component
+                  refId="Package\FLC - Load Source File Continuously\DFT - Stage Data\Derived Column"
+                  componentClassID="Microsoft.DerivedColumn"
+                  contactInfo="Derived Column;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;0"
+                  description="Creates new column values by applying expressions to transformation input columns. Create new columns or overwrite existing ones. For example, concatenate the values from the 'first name' and 'last name' column to make a 'full name' column."
+                  name="Derived Column"
+                  usesDispositions="true">
+                  <inputs>
+                    <input
+                      refId="Package\FLC - Load Source File Continuously\DFT - Stage Data\Derived Column.Inputs[Derived Column Input]"
+                      description="Input to the Derived Column Transformation"
+                      name="Derived Column Input">
+                      <inputColumns>
+                        <inputColumn
+                          refId="Package\FLC - Load Source File Continuously\DFT - Stage Data\Derived Column.Inputs[Derived Column Input].Columns[Exchange Assigned Member ID]"
+                          cachedCodepage="1252"
+                          cachedDataType="str"
+                          cachedLength="50"
+                          cachedName="Exchange Assigned Member ID"
+                          lineageId="Package\FLC - Load Source File Continuously\DFT - Stage Data\Flat File Source.Outputs[Flat File Source Output].Columns[Exchange Assigned Member ID]" />
+                      </inputColumns>
+                      <externalMetadataColumns />
+                    </input>
+                  </inputs>
+                  <outputs>
+                    <output
+                      refId="Package\FLC - Load Source File Continuously\DFT - Stage Data\Derived Column.Outputs[Derived Column Output]"
+                      description="Default Output of the Derived Column Transformation"
+                      exclusionGroup="1"
+                      name="Derived Column Output"
+                      synchronousInputId="Package\FLC - Load Source File Continuously\DFT - Stage Data\Derived Column.Inputs[Derived Column Input]">
+                      <outputColumns>
+                        <outputColumn
+                          refId="Package\FLC - Load Source File Continuously\DFT - Stage Data\Derived Column.Outputs[Derived Column Output].Columns[UpdatedExchangeAssignedMemberID]"
+                          codePage="1252"
+                          dataType="str"
+                          errorOrTruncationOperation="Computation"
+                          errorRowDisposition="FailComponent"
+                          length="50"
+                          lineageId="Package\FLC - Load Source File Continuously\DFT - Stage Data\Derived Column.Outputs[Derived Column Output].Columns[UpdatedExchangeAssignedMemberID]"
+                          name="UpdatedExchangeAssignedMemberID"
+                          truncationRowDisposition="FailComponent">
+                          <properties>
+                            <property
+                              containsID="true"
+                              dataType="System.String"
+                              description="Derived Column Expression"
+                              name="Expression">(DT_STR,50,1252)[RIGHT]("0000000000" + #{Package\FLC - Load Source File Continuously\DFT - Stage Data\Flat File Source.Outputs[Flat File Source Output].Columns[Exchange Assigned Member ID]},10)</property>
+                            <property
+                              containsID="true"
+                              dataType="System.String"
+                              description="Derived Column Friendly Expression"
+                              expressionType="Notify"
+                              name="FriendlyExpression">(DT_STR,50,1252)RIGHT("0000000000" + [Exchange Assigned Member ID],10)</property>
+                          </properties>
+                        </outputColumn>
+                      </outputColumns>
+                      <externalMetadataColumns />
+                    </output>
+                    <output
+                      refId="Package\FLC - Load Source File Continuously\DFT - Stage Data\Derived Column.Outputs[Derived Column Error Output]"
+                      description="Error Output of the Derived Column Transformation"
+                      exclusionGroup="1"
+                      isErrorOut="true"
+                      name="Derived Column Error Output"
+                      synchronousInputId="Package\FLC - Load Source File Continuously\DFT - Stage Data\Derived Column.Inputs[Derived Column Input]">
+                      <outputColumns>
+                        <outputColumn
+                          refId="Package\FLC - Load Source File Continuously\DFT - Stage Data\Derived Column.Outputs[Derived Column Error Output].Columns[ErrorCode]"
+                          dataType="i4"
+                          lineageId="Package\FLC - Load Source File Continuously\DFT - Stage Data\Derived Column.Outputs[Derived Column Error Output].Columns[ErrorCode]"
+                          name="ErrorCode"
+                          specialFlags="1" />
+                        <outputColumn
+                          refId="Package\FLC - Load Source File Continuously\DFT - Stage Data\Derived Column.Outputs[Derived Column Error Output].Columns[ErrorColumn]"
+                          dataType="i4"
+                          lineageId="Package\FLC - Load Source File Continuously\DFT - Stage Data\Derived Column.Outputs[Derived Column Error Output].Columns[ErrorColumn]"
+                          name="ErrorColumn"
+                          specialFlags="2" />
+                      </outputColumns>
+                      <externalMetadataColumns />
+                    </output>
+                  </outputs>
+                </component>
+                <component
+                  refId="Package\FLC - Load Source File Continuously\DFT - Stage Data\Flat File Source"
+                  componentClassID="Microsoft.FlatFileSource"
+                  contactInfo="Flat File Source;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;1"
+                  description="Flat File Source"
+                  localeId="1033"
+                  name="Flat File Source"
+                  usesDispositions="true"
+                  version="1">
+                  <properties>
+                    <property
+                      dataType="System.Boolean"
+                      description="Specifies whether zero-length columns are treated as null."
+                      name="RetainNulls">false</property>
+                    <property
+                      dataType="System.String"
+                      description="Specifies the name of an output column containing the file name. If no name is specified, no output column containing the file name will be generated."
+                      name="FileNameColumnName"></property>
+                  </properties>
+                  <connections>
+                    <connection
+                      refId="Package\FLC - Load Source File Continuously\DFT - Stage Data\Flat File Source.Connections[FlatFileConnection]"
+                      connectionManagerID="Package.ConnectionManagers[Source File]"
+                      connectionManagerRefId="Package.ConnectionManagers[Source File]"
+                      name="FlatFileConnection" />
+                  </connections>
+                  <outputs>
+                    <output
+                      refId="Package\FLC - Load Source File Continuously\DFT - Stage Data\Flat File Source.Outputs[Flat File Source Output]"
+                      name="Flat File Source Output">
+                      <outputColumns>
+                        <outputColumn
+                          refId="Package\FLC - Load Source File Continuously\DFT - Stage Data\Flat File Source.Outputs[Flat File Source Output].Columns[Point of Contact]"
+                          codePage="1252"
+                          dataType="str"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\FLC - Load Source File Continuously\DFT - Stage Data\Flat File Source.Outputs[Flat File Source Output].ExternalColumns[Point of Contact]"
+                          length="100"
+                          lineageId="Package\FLC - Load Source File Continuously\DFT - Stage Data\Flat File Source.Outputs[Flat File Source Output].Columns[Point of Contact]"
+                          name="Point of Contact"
+                          truncationRowDisposition="FailComponent">
+                          <properties>
+                            <property
+                              dataType="System.Boolean"
+                              description="Indicates whether the column uses the faster, locale-neutral parsing routines."
+                              name="FastParse">false</property>
+                            <property
+                              dataType="System.Boolean"
+                              description="Indicates whether the data is in binary format."
+                              name="UseBinaryFormat">false</property>
+                          </properties>
+                        </outputColumn>
+                        <outputColumn
+                          refId="Package\FLC - Load Source File Continuously\DFT - Stage Data\Flat File Source.Outputs[Flat File Source Output].Columns[Telephone Number]"
+                          codePage="1252"
+                          dataType="str"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\FLC - Load Source File Continuously\DFT - Stage Data\Flat File Source.Outputs[Flat File Source Output].ExternalColumns[Telephone Number]"
+                          length="50"
+                          lineageId="Package\FLC - Load Source File Continuously\DFT - Stage Data\Flat File Source.Outputs[Flat File Source Output].Columns[Telephone Number]"
+                          name="Telephone Number"
+                          truncationRowDisposition="FailComponent">
+                          <properties>
+                            <property
+                              dataType="System.Boolean"
+                              description="Indicates whether the column uses the faster, locale-neutral parsing routines."
+                              name="FastParse">false</property>
+                            <property
+                              dataType="System.Boolean"
+                              description="Indicates whether the data is in binary format."
+                              name="UseBinaryFormat">false</property>
+                          </properties>
+                        </outputColumn>
+                        <outputColumn
+                          refId="Package\FLC - Load Source File Continuously\DFT - Stage Data\Flat File Source.Outputs[Flat File Source Output].Columns[Email address]"
+                          codePage="1252"
+                          dataType="str"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\FLC - Load Source File Continuously\DFT - Stage Data\Flat File Source.Outputs[Flat File Source Output].ExternalColumns[Email address]"
+                          length="100"
+                          lineageId="Package\FLC - Load Source File Continuously\DFT - Stage Data\Flat File Source.Outputs[Flat File Source Output].Columns[Email address]"
+                          name="Email address"
+                          truncationRowDisposition="FailComponent">
+                          <properties>
+                            <property
+                              dataType="System.Boolean"
+                              description="Indicates whether the column uses the faster, locale-neutral parsing routines."
+                              name="FastParse">false</property>
+                            <property
+                              dataType="System.Boolean"
+                              description="Indicates whether the data is in binary format."
+                              name="UseBinaryFormat">false</property>
+                          </properties>
+                        </outputColumn>
+                        <outputColumn
+                          refId="Package\FLC - Load Source File Continuously\DFT - Stage Data\Flat File Source.Outputs[Flat File Source Output].Columns[HIOS ID]"
+                          codePage="1252"
+                          dataType="str"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\FLC - Load Source File Continuously\DFT - Stage Data\Flat File Source.Outputs[Flat File Source Output].ExternalColumns[HIOS ID]"
+                          length="50"
+                          lineageId="Package\FLC - Load Source File Continuously\DFT - Stage Data\Flat File Source.Outputs[Flat File Source Output].Columns[HIOS ID]"
+                          name="HIOS ID"
+                          truncationRowDisposition="FailComponent">
+                          <properties>
+                            <property
+                              dataType="System.Boolean"
+                              description="Indicates whether the column uses the faster, locale-neutral parsing routines."
+                              name="FastParse">false</property>
+                            <property
+                              dataType="System.Boolean"
+                              description="Indicates whether the data is in binary format."
+                              name="UseBinaryFormat">false</property>
+                          </properties>
+                        </outputColumn>
+                        <outputColumn
+                          refId="Package\FLC - Load Source File Continuously\DFT - Stage Data\Flat File Source.Outputs[Flat File Source Output].Columns[Exchange Assigned Policy ID]"
+                          codePage="1252"
+                          dataType="str"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\FLC - Load Source File Continuously\DFT - Stage Data\Flat File Source.Outputs[Flat File Source Output].ExternalColumns[Exchange Assigned Policy ID]"
+                          length="50"
+                          lineageId="Package\FLC - Load Source File Continuously\DFT - Stage Data\Flat File Source.Outputs[Flat File Source Output].Columns[Exchange Assigned Policy ID]"
+                          name="Exchange Assigned Policy ID"
+                          truncationRowDisposition="FailComponent">
+                          <properties>
+                            <property
+                              dataType="System.Boolean"
+                              description="Indicates whether the column uses the faster, locale-neutral parsing routines."
+                              name="FastParse">false</property>
+                            <property
+                              dataType="System.Boolean"
+                              description="Indicates whether the data is in binary format."
+                              name="UseBinaryFormat">false</property>
+                          </properties>
+                        </outputColumn>
+                        <outputColumn
+                          refId="Package\FLC - Load Source File Continuously\DFT - Stage Data\Flat File Source.Outputs[Flat File Source Output].Columns[Filename]"
+                          codePage="1252"
+                          dataType="str"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\FLC - Load Source File Continuously\DFT - Stage Data\Flat File Source.Outputs[Flat File Source Output].ExternalColumns[Filename]"
+                          length="100"
+                          lineageId="Package\FLC - Load Source File Continuously\DFT - Stage Data\Flat File Source.Outputs[Flat File Source Output].Columns[Filename]"
+                          name="Filename"
+                          truncationRowDisposition="FailComponent">
+                          <properties>
+                            <property
+                              dataType="System.Boolean"
+                              description="Indicates whether the column uses the faster, locale-neutral parsing routines."
+                              name="FastParse">false</property>
+                            <property
+                              dataType="System.Boolean"
+                              description="Indicates whether the data is in binary format."
+                              name="UseBinaryFormat">false</property>
+                          </properties>
+                        </outputColumn>
+                        <outputColumn
+                          refId="Package\FLC - Load Source File Continuously\DFT - Stage Data\Flat File Source.Outputs[Flat File Source Output].Columns[Coverage Year]"
+                          codePage="1252"
+                          dataType="str"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\FLC - Load Source File Continuously\DFT - Stage Data\Flat File Source.Outputs[Flat File Source Output].ExternalColumns[Coverage Year]"
+                          length="50"
+                          lineageId="Package\FLC - Load Source File Continuously\DFT - Stage Data\Flat File Source.Outputs[Flat File Source Output].Columns[Coverage Year]"
+                          name="Coverage Year"
+                          truncationRowDisposition="FailComponent">
+                          <properties>
+                            <property
+                              dataType="System.Boolean"
+                              description="Indicates whether the column uses the faster, locale-neutral parsing routines."
+                              name="FastParse">false</property>
+                            <property
+                              dataType="System.Boolean"
+                              description="Indicates whether the data is in binary format."
+                              name="UseBinaryFormat">false</property>
+                          </properties>
+                        </outputColumn>
+                        <outputColumn
+                          refId="Package\FLC - Load Source File Continuously\DFT - Stage Data\Flat File Source.Outputs[Flat File Source Output].Columns[Exchange Assigned Member ID]"
+                          codePage="1252"
+                          dataType="str"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\FLC - Load Source File Continuously\DFT - Stage Data\Flat File Source.Outputs[Flat File Source Output].ExternalColumns[Exchange Assigned Member ID]"
+                          length="50"
+                          lineageId="Package\FLC - Load Source File Continuously\DFT - Stage Data\Flat File Source.Outputs[Flat File Source Output].Columns[Exchange Assigned Member ID]"
+                          name="Exchange Assigned Member ID"
+                          truncationRowDisposition="FailComponent">
+                          <properties>
+                            <property
+                              dataType="System.Boolean"
+                              description="Indicates whether the column uses the faster, locale-neutral parsing routines."
+                              name="FastParse">false</property>
+                            <property
+                              dataType="System.Boolean"
+                              description="Indicates whether the data is in binary format."
+                              name="UseBinaryFormat">false</property>
+                          </properties>
+                        </outputColumn>
+                      </outputColumns>
+                      <externalMetadataColumns
+                        isUsed="True">
+                        <externalMetadataColumn
+                          refId="Package\FLC - Load Source File Continuously\DFT - Stage Data\Flat File Source.Outputs[Flat File Source Output].ExternalColumns[Point of Contact]"
+                          codePage="1252"
+                          dataType="str"
+                          length="100"
+                          name="Point of Contact" />
+                        <externalMetadataColumn
+                          refId="Package\FLC - Load Source File Continuously\DFT - Stage Data\Flat File Source.Outputs[Flat File Source Output].ExternalColumns[Telephone Number]"
+                          codePage="1252"
+                          dataType="str"
+                          length="50"
+                          name="Telephone Number" />
+                        <externalMetadataColumn
+                          refId="Package\FLC - Load Source File Continuously\DFT - Stage Data\Flat File Source.Outputs[Flat File Source Output].ExternalColumns[Email address]"
+                          codePage="1252"
+                          dataType="str"
+                          length="100"
+                          name="Email address" />
+                        <externalMetadataColumn
+                          refId="Package\FLC - Load Source File Continuously\DFT - Stage Data\Flat File Source.Outputs[Flat File Source Output].ExternalColumns[HIOS ID]"
+                          codePage="1252"
+                          dataType="str"
+                          length="50"
+                          name="HIOS ID" />
+                        <externalMetadataColumn
+                          refId="Package\FLC - Load Source File Continuously\DFT - Stage Data\Flat File Source.Outputs[Flat File Source Output].ExternalColumns[Exchange Assigned Policy ID]"
+                          codePage="1252"
+                          dataType="str"
+                          length="50"
+                          name="Exchange Assigned Policy ID" />
+                        <externalMetadataColumn
+                          refId="Package\FLC - Load Source File Continuously\DFT - Stage Data\Flat File Source.Outputs[Flat File Source Output].ExternalColumns[Filename]"
+                          codePage="1252"
+                          dataType="str"
+                          length="100"
+                          name="Filename" />
+                        <externalMetadataColumn
+                          refId="Package\FLC - Load Source File Continuously\DFT - Stage Data\Flat File Source.Outputs[Flat File Source Output].ExternalColumns[Coverage Year]"
+                          codePage="1252"
+                          dataType="str"
+                          length="50"
+                          name="Coverage Year" />
+                        <externalMetadataColumn
+                          refId="Package\FLC - Load Source File Continuously\DFT - Stage Data\Flat File Source.Outputs[Flat File Source Output].ExternalColumns[Exchange Assigned Member ID]"
+                          codePage="1252"
+                          dataType="str"
+                          length="50"
+                          name="Exchange Assigned Member ID" />
+                      </externalMetadataColumns>
+                    </output>
+                    <output
+                      refId="Package\FLC - Load Source File Continuously\DFT - Stage Data\Flat File Source.Outputs[Flat File Source Error Output]"
+                      isErrorOut="true"
+                      name="Flat File Source Error Output">
+                      <outputColumns>
+                        <outputColumn
+                          refId="Package\FLC - Load Source File Continuously\DFT - Stage Data\Flat File Source.Outputs[Flat File Source Error Output].Columns[Flat File Source Error Output Column]"
+                          codePage="1252"
+                          dataType="text"
+                          description="Flat File Source Error Output Column"
+                          lineageId="Package\FLC - Load Source File Continuously\DFT - Stage Data\Flat File Source.Outputs[Flat File Source Error Output].Columns[Flat File Source Error Output Column]"
+                          name="Flat File Source Error Output Column" />
+                        <outputColumn
+                          refId="Package\FLC - Load Source File Continuously\DFT - Stage Data\Flat File Source.Outputs[Flat File Source Error Output].Columns[ErrorCode]"
+                          dataType="i4"
+                          lineageId="Package\FLC - Load Source File Continuously\DFT - Stage Data\Flat File Source.Outputs[Flat File Source Error Output].Columns[ErrorCode]"
+                          name="ErrorCode"
+                          specialFlags="1" />
+                        <outputColumn
+                          refId="Package\FLC - Load Source File Continuously\DFT - Stage Data\Flat File Source.Outputs[Flat File Source Error Output].Columns[ErrorColumn]"
+                          dataType="i4"
+                          lineageId="Package\FLC - Load Source File Continuously\DFT - Stage Data\Flat File Source.Outputs[Flat File Source Error Output].Columns[ErrorColumn]"
+                          name="ErrorColumn"
+                          specialFlags="2" />
+                      </outputColumns>
+                      <externalMetadataColumns />
+                    </output>
+                  </outputs>
+                </component>
+                <component
+                  refId="Package\FLC - Load Source File Continuously\DFT - Stage Data\OLE DB Destination - stage-MedicareTerminationList"
+                  componentClassID="Microsoft.OLEDBDestination"
+                  contactInfo="OLE DB Destination;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;4"
+                  description="OLE DB Destination"
+                  name="OLE DB Destination - stage-MedicareTerminationList"
+                  usesDispositions="true"
+                  version="4">
+                  <properties>
+                    <property
+                      dataType="System.Int32"
+                      description="The number of seconds before a command times out.  A value of 0 indicates an infinite time-out."
+                      name="CommandTimeout">0</property>
+                    <property
+                      dataType="System.String"
+                      description="Specifies the name of the database object used to open a rowset."
+                      name="OpenRowset">[stage].[MedicareTerminationList]</property>
+                    <property
+                      dataType="System.String"
+                      description="Specifies the variable that contains the name of the database object used to open a rowset."
+                      name="OpenRowsetVariable"></property>
+                    <property
+                      dataType="System.String"
+                      description="The SQL command to be executed."
+                      name="SqlCommand"
+                      UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor"></property>
+                    <property
+                      dataType="System.Int32"
+                      description="Specifies the column code page to use when code page information is unavailable from the data source."
+                      name="DefaultCodePage">1252</property>
+                    <property
+                      dataType="System.Boolean"
+                      description="Forces the use of the DefaultCodePage property value when describing character data."
+                      name="AlwaysUseDefaultCodePage">false</property>
+                    <property
+                      dataType="System.Int32"
+                      description="Specifies the mode used to access the database."
+                      name="AccessMode"
+                      typeConverter="AccessMode">0</property>
+                    <property
+                      dataType="System.Boolean"
+                      description="Indicates whether the values supplied for identity columns will be copied to the destination. If false, values for identity columns will be auto-generated at the destination. Applies only if fast load is turned on."
+                      name="FastLoadKeepIdentity">false</property>
+                    <property
+                      dataType="System.Boolean"
+                      description="Indicates whether the columns containing null will have null inserted in the destination. If false, columns containing null will have their default values inserted at the destination. Applies only if fast load is turned on."
+                      name="FastLoadKeepNulls">false</property>
+                    <property
+                      dataType="System.String"
+                      description="Specifies options to be used with fast load.  Applies only if fast load is turned on."
+                      name="FastLoadOptions"></property>
+                    <property
+                      dataType="System.Int32"
+                      description="Specifies when commits are issued during data insertion.  A value of 0 specifies that one commit will be issued at the end of data insertion.  Applies only if fast load is turned on."
+                      name="FastLoadMaxInsertCommitSize">2147483647</property>
+                  </properties>
+                  <connections>
+                    <connection
+                      refId="Package\FLC - Load Source File Continuously\DFT - Stage Data\OLE DB Destination - stage-MedicareTerminationList.Connections[OleDbConnection]"
+                      connectionManagerID="Package.ConnectionManagers[ERR_1095A]"
+                      connectionManagerRefId="Package.ConnectionManagers[ERR_1095A]"
+                      description="The OLE DB runtime connection used to access the database."
+                      name="OleDbConnection" />
+                  </connections>
+                  <inputs>
+                    <input
+                      refId="Package\FLC - Load Source File Continuously\DFT - Stage Data\OLE DB Destination - stage-MedicareTerminationList.Inputs[OLE DB Destination Input]"
+                      errorOrTruncationOperation="Insert"
+                      errorRowDisposition="FailComponent"
+                      hasSideEffects="true"
+                      name="OLE DB Destination Input">
+                      <inputColumns>
+                        <inputColumn
+                          refId="Package\FLC - Load Source File Continuously\DFT - Stage Data\OLE DB Destination - stage-MedicareTerminationList.Inputs[OLE DB Destination Input].Columns[Filename]"
+                          cachedCodepage="1252"
+                          cachedDataType="str"
+                          cachedLength="100"
+                          cachedName="Filename"
+                          externalMetadataColumnId="Package\FLC - Load Source File Continuously\DFT - Stage Data\OLE DB Destination - stage-MedicareTerminationList.Inputs[OLE DB Destination Input].ExternalColumns[Filename]"
+                          lineageId="Package\FLC - Load Source File Continuously\DFT - Stage Data\Flat File Source.Outputs[Flat File Source Output].Columns[Filename]" />
+                        <inputColumn
+                          refId="Package\FLC - Load Source File Continuously\DFT - Stage Data\OLE DB Destination - stage-MedicareTerminationList.Inputs[OLE DB Destination Input].Columns[Point of Contact]"
+                          cachedCodepage="1252"
+                          cachedDataType="str"
+                          cachedLength="100"
+                          cachedName="Point of Contact"
+                          externalMetadataColumnId="Package\FLC - Load Source File Continuously\DFT - Stage Data\OLE DB Destination - stage-MedicareTerminationList.Inputs[OLE DB Destination Input].ExternalColumns[Point_of_Contact]"
+                          lineageId="Package\FLC - Load Source File Continuously\DFT - Stage Data\Flat File Source.Outputs[Flat File Source Output].Columns[Point of Contact]" />
+                        <inputColumn
+                          refId="Package\FLC - Load Source File Continuously\DFT - Stage Data\OLE DB Destination - stage-MedicareTerminationList.Inputs[OLE DB Destination Input].Columns[Telephone Number]"
+                          cachedCodepage="1252"
+                          cachedDataType="str"
+                          cachedLength="50"
+                          cachedName="Telephone Number"
+                          externalMetadataColumnId="Package\FLC - Load Source File Continuously\DFT - Stage Data\OLE DB Destination - stage-MedicareTerminationList.Inputs[OLE DB Destination Input].ExternalColumns[Telephone_Number]"
+                          lineageId="Package\FLC - Load Source File Continuously\DFT - Stage Data\Flat File Source.Outputs[Flat File Source Output].Columns[Telephone Number]" />
+                        <inputColumn
+                          refId="Package\FLC - Load Source File Continuously\DFT - Stage Data\OLE DB Destination - stage-MedicareTerminationList.Inputs[OLE DB Destination Input].Columns[Email address]"
+                          cachedCodepage="1252"
+                          cachedDataType="str"
+                          cachedLength="100"
+                          cachedName="Email address"
+                          externalMetadataColumnId="Package\FLC - Load Source File Continuously\DFT - Stage Data\OLE DB Destination - stage-MedicareTerminationList.Inputs[OLE DB Destination Input].ExternalColumns[Email_address]"
+                          lineageId="Package\FLC - Load Source File Continuously\DFT - Stage Data\Flat File Source.Outputs[Flat File Source Output].Columns[Email address]" />
+                        <inputColumn
+                          refId="Package\FLC - Load Source File Continuously\DFT - Stage Data\OLE DB Destination - stage-MedicareTerminationList.Inputs[OLE DB Destination Input].Columns[HIOS ID]"
+                          cachedCodepage="1252"
+                          cachedDataType="str"
+                          cachedLength="50"
+                          cachedName="HIOS ID"
+                          externalMetadataColumnId="Package\FLC - Load Source File Continuously\DFT - Stage Data\OLE DB Destination - stage-MedicareTerminationList.Inputs[OLE DB Destination Input].ExternalColumns[HIOS_ID]"
+                          lineageId="Package\FLC - Load Source File Continuously\DFT - Stage Data\Flat File Source.Outputs[Flat File Source Output].Columns[HIOS ID]" />
+                        <inputColumn
+                          refId="Package\FLC - Load Source File Continuously\DFT - Stage Data\OLE DB Destination - stage-MedicareTerminationList.Inputs[OLE DB Destination Input].Columns[Exchange Assigned Policy ID]"
+                          cachedCodepage="1252"
+                          cachedDataType="str"
+                          cachedLength="50"
+                          cachedName="Exchange Assigned Policy ID"
+                          externalMetadataColumnId="Package\FLC - Load Source File Continuously\DFT - Stage Data\OLE DB Destination - stage-MedicareTerminationList.Inputs[OLE DB Destination Input].ExternalColumns[Exchange_Assigned_Policy_ID]"
+                          lineageId="Package\FLC - Load Source File Continuously\DFT - Stage Data\Flat File Source.Outputs[Flat File Source Output].Columns[Exchange Assigned Policy ID]" />
+                        <inputColumn
+                          refId="Package\FLC - Load Source File Continuously\DFT - Stage Data\OLE DB Destination - stage-MedicareTerminationList.Inputs[OLE DB Destination Input].Columns[Coverage Year]"
+                          cachedCodepage="1252"
+                          cachedDataType="str"
+                          cachedLength="50"
+                          cachedName="Coverage Year"
+                          externalMetadataColumnId="Package\FLC - Load Source File Continuously\DFT - Stage Data\OLE DB Destination - stage-MedicareTerminationList.Inputs[OLE DB Destination Input].ExternalColumns[Coverage_Year]"
+                          lineageId="Package\FLC - Load Source File Continuously\DFT - Stage Data\Flat File Source.Outputs[Flat File Source Output].Columns[Coverage Year]" />
+                        <inputColumn
+                          refId="Package\FLC - Load Source File Continuously\DFT - Stage Data\OLE DB Destination - stage-MedicareTerminationList.Inputs[OLE DB Destination Input].Columns[UpdatedExchangeAssignedMemberID]"
+                          cachedCodepage="1252"
+                          cachedDataType="str"
+                          cachedLength="50"
+                          cachedName="UpdatedExchangeAssignedMemberID"
+                          externalMetadataColumnId="Package\FLC - Load Source File Continuously\DFT - Stage Data\OLE DB Destination - stage-MedicareTerminationList.Inputs[OLE DB Destination Input].ExternalColumns[Exchange_Assigned_Member_ID]"
+                          lineageId="Package\FLC - Load Source File Continuously\DFT - Stage Data\Derived Column.Outputs[Derived Column Output].Columns[UpdatedExchangeAssignedMemberID]" />
+                      </inputColumns>
+                      <externalMetadataColumns
+                        isUsed="True">
+                        <externalMetadataColumn
+                          refId="Package\FLC - Load Source File Continuously\DFT - Stage Data\OLE DB Destination - stage-MedicareTerminationList.Inputs[OLE DB Destination Input].ExternalColumns[Point_of_Contact]"
+                          codePage="1252"
+                          dataType="str"
+                          length="100"
+                          name="Point_of_Contact" />
+                        <externalMetadataColumn
+                          refId="Package\FLC - Load Source File Continuously\DFT - Stage Data\OLE DB Destination - stage-MedicareTerminationList.Inputs[OLE DB Destination Input].ExternalColumns[Telephone_Number]"
+                          codePage="1252"
+                          dataType="str"
+                          length="50"
+                          name="Telephone_Number" />
+                        <externalMetadataColumn
+                          refId="Package\FLC - Load Source File Continuously\DFT - Stage Data\OLE DB Destination - stage-MedicareTerminationList.Inputs[OLE DB Destination Input].ExternalColumns[Email_address]"
+                          codePage="1252"
+                          dataType="str"
+                          length="100"
+                          name="Email_address" />
+                        <externalMetadataColumn
+                          refId="Package\FLC - Load Source File Continuously\DFT - Stage Data\OLE DB Destination - stage-MedicareTerminationList.Inputs[OLE DB Destination Input].ExternalColumns[HIOS_ID]"
+                          codePage="1252"
+                          dataType="str"
+                          length="50"
+                          name="HIOS_ID" />
+                        <externalMetadataColumn
+                          refId="Package\FLC - Load Source File Continuously\DFT - Stage Data\OLE DB Destination - stage-MedicareTerminationList.Inputs[OLE DB Destination Input].ExternalColumns[Exchange_Assigned_Policy_ID]"
+                          codePage="1252"
+                          dataType="str"
+                          length="50"
+                          name="Exchange_Assigned_Policy_ID" />
+                        <externalMetadataColumn
+                          refId="Package\FLC - Load Source File Continuously\DFT - Stage Data\OLE DB Destination - stage-MedicareTerminationList.Inputs[OLE DB Destination Input].ExternalColumns[Filename]"
+                          codePage="1252"
+                          dataType="str"
+                          length="100"
+                          name="Filename" />
+                        <externalMetadataColumn
+                          refId="Package\FLC - Load Source File Continuously\DFT - Stage Data\OLE DB Destination - stage-MedicareTerminationList.Inputs[OLE DB Destination Input].ExternalColumns[CreatedDate]"
+                          dataType="dbTimeStamp2"
+                          name="CreatedDate"
+                          scale="2" />
+                        <externalMetadataColumn
+                          refId="Package\FLC - Load Source File Continuously\DFT - Stage Data\OLE DB Destination - stage-MedicareTerminationList.Inputs[OLE DB Destination Input].ExternalColumns[Coverage_Year]"
+                          codePage="1252"
+                          dataType="str"
+                          length="50"
+                          name="Coverage_Year" />
+                        <externalMetadataColumn
+                          refId="Package\FLC - Load Source File Continuously\DFT - Stage Data\OLE DB Destination - stage-MedicareTerminationList.Inputs[OLE DB Destination Input].ExternalColumns[Exchange_Assigned_Member_ID]"
+                          codePage="1252"
+                          dataType="str"
+                          length="50"
+                          name="Exchange_Assigned_Member_ID" />
+                      </externalMetadataColumns>
+                    </input>
+                  </inputs>
+                  <outputs>
+                    <output
+                      refId="Package\FLC - Load Source File Continuously\DFT - Stage Data\OLE DB Destination - stage-MedicareTerminationList.Outputs[OLE DB Destination Error Output]"
+                      exclusionGroup="1"
+                      isErrorOut="true"
+                      name="OLE DB Destination Error Output"
+                      synchronousInputId="Package\FLC - Load Source File Continuously\DFT - Stage Data\OLE DB Destination - stage-MedicareTerminationList.Inputs[OLE DB Destination Input]">
+                      <outputColumns>
+                        <outputColumn
+                          refId="Package\FLC - Load Source File Continuously\DFT - Stage Data\OLE DB Destination - stage-MedicareTerminationList.Outputs[OLE DB Destination Error Output].Columns[ErrorCode]"
+                          dataType="i4"
+                          lineageId="Package\FLC - Load Source File Continuously\DFT - Stage Data\OLE DB Destination - stage-MedicareTerminationList.Outputs[OLE DB Destination Error Output].Columns[ErrorCode]"
+                          name="ErrorCode"
+                          specialFlags="1" />
+                        <outputColumn
+                          refId="Package\FLC - Load Source File Continuously\DFT - Stage Data\OLE DB Destination - stage-MedicareTerminationList.Outputs[OLE DB Destination Error Output].Columns[ErrorColumn]"
+                          dataType="i4"
+                          lineageId="Package\FLC - Load Source File Continuously\DFT - Stage Data\OLE DB Destination - stage-MedicareTerminationList.Outputs[OLE DB Destination Error Output].Columns[ErrorColumn]"
+                          name="ErrorColumn"
+                          specialFlags="2" />
+                      </outputColumns>
+                      <externalMetadataColumns />
+                    </output>
+                  </outputs>
+                </component>
+              </components>
+              <paths>
+                <path
+                  refId="Package\FLC - Load Source File Continuously\DFT - Stage Data.Paths[Derived Column Output]"
+                  endId="Package\FLC - Load Source File Continuously\DFT - Stage Data\OLE DB Destination - stage-MedicareTerminationList.Inputs[OLE DB Destination Input]"
+                  name="Derived Column Output"
+                  startId="Package\FLC - Load Source File Continuously\DFT - Stage Data\Derived Column.Outputs[Derived Column Output]" />
+                <path
+                  refId="Package\FLC - Load Source File Continuously\DFT - Stage Data.Paths[Flat File Source Output]"
+                  endId="Package\FLC - Load Source File Continuously\DFT - Stage Data\Derived Column.Inputs[Derived Column Input]"
+                  name="Flat File Source Output"
+                  startId="Package\FLC - Load Source File Continuously\DFT - Stage Data\Flat File Source.Outputs[Flat File Source Output]" />
+              </paths>
+            </pipeline>
+          </DTS:ObjectData>
+        </DTS:Executable>
+        <DTS:Executable
+          DTS:refId="Package\FLC - Load Source File Continuously\EST - Load dbo table"
+          DTS:CreationName="Microsoft.ExecuteSQLTask"
+          DTS:Description="Execute SQL Task"
+          DTS:DTSID="{50648A59-0348-4FA5-AC1D-943D62739331}"
+          DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+          DTS:LocaleID="-1"
+          DTS:ObjectName="EST - Load dbo table"
+          DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2017 RC1; © 2017 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+          DTS:ThreadHint="0">
+          <DTS:Variables />
+          <DTS:ObjectData>
+            <SQLTask:SqlTaskData
+              SQLTask:Connection="{6A801D80-9FBB-4595-93E2-C4BD4ED6D7C6}"
+              SQLTask:SqlStatementSource="EXEC [dbo].[pMergeMedicareTerminationList]" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
+          </DTS:ObjectData>
+        </DTS:Executable>
+        <DTS:Executable
+          DTS:refId="Package\FLC - Load Source File Continuously\FST - Archive Source File"
+          DTS:CreationName="Microsoft.FileSystemTask"
+          DTS:Description="File System Task"
+          DTS:DTSID="{E2C8CA75-AC2E-4971-979B-48DDF1E91194}"
+          DTS:ExecutableType="Microsoft.FileSystemTask"
+          DTS:LocaleID="-1"
+          DTS:ObjectName="FST - Archive Source File"
+          DTS:TaskContact="File System Task;Microsoft Corporation; SQL Server 2017 RC1; © 2017 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+          DTS:ThreadHint="0">
+          <DTS:Variables />
+          <DTS:ObjectData>
+            <FileSystemData
+              TaskOperationType="MoveFile"
+              TaskOverwriteDestFile="True"
+              TaskSourcePath="User::FullSourceFile"
+              TaskIsSourceVariable="True"
+              TaskDestinationPath="$Project::IMTL1_ArchiveFolderPath"
+              TaskIsDestinationVariable="True" />
+          </DTS:ObjectData>
+        </DTS:Executable>
+        <DTS:Executable
+          DTS:refId="Package\FLC - Load Source File Continuously\Truncate Stage Table"
+          DTS:CreationName="Microsoft.ExecuteSQLTask"
+          DTS:Description="Execute SQL Task"
+          DTS:DTSID="{2D4772B5-6408-446D-B35E-96B6B0A9F25E}"
+          DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+          DTS:LocaleID="-1"
+          DTS:ObjectName="Truncate Stage Table"
+          DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2017 RC1; © 2017 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+          DTS:ThreadHint="0">
+          <DTS:Variables />
+          <DTS:ObjectData>
+            <SQLTask:SqlTaskData
+              SQLTask:Connection="{6A801D80-9FBB-4595-93E2-C4BD4ED6D7C6}"
+              SQLTask:SqlStatementSource="TRUNCATE TABLE [stage].[MedicareTerminationList]" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
+          </DTS:ObjectData>
+        </DTS:Executable>
+      </DTS:Executables>
+      <DTS:PrecedenceConstraints>
+        <DTS:PrecedenceConstraint
+          DTS:refId="Package\FLC - Load Source File Continuously.PrecedenceConstraints[Constraint]"
+          DTS:CreationName=""
+          DTS:DTSID="{5BB0130D-3861-41D8-A164-37567614FD96}"
+          DTS:From="Package\FLC - Load Source File Continuously\Truncate Stage Table"
+          DTS:LogicalAnd="True"
+          DTS:ObjectName="Constraint"
+          DTS:To="Package\FLC - Load Source File Continuously\DFT - Stage Data" />
+        <DTS:PrecedenceConstraint
+          DTS:refId="Package\FLC - Load Source File Continuously.PrecedenceConstraints[Constraint 1]"
+          DTS:CreationName=""
+          DTS:DTSID="{1969BC44-D373-413B-B324-D2C7BADA2730}"
+          DTS:From="Package\FLC - Load Source File Continuously\DFT - Stage Data"
+          DTS:LogicalAnd="True"
+          DTS:ObjectName="Constraint 1"
+          DTS:To="Package\FLC - Load Source File Continuously\EST - Load dbo table" />
+        <DTS:PrecedenceConstraint
+          DTS:refId="Package\FLC - Load Source File Continuously.PrecedenceConstraints[Constraint 2]"
+          DTS:CreationName=""
+          DTS:DTSID="{8B6E44D1-1829-4247-B347-E3A367F10FC4}"
+          DTS:From="Package\FLC - Load Source File Continuously\EST - Load dbo table"
+          DTS:LogicalAnd="True"
+          DTS:ObjectName="Constraint 2"
+          DTS:To="Package\FLC - Load Source File Continuously\FST - Archive Source File" />
+      </DTS:PrecedenceConstraints>
+      <DTS:ForEachVariableMappings>
+        <DTS:ForEachVariableMapping
+          DTS:CreationName=""
+          DTS:DTSID="{B893A116-E31C-429C-812C-63E0B8422704}"
+          DTS:ObjectName="{B893A116-E31C-429C-812C-63E0B8422704}"
+          DTS:ValueIndex="0"
+          DTS:VariableName="User::SourceFileName" />
+      </DTS:ForEachVariableMappings>
+    </DTS:Executable>
+  </DTS:Executables>
+  <DTS:DesignTimeProperties><![CDATA[<?xml version="1.0"?>
+<!--This CDATA section contains the layout information of the package. The section includes information such as (x,y) coordinates, width, and height.-->
+<!--If you manually edit this section and make a mistake, you can delete it. -->
+<!--The package will still be able to load normally but the previous layout information will be lost and the designer will automatically re-arrange the elements on the design surface.-->
+<Objects
+  Version="8">
+  <!--Each node below will contain properties that do not affect runtime behavior.-->
+  <Package
+    design-time-name="Package">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="8" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
+        <NodeLayout
+          Size="161,42"
+          Id="Package\FLC - Load Source File Continuously\DFT - Stage Data"
+          TopLeft="317,25" />
+        <NodeLayout
+          Size="178,42"
+          Id="Package\FLC - Load Source File Continuously\EST - Load dbo table"
+          TopLeft="312,136" />
+        <NodeLayout
+          Size="197,42"
+          Id="Package\FLC - Load Source File Continuously\FST - Archive Source File"
+          TopLeft="37,136" />
+        <NodeLayout
+          Size="180,42"
+          Id="Package\FLC - Load Source File Continuously\Truncate Stage Table"
+          TopLeft="41,29" />
+        <EdgeLayout
+          Id="Package\FLC - Load Source File Continuously.PrecedenceConstraints[Constraint]"
+          TopLeft="221,48">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="96,0"
+              Start="0,0"
+              End="88.5,0">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="88.5,0" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\FLC - Load Source File Continuously.PrecedenceConstraints[Constraint 1]"
+          TopLeft="399.25,67">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,69"
+              Start="0,0"
+              End="0,61.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,61.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\FLC - Load Source File Continuously.PrecedenceConstraints[Constraint 2]"
+          TopLeft="312,157">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="-78,0"
+              Start="0,0"
+              End="-70.5,0">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="-70.5,0" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <ContainerLayout
+          HeaderHeight="43"
+          IsExpanded="True"
+          PanelSize="555,325"
+          Size="555,368"
+          Id="Package\FLC - Load Source File Continuously"
+          TopLeft="45,90" />
+      </GraphLayout>
+    </LayoutInfo>
+  </Package>
+  <TaskHost
+    design-time-name="Package\FLC - Load Source File Continuously\DFT - Stage Data">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="8" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
+        <NodeLayout
+          Size="222,42"
+          Id="Package\FLC - Load Source File Continuously\DFT - Stage Data\Flat File Source"
+          TopLeft="178,54" />
+        <NodeLayout
+          Size="325,42"
+          Id="Package\FLC - Load Source File Continuously\DFT - Stage Data\OLE DB Destination - stage-MedicareTerminationList"
+          TopLeft="129,279" />
+        <NodeLayout
+          Size="154,42"
+          Id="Package\FLC - Load Source File Continuously\DFT - Stage Data\Derived Column"
+          TopLeft="219,161" />
+        <EdgeLayout
+          Id="Package\FLC - Load Source File Continuously\DFT - Stage Data.Paths[Flat File Source Output]"
+          TopLeft="292.5,96">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,65"
+              Start="0,0"
+              End="0,57.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,57.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\FLC - Load Source File Continuously\DFT - Stage Data.Paths[Derived Column Output]"
+          TopLeft="293.75,203">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,76"
+              Start="0,0"
+              End="0,68.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,68.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+      </GraphLayout>
+    </LayoutInfo>
+  </TaskHost>
+  <PipelineComponentMetadata
+    design-time-name="Package\FLC - Load Source File Continuously\DFT - Stage Data\OLE DB Destination - stage-MedicareTerminationList">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+      <Property>
+        <Name>TableInfoObjectType</Name>
+        <Value
+          type="q2:string">Table</Value>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+</Objects>]]></DTS:DesignTimeProperties>
+</DTS:Executable>

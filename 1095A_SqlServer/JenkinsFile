@@ -1,0 +1,73 @@
+def PowerShell(psCmd) {
+    bat "powershell.exe -NonInteractive -ExecutionPolicy Bypass -Command \"\$ErrorActionPreference='Stop';[Console]::OutputEncoding=[System.Text.Encoding]::UTF8;$psCmd;EXIT \$global:LastExitCode\""
+}
+
+node {
+
+
+    stage("build:1095A-SSIS") {
+
+        build 'Azure-CERRS.NG.1095A-SSIS-BuildOnly' 
+    }
+	
+	
+	milestone()
+	
+	
+	
+	
+
+	stage ('Deploy:1095A-SSIS-Ispacs-DEV')
+{
+    node ('DEV_SQL_SVR') {
+        PowerShell("& 'c:\\temp\\ispacs\\Copy_1095_Ispacs_DEV.ps1'")
+	    PowerShell("& 'c:\\temp\\ispacs\\CDE_Ispac_Deploy.ps1'")
+		PowerShell("& 'c:\\temp\\ispacs\\CDEPreAudit_Ispac_Deploy.ps1'")
+		PowerShell("& 'c:\\temp\\ispacs\\CERRS_NG_deploy_ispacs.ps1'")
+
+    }
+}
+
+
+
+
+milestone()
+
+
+   	stage ('Deploy:1095A-SSIS-Ispacs-TEST')
+{
+    node ('QA_SQL_SVR') {
+
+         PowerShell("& 'c:\\temp\\ispacs\\Copy_1095_Ispacs_TEST.ps1'")
+	    PowerShell("& 'c:\\temp\\ispacs\\CDEPreAudit_Ispac_Deploy.ps1'")
+		PowerShell("& 'c:\\temp\\ispacs\\CERRS_NG_deploy_ispacs.ps1'")
+
+
+
+		// mail (to: 'Jim.Mothershead@cognosante.com',
+        // subject: "Job '${env.JOB_NAME}' (${env.BUILD_NUMBER}) deployed to TEST",
+        // body: "${env.JOB_NAME} was successfuly deployed to Azure Test server: AGTST46ISSQL01, 	results can be viewd at: ${env.BUILD_URL}.");
+
+    }
+}
+	
+	milestone()
+
+  	stage ('Deploy:1095A-SSIS-Ispacs-INT')
+{
+    node ('Integration_SQL_SVR') {
+        PowerShell("& 'c:\\temp\\ispacs\\Copy_1095_Ispacs_TEST.ps1'")
+	PowerShell("& 'c:\\temp\\ispacs\\zip_ispacs.ps1'")
+	    PowerShell("& 'c:\\temp\\ispacs\\CDEPreAudit_Ispac_Deploy.ps1'")
+		PowerShell("& 'c:\\temp\\ispacs\\CERRS_NG_deploy_ispacs.ps1'")
+
+    }
+}
+
+    stage("deploy:1095A-SSIS-Ispacs-PROD") {
+        echo "codeception" 
+    }
+}
+
+
+

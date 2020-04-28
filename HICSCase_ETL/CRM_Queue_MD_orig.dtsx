@@ -1,0 +1,3229 @@
+﻿<?xml version="1.0"?>
+<DTS:Executable xmlns:DTS="www.microsoft.com/SqlServer/Dts"
+  DTS:refId="Package"
+  DTS:CreationDate="8/25/2015 5:33:39 PM"
+  DTS:CreationName="Microsoft.Package"
+  DTS:CreatorComputerName="AMDEV01SQL01"
+  DTS:CreatorName="AZ\jhenningsen"
+  DTS:DTSID="{56269504-D87D-4BB8-A67C-269581B7735F}"
+  DTS:ExecutableType="Microsoft.Package"
+  DTS:LastModifiedProductVersion="14.0.1000.169"
+  DTS:LocaleID="1033"
+  DTS:ObjectName="CRM_Queue_MD_orig"
+  DTS:PackageType="5"
+  DTS:ProtectionLevel="0"
+  DTS:VersionBuild="292"
+  DTS:VersionGUID="{CB9C3A40-58BC-4283-92B3-EE8721A0FAAA}">
+  <DTS:Property
+    DTS:Name="PackageFormatVersion">8</DTS:Property>
+  <DTS:PackageParameters>
+    <DTS:PackageParameter
+      DTS:CreationName=""
+      DTS:DataType="7"
+      DTS:DTSID="{388FF38E-AD25-4E64-9967-194C74213030}"
+      DTS:ObjectName="ManualStartDate">
+      <DTS:Property
+        DTS:DataType="7"
+        DTS:Name="ParameterValue">1/1/1900</DTS:Property>
+    </DTS:PackageParameter>
+    <DTS:PackageParameter
+      DTS:CreationName=""
+      DTS:DataType="11"
+      DTS:DTSID="{9070334F-DDE1-4A12-A1A5-4BA5AFDF7E64}"
+      DTS:ObjectName="StartDateOverride">
+      <DTS:Property
+        DTS:DataType="11"
+        DTS:Name="ParameterValue">0</DTS:Property>
+    </DTS:PackageParameter>
+  </DTS:PackageParameters>
+  <DTS:Variables>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{4D1F5032-C226-4AAA-95A8-4B635339FC06}"
+      DTS:IncludeInDebugDump="6789"
+      DTS:Namespace="User"
+      DTS:ObjectName="Audit_ID">
+      <DTS:VariableValue
+        DTS:DataType="3">0</DTS:VariableValue>
+    </DTS:Variable>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{A365D4E5-108F-431A-8258-80F6A6077A61}"
+      DTS:IncludeInDebugDump="6789"
+      DTS:Namespace="User"
+      DTS:ObjectName="InsertCount">
+      <DTS:VariableValue
+        DTS:DataType="3">0</DTS:VariableValue>
+    </DTS:Variable>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{2DCE3B3D-1306-47A4-A085-9B06C7F736BD}"
+      DTS:IncludeInDebugDump="6789"
+      DTS:Namespace="User"
+      DTS:ObjectName="LastRunDate">
+      <DTS:VariableValue
+        DTS:DataType="7">1/1/1900</DTS:VariableValue>
+    </DTS:Variable>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{764CA7E8-7DF0-4070-80E4-6570C2774BCD}"
+      DTS:EvaluateAsExpression="True"
+      DTS:Expression="@[$Package::StartDateOverride]  ? @[$Package::ManualStartDate]  :  @[User::LastRunDate]"
+      DTS:IncludeInDebugDump="2345"
+      DTS:Namespace="User"
+      DTS:ObjectName="StartDate">
+      <DTS:VariableValue
+        DTS:DataType="7">1/1/1900</DTS:VariableValue>
+    </DTS:Variable>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{ABCB779C-FCF8-4507-8ACD-546BE48F1C4C}"
+      DTS:IncludeInDebugDump="6789"
+      DTS:Namespace="User"
+      DTS:ObjectName="UpdateCount">
+      <DTS:VariableValue
+        DTS:DataType="3">0</DTS:VariableValue>
+    </DTS:Variable>
+  </DTS:Variables>
+  <DTS:Executables>
+    <DTS:Executable
+      DTS:refId="Package\Audit Delete CRM Queue Execute SQL Task"
+      DTS:CreationName="Microsoft.ExecuteSQLTask"
+      DTS:Description="Execute SQL Task"
+      DTS:DTSID="{32948F80-AFC4-432E-BED9-81B7FE92334F}"
+      DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Audit Delete CRM Queue Execute SQL Task"
+      DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2012; © 2007 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+      DTS:ThreadHint="0">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <SQLTask:SqlTaskData
+          SQLTask:Connection="{8A37FDFB-9A39-4961-8D61-9862EAFA6C6C}"
+          SQLTask:SqlStatementSource="INSERT INTO [dbo].[Audit]&#xA; ([Package] ,[PackageExecutionId] ,[Task], [Updated])&#xA;VALUES&#xA;(?, ?, ?, ? )" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask">
+          <SQLTask:ParameterBinding
+            SQLTask:ParameterName="0"
+            SQLTask:DtsVariableName="System::PackageName"
+            SQLTask:ParameterDirection="Input"
+            SQLTask:DataType="129"
+            SQLTask:ParameterSize="255" />
+          <SQLTask:ParameterBinding
+            SQLTask:ParameterName="1"
+            SQLTask:DtsVariableName="System::ExecutionInstanceGUID"
+            SQLTask:ParameterDirection="Input"
+            SQLTask:DataType="129"
+            SQLTask:ParameterSize="255" />
+          <SQLTask:ParameterBinding
+            SQLTask:ParameterName="2"
+            SQLTask:DtsVariableName="System::TaskName"
+            SQLTask:ParameterDirection="Input"
+            SQLTask:DataType="129"
+            SQLTask:ParameterSize="255" />
+          <SQLTask:ParameterBinding
+            SQLTask:ParameterName="3"
+            SQLTask:DtsVariableName="User::UpdateCount"
+            SQLTask:ParameterDirection="Input"
+            SQLTask:DataType="20"
+            SQLTask:ParameterSize="-1" />
+        </SQLTask:SqlTaskData>
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\Audit End CRM Queue Execute SQL Task"
+      DTS:CreationName="Microsoft.ExecuteSQLTask"
+      DTS:Description="Execute SQL Task"
+      DTS:DTSID="{FB029AAC-5FA3-465E-ADE3-92D05E1DA392}"
+      DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Audit End CRM Queue Execute SQL Task"
+      DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2012; © 2007 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+      DTS:ThreadHint="0">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <SQLTask:SqlTaskData
+          SQLTask:Connection="{8A37FDFB-9A39-4961-8D61-9862EAFA6C6C}"
+          SQLTask:SqlStatementSource="INSERT INTO [dbo].[Audit]&#xA; ([Package] ,[PackageExecutionId] ,[Task])&#xA;VALUES&#xA;(?, ?, ? )" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask">
+          <SQLTask:ParameterBinding
+            SQLTask:ParameterName="0"
+            SQLTask:DtsVariableName="System::PackageName"
+            SQLTask:ParameterDirection="Input"
+            SQLTask:DataType="129"
+            SQLTask:ParameterSize="255" />
+          <SQLTask:ParameterBinding
+            SQLTask:ParameterName="1"
+            SQLTask:DtsVariableName="System::ExecutionInstanceGUID"
+            SQLTask:ParameterDirection="Input"
+            SQLTask:DataType="129"
+            SQLTask:ParameterSize="255" />
+          <SQLTask:ParameterBinding
+            SQLTask:ParameterName="2"
+            SQLTask:DtsVariableName="System::TaskName"
+            SQLTask:ParameterDirection="Input"
+            SQLTask:DataType="129"
+            SQLTask:ParameterSize="255" />
+        </SQLTask:SqlTaskData>
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\Audit Load CRM Queue Execute SQL Task"
+      DTS:CreationName="Microsoft.ExecuteSQLTask"
+      DTS:Description="Execute SQL Task"
+      DTS:DTSID="{AC8BAAE0-782A-43C8-B3A3-C436AC0A7A9D}"
+      DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Audit Load CRM Queue Execute SQL Task"
+      DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2012; © 2007 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+      DTS:ThreadHint="0">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <SQLTask:SqlTaskData
+          SQLTask:Connection="{8A37FDFB-9A39-4961-8D61-9862EAFA6C6C}"
+          SQLTask:SqlStatementSource="INSERT INTO [dbo].[Audit]&#xA; ([Package] ,[PackageExecutionId] ,[Task], [Inserted])&#xA;VALUES&#xA;(?, ?, ?, ? )" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask">
+          <SQLTask:ParameterBinding
+            SQLTask:ParameterName="0"
+            SQLTask:DtsVariableName="System::PackageName"
+            SQLTask:ParameterDirection="Input"
+            SQLTask:DataType="129"
+            SQLTask:ParameterSize="255" />
+          <SQLTask:ParameterBinding
+            SQLTask:ParameterName="1"
+            SQLTask:DtsVariableName="System::ExecutionInstanceGUID"
+            SQLTask:ParameterDirection="Input"
+            SQLTask:DataType="129"
+            SQLTask:ParameterSize="255" />
+          <SQLTask:ParameterBinding
+            SQLTask:ParameterName="2"
+            SQLTask:DtsVariableName="System::TaskName"
+            SQLTask:ParameterDirection="Input"
+            SQLTask:DataType="129"
+            SQLTask:ParameterSize="255" />
+          <SQLTask:ParameterBinding
+            SQLTask:ParameterName="3"
+            SQLTask:DtsVariableName="User::InsertCount"
+            SQLTask:ParameterDirection="Input"
+            SQLTask:DataType="20"
+            SQLTask:ParameterSize="-1" />
+        </SQLTask:SqlTaskData>
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\Delete CRM Queue Data Flow Task"
+      DTS:CreationName="Microsoft.Pipeline"
+      DTS:Description="Data Flow Task"
+      DTS:DTSID="{98B22402-C7E8-4ED1-B317-A5DADD70B699}"
+      DTS:ExecutableType="Microsoft.Pipeline"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Delete CRM Queue Data Flow Task"
+      DTS:TaskContact="Performs high-performance data extraction, transformation and loading;Microsoft Corporation; Microsoft SQL Server; (C) 2007 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <pipeline
+          version="1">
+          <components>
+            <component
+              refId="Package\Delete CRM Queue Data Flow Task\Delete QueueItem Dynamics CRM Destination"
+              componentClassID="Microsoft.ManagedComponentHost"
+              contactInfo="KingswaySoft Inc.; http://www.kingswaysoft.com; support@kingswaysoft.com; Copyright 2011-2016 KingswaySoft Inc."
+              description="Populate data into Microsoft Dynamics CRM."
+              name="Delete QueueItem Dynamics CRM Destination"
+              usesDispositions="true"
+              version="3">
+              <properties>
+                <property
+                  dataType="System.String"
+                  description="Destination entity to write data."
+                  expressionType="Notify"
+                  name="DestinationEntity">queueitem</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies how data is written to CRM server."
+                  name="ActionType"
+                  typeConverter="KingswaySoft.IntegrationToolkit.DynamicsCrm.CrmDestinationActionType">4</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Specifies whether the values of CRM lookup fields should be removed if the reference records cannot be found. "
+                  expressionType="Notify"
+                  name="RemoveUnresolvableReferences">false</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Specifies whether duplicate detection should be enabled when creating or updating CRM records. Duplicate records are determined by the duplicate detection rules and settings defined in Microsoft Dynamics CRM."
+                  expressionType="Notify"
+                  name="EnableDuplicateDetection">false</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specify the matching criteria to be used when Upsert action is chosen."
+                  expressionType="Notify"
+                  name="UpsertMatchingCriteria"
+                  typeConverter="KingswaySoft.IntegrationToolkit.Common.DescriptiveEnumTypeConverter`1[[KingswaySoft.IntegrationToolkit.DynamicsCrm.CrmUpsertMatchingCriteria">0</property>
+                <property
+                  dataType="System.String"
+                  description="Specify the matching fields to be used to determine the matching records that exist in CRM when Manually Specify option is chosen for Upsert action."
+                  expressionType="Notify"
+                  name="UpsertMatchingFields"></property>
+                <property
+                  dataType="System.Boolean"
+                  description="Specifies whether to ignore those NULL-valued fields."
+                  expressionType="Notify"
+                  name="IgnoreNullValuedFields">false</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Specifies whether to ignore those fields that have no value changes in the target system. "
+                  expressionType="Notify"
+                  name="IgnoreUnchangedFields">false</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Specify whether to remove those invalid characters before writing to CRM."
+                  expressionType="Notify"
+                  name="RemoveInvalidCharacters">false</property>
+                <property
+                  dataType="System.String"
+                  description="Specify the flag field(s) that are used to track the source of changes. The field(s) will not posted to CRM server unless there are changes to other fields if specified. &quot;Ignore Unchange Fields&quot; option is required in order for the specified flag field(s) to work. "
+                  expressionType="Notify"
+                  name="ChangeFlagFields"></property>
+                <property
+                  dataType="System.Int32"
+                  description="Specify what action will be taken when multiple matches are found with Upsert action."
+                  expressionType="Notify"
+                  name="HandlingOfMultipleMatches"
+                  typeConverter="KingswaySoft.IntegrationToolkit.Common.DescriptiveEnumTypeConverter`1[[KingswaySoft.IntegrationToolkit.DynamicsCrm.CrmUpsertHandlingOfMultipleMatches">0</property>
+                <property
+                  dataType="System.String"
+                  description="Workflow to be executed."
+                  expressionType="Notify"
+                  name="Workflow"></property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the number of records to be sent to Microsoft Dynamics CRM in each batch (CRM 2011 Update Rollup 12 or later is required if batch size is greater than 1)."
+                  expressionType="Notify"
+                  name="BatchSize">200</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Specifies whether datetime values should be sent to CRM server in UTC format."
+                  expressionType="Notify"
+                  name="SendDateTimeInUtcFormat">false</property>
+                <property
+                  dataType="System.String"
+                  name="UserComponentTypeName">KingswaySoft.IntegrationToolkit.DynamicsCrm.CrmDestinationComponent</property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\Delete CRM Queue Data Flow Task\Delete QueueItem Dynamics CRM Destination.Connections[DynamicsCRM]"
+                  connectionManagerID="{1CDE5DA3-752B-45DA-A7CB-DC93B7EF62F0}:external"
+                  connectionManagerRefId="Project.ConnectionManagers[Dynamics CRM Connection Manager]"
+                  description="Dynamics CRM Connection Manager"
+                  name="DynamicsCRM" />
+              </connections>
+              <inputs>
+                <input
+                  refId="Package\Delete CRM Queue Data Flow Task\Delete QueueItem Dynamics CRM Destination.Inputs[Input]"
+                  errorOrTruncationOperation="Insert"
+                  errorRowDisposition="FailComponent"
+                  hasSideEffects="true"
+                  name="Input">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\Delete CRM Queue Data Flow Task\Delete QueueItem Dynamics CRM Destination.Inputs[Input].Columns[lkp_QueueItemId]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="100"
+                      cachedName="lkp_QueueItemId"
+                      externalMetadataColumnId="Package\Delete CRM Queue Data Flow Task\Delete QueueItem Dynamics CRM Destination.Inputs[Input].ExternalColumns[queueitemid]"
+                      lineageId="Package\Delete CRM Queue Data Flow Task\QueueItem Lookup.Outputs[Lookup Match Output].Columns[lkp_QueueItemId]" />
+                  </inputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\Delete CRM Queue Data Flow Task\Delete QueueItem Dynamics CRM Destination.Inputs[Input].ExternalColumns[queueitemid]"
+                      dataType="guid"
+                      name="queueitemid">
+                      <properties>
+                        <property
+                          dataType="System.String"
+                          name="CrmFieldType">Uniqueidentifier</property>
+                        <property
+                          dataType="System.String"
+                          name="LookupTypes">queueitem</property>
+                      </properties>
+                    </externalMetadataColumn>
+                  </externalMetadataColumns>
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\Delete CRM Queue Data Flow Task\Delete QueueItem Dynamics CRM Destination.Outputs[Error Output]"
+                  exclusionGroup="1"
+                  isErrorOut="true"
+                  name="Error Output"
+                  synchronousInputId="Package\Delete CRM Queue Data Flow Task\Delete QueueItem Dynamics CRM Destination.Inputs[Input]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Delete CRM Queue Data Flow Task\Delete QueueItem Dynamics CRM Destination.Outputs[Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\Delete CRM Queue Data Flow Task\Delete QueueItem Dynamics CRM Destination.Outputs[Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\Delete CRM Queue Data Flow Task\Delete QueueItem Dynamics CRM Destination.Outputs[Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\Delete CRM Queue Data Flow Task\Delete QueueItem Dynamics CRM Destination.Outputs[Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                    <outputColumn
+                      refId="Package\Delete CRM Queue Data Flow Task\Delete QueueItem Dynamics CRM Destination.Outputs[Error Output].Columns[CrmErrorMessage]"
+                      dataType="wstr"
+                      length="2048"
+                      lineageId="Package\Delete CRM Queue Data Flow Task\Delete QueueItem Dynamics CRM Destination.Outputs[Error Output].Columns[CrmErrorMessage]"
+                      name="CrmErrorMessage" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+                <output
+                  refId="Package\Delete CRM Queue Data Flow Task\Delete QueueItem Dynamics CRM Destination.Outputs[Default Output]"
+                  exclusionGroup="1"
+                  name="Default Output"
+                  synchronousInputId="Package\Delete CRM Queue Data Flow Task\Delete QueueItem Dynamics CRM Destination.Inputs[Input]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Delete CRM Queue Data Flow Task\Delete QueueItem Dynamics CRM Destination.Outputs[Default Output].Columns[CrmRecordId]"
+                      dataType="guid"
+                      lineageId="Package\Delete CRM Queue Data Flow Task\Delete QueueItem Dynamics CRM Destination.Outputs[Default Output].Columns[CrmRecordId]"
+                      name="CrmRecordId" />
+                    <outputColumn
+                      refId="Package\Delete CRM Queue Data Flow Task\Delete QueueItem Dynamics CRM Destination.Outputs[Default Output].Columns[IsNew]"
+                      dataType="bool"
+                      lineageId="Package\Delete CRM Queue Data Flow Task\Delete QueueItem Dynamics CRM Destination.Outputs[Default Output].Columns[IsNew]"
+                      name="IsNew" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\Delete CRM Queue Data Flow Task\ODS Case OLE DB Source"
+              componentClassID="Microsoft.OLEDBSource"
+              contactInfo="OLE DB Source;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;7"
+              description="OLE DB Source"
+              name="ODS Case OLE DB Source"
+              usesDispositions="true"
+              version="7">
+              <properties>
+                <property
+                  dataType="System.Int32"
+                  description="The number of seconds before a command times out.  A value of 0 indicates an infinite time-out."
+                  name="CommandTimeout">0</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the name of the database object used to open a rowset."
+                  name="OpenRowset"></property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the variable that contains the name of the database object used to open a rowset."
+                  name="OpenRowsetVariable"></property>
+                <property
+                  dataType="System.String"
+                  description="The SQL command to be executed."
+                  name="SqlCommand"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor, Microsoft.DataTransformationServices.Controls, Version=14.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91">EXEC pCRMQueue_MD ?</property>
+                <property
+                  dataType="System.String"
+                  description="The variable that contains the SQL command to be executed."
+                  name="SqlCommandVariable"></property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the column code page to use when code page information is unavailable from the data source."
+                  name="DefaultCodePage">1252</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Forces the use of the DefaultCodePage property value when describing character data."
+                  name="AlwaysUseDefaultCodePage">false</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the mode used to access the database."
+                  name="AccessMode"
+                  typeConverter="AccessMode">2</property>
+                <property
+                  dataType="System.String"
+                  description="The mappings between the parameters in the SQL command and variables."
+                  name="ParameterMapping">"@StartDate:Input",{764CA7E8-7DF0-4070-80E4-6570C2774BCD};</property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\Delete CRM Queue Data Flow Task\ODS Case OLE DB Source.Connections[OleDbConnection]"
+                  connectionManagerID="{8A37FDFB-9A39-4961-8D61-9862EAFA6C6C}:external"
+                  connectionManagerRefId="Project.ConnectionManagers[localhost.CERRS_ODS]"
+                  description="The OLE DB runtime connection used to access the database."
+                  name="OleDbConnection" />
+              </connections>
+              <outputs>
+                <output
+                  refId="Package\Delete CRM Queue Data Flow Task\ODS Case OLE DB Source.Outputs[OLE DB Source Output]"
+                  name="OLE DB Source Output">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Delete CRM Queue Data Flow Task\ODS Case OLE DB Source.Outputs[OLE DB Source Output].Columns[MasterCaseOdsId]"
+                      dataType="i8"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Delete CRM Queue Data Flow Task\ODS Case OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[MasterCaseOdsId]"
+                      lineageId="Package\Delete CRM Queue Data Flow Task\ODS Case OLE DB Source.Outputs[OLE DB Source Output].Columns[MasterCaseOdsId]"
+                      name="MasterCaseOdsId"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Delete CRM Queue Data Flow Task\ODS Case OLE DB Source.Outputs[OLE DB Source Output].Columns[CaseQueue]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Delete CRM Queue Data Flow Task\ODS Case OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[CaseQueue]"
+                      length="255"
+                      lineageId="Package\Delete CRM Queue Data Flow Task\ODS Case OLE DB Source.Outputs[OLE DB Source Output].Columns[CaseQueue]"
+                      name="CaseQueue"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Delete CRM Queue Data Flow Task\ODS Case OLE DB Source.Outputs[OLE DB Source Output].Columns[HICSCaseGUID]"
+                      dataType="guid"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Delete CRM Queue Data Flow Task\ODS Case OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[HICSCaseGUID]"
+                      lineageId="Package\Delete CRM Queue Data Flow Task\ODS Case OLE DB Source.Outputs[OLE DB Source Output].Columns[HICSCaseGUID]"
+                      name="HICSCaseGUID"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Delete CRM Queue Data Flow Task\ODS Case OLE DB Source.Outputs[OLE DB Source Output].Columns[CaseID]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Delete CRM Queue Data Flow Task\ODS Case OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[CaseID]"
+                      length="20"
+                      lineageId="Package\Delete CRM Queue Data Flow Task\ODS Case OLE DB Source.Outputs[OLE DB Source Output].Columns[CaseID]"
+                      name="CaseID"
+                      truncationRowDisposition="FailComponent" />
+                  </outputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\Delete CRM Queue Data Flow Task\ODS Case OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[MasterCaseOdsId]"
+                      dataType="i8"
+                      name="MasterCaseOdsId" />
+                    <externalMetadataColumn
+                      refId="Package\Delete CRM Queue Data Flow Task\ODS Case OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[CaseQueue]"
+                      codePage="1252"
+                      dataType="str"
+                      length="255"
+                      name="CaseQueue" />
+                    <externalMetadataColumn
+                      refId="Package\Delete CRM Queue Data Flow Task\ODS Case OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[HICSCaseGUID]"
+                      dataType="guid"
+                      name="HICSCaseGUID" />
+                    <externalMetadataColumn
+                      refId="Package\Delete CRM Queue Data Flow Task\ODS Case OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[CaseID]"
+                      codePage="1252"
+                      dataType="str"
+                      length="20"
+                      name="CaseID" />
+                  </externalMetadataColumns>
+                </output>
+                <output
+                  refId="Package\Delete CRM Queue Data Flow Task\ODS Case OLE DB Source.Outputs[OLE DB Source Error Output]"
+                  isErrorOut="true"
+                  name="OLE DB Source Error Output">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Delete CRM Queue Data Flow Task\ODS Case OLE DB Source.Outputs[OLE DB Source Error Output].Columns[MasterCaseOdsId]"
+                      dataType="i8"
+                      lineageId="Package\Delete CRM Queue Data Flow Task\ODS Case OLE DB Source.Outputs[OLE DB Source Error Output].Columns[MasterCaseOdsId]"
+                      name="MasterCaseOdsId" />
+                    <outputColumn
+                      refId="Package\Delete CRM Queue Data Flow Task\ODS Case OLE DB Source.Outputs[OLE DB Source Error Output].Columns[CaseID]"
+                      codePage="1252"
+                      dataType="str"
+                      length="20"
+                      lineageId="Package\Delete CRM Queue Data Flow Task\ODS Case OLE DB Source.Outputs[OLE DB Source Error Output].Columns[CaseID]"
+                      name="CaseID" />
+                    <outputColumn
+                      refId="Package\Delete CRM Queue Data Flow Task\ODS Case OLE DB Source.Outputs[OLE DB Source Error Output].Columns[HICSCaseGUID]"
+                      dataType="guid"
+                      lineageId="Package\Delete CRM Queue Data Flow Task\ODS Case OLE DB Source.Outputs[OLE DB Source Error Output].Columns[HICSCaseGUID]"
+                      name="HICSCaseGUID" />
+                    <outputColumn
+                      refId="Package\Delete CRM Queue Data Flow Task\ODS Case OLE DB Source.Outputs[OLE DB Source Error Output].Columns[CaseQueue]"
+                      codePage="1252"
+                      dataType="str"
+                      length="255"
+                      lineageId="Package\Delete CRM Queue Data Flow Task\ODS Case OLE DB Source.Outputs[OLE DB Source Error Output].Columns[CaseQueue]"
+                      name="CaseQueue" />
+                    <outputColumn
+                      refId="Package\Delete CRM Queue Data Flow Task\ODS Case OLE DB Source.Outputs[OLE DB Source Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\Delete CRM Queue Data Flow Task\ODS Case OLE DB Source.Outputs[OLE DB Source Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\Delete CRM Queue Data Flow Task\ODS Case OLE DB Source.Outputs[OLE DB Source Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\Delete CRM Queue Data Flow Task\ODS Case OLE DB Source.Outputs[OLE DB Source Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\Delete CRM Queue Data Flow Task\QueueItem Lookup"
+              componentClassID="Microsoft.Lookup"
+              contactInfo="Lookup;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;6"
+              description="Joins additional columns to the data flow by looking up values in a table. For example, join to the 'employee id' column the employees table to get 'hire date' and 'employee name'. We recommend this transformation when the lookup table can fit into memory."
+              name="QueueItem Lookup"
+              usesDispositions="true"
+              version="6">
+              <properties>
+                <property
+                  dataType="System.String"
+                  description="Specifies the SQL statement that generates the lookup table."
+                  expressionType="Notify"
+                  name="SqlCommand"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor, Microsoft.DataTransformationServices.Controls, Version=14.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91">SELECT CAST(Title as varchar(100)) AS Title, CAST(QueueItemId as varchar(100)) AS QueueItemId
+FROM QueueItem</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies a SQL statement that uses parameters to generate the lookup table."
+                  expressionType="Notify"
+                  name="SqlCommandParam"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor, Microsoft.DataTransformationServices.Controls, Version=14.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91">select * from (SELECT CAST(Title as varchar(100)) AS Title, CAST(QueueItemId as varchar(100)) AS QueueItemId
+FROM QueueItem) [refTable]
+where [refTable].[Title] = ?</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the type of connection used to access the reference dataset."
+                  name="ConnectionType"
+                  typeConverter="LookupConnectionType">0</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the cache type of the lookup table."
+                  name="CacheType"
+                  typeConverter="CacheType">0</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies how the Lookup transformation handles rows without matching entries in the reference data set."
+                  name="NoMatchBehavior"
+                  typeConverter="LookupNoMatchBehavior">1</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the percentage of the cache that is allocated for rows with no matching entries in the reference dataset."
+                  name="NoMatchCachePercentage">0</property>
+                <property
+                  dataType="System.Int32"
+                  description="Maximum Memory Usage for Reference Cache on a 32 bit platform."
+                  name="MaxMemoryUsage">25</property>
+                <property
+                  dataType="System.Int64"
+                  description="Maximum Memory Usage for Reference Cache on a 64 bit platform."
+                  name="MaxMemoryUsage64">25</property>
+                <property
+                  dataType="System.String"
+                  description="Indicates whether to reference metadata in an XML format."
+                  name="ReferenceMetadataXml">&lt;referenceMetadata&gt;&lt;referenceColumns&gt;&lt;referenceColumn name="Title" dataType="DT_STR" length="100" precision="0" scale="0" codePage="1252"/&gt;&lt;referenceColumn name="QueueItemId" dataType="DT_STR" length="100" precision="0" scale="0" codePage="1252"/&gt;&lt;/referenceColumns&gt;&lt;/referenceMetadata&gt;</property>
+                <property
+                  containsID="true"
+                  dataType="System.String"
+                  description="Specifies the list of lineage identifiers that map to the parameters that the SQL statement in the SQLCommand property uses. Entries in the list are separated by semicolons."
+                  name="ParameterMap">#{Package\Delete CRM Queue Data Flow Task\ODS Case OLE DB Source.Outputs[OLE DB Source Output].Columns[CaseID]};</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the column code page to use when code page information is unavailable from the data source."
+                  name="DefaultCodePage">1252</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Determines whether duplicate keys in the reference data should be treated as errors when full cache mode is used."
+                  name="TreatDuplicateKeysAsError">false</property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\Delete CRM Queue Data Flow Task\QueueItem Lookup.Connections[OleDbConnection]"
+                  connectionManagerID="{A5CCA6ED-9861-4C55-8EB4-9C5AA057608F}:external"
+                  connectionManagerRefId="Project.ConnectionManagers[localhost.CERRSDEV1_MSCRM]"
+                  description="Connection manager used to access lookup data."
+                  name="OleDbConnection" />
+              </connections>
+              <inputs>
+                <input
+                  refId="Package\Delete CRM Queue Data Flow Task\QueueItem Lookup.Inputs[Lookup Input]"
+                  name="Lookup Input">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\Delete CRM Queue Data Flow Task\QueueItem Lookup.Inputs[Lookup Input].Columns[CaseID]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="20"
+                      cachedName="CaseID"
+                      lineageId="Package\Delete CRM Queue Data Flow Task\ODS Case OLE DB Source.Outputs[OLE DB Source Output].Columns[CaseID]">
+                      <properties>
+                        <property
+                          dataType="System.String"
+                          description="Specifies the column in the reference table that a column joins."
+                          name="JoinToReferenceColumn">Title</property>
+                        <property
+                          dataType="System.Null"
+                          description="Specifies the column in the reference table from which a column is copied."
+                          name="CopyFromReferenceColumn" />
+                      </properties>
+                    </inputColumn>
+                  </inputColumns>
+                  <externalMetadataColumns />
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\Delete CRM Queue Data Flow Task\QueueItem Lookup.Outputs[Lookup Match Output]"
+                  errorOrTruncationOperation="Lookup"
+                  exclusionGroup="1"
+                  name="Lookup Match Output"
+                  synchronousInputId="Package\Delete CRM Queue Data Flow Task\QueueItem Lookup.Inputs[Lookup Input]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Delete CRM Queue Data Flow Task\QueueItem Lookup.Outputs[Lookup Match Output].Columns[lkp_QueueItemId]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Copy Column"
+                      length="100"
+                      lineageId="Package\Delete CRM Queue Data Flow Task\QueueItem Lookup.Outputs[Lookup Match Output].Columns[lkp_QueueItemId]"
+                      name="lkp_QueueItemId"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          dataType="System.String"
+                          description="Specifies the column in the reference table from which a column is copied."
+                          name="CopyFromReferenceColumn">QueueItemId</property>
+                      </properties>
+                    </outputColumn>
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+                <output
+                  refId="Package\Delete CRM Queue Data Flow Task\QueueItem Lookup.Outputs[Lookup No Match Output]"
+                  description="The Lookup output that handles rows with no matching entries in the reference dataset. Use this output when the NoMatchBehavior property is set to &quot;Send rows with no matching entries to the no match output.&quot;"
+                  exclusionGroup="1"
+                  name="Lookup No Match Output"
+                  synchronousInputId="Package\Delete CRM Queue Data Flow Task\QueueItem Lookup.Inputs[Lookup Input]">
+                  <externalMetadataColumns />
+                </output>
+                <output
+                  refId="Package\Delete CRM Queue Data Flow Task\QueueItem Lookup.Outputs[Lookup Error Output]"
+                  exclusionGroup="1"
+                  isErrorOut="true"
+                  name="Lookup Error Output"
+                  synchronousInputId="Package\Delete CRM Queue Data Flow Task\QueueItem Lookup.Inputs[Lookup Input]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Delete CRM Queue Data Flow Task\QueueItem Lookup.Outputs[Lookup Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\Delete CRM Queue Data Flow Task\QueueItem Lookup.Outputs[Lookup Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\Delete CRM Queue Data Flow Task\QueueItem Lookup.Outputs[Lookup Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\Delete CRM Queue Data Flow Task\QueueItem Lookup.Outputs[Lookup Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\Delete CRM Queue Data Flow Task\Row Count"
+              componentClassID="Microsoft.RowCount"
+              contactInfo="Row Count;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;0"
+              description="Counts rows as they pass through a data flow. For example, use the number of rows processed to determine whether or not to perform cleanup operations, or update text in an e-mail message to communicate processing status."
+              name="Row Count">
+              <properties>
+                <property
+                  dataType="System.String"
+                  description="Specifies the variable to hold the row count."
+                  name="VariableName">User::UpdateCount</property>
+              </properties>
+              <inputs>
+                <input
+                  refId="Package\Delete CRM Queue Data Flow Task\Row Count.Inputs[Row Count Input 1]"
+                  hasSideEffects="true"
+                  name="Row Count Input 1">
+                  <externalMetadataColumns />
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\Delete CRM Queue Data Flow Task\Row Count.Outputs[Row Count Output 1]"
+                  name="Row Count Output 1"
+                  synchronousInputId="Package\Delete CRM Queue Data Flow Task\Row Count.Inputs[Row Count Input 1]">
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+          </components>
+          <paths>
+            <path
+              refId="Package\Delete CRM Queue Data Flow Task.Paths[Lookup Match Output]"
+              endId="Package\Delete CRM Queue Data Flow Task\Row Count.Inputs[Row Count Input 1]"
+              name="Lookup Match Output"
+              startId="Package\Delete CRM Queue Data Flow Task\QueueItem Lookup.Outputs[Lookup Match Output]" />
+            <path
+              refId="Package\Delete CRM Queue Data Flow Task.Paths[OLE DB Source Output]"
+              endId="Package\Delete CRM Queue Data Flow Task\QueueItem Lookup.Inputs[Lookup Input]"
+              name="OLE DB Source Output"
+              startId="Package\Delete CRM Queue Data Flow Task\ODS Case OLE DB Source.Outputs[OLE DB Source Output]" />
+            <path
+              refId="Package\Delete CRM Queue Data Flow Task.Paths[Row Count Output 1]"
+              endId="Package\Delete CRM Queue Data Flow Task\Delete QueueItem Dynamics CRM Destination.Inputs[Input]"
+              name="Row Count Output 1"
+              startId="Package\Delete CRM Queue Data Flow Task\Row Count.Outputs[Row Count Output 1]" />
+          </paths>
+        </pipeline>
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\Get LastRunDate Execute SQL Task"
+      DTS:CreationName="Microsoft.ExecuteSQLTask"
+      DTS:Description="Execute SQL Task"
+      DTS:DTSID="{0984C188-37ED-48DA-880C-773198B6E829}"
+      DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Get LastRunDate Execute SQL Task"
+      DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2012; © 2007 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+      DTS:ThreadHint="0">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <SQLTask:SqlTaskData
+          SQLTask:Connection="{8A37FDFB-9A39-4961-8D61-9862EAFA6C6C}"
+          SQLTask:SqlStatementSource="SELECT COALESCE(MAX(AuditTimestamp), '01/01/1900') AS LastRunDate&#xA;FROM Audit&#xA;WHERE Package = ?"
+          SQLTask:ResultType="ResultSetType_SingleRow" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask">
+          <SQLTask:ResultBinding
+            SQLTask:ResultName="LastRunDate"
+            SQLTask:DtsVariableName="User::LastRunDate" />
+          <SQLTask:ParameterBinding
+            SQLTask:ParameterName="0"
+            SQLTask:DtsVariableName="System::PackageName"
+            SQLTask:ParameterDirection="Input"
+            SQLTask:DataType="129"
+            SQLTask:ParameterSize="255" />
+        </SQLTask:SqlTaskData>
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\Load CRM Queue Data Flow Task"
+      DTS:CreationName="Microsoft.Pipeline"
+      DTS:Description="Data Flow Task"
+      DTS:DTSID="{80BC9862-0321-498E-8DCD-782C024D0D19}"
+      DTS:ExecutableType="Microsoft.Pipeline"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Load CRM Queue Data Flow Task"
+      DTS:TaskContact="Performs high-performance data extraction, transformation and loading;Microsoft Corporation; Microsoft SQL Server; (C) 2007 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <pipeline
+          version="1">
+          <components>
+            <component
+              refId="Package\Load CRM Queue Data Flow Task\Case Queue Lookup"
+              componentClassID="Microsoft.Lookup"
+              contactInfo="Lookup;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;6"
+              description="Joins additional columns to the data flow by looking up values in a table. For example, join to the 'employee id' column the employees table to get 'hire date' and 'employee name'. We recommend this transformation when the lookup table can fit into memory."
+              name="Case Queue Lookup"
+              usesDispositions="true"
+              version="6">
+              <properties>
+                <property
+                  dataType="System.String"
+                  description="Specifies the SQL statement that generates the lookup table."
+                  expressionType="Notify"
+                  name="SqlCommand"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor, Microsoft.DataTransformationServices.Controls, Version=14.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91">with DistinctValue as (
+SELECT DISTINCT [Name]
+,cast([cog_QueueKeyName] as varchar(255)) as cog_QueueKeyName
+FROM [dbo].[Queue]
+where [cog_QueueKeyName] is not null
+)
+SELECT Name, [cog_QueueKeyName]
+	, CAST(QueueId as VARCHAR(100)) AS QueueId  
+FROM DistinctValue dn
+OUTER APPLY (
+	SELECT TOP 1 QueueId 
+	FROM [dbo].[Queue]
+	WHERE [cog_QueueKeyName] = dn.[cog_QueueKeyName]
+	ORDER BY ModifiedOn DESC) a</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies a SQL statement that uses parameters to generate the lookup table."
+                  expressionType="Notify"
+                  name="SqlCommandParam"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor, Microsoft.DataTransformationServices.Controls, Version=14.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91">select * from (with DistinctValue as (
+SELECT DISTINCT [Name]
+,cast([cog_QueueKeyName] as varchar(255)) as cog_QueueKeyName
+FROM [dbo].[Queue]
+where [cog_QueueKeyName] is not null
+)
+SELECT Name, [cog_QueueKeyName]
+	, CAST(QueueId as VARCHAR(100)) AS QueueId  
+FROM DistinctValue dn
+OUTER APPLY (
+	SELECT TOP 1 QueueId 
+	FROM [dbo].[Queue]
+	WHERE [cog_QueueKeyName] = dn.[cog_QueueKeyName]
+	ORDER BY ModifiedOn DESC) a) [refTable]
+where [refTable].[cog_QueueKeyName] = ?</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the type of connection used to access the reference dataset."
+                  name="ConnectionType"
+                  typeConverter="LookupConnectionType">0</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the cache type of the lookup table."
+                  name="CacheType"
+                  typeConverter="CacheType">0</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies how the Lookup transformation handles rows without matching entries in the reference data set."
+                  name="NoMatchBehavior"
+                  typeConverter="LookupNoMatchBehavior">0</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the percentage of the cache that is allocated for rows with no matching entries in the reference dataset."
+                  name="NoMatchCachePercentage">0</property>
+                <property
+                  dataType="System.Int32"
+                  description="Maximum Memory Usage for Reference Cache on a 32 bit platform."
+                  name="MaxMemoryUsage">25</property>
+                <property
+                  dataType="System.Int64"
+                  description="Maximum Memory Usage for Reference Cache on a 64 bit platform."
+                  name="MaxMemoryUsage64">25</property>
+                <property
+                  dataType="System.String"
+                  description="Indicates whether to reference metadata in an XML format."
+                  name="ReferenceMetadataXml">&lt;referenceMetadata&gt;&lt;referenceColumns&gt;&lt;referenceColumn name="Name" dataType="DT_WSTR" length="200" precision="0" scale="0" codePage="0"/&gt;&lt;referenceColumn name="cog_QueueKeyName" dataType="DT_STR" length="255" precision="0" scale="0" codePage="1252"/&gt;&lt;referenceColumn name="QueueId" dataType="DT_STR" length="100" precision="0" scale="0" codePage="1252"/&gt;&lt;/referenceColumns&gt;&lt;/referenceMetadata&gt;</property>
+                <property
+                  containsID="true"
+                  dataType="System.String"
+                  description="Specifies the list of lineage identifiers that map to the parameters that the SQL statement in the SQLCommand property uses. Entries in the list are separated by semicolons."
+                  name="ParameterMap">#{Package\Load CRM Queue Data Flow Task\ODS Case OLE DB Source.Outputs[OLE DB Source Output].Columns[CaseQueue]};</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the column code page to use when code page information is unavailable from the data source."
+                  name="DefaultCodePage">1252</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Determines whether duplicate keys in the reference data should be treated as errors when full cache mode is used."
+                  name="TreatDuplicateKeysAsError">false</property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\Load CRM Queue Data Flow Task\Case Queue Lookup.Connections[OleDbConnection]"
+                  connectionManagerID="{A5CCA6ED-9861-4C55-8EB4-9C5AA057608F}:external"
+                  connectionManagerRefId="Project.ConnectionManagers[localhost.CERRSDEV1_MSCRM]"
+                  description="Connection manager used to access lookup data."
+                  name="OleDbConnection" />
+              </connections>
+              <inputs>
+                <input
+                  refId="Package\Load CRM Queue Data Flow Task\Case Queue Lookup.Inputs[Lookup Input]"
+                  name="Lookup Input">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\Load CRM Queue Data Flow Task\Case Queue Lookup.Inputs[Lookup Input].Columns[CaseQueue]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="255"
+                      cachedName="CaseQueue"
+                      lineageId="Package\Load CRM Queue Data Flow Task\ODS Case OLE DB Source.Outputs[OLE DB Source Output].Columns[CaseQueue]">
+                      <properties>
+                        <property
+                          dataType="System.String"
+                          description="Specifies the column in the reference table that a column joins."
+                          name="JoinToReferenceColumn">cog_QueueKeyName</property>
+                        <property
+                          dataType="System.Null"
+                          description="Specifies the column in the reference table from which a column is copied."
+                          name="CopyFromReferenceColumn" />
+                      </properties>
+                    </inputColumn>
+                  </inputColumns>
+                  <externalMetadataColumns />
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\Load CRM Queue Data Flow Task\Case Queue Lookup.Outputs[Lookup Match Output]"
+                  errorOrTruncationOperation="Lookup"
+                  errorRowDisposition="FailComponent"
+                  exclusionGroup="1"
+                  name="Lookup Match Output"
+                  synchronousInputId="Package\Load CRM Queue Data Flow Task\Case Queue Lookup.Inputs[Lookup Input]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Load CRM Queue Data Flow Task\Case Queue Lookup.Outputs[Lookup Match Output].Columns[lkp_QueueId]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Copy Column"
+                      length="100"
+                      lineageId="Package\Load CRM Queue Data Flow Task\Case Queue Lookup.Outputs[Lookup Match Output].Columns[lkp_QueueId]"
+                      name="lkp_QueueId"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          dataType="System.String"
+                          description="Specifies the column in the reference table from which a column is copied."
+                          name="CopyFromReferenceColumn">QueueId</property>
+                      </properties>
+                    </outputColumn>
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+                <output
+                  refId="Package\Load CRM Queue Data Flow Task\Case Queue Lookup.Outputs[Lookup No Match Output]"
+                  description="The Lookup output that handles rows with no matching entries in the reference dataset. Use this output when the NoMatchBehavior property is set to &quot;Send rows with no matching entries to the no match output.&quot;"
+                  exclusionGroup="1"
+                  name="Lookup No Match Output"
+                  synchronousInputId="Package\Load CRM Queue Data Flow Task\Case Queue Lookup.Inputs[Lookup Input]">
+                  <externalMetadataColumns />
+                </output>
+                <output
+                  refId="Package\Load CRM Queue Data Flow Task\Case Queue Lookup.Outputs[Lookup Error Output]"
+                  exclusionGroup="1"
+                  isErrorOut="true"
+                  name="Lookup Error Output"
+                  synchronousInputId="Package\Load CRM Queue Data Flow Task\Case Queue Lookup.Inputs[Lookup Input]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Load CRM Queue Data Flow Task\Case Queue Lookup.Outputs[Lookup Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\Load CRM Queue Data Flow Task\Case Queue Lookup.Outputs[Lookup Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\Load CRM Queue Data Flow Task\Case Queue Lookup.Outputs[Lookup Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\Load CRM Queue Data Flow Task\Case Queue Lookup.Outputs[Lookup Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\Load CRM Queue Data Flow Task\Create Queue Dynamics CRM Destination"
+              componentClassID="Microsoft.ManagedComponentHost"
+              contactInfo="KingswaySoft Inc.; http://www.kingswaysoft.com; support@kingswaysoft.com; Copyright 2011-2016 KingswaySoft Inc."
+              description="Populate data into Microsoft Dynamics CRM."
+              name="Create Queue Dynamics CRM Destination"
+              usesDispositions="true"
+              version="3">
+              <properties>
+                <property
+                  dataType="System.String"
+                  description="Destination entity to write data."
+                  expressionType="Notify"
+                  name="DestinationEntity">queueitem</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies how data is written to CRM server."
+                  name="ActionType"
+                  typeConverter="KingswaySoft.IntegrationToolkit.DynamicsCrm.CrmDestinationActionType">1</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Specifies whether the values of CRM lookup fields should be removed if the reference records cannot be found. "
+                  expressionType="Notify"
+                  name="RemoveUnresolvableReferences">false</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Specifies whether duplicate detection should be enabled when creating or updating CRM records. Duplicate records are determined by the duplicate detection rules and settings defined in Microsoft Dynamics CRM."
+                  expressionType="Notify"
+                  name="EnableDuplicateDetection">false</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specify the matching criteria to be used when Upsert action is chosen."
+                  expressionType="Notify"
+                  name="UpsertMatchingCriteria"
+                  typeConverter="KingswaySoft.IntegrationToolkit.Common.DescriptiveEnumTypeConverter`1[[KingswaySoft.IntegrationToolkit.DynamicsCrm.CrmUpsertMatchingCriteria">0</property>
+                <property
+                  dataType="System.String"
+                  description="Specify the matching fields to be used to determine the matching records that exist in CRM when Manually Specify option is chosen for Upsert action."
+                  expressionType="Notify"
+                  name="UpsertMatchingFields"></property>
+                <property
+                  dataType="System.Boolean"
+                  description="Specifies whether to ignore those NULL-valued fields."
+                  expressionType="Notify"
+                  name="IgnoreNullValuedFields">false</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Specifies whether to ignore those fields that have no value changes in the target system. "
+                  expressionType="Notify"
+                  name="IgnoreUnchangedFields">false</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Specify whether to remove those invalid characters before writing to CRM."
+                  expressionType="Notify"
+                  name="RemoveInvalidCharacters">false</property>
+                <property
+                  dataType="System.String"
+                  description="Specify the flag field(s) that are used to track the source of changes. The field(s) will not posted to CRM server unless there are changes to other fields if specified. &quot;Ignore Unchange Fields&quot; option is required in order for the specified flag field(s) to work. "
+                  expressionType="Notify"
+                  name="ChangeFlagFields"></property>
+                <property
+                  dataType="System.Int32"
+                  description="Specify what action will be taken when multiple matches are found with Upsert action."
+                  expressionType="Notify"
+                  name="HandlingOfMultipleMatches"
+                  typeConverter="KingswaySoft.IntegrationToolkit.Common.DescriptiveEnumTypeConverter`1[[KingswaySoft.IntegrationToolkit.DynamicsCrm.CrmUpsertHandlingOfMultipleMatches">0</property>
+                <property
+                  dataType="System.String"
+                  description="Workflow to be executed."
+                  expressionType="Notify"
+                  name="Workflow"></property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the number of records to be sent to Microsoft Dynamics CRM in each batch (CRM 2011 Update Rollup 12 or later is required if batch size is greater than 1)."
+                  expressionType="Notify"
+                  name="BatchSize">200</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Specifies whether datetime values should be sent to CRM server in UTC format."
+                  expressionType="Notify"
+                  name="SendDateTimeInUtcFormat">false</property>
+                <property
+                  dataType="System.String"
+                  name="UserComponentTypeName">KingswaySoft.IntegrationToolkit.DynamicsCrm.CrmDestinationComponent</property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\Load CRM Queue Data Flow Task\Create Queue Dynamics CRM Destination.Connections[DynamicsCRM]"
+                  connectionManagerID="{1CDE5DA3-752B-45DA-A7CB-DC93B7EF62F0}:external"
+                  connectionManagerRefId="Project.ConnectionManagers[Dynamics CRM Connection Manager]"
+                  description="Dynamics CRM Connection Manager"
+                  name="DynamicsCRM" />
+              </connections>
+              <inputs>
+                <input
+                  refId="Package\Load CRM Queue Data Flow Task\Create Queue Dynamics CRM Destination.Inputs[Input]"
+                  errorOrTruncationOperation="Insert"
+                  errorRowDisposition="FailComponent"
+                  hasSideEffects="true"
+                  name="Input">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\Load CRM Queue Data Flow Task\Create Queue Dynamics CRM Destination.Inputs[Input].Columns[HICSCaseGUID]"
+                      cachedDataType="guid"
+                      cachedName="HICSCaseGUID"
+                      externalMetadataColumnId="Package\Load CRM Queue Data Flow Task\Create Queue Dynamics CRM Destination.Inputs[Input].ExternalColumns[objectid]"
+                      lineageId="Package\Load CRM Queue Data Flow Task\ODS Case OLE DB Source.Outputs[OLE DB Source Output].Columns[HICSCaseGUID]" />
+                    <inputColumn
+                      refId="Package\Load CRM Queue Data Flow Task\Create Queue Dynamics CRM Destination.Inputs[Input].Columns[lkp_ObjectTypeCode]"
+                      cachedDataType="wstr"
+                      cachedLength="64"
+                      cachedName="lkp_ObjectTypeCode"
+                      externalMetadataColumnId="Package\Load CRM Queue Data Flow Task\Create Queue Dynamics CRM Destination.Inputs[Input].ExternalColumns[objectidtypecode]"
+                      lineageId="Package\Load CRM Queue Data Flow Task\Object Type Code Lookup.Outputs[Lookup Match Output].Columns[lkp_ObjectTypeCode]" />
+                    <inputColumn
+                      refId="Package\Load CRM Queue Data Flow Task\Create Queue Dynamics CRM Destination.Inputs[Input].Columns[lkp_QueueId]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="100"
+                      cachedName="lkp_QueueId"
+                      externalMetadataColumnId="Package\Load CRM Queue Data Flow Task\Create Queue Dynamics CRM Destination.Inputs[Input].ExternalColumns[queueid]"
+                      lineageId="Package\Load CRM Queue Data Flow Task\Case Queue Lookup.Outputs[Lookup Match Output].Columns[lkp_QueueId]" />
+                  </inputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\Load CRM Queue Data Flow Task\Create Queue Dynamics CRM Destination.Inputs[Input].ExternalColumns[cog_itemdate]"
+                      dataType="dbTimeStamp"
+                      name="cog_itemdate">
+                      <properties>
+                        <property
+                          dataType="System.String"
+                          name="CrmFieldType">DateTime</property>
+                        <property
+                          dataType="System.String"
+                          name="LookupTypes"></property>
+                      </properties>
+                    </externalMetadataColumn>
+                    <externalMetadataColumn
+                      refId="Package\Load CRM Queue Data Flow Task\Create Queue Dynamics CRM Destination.Inputs[Input].ExternalColumns[createdby]"
+                      dataType="guid"
+                      name="createdby">
+                      <properties>
+                        <property
+                          dataType="System.String"
+                          name="CrmFieldType">Lookup</property>
+                        <property
+                          dataType="System.String"
+                          name="LookupTypes">systemuser</property>
+                      </properties>
+                    </externalMetadataColumn>
+                    <externalMetadataColumn
+                      refId="Package\Load CRM Queue Data Flow Task\Create Queue Dynamics CRM Destination.Inputs[Input].ExternalColumns[importsequencenumber]"
+                      dataType="i4"
+                      name="importsequencenumber">
+                      <properties>
+                        <property
+                          dataType="System.String"
+                          name="CrmFieldType">Integer</property>
+                        <property
+                          dataType="System.String"
+                          name="LookupTypes"></property>
+                      </properties>
+                    </externalMetadataColumn>
+                    <externalMetadataColumn
+                      refId="Package\Load CRM Queue Data Flow Task\Create Queue Dynamics CRM Destination.Inputs[Input].ExternalColumns[objectid]"
+                      dataType="guid"
+                      name="objectid">
+                      <properties>
+                        <property
+                          dataType="System.String"
+                          name="CrmFieldType">Lookup</property>
+                        <property
+                          dataType="System.String"
+                          name="LookupTypes">activitypointer;appointment;bulkoperation;campaignactivity;campaignresponse;cog_case;cog_caseauditactivities;cog_dataremediation;cog_privacyverificationactivity;cog_reportprocess;cog_reportsessionparam;cog_timelineactivity;cog_timezonebystate;cog_workbookrequest;email;fax;incident;letter;phonecall;recurringappointmentmaster;serviceappointment;socialactivity;task</property>
+                      </properties>
+                    </externalMetadataColumn>
+                    <externalMetadataColumn
+                      refId="Package\Load CRM Queue Data Flow Task\Create Queue Dynamics CRM Destination.Inputs[Input].ExternalColumns[objectidtypecode]"
+                      dataType="wstr"
+                      length="64"
+                      name="objectidtypecode">
+                      <properties>
+                        <property
+                          dataType="System.String"
+                          name="CrmFieldType">EntityName</property>
+                        <property
+                          dataType="System.String"
+                          name="LookupTypes"></property>
+                      </properties>
+                    </externalMetadataColumn>
+                    <externalMetadataColumn
+                      refId="Package\Load CRM Queue Data Flow Task\Create Queue Dynamics CRM Destination.Inputs[Input].ExternalColumns[overriddencreatedon]"
+                      dataType="dbTimeStamp"
+                      name="overriddencreatedon">
+                      <properties>
+                        <property
+                          dataType="System.String"
+                          name="CrmFieldType">DateTime</property>
+                        <property
+                          dataType="System.String"
+                          name="LookupTypes"></property>
+                      </properties>
+                    </externalMetadataColumn>
+                    <externalMetadataColumn
+                      refId="Package\Load CRM Queue Data Flow Task\Create Queue Dynamics CRM Destination.Inputs[Input].ExternalColumns[priority]"
+                      dataType="i4"
+                      name="priority">
+                      <properties>
+                        <property
+                          dataType="System.String"
+                          name="CrmFieldType">Integer</property>
+                        <property
+                          dataType="System.String"
+                          name="LookupTypes"></property>
+                      </properties>
+                    </externalMetadataColumn>
+                    <externalMetadataColumn
+                      refId="Package\Load CRM Queue Data Flow Task\Create Queue Dynamics CRM Destination.Inputs[Input].ExternalColumns[queueid]"
+                      dataType="guid"
+                      name="queueid">
+                      <properties>
+                        <property
+                          dataType="System.String"
+                          name="CrmFieldType">Lookup</property>
+                        <property
+                          dataType="System.String"
+                          name="LookupTypes">queue</property>
+                      </properties>
+                    </externalMetadataColumn>
+                    <externalMetadataColumn
+                      refId="Package\Load CRM Queue Data Flow Task\Create Queue Dynamics CRM Destination.Inputs[Input].ExternalColumns[queueitemid]"
+                      dataType="guid"
+                      name="queueitemid">
+                      <properties>
+                        <property
+                          dataType="System.String"
+                          name="CrmFieldType">Uniqueidentifier</property>
+                        <property
+                          dataType="System.String"
+                          name="LookupTypes"></property>
+                      </properties>
+                    </externalMetadataColumn>
+                    <externalMetadataColumn
+                      refId="Package\Load CRM Queue Data Flow Task\Create Queue Dynamics CRM Destination.Inputs[Input].ExternalColumns[sender]"
+                      dataType="wstr"
+                      length="250"
+                      name="sender">
+                      <properties>
+                        <property
+                          dataType="System.String"
+                          name="CrmFieldType">String</property>
+                        <property
+                          dataType="System.String"
+                          name="LookupTypes"></property>
+                      </properties>
+                    </externalMetadataColumn>
+                    <externalMetadataColumn
+                      refId="Package\Load CRM Queue Data Flow Task\Create Queue Dynamics CRM Destination.Inputs[Input].ExternalColumns[state]"
+                      dataType="i4"
+                      name="state">
+                      <properties>
+                        <property
+                          dataType="System.String"
+                          name="CrmFieldType">Integer</property>
+                        <property
+                          dataType="System.String"
+                          name="LookupTypes"></property>
+                      </properties>
+                    </externalMetadataColumn>
+                    <externalMetadataColumn
+                      refId="Package\Load CRM Queue Data Flow Task\Create Queue Dynamics CRM Destination.Inputs[Input].ExternalColumns[statecode]"
+                      dataType="i4"
+                      name="statecode">
+                      <properties>
+                        <property
+                          dataType="System.String"
+                          name="CrmFieldType">State</property>
+                        <property
+                          dataType="System.String"
+                          name="LookupTypes"></property>
+                      </properties>
+                    </externalMetadataColumn>
+                    <externalMetadataColumn
+                      refId="Package\Load CRM Queue Data Flow Task\Create Queue Dynamics CRM Destination.Inputs[Input].ExternalColumns[status]"
+                      dataType="i4"
+                      name="status">
+                      <properties>
+                        <property
+                          dataType="System.String"
+                          name="CrmFieldType">Integer</property>
+                        <property
+                          dataType="System.String"
+                          name="LookupTypes"></property>
+                      </properties>
+                    </externalMetadataColumn>
+                    <externalMetadataColumn
+                      refId="Package\Load CRM Queue Data Flow Task\Create Queue Dynamics CRM Destination.Inputs[Input].ExternalColumns[statuscode]"
+                      dataType="i4"
+                      name="statuscode">
+                      <properties>
+                        <property
+                          dataType="System.String"
+                          name="CrmFieldType">Status</property>
+                        <property
+                          dataType="System.String"
+                          name="LookupTypes"></property>
+                      </properties>
+                    </externalMetadataColumn>
+                    <externalMetadataColumn
+                      refId="Package\Load CRM Queue Data Flow Task\Create Queue Dynamics CRM Destination.Inputs[Input].ExternalColumns[timezoneruleversionnumber]"
+                      dataType="i4"
+                      name="timezoneruleversionnumber">
+                      <properties>
+                        <property
+                          dataType="System.String"
+                          name="CrmFieldType">Integer</property>
+                        <property
+                          dataType="System.String"
+                          name="LookupTypes"></property>
+                      </properties>
+                    </externalMetadataColumn>
+                    <externalMetadataColumn
+                      refId="Package\Load CRM Queue Data Flow Task\Create Queue Dynamics CRM Destination.Inputs[Input].ExternalColumns[torecipients]"
+                      dataType="wstr"
+                      length="500"
+                      name="torecipients">
+                      <properties>
+                        <property
+                          dataType="System.String"
+                          name="CrmFieldType">String</property>
+                        <property
+                          dataType="System.String"
+                          name="LookupTypes"></property>
+                      </properties>
+                    </externalMetadataColumn>
+                    <externalMetadataColumn
+                      refId="Package\Load CRM Queue Data Flow Task\Create Queue Dynamics CRM Destination.Inputs[Input].ExternalColumns[transactioncurrencyid]"
+                      dataType="guid"
+                      name="transactioncurrencyid">
+                      <properties>
+                        <property
+                          dataType="System.String"
+                          name="CrmFieldType">Lookup</property>
+                        <property
+                          dataType="System.String"
+                          name="LookupTypes">transactioncurrency</property>
+                      </properties>
+                    </externalMetadataColumn>
+                    <externalMetadataColumn
+                      refId="Package\Load CRM Queue Data Flow Task\Create Queue Dynamics CRM Destination.Inputs[Input].ExternalColumns[utcconversiontimezonecode]"
+                      dataType="i4"
+                      name="utcconversiontimezonecode">
+                      <properties>
+                        <property
+                          dataType="System.String"
+                          name="CrmFieldType">Integer</property>
+                        <property
+                          dataType="System.String"
+                          name="LookupTypes"></property>
+                      </properties>
+                    </externalMetadataColumn>
+                    <externalMetadataColumn
+                      refId="Package\Load CRM Queue Data Flow Task\Create Queue Dynamics CRM Destination.Inputs[Input].ExternalColumns[workerid]"
+                      dataType="guid"
+                      name="workerid">
+                      <properties>
+                        <property
+                          dataType="System.String"
+                          name="CrmFieldType">Lookup</property>
+                        <property
+                          dataType="System.String"
+                          name="LookupTypes">systemuser;team</property>
+                      </properties>
+                    </externalMetadataColumn>
+                    <externalMetadataColumn
+                      refId="Package\Load CRM Queue Data Flow Task\Create Queue Dynamics CRM Destination.Inputs[Input].ExternalColumns[workeridtype]"
+                      dataType="wstr"
+                      length="64"
+                      name="workeridtype">
+                      <properties>
+                        <property
+                          dataType="System.String"
+                          name="CrmFieldType">EntityName</property>
+                        <property
+                          dataType="System.String"
+                          name="LookupTypes"></property>
+                      </properties>
+                    </externalMetadataColumn>
+                  </externalMetadataColumns>
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\Load CRM Queue Data Flow Task\Create Queue Dynamics CRM Destination.Outputs[Error Output]"
+                  exclusionGroup="1"
+                  isErrorOut="true"
+                  name="Error Output"
+                  synchronousInputId="Package\Load CRM Queue Data Flow Task\Create Queue Dynamics CRM Destination.Inputs[Input]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Load CRM Queue Data Flow Task\Create Queue Dynamics CRM Destination.Outputs[Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\Load CRM Queue Data Flow Task\Create Queue Dynamics CRM Destination.Outputs[Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\Load CRM Queue Data Flow Task\Create Queue Dynamics CRM Destination.Outputs[Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\Load CRM Queue Data Flow Task\Create Queue Dynamics CRM Destination.Outputs[Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                    <outputColumn
+                      refId="Package\Load CRM Queue Data Flow Task\Create Queue Dynamics CRM Destination.Outputs[Error Output].Columns[CrmErrorMessage]"
+                      dataType="wstr"
+                      length="2048"
+                      lineageId="Package\Load CRM Queue Data Flow Task\Create Queue Dynamics CRM Destination.Outputs[Error Output].Columns[CrmErrorMessage]"
+                      name="CrmErrorMessage" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+                <output
+                  refId="Package\Load CRM Queue Data Flow Task\Create Queue Dynamics CRM Destination.Outputs[Default Output]"
+                  exclusionGroup="1"
+                  name="Default Output"
+                  synchronousInputId="Package\Load CRM Queue Data Flow Task\Create Queue Dynamics CRM Destination.Inputs[Input]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Load CRM Queue Data Flow Task\Create Queue Dynamics CRM Destination.Outputs[Default Output].Columns[CrmRecordId]"
+                      dataType="guid"
+                      lineageId="Package\Load CRM Queue Data Flow Task\Create Queue Dynamics CRM Destination.Outputs[Default Output].Columns[CrmRecordId]"
+                      name="CrmRecordId" />
+                    <outputColumn
+                      refId="Package\Load CRM Queue Data Flow Task\Create Queue Dynamics CRM Destination.Outputs[Default Output].Columns[IsNew]"
+                      dataType="bool"
+                      lineageId="Package\Load CRM Queue Data Flow Task\Create Queue Dynamics CRM Destination.Outputs[Default Output].Columns[IsNew]"
+                      name="IsNew" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\Load CRM Queue Data Flow Task\Lookup cog_caseid"
+              componentClassID="Microsoft.Lookup"
+              contactInfo="Lookup;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;6"
+              description="Joins additional columns to the data flow by looking up values in a table. For example, join to the 'employee id' column the employees table to get 'hire date' and 'employee name'. We recommend this transformation when the lookup table can fit into memory."
+              name="Lookup cog_caseid"
+              usesDispositions="true"
+              version="6">
+              <properties>
+                <property
+                  dataType="System.String"
+                  description="Specifies the SQL statement that generates the lookup table."
+                  expressionType="Notify"
+                  name="SqlCommand"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor, Microsoft.DataTransformationServices.Controls, Version=14.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91">SELECT 
+[cog_caseId]
+,cast([cog_name] as varchar(100)) as cog_name
+ FROM [dbo].[cog_case] c (nolock)
+cross apply 
+  (SELECT Value, AttributeValue 
+   FROM StringMapBase sm (nolock)
+   WHERE c.cog_CaseSubject = sm.AttributeValue
+   and AttributeName like 'cog_casesubject'
+   AND (sm.Value = '1095A Issue'
+    or sm.Value = 'CCHC Detail'
+    or sm.Value = 'CCHC Header')
+   and sm.ObjectTypeCode = (select max(ObjectTypeCode)
+          FROM StringMapBase sm (nolock)
+          WHERE AttributeName like 'cog_casesubject'
+          AND (Value = '1095A Issue'
+           or Value = 'CCHC Detail'
+           or Value = 'CCHC Header')
+         )
+  ) sub
+  where cog_caseid is not null</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies a SQL statement that uses parameters to generate the lookup table."
+                  expressionType="Notify"
+                  name="SqlCommandParam"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor, Microsoft.DataTransformationServices.Controls, Version=14.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91">select * from (SELECT 
+[cog_caseId]
+,cast([cog_name] as varchar(100)) as cog_name
+ FROM [dbo].[cog_case] c (nolock)
+cross apply 
+  (SELECT Value, AttributeValue 
+   FROM StringMapBase sm (nolock)
+   WHERE c.cog_CaseSubject = sm.AttributeValue
+   and AttributeName like 'cog_casesubject'
+   AND (sm.Value = '1095A Issue'
+    or sm.Value = 'CCHC Detail'
+    or sm.Value = 'CCHC Header')
+   and sm.ObjectTypeCode = (select max(ObjectTypeCode)
+          FROM StringMapBase sm (nolock)
+          WHERE AttributeName like 'cog_casesubject'
+          AND (Value = '1095A Issue'
+           or Value = 'CCHC Detail'
+           or Value = 'CCHC Header')
+         )
+  ) sub
+  where cog_caseid is not null) [refTable]
+where [refTable].[cog_name] = ?</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the type of connection used to access the reference dataset."
+                  name="ConnectionType"
+                  typeConverter="LookupConnectionType">0</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the cache type of the lookup table."
+                  name="CacheType"
+                  typeConverter="CacheType">0</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies how the Lookup transformation handles rows without matching entries in the reference data set."
+                  name="NoMatchBehavior"
+                  typeConverter="LookupNoMatchBehavior">1</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the percentage of the cache that is allocated for rows with no matching entries in the reference dataset."
+                  name="NoMatchCachePercentage">0</property>
+                <property
+                  dataType="System.Int32"
+                  description="Maximum Memory Usage for Reference Cache on a 32 bit platform."
+                  name="MaxMemoryUsage">25</property>
+                <property
+                  dataType="System.Int64"
+                  description="Maximum Memory Usage for Reference Cache on a 64 bit platform."
+                  name="MaxMemoryUsage64">25</property>
+                <property
+                  dataType="System.String"
+                  description="Indicates whether to reference metadata in an XML format."
+                  name="ReferenceMetadataXml">&lt;referenceMetadata&gt;&lt;referenceColumns&gt;&lt;referenceColumn name="cog_caseId" dataType="DT_GUID" length="0" precision="0" scale="0" codePage="0"/&gt;&lt;referenceColumn name="cog_name" dataType="DT_STR" length="100" precision="0" scale="0" codePage="1252"/&gt;&lt;/referenceColumns&gt;&lt;/referenceMetadata&gt;</property>
+                <property
+                  containsID="true"
+                  dataType="System.String"
+                  description="Specifies the list of lineage identifiers that map to the parameters that the SQL statement in the SQLCommand property uses. Entries in the list are separated by semicolons."
+                  name="ParameterMap">#{Package\Load CRM Queue Data Flow Task\ODS Case OLE DB Source.Outputs[OLE DB Source Output].Columns[CaseID]};</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the column code page to use when code page information is unavailable from the data source."
+                  name="DefaultCodePage">1252</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Determines whether duplicate keys in the reference data should be treated as errors when full cache mode is used."
+                  name="TreatDuplicateKeysAsError">false</property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\Load CRM Queue Data Flow Task\Lookup cog_caseid.Connections[OleDbConnection]"
+                  connectionManagerID="{A5CCA6ED-9861-4C55-8EB4-9C5AA057608F}:external"
+                  connectionManagerRefId="Project.ConnectionManagers[localhost.CERRSDEV1_MSCRM]"
+                  description="Connection manager used to access lookup data."
+                  name="OleDbConnection" />
+              </connections>
+              <inputs>
+                <input
+                  refId="Package\Load CRM Queue Data Flow Task\Lookup cog_caseid.Inputs[Lookup Input]"
+                  name="Lookup Input">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\Load CRM Queue Data Flow Task\Lookup cog_caseid.Inputs[Lookup Input].Columns[CaseID]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="20"
+                      cachedName="CaseID"
+                      lineageId="Package\Load CRM Queue Data Flow Task\ODS Case OLE DB Source.Outputs[OLE DB Source Output].Columns[CaseID]">
+                      <properties>
+                        <property
+                          dataType="System.String"
+                          description="Specifies the column in the reference table that a column joins."
+                          name="JoinToReferenceColumn">cog_name</property>
+                        <property
+                          dataType="System.Null"
+                          description="Specifies the column in the reference table from which a column is copied."
+                          name="CopyFromReferenceColumn" />
+                      </properties>
+                    </inputColumn>
+                  </inputColumns>
+                  <externalMetadataColumns />
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\Load CRM Queue Data Flow Task\Lookup cog_caseid.Outputs[Lookup Match Output]"
+                  errorOrTruncationOperation="Lookup"
+                  exclusionGroup="1"
+                  name="Lookup Match Output"
+                  synchronousInputId="Package\Load CRM Queue Data Flow Task\Lookup cog_caseid.Inputs[Lookup Input]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Load CRM Queue Data Flow Task\Lookup cog_caseid.Outputs[Lookup Match Output].Columns[lkp_cog_caseId]"
+                      dataType="guid"
+                      errorOrTruncationOperation="Copy Column"
+                      lineageId="Package\Load CRM Queue Data Flow Task\Lookup cog_caseid.Outputs[Lookup Match Output].Columns[lkp_cog_caseId]"
+                      name="lkp_cog_caseId"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          dataType="System.String"
+                          description="Specifies the column in the reference table from which a column is copied."
+                          name="CopyFromReferenceColumn">cog_caseId</property>
+                      </properties>
+                    </outputColumn>
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+                <output
+                  refId="Package\Load CRM Queue Data Flow Task\Lookup cog_caseid.Outputs[Lookup No Match Output]"
+                  description="The Lookup output that handles rows with no matching entries in the reference dataset. Use this output when the NoMatchBehavior property is set to &quot;Send rows with no matching entries to the no match output.&quot;"
+                  exclusionGroup="1"
+                  name="Lookup No Match Output"
+                  synchronousInputId="Package\Load CRM Queue Data Flow Task\Lookup cog_caseid.Inputs[Lookup Input]">
+                  <externalMetadataColumns />
+                </output>
+                <output
+                  refId="Package\Load CRM Queue Data Flow Task\Lookup cog_caseid.Outputs[Lookup Error Output]"
+                  exclusionGroup="1"
+                  isErrorOut="true"
+                  name="Lookup Error Output"
+                  synchronousInputId="Package\Load CRM Queue Data Flow Task\Lookup cog_caseid.Inputs[Lookup Input]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Load CRM Queue Data Flow Task\Lookup cog_caseid.Outputs[Lookup Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\Load CRM Queue Data Flow Task\Lookup cog_caseid.Outputs[Lookup Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\Load CRM Queue Data Flow Task\Lookup cog_caseid.Outputs[Lookup Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\Load CRM Queue Data Flow Task\Lookup cog_caseid.Outputs[Lookup Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\Load CRM Queue Data Flow Task\Multicast"
+              componentClassID="Microsoft.Multicast"
+              contactInfo="Multicast;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;0"
+              description="Distributes every input row to every row in one or more outputs. For example, branch your data flow to make a copy of data so that some values can be masked before sharing with external partners."
+              name="Multicast">
+              <inputs>
+                <input
+                  refId="Package\Load CRM Queue Data Flow Task\Multicast.Inputs[Multicast Input 1]"
+                  name="Multicast Input 1">
+                  <externalMetadataColumns />
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\Load CRM Queue Data Flow Task\Multicast.Outputs[Multicast Output 3]"
+                  deleteOutputOnPathDetached="true"
+                  name="Multicast Output 3"
+                  synchronousInputId="Package\Load CRM Queue Data Flow Task\Multicast.Inputs[Multicast Input 1]">
+                  <externalMetadataColumns />
+                </output>
+                <output
+                  refId="Package\Load CRM Queue Data Flow Task\Multicast.Outputs[Multicast Output 1]"
+                  dangling="true"
+                  deleteOutputOnPathDetached="true"
+                  name="Multicast Output 1"
+                  synchronousInputId="Package\Load CRM Queue Data Flow Task\Multicast.Inputs[Multicast Input 1]">
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\Load CRM Queue Data Flow Task\Object Type Code Lookup"
+              componentClassID="Microsoft.Lookup"
+              contactInfo="Lookup;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;6"
+              description="Joins additional columns to the data flow by looking up values in a table. For example, join to the 'employee id' column the employees table to get 'hire date' and 'employee name'. We recommend this transformation when the lookup table can fit into memory."
+              name="Object Type Code Lookup"
+              usesDispositions="true"
+              version="6">
+              <properties>
+                <property
+                  dataType="System.String"
+                  description="Specifies the SQL statement that generates the lookup table."
+                  expressionType="Notify"
+                  name="SqlCommand"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor, Microsoft.DataTransformationServices.Controls, Version=14.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91">with DistinctName as (
+SELECT DISTINCT Name
+FROM [MetadataSchema].[Entity]
+)
+SELECT UPPER((dn.Name)) AS EntityName, CAST(a.ObjectTypeCode as nvarchar(64)) AS ObjectTypeCode
+FROM DistinctName dn
+OUTER APPLY (
+	SELECT TOP 1 ObjectTypeCode
+	FROM [MetadataSchema].[Entity]
+	WHERE Name = dn.Name
+	ORDER BY OverwriteTime DESC) a</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies a SQL statement that uses parameters to generate the lookup table."
+                  expressionType="Notify"
+                  name="SqlCommandParam"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor, Microsoft.DataTransformationServices.Controls, Version=14.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91">select * from (with DistinctName as (
+SELECT DISTINCT Name
+FROM [MetadataSchema].[Entity]
+)
+SELECT UPPER((dn.Name)) AS EntityName, CAST(a.ObjectTypeCode as nvarchar(64)) AS ObjectTypeCode
+FROM DistinctName dn
+OUTER APPLY (
+	SELECT TOP 1 ObjectTypeCode
+	FROM [MetadataSchema].[Entity]
+	WHERE Name = dn.Name
+	ORDER BY OverwriteTime DESC) a) [refTable]
+where [refTable].[EntityName] = ?</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the type of connection used to access the reference dataset."
+                  name="ConnectionType"
+                  typeConverter="LookupConnectionType">0</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the cache type of the lookup table."
+                  name="CacheType"
+                  typeConverter="CacheType">0</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies how the Lookup transformation handles rows without matching entries in the reference data set."
+                  name="NoMatchBehavior"
+                  typeConverter="LookupNoMatchBehavior">0</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the percentage of the cache that is allocated for rows with no matching entries in the reference dataset."
+                  name="NoMatchCachePercentage">0</property>
+                <property
+                  dataType="System.Int32"
+                  description="Maximum Memory Usage for Reference Cache on a 32 bit platform."
+                  name="MaxMemoryUsage">25</property>
+                <property
+                  dataType="System.Int64"
+                  description="Maximum Memory Usage for Reference Cache on a 64 bit platform."
+                  name="MaxMemoryUsage64">25</property>
+                <property
+                  dataType="System.String"
+                  description="Indicates whether to reference metadata in an XML format."
+                  name="ReferenceMetadataXml">&lt;referenceMetadata&gt;&lt;referenceColumns&gt;&lt;referenceColumn name="EntityName" dataType="DT_WSTR" length="64" precision="0" scale="0" codePage="0"/&gt;&lt;referenceColumn name="ObjectTypeCode" dataType="DT_WSTR" length="64" precision="0" scale="0" codePage="0"/&gt;&lt;/referenceColumns&gt;&lt;/referenceMetadata&gt;</property>
+                <property
+                  containsID="true"
+                  dataType="System.String"
+                  description="Specifies the list of lineage identifiers that map to the parameters that the SQL statement in the SQLCommand property uses. Entries in the list are separated by semicolons."
+                  name="ParameterMap">#{Package\Load CRM Queue Data Flow Task\Object Type Derived Column.Outputs[Derived Column Output].Columns[ObjectType]};</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the column code page to use when code page information is unavailable from the data source."
+                  name="DefaultCodePage">1252</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Determines whether duplicate keys in the reference data should be treated as errors when full cache mode is used."
+                  name="TreatDuplicateKeysAsError">false</property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\Load CRM Queue Data Flow Task\Object Type Code Lookup.Connections[OleDbConnection]"
+                  connectionManagerID="{A5CCA6ED-9861-4C55-8EB4-9C5AA057608F}:external"
+                  connectionManagerRefId="Project.ConnectionManagers[localhost.CERRSDEV1_MSCRM]"
+                  description="Connection manager used to access lookup data."
+                  name="OleDbConnection" />
+              </connections>
+              <inputs>
+                <input
+                  refId="Package\Load CRM Queue Data Flow Task\Object Type Code Lookup.Inputs[Lookup Input]"
+                  name="Lookup Input">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\Load CRM Queue Data Flow Task\Object Type Code Lookup.Inputs[Lookup Input].Columns[ObjectType]"
+                      cachedDataType="wstr"
+                      cachedLength="50"
+                      cachedName="ObjectType"
+                      lineageId="Package\Load CRM Queue Data Flow Task\Object Type Derived Column.Outputs[Derived Column Output].Columns[ObjectType]">
+                      <properties>
+                        <property
+                          dataType="System.String"
+                          description="Specifies the column in the reference table that a column joins."
+                          name="JoinToReferenceColumn">EntityName</property>
+                        <property
+                          dataType="System.Null"
+                          description="Specifies the column in the reference table from which a column is copied."
+                          name="CopyFromReferenceColumn" />
+                      </properties>
+                    </inputColumn>
+                  </inputColumns>
+                  <externalMetadataColumns />
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\Load CRM Queue Data Flow Task\Object Type Code Lookup.Outputs[Lookup Match Output]"
+                  errorOrTruncationOperation="Lookup"
+                  errorRowDisposition="FailComponent"
+                  exclusionGroup="1"
+                  name="Lookup Match Output"
+                  synchronousInputId="Package\Load CRM Queue Data Flow Task\Object Type Code Lookup.Inputs[Lookup Input]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Load CRM Queue Data Flow Task\Object Type Code Lookup.Outputs[Lookup Match Output].Columns[lkp_ObjectTypeCode]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Copy Column"
+                      length="64"
+                      lineageId="Package\Load CRM Queue Data Flow Task\Object Type Code Lookup.Outputs[Lookup Match Output].Columns[lkp_ObjectTypeCode]"
+                      name="lkp_ObjectTypeCode"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          dataType="System.String"
+                          description="Specifies the column in the reference table from which a column is copied."
+                          name="CopyFromReferenceColumn">ObjectTypeCode</property>
+                      </properties>
+                    </outputColumn>
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+                <output
+                  refId="Package\Load CRM Queue Data Flow Task\Object Type Code Lookup.Outputs[Lookup No Match Output]"
+                  description="The Lookup output that handles rows with no matching entries in the reference dataset. Use this output when the NoMatchBehavior property is set to &quot;Send rows with no matching entries to the no match output.&quot;"
+                  exclusionGroup="1"
+                  name="Lookup No Match Output"
+                  synchronousInputId="Package\Load CRM Queue Data Flow Task\Object Type Code Lookup.Inputs[Lookup Input]">
+                  <externalMetadataColumns />
+                </output>
+                <output
+                  refId="Package\Load CRM Queue Data Flow Task\Object Type Code Lookup.Outputs[Lookup Error Output]"
+                  exclusionGroup="1"
+                  isErrorOut="true"
+                  name="Lookup Error Output"
+                  synchronousInputId="Package\Load CRM Queue Data Flow Task\Object Type Code Lookup.Inputs[Lookup Input]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Load CRM Queue Data Flow Task\Object Type Code Lookup.Outputs[Lookup Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\Load CRM Queue Data Flow Task\Object Type Code Lookup.Outputs[Lookup Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\Load CRM Queue Data Flow Task\Object Type Code Lookup.Outputs[Lookup Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\Load CRM Queue Data Flow Task\Object Type Code Lookup.Outputs[Lookup Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\Load CRM Queue Data Flow Task\Object Type Derived Column"
+              componentClassID="Microsoft.DerivedColumn"
+              contactInfo="Derived Column;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;0"
+              description="Creates new column values by applying expressions to transformation input columns. Create new columns or overwrite existing ones. For example, concatenate the values from the 'first name' and 'last name' column to make a 'full name' column."
+              name="Object Type Derived Column"
+              usesDispositions="true">
+              <inputs>
+                <input
+                  refId="Package\Load CRM Queue Data Flow Task\Object Type Derived Column.Inputs[Derived Column Input]"
+                  description="Input to the Derived Column Transformation"
+                  name="Derived Column Input">
+                  <externalMetadataColumns />
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\Load CRM Queue Data Flow Task\Object Type Derived Column.Outputs[Derived Column Output]"
+                  description="Default Output of the Derived Column Transformation"
+                  exclusionGroup="1"
+                  name="Derived Column Output"
+                  synchronousInputId="Package\Load CRM Queue Data Flow Task\Object Type Derived Column.Inputs[Derived Column Input]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Load CRM Queue Data Flow Task\Object Type Derived Column.Outputs[Derived Column Output].Columns[ObjectType]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Computation"
+                      errorRowDisposition="FailComponent"
+                      length="50"
+                      lineageId="Package\Load CRM Queue Data Flow Task\Object Type Derived Column.Outputs[Derived Column Output].Columns[ObjectType]"
+                      name="ObjectType"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.String"
+                          description="Derived Column Expression"
+                          name="Expression">(DT_WSTR,50)"COG_CASE"</property>
+                        <property
+                          containsID="true"
+                          dataType="System.String"
+                          description="Derived Column Friendly Expression"
+                          expressionType="Notify"
+                          name="FriendlyExpression">(DT_WSTR,50)"COG_CASE"</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\Load CRM Queue Data Flow Task\Object Type Derived Column.Outputs[Derived Column Output].Columns[PackageName]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Computation"
+                      errorRowDisposition="FailComponent"
+                      length="9"
+                      lineageId="Package\Load CRM Queue Data Flow Task\Object Type Derived Column.Outputs[Derived Column Output].Columns[PackageName]"
+                      name="PackageName"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.String"
+                          description="Derived Column Expression"
+                          name="Expression">@[System::PackageName]</property>
+                        <property
+                          containsID="true"
+                          dataType="System.String"
+                          description="Derived Column Friendly Expression"
+                          expressionType="Notify"
+                          name="FriendlyExpression">@[System::PackageName]</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\Load CRM Queue Data Flow Task\Object Type Derived Column.Outputs[Derived Column Output].Columns[TaskName]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Computation"
+                      errorRowDisposition="FailComponent"
+                      length="29"
+                      lineageId="Package\Load CRM Queue Data Flow Task\Object Type Derived Column.Outputs[Derived Column Output].Columns[TaskName]"
+                      name="TaskName"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.String"
+                          description="Derived Column Expression"
+                          name="Expression">@[System::TaskName]</property>
+                        <property
+                          containsID="true"
+                          dataType="System.String"
+                          description="Derived Column Friendly Expression"
+                          expressionType="Notify"
+                          name="FriendlyExpression">@[System::TaskName]</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\Load CRM Queue Data Flow Task\Object Type Derived Column.Outputs[Derived Column Output].Columns[CreatedOnUTCDate]"
+                      dataType="dbTimeStamp"
+                      errorOrTruncationOperation="Computation"
+                      errorRowDisposition="FailComponent"
+                      lineageId="Package\Load CRM Queue Data Flow Task\Object Type Derived Column.Outputs[Derived Column Output].Columns[CreatedOnUTCDate]"
+                      name="CreatedOnUTCDate"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.String"
+                          description="Derived Column Expression"
+                          name="Expression">[GETUTCDATE]()</property>
+                        <property
+                          containsID="true"
+                          dataType="System.String"
+                          description="Derived Column Friendly Expression"
+                          expressionType="Notify"
+                          name="FriendlyExpression">GETUTCDATE()</property>
+                      </properties>
+                    </outputColumn>
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+                <output
+                  refId="Package\Load CRM Queue Data Flow Task\Object Type Derived Column.Outputs[Derived Column Error Output]"
+                  description="Error Output of the Derived Column Transformation"
+                  exclusionGroup="1"
+                  isErrorOut="true"
+                  name="Derived Column Error Output"
+                  synchronousInputId="Package\Load CRM Queue Data Flow Task\Object Type Derived Column.Inputs[Derived Column Input]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Load CRM Queue Data Flow Task\Object Type Derived Column.Outputs[Derived Column Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\Load CRM Queue Data Flow Task\Object Type Derived Column.Outputs[Derived Column Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\Load CRM Queue Data Flow Task\Object Type Derived Column.Outputs[Derived Column Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\Load CRM Queue Data Flow Task\Object Type Derived Column.Outputs[Derived Column Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\Load CRM Queue Data Flow Task\ODS Case OLE DB Source"
+              componentClassID="Microsoft.OLEDBSource"
+              contactInfo="OLE DB Source;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;7"
+              description="OLE DB Source"
+              name="ODS Case OLE DB Source"
+              usesDispositions="true"
+              version="7">
+              <properties>
+                <property
+                  dataType="System.Int32"
+                  description="The number of seconds before a command times out.  A value of 0 indicates an infinite time-out."
+                  name="CommandTimeout">0</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the name of the database object used to open a rowset."
+                  name="OpenRowset"></property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the variable that contains the name of the database object used to open a rowset."
+                  name="OpenRowsetVariable"></property>
+                <property
+                  dataType="System.String"
+                  description="The SQL command to be executed."
+                  name="SqlCommand"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor, Microsoft.DataTransformationServices.Controls, Version=14.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91">EXEC pCRMQueue_MD ?</property>
+                <property
+                  dataType="System.String"
+                  description="The variable that contains the SQL command to be executed."
+                  name="SqlCommandVariable"></property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the column code page to use when code page information is unavailable from the data source."
+                  name="DefaultCodePage">1252</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Forces the use of the DefaultCodePage property value when describing character data."
+                  name="AlwaysUseDefaultCodePage">false</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the mode used to access the database."
+                  name="AccessMode"
+                  typeConverter="AccessMode">2</property>
+                <property
+                  dataType="System.String"
+                  description="The mappings between the parameters in the SQL command and variables."
+                  name="ParameterMapping">"@StartDate:Input",{764CA7E8-7DF0-4070-80E4-6570C2774BCD};</property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\Load CRM Queue Data Flow Task\ODS Case OLE DB Source.Connections[OleDbConnection]"
+                  connectionManagerID="{8A37FDFB-9A39-4961-8D61-9862EAFA6C6C}:external"
+                  connectionManagerRefId="Project.ConnectionManagers[localhost.CERRS_ODS]"
+                  description="The OLE DB runtime connection used to access the database."
+                  name="OleDbConnection" />
+              </connections>
+              <outputs>
+                <output
+                  refId="Package\Load CRM Queue Data Flow Task\ODS Case OLE DB Source.Outputs[OLE DB Source Output]"
+                  name="OLE DB Source Output">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Load CRM Queue Data Flow Task\ODS Case OLE DB Source.Outputs[OLE DB Source Output].Columns[MasterCaseOdsId]"
+                      dataType="i8"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Load CRM Queue Data Flow Task\ODS Case OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[MasterCaseOdsId]"
+                      lineageId="Package\Load CRM Queue Data Flow Task\ODS Case OLE DB Source.Outputs[OLE DB Source Output].Columns[MasterCaseOdsId]"
+                      name="MasterCaseOdsId"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Load CRM Queue Data Flow Task\ODS Case OLE DB Source.Outputs[OLE DB Source Output].Columns[CaseQueue]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Load CRM Queue Data Flow Task\ODS Case OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[CaseQueue]"
+                      length="255"
+                      lineageId="Package\Load CRM Queue Data Flow Task\ODS Case OLE DB Source.Outputs[OLE DB Source Output].Columns[CaseQueue]"
+                      name="CaseQueue"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Load CRM Queue Data Flow Task\ODS Case OLE DB Source.Outputs[OLE DB Source Output].Columns[HICSCaseGUID]"
+                      dataType="guid"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Load CRM Queue Data Flow Task\ODS Case OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[HICSCaseGUID]"
+                      lineageId="Package\Load CRM Queue Data Flow Task\ODS Case OLE DB Source.Outputs[OLE DB Source Output].Columns[HICSCaseGUID]"
+                      name="HICSCaseGUID"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Load CRM Queue Data Flow Task\ODS Case OLE DB Source.Outputs[OLE DB Source Output].Columns[CaseID]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Load CRM Queue Data Flow Task\ODS Case OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[CaseID]"
+                      length="20"
+                      lineageId="Package\Load CRM Queue Data Flow Task\ODS Case OLE DB Source.Outputs[OLE DB Source Output].Columns[CaseID]"
+                      name="CaseID"
+                      truncationRowDisposition="FailComponent" />
+                  </outputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\Load CRM Queue Data Flow Task\ODS Case OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[MasterCaseOdsId]"
+                      dataType="i8"
+                      name="MasterCaseOdsId" />
+                    <externalMetadataColumn
+                      refId="Package\Load CRM Queue Data Flow Task\ODS Case OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[CaseQueue]"
+                      codePage="1252"
+                      dataType="str"
+                      length="255"
+                      name="CaseQueue" />
+                    <externalMetadataColumn
+                      refId="Package\Load CRM Queue Data Flow Task\ODS Case OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[HICSCaseGUID]"
+                      dataType="guid"
+                      name="HICSCaseGUID" />
+                    <externalMetadataColumn
+                      refId="Package\Load CRM Queue Data Flow Task\ODS Case OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[CaseID]"
+                      codePage="1252"
+                      dataType="str"
+                      length="20"
+                      name="CaseID" />
+                  </externalMetadataColumns>
+                </output>
+                <output
+                  refId="Package\Load CRM Queue Data Flow Task\ODS Case OLE DB Source.Outputs[OLE DB Source Error Output]"
+                  isErrorOut="true"
+                  name="OLE DB Source Error Output">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Load CRM Queue Data Flow Task\ODS Case OLE DB Source.Outputs[OLE DB Source Error Output].Columns[MasterCaseOdsId]"
+                      dataType="i8"
+                      lineageId="Package\Load CRM Queue Data Flow Task\ODS Case OLE DB Source.Outputs[OLE DB Source Error Output].Columns[MasterCaseOdsId]"
+                      name="MasterCaseOdsId" />
+                    <outputColumn
+                      refId="Package\Load CRM Queue Data Flow Task\ODS Case OLE DB Source.Outputs[OLE DB Source Error Output].Columns[CaseID]"
+                      codePage="1252"
+                      dataType="str"
+                      length="20"
+                      lineageId="Package\Load CRM Queue Data Flow Task\ODS Case OLE DB Source.Outputs[OLE DB Source Error Output].Columns[CaseID]"
+                      name="CaseID" />
+                    <outputColumn
+                      refId="Package\Load CRM Queue Data Flow Task\ODS Case OLE DB Source.Outputs[OLE DB Source Error Output].Columns[HICSCaseGUID]"
+                      dataType="guid"
+                      lineageId="Package\Load CRM Queue Data Flow Task\ODS Case OLE DB Source.Outputs[OLE DB Source Error Output].Columns[HICSCaseGUID]"
+                      name="HICSCaseGUID" />
+                    <outputColumn
+                      refId="Package\Load CRM Queue Data Flow Task\ODS Case OLE DB Source.Outputs[OLE DB Source Error Output].Columns[CaseQueue]"
+                      codePage="1252"
+                      dataType="str"
+                      length="255"
+                      lineageId="Package\Load CRM Queue Data Flow Task\ODS Case OLE DB Source.Outputs[OLE DB Source Error Output].Columns[CaseQueue]"
+                      name="CaseQueue" />
+                    <outputColumn
+                      refId="Package\Load CRM Queue Data Flow Task\ODS Case OLE DB Source.Outputs[OLE DB Source Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\Load CRM Queue Data Flow Task\ODS Case OLE DB Source.Outputs[OLE DB Source Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\Load CRM Queue Data Flow Task\ODS Case OLE DB Source.Outputs[OLE DB Source Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\Load CRM Queue Data Flow Task\ODS Case OLE DB Source.Outputs[OLE DB Source Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\Load CRM Queue Data Flow Task\Row Count"
+              componentClassID="Microsoft.RowCount"
+              contactInfo="Row Count;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;0"
+              description="Counts rows as they pass through a data flow. For example, use the number of rows processed to determine whether or not to perform cleanup operations, or update text in an e-mail message to communicate processing status."
+              name="Row Count">
+              <properties>
+                <property
+                  dataType="System.String"
+                  description="Specifies the variable to hold the row count."
+                  name="VariableName">User::InsertCount</property>
+              </properties>
+              <inputs>
+                <input
+                  refId="Package\Load CRM Queue Data Flow Task\Row Count.Inputs[Row Count Input 1]"
+                  hasSideEffects="true"
+                  name="Row Count Input 1">
+                  <externalMetadataColumns />
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\Load CRM Queue Data Flow Task\Row Count.Outputs[Row Count Output 1]"
+                  name="Row Count Output 1"
+                  synchronousInputId="Package\Load CRM Queue Data Flow Task\Row Count.Inputs[Row Count Input 1]">
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\Load CRM Queue Data Flow Task\stage Exceptions Destination"
+              componentClassID="Microsoft.OLEDBDestination"
+              contactInfo="OLE DB Destination;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;4"
+              description="OLE DB Destination"
+              name="stage Exceptions Destination"
+              usesDispositions="true"
+              version="4">
+              <properties>
+                <property
+                  dataType="System.Int32"
+                  description="The number of seconds before a command times out.  A value of 0 indicates an infinite time-out."
+                  name="CommandTimeout">0</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the name of the database object used to open a rowset."
+                  name="OpenRowset">[stage].[Exceptions]</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the variable that contains the name of the database object used to open a rowset."
+                  name="OpenRowsetVariable"></property>
+                <property
+                  dataType="System.String"
+                  description="The SQL command to be executed."
+                  name="SqlCommand"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor, Microsoft.DataTransformationServices.Controls, Version=14.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"></property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the column code page to use when code page information is unavailable from the data source."
+                  name="DefaultCodePage">1252</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Forces the use of the DefaultCodePage property value when describing character data."
+                  name="AlwaysUseDefaultCodePage">false</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the mode used to access the database."
+                  name="AccessMode"
+                  typeConverter="AccessMode">3</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Indicates whether the values supplied for identity columns will be copied to the destination. If false, values for identity columns will be auto-generated at the destination. Applies only if fast load is turned on."
+                  name="FastLoadKeepIdentity">false</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Indicates whether the columns containing null will have null inserted in the destination. If false, columns containing null will have their default values inserted at the destination. Applies only if fast load is turned on."
+                  name="FastLoadKeepNulls">false</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies options to be used with fast load.  Applies only if fast load is turned on."
+                  name="FastLoadOptions">TABLOCK,CHECK_CONSTRAINTS</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies when commits are issued during data insertion.  A value of 0 specifies that one commit will be issued at the end of data insertion.  Applies only if fast load is turned on."
+                  name="FastLoadMaxInsertCommitSize">2147483647</property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\Load CRM Queue Data Flow Task\stage Exceptions Destination.Connections[OleDbConnection]"
+                  connectionManagerID="{8A37FDFB-9A39-4961-8D61-9862EAFA6C6C}:external"
+                  connectionManagerRefId="Project.ConnectionManagers[localhost.CERRS_ODS]"
+                  description="The OLE DB runtime connection used to access the database."
+                  name="OleDbConnection" />
+              </connections>
+              <inputs>
+                <input
+                  refId="Package\Load CRM Queue Data Flow Task\stage Exceptions Destination.Inputs[OLE DB Destination Input]"
+                  errorOrTruncationOperation="Insert"
+                  errorRowDisposition="FailComponent"
+                  hasSideEffects="true"
+                  name="OLE DB Destination Input">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\Load CRM Queue Data Flow Task\stage Exceptions Destination.Inputs[OLE DB Destination Input].Columns[CreatedOnUTCDate]"
+                      cachedDataType="dbTimeStamp"
+                      cachedName="CreatedOnUTCDate"
+                      externalMetadataColumnId="Package\Load CRM Queue Data Flow Task\stage Exceptions Destination.Inputs[OLE DB Destination Input].ExternalColumns[Column1_date]"
+                      lineageId="Package\Load CRM Queue Data Flow Task\Object Type Derived Column.Outputs[Derived Column Output].Columns[CreatedOnUTCDate]" />
+                    <inputColumn
+                      refId="Package\Load CRM Queue Data Flow Task\stage Exceptions Destination.Inputs[OLE DB Destination Input].Columns[HICSCaseGUID]"
+                      cachedDataType="guid"
+                      cachedName="HICSCaseGUID"
+                      externalMetadataColumnId="Package\Load CRM Queue Data Flow Task\stage Exceptions Destination.Inputs[OLE DB Destination Input].ExternalColumns[Column2_var]"
+                      lineageId="Package\Load CRM Queue Data Flow Task\ODS Case OLE DB Source.Outputs[OLE DB Source Output].Columns[HICSCaseGUID]" />
+                    <inputColumn
+                      refId="Package\Load CRM Queue Data Flow Task\stage Exceptions Destination.Inputs[OLE DB Destination Input].Columns[CaseID]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="20"
+                      cachedName="CaseID"
+                      externalMetadataColumnId="Package\Load CRM Queue Data Flow Task\stage Exceptions Destination.Inputs[OLE DB Destination Input].ExternalColumns[Column3_var]"
+                      lineageId="Package\Load CRM Queue Data Flow Task\ODS Case OLE DB Source.Outputs[OLE DB Source Output].Columns[CaseID]" />
+                    <inputColumn
+                      refId="Package\Load CRM Queue Data Flow Task\stage Exceptions Destination.Inputs[OLE DB Destination Input].Columns[PackageName]"
+                      cachedDataType="wstr"
+                      cachedLength="9"
+                      cachedName="PackageName"
+                      externalMetadataColumnId="Package\Load CRM Queue Data Flow Task\stage Exceptions Destination.Inputs[OLE DB Destination Input].ExternalColumns[Column8_nvar]"
+                      lineageId="Package\Load CRM Queue Data Flow Task\Object Type Derived Column.Outputs[Derived Column Output].Columns[PackageName]" />
+                    <inputColumn
+                      refId="Package\Load CRM Queue Data Flow Task\stage Exceptions Destination.Inputs[OLE DB Destination Input].Columns[TaskName]"
+                      cachedDataType="wstr"
+                      cachedLength="29"
+                      cachedName="TaskName"
+                      externalMetadataColumnId="Package\Load CRM Queue Data Flow Task\stage Exceptions Destination.Inputs[OLE DB Destination Input].ExternalColumns[Column9_nvar]"
+                      lineageId="Package\Load CRM Queue Data Flow Task\Object Type Derived Column.Outputs[Derived Column Output].Columns[TaskName]" />
+                  </inputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\Load CRM Queue Data Flow Task\stage Exceptions Destination.Inputs[OLE DB Destination Input].ExternalColumns[Id]"
+                      dataType="i4"
+                      name="Id" />
+                    <externalMetadataColumn
+                      refId="Package\Load CRM Queue Data Flow Task\stage Exceptions Destination.Inputs[OLE DB Destination Input].ExternalColumns[Column1_date]"
+                      dataType="dbTimeStamp2"
+                      name="Column1_date"
+                      scale="7" />
+                    <externalMetadataColumn
+                      refId="Package\Load CRM Queue Data Flow Task\stage Exceptions Destination.Inputs[OLE DB Destination Input].ExternalColumns[Column2_var]"
+                      codePage="1252"
+                      dataType="str"
+                      length="255"
+                      name="Column2_var" />
+                    <externalMetadataColumn
+                      refId="Package\Load CRM Queue Data Flow Task\stage Exceptions Destination.Inputs[OLE DB Destination Input].ExternalColumns[Column3_var]"
+                      codePage="1252"
+                      dataType="str"
+                      length="255"
+                      name="Column3_var" />
+                    <externalMetadataColumn
+                      refId="Package\Load CRM Queue Data Flow Task\stage Exceptions Destination.Inputs[OLE DB Destination Input].ExternalColumns[Column4_var]"
+                      codePage="1252"
+                      dataType="str"
+                      length="255"
+                      name="Column4_var" />
+                    <externalMetadataColumn
+                      refId="Package\Load CRM Queue Data Flow Task\stage Exceptions Destination.Inputs[OLE DB Destination Input].ExternalColumns[Column5_var]"
+                      codePage="1252"
+                      dataType="str"
+                      length="255"
+                      name="Column5_var" />
+                    <externalMetadataColumn
+                      refId="Package\Load CRM Queue Data Flow Task\stage Exceptions Destination.Inputs[OLE DB Destination Input].ExternalColumns[Column6_var]"
+                      codePage="1252"
+                      dataType="str"
+                      length="255"
+                      name="Column6_var" />
+                    <externalMetadataColumn
+                      refId="Package\Load CRM Queue Data Flow Task\stage Exceptions Destination.Inputs[OLE DB Destination Input].ExternalColumns[Column7_var]"
+                      codePage="1252"
+                      dataType="str"
+                      length="255"
+                      name="Column7_var" />
+                    <externalMetadataColumn
+                      refId="Package\Load CRM Queue Data Flow Task\stage Exceptions Destination.Inputs[OLE DB Destination Input].ExternalColumns[Column8_nvar]"
+                      dataType="wstr"
+                      length="255"
+                      name="Column8_nvar" />
+                    <externalMetadataColumn
+                      refId="Package\Load CRM Queue Data Flow Task\stage Exceptions Destination.Inputs[OLE DB Destination Input].ExternalColumns[Column9_nvar]"
+                      dataType="wstr"
+                      length="255"
+                      name="Column9_nvar" />
+                    <externalMetadataColumn
+                      refId="Package\Load CRM Queue Data Flow Task\stage Exceptions Destination.Inputs[OLE DB Destination Input].ExternalColumns[Column10_nvar]"
+                      dataType="wstr"
+                      length="255"
+                      name="Column10_nvar" />
+                    <externalMetadataColumn
+                      refId="Package\Load CRM Queue Data Flow Task\stage Exceptions Destination.Inputs[OLE DB Destination Input].ExternalColumns[Column11_nvar]"
+                      dataType="wstr"
+                      length="255"
+                      name="Column11_nvar" />
+                    <externalMetadataColumn
+                      refId="Package\Load CRM Queue Data Flow Task\stage Exceptions Destination.Inputs[OLE DB Destination Input].ExternalColumns[Column12_unique]"
+                      dataType="guid"
+                      name="Column12_unique" />
+                  </externalMetadataColumns>
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\Load CRM Queue Data Flow Task\stage Exceptions Destination.Outputs[OLE DB Destination Error Output]"
+                  exclusionGroup="1"
+                  isErrorOut="true"
+                  name="OLE DB Destination Error Output"
+                  synchronousInputId="Package\Load CRM Queue Data Flow Task\stage Exceptions Destination.Inputs[OLE DB Destination Input]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Load CRM Queue Data Flow Task\stage Exceptions Destination.Outputs[OLE DB Destination Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\Load CRM Queue Data Flow Task\stage Exceptions Destination.Outputs[OLE DB Destination Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\Load CRM Queue Data Flow Task\stage Exceptions Destination.Outputs[OLE DB Destination Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\Load CRM Queue Data Flow Task\stage Exceptions Destination.Outputs[OLE DB Destination Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+          </components>
+          <paths>
+            <path
+              refId="Package\Load CRM Queue Data Flow Task.Paths[Derived Column Output]"
+              endId="Package\Load CRM Queue Data Flow Task\Lookup cog_caseid.Inputs[Lookup Input]"
+              name="Derived Column Output"
+              startId="Package\Load CRM Queue Data Flow Task\Object Type Derived Column.Outputs[Derived Column Output]" />
+            <path
+              refId="Package\Load CRM Queue Data Flow Task.Paths[Lookup Match Output]"
+              endId="Package\Load CRM Queue Data Flow Task\Case Queue Lookup.Inputs[Lookup Input]"
+              name="Lookup Match Output"
+              startId="Package\Load CRM Queue Data Flow Task\Object Type Code Lookup.Outputs[Lookup Match Output]" />
+            <path
+              refId="Package\Load CRM Queue Data Flow Task.Paths[Lookup Match Output1]"
+              endId="Package\Load CRM Queue Data Flow Task\Multicast.Inputs[Multicast Input 1]"
+              name="Lookup Match Output"
+              startId="Package\Load CRM Queue Data Flow Task\Case Queue Lookup.Outputs[Lookup Match Output]" />
+            <path
+              refId="Package\Load CRM Queue Data Flow Task.Paths[Lookup Match Output2]"
+              endId="Package\Load CRM Queue Data Flow Task\Object Type Code Lookup.Inputs[Lookup Input]"
+              name="Lookup Match Output"
+              startId="Package\Load CRM Queue Data Flow Task\Lookup cog_caseid.Outputs[Lookup Match Output]" />
+            <path
+              refId="Package\Load CRM Queue Data Flow Task.Paths[Lookup No Match Output]"
+              endId="Package\Load CRM Queue Data Flow Task\stage Exceptions Destination.Inputs[OLE DB Destination Input]"
+              name="Lookup No Match Output"
+              startId="Package\Load CRM Queue Data Flow Task\Lookup cog_caseid.Outputs[Lookup No Match Output]" />
+            <path
+              refId="Package\Load CRM Queue Data Flow Task.Paths[Multicast Output 3]"
+              endId="Package\Load CRM Queue Data Flow Task\Row Count.Inputs[Row Count Input 1]"
+              name="Multicast Output 3"
+              startId="Package\Load CRM Queue Data Flow Task\Multicast.Outputs[Multicast Output 3]" />
+            <path
+              refId="Package\Load CRM Queue Data Flow Task.Paths[OLE DB Source Output]"
+              endId="Package\Load CRM Queue Data Flow Task\Object Type Derived Column.Inputs[Derived Column Input]"
+              name="OLE DB Source Output"
+              startId="Package\Load CRM Queue Data Flow Task\ODS Case OLE DB Source.Outputs[OLE DB Source Output]" />
+            <path
+              refId="Package\Load CRM Queue Data Flow Task.Paths[Row Count Output 1]"
+              endId="Package\Load CRM Queue Data Flow Task\Create Queue Dynamics CRM Destination.Inputs[Input]"
+              name="Row Count Output 1"
+              startId="Package\Load CRM Queue Data Flow Task\Row Count.Outputs[Row Count Output 1]" />
+          </paths>
+        </pipeline>
+      </DTS:ObjectData>
+    </DTS:Executable>
+  </DTS:Executables>
+  <DTS:PrecedenceConstraints>
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint]"
+      DTS:CreationName=""
+      DTS:DTSID="{124454BA-A510-4109-8C57-8DF9A467FC06}"
+      DTS:From="Package\Get LastRunDate Execute SQL Task"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint"
+      DTS:To="Package\Delete CRM Queue Data Flow Task" />
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint 1]"
+      DTS:CreationName=""
+      DTS:DTSID="{30AFACDC-BC3D-4CC7-8CA4-C29B0682355C}"
+      DTS:From="Package\Delete CRM Queue Data Flow Task"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint 1"
+      DTS:To="Package\Audit Delete CRM Queue Execute SQL Task" />
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint 2]"
+      DTS:CreationName=""
+      DTS:DTSID="{5B541363-DB86-4E9A-9BA9-8ACA85257C5F}"
+      DTS:From="Package\Audit Delete CRM Queue Execute SQL Task"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint 2"
+      DTS:To="Package\Load CRM Queue Data Flow Task" />
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint 3]"
+      DTS:CreationName=""
+      DTS:DTSID="{36971867-61C9-49DA-B52F-DC3D2B02964A}"
+      DTS:From="Package\Load CRM Queue Data Flow Task"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint 3"
+      DTS:To="Package\Audit Load CRM Queue Execute SQL Task" />
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint 4]"
+      DTS:CreationName=""
+      DTS:DTSID="{0A7E8FF6-06A5-473E-BA84-C36EB48E6D0A}"
+      DTS:From="Package\Audit Load CRM Queue Execute SQL Task"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint 4"
+      DTS:To="Package\Audit End CRM Queue Execute SQL Task" />
+  </DTS:PrecedenceConstraints>
+  <DTS:DesignTimeProperties><![CDATA[<?xml version="1.0"?>
+<!--This CDATA section contains the layout information of the package. The section includes information such as (x,y) coordinates, width, and height.-->
+<!--If you manually edit this section and make a mistake, you can delete it. -->
+<!--The package will still be able to load normally but the previous layout information will be lost and the designer will automatically re-arrange the elements on the design surface.-->
+<Objects
+  Version="8">
+  <!--Each node below will contain properties that do not affect runtime behavior.-->
+  <Package
+    design-time-name="Package">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="16" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
+        <NodeLayout
+          Size="283,42"
+          Id="Package\Audit Delete CRM Queue Execute SQL Task"
+          TopLeft="149,163" />
+        <NodeLayout
+          Size="271,42"
+          Id="Package\Audit End CRM Queue Execute SQL Task"
+          TopLeft="559.214285714286,163.821428571429" />
+        <NodeLayout
+          Size="275,42"
+          Id="Package\Audit Load CRM Queue Execute SQL Task"
+          TopLeft="519.571428571429,90.2857142857143" />
+        <NodeLayout
+          Size="243,42"
+          Id="Package\Delete CRM Queue Data Flow Task"
+          TopLeft="129,87" />
+        <NodeLayout
+          Size="246,42"
+          Id="Package\Get LastRunDate Execute SQL Task"
+          TopLeft="98.333333333333,7.0277777777778" />
+        <NodeLayout
+          Size="236,42"
+          Id="Package\Load CRM Queue Data Flow Task"
+          TopLeft="471.821428571429,9.16269841269883" />
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint]"
+          TopLeft="221.333333333333,49.0277777777778">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="29.166666666667,37.9722222222222"
+              Start="0,0"
+              End="29.166666666667,30.4722222222222">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,14.9861111111111" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,14.9861111111111"
+                    Point2="0,18.9861111111111"
+                    Point3="4,18.9861111111111" />
+                  <mssgle:LineSegment
+                    End="25.166666666667,18.9861111111111" />
+                  <mssgle:CubicBezierSegment
+                    Point1="25.166666666667,18.9861111111111"
+                    Point2="29.166666666667,18.9861111111111"
+                    Point3="29.166666666667,22.9861111111111" />
+                  <mssgle:LineSegment
+                    End="29.166666666667,30.4722222222222" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint 1]"
+          TopLeft="250.5,129">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="40,34"
+              Start="0,0"
+              End="40,26.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,13" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,13"
+                    Point2="0,17"
+                    Point3="4,17" />
+                  <mssgle:LineSegment
+                    End="36,17" />
+                  <mssgle:CubicBezierSegment
+                    Point1="36,17"
+                    Point2="40,17"
+                    Point3="40,21" />
+                  <mssgle:LineSegment
+                    End="40,26.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint 2]"
+          TopLeft="336.333333333333,163">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="215.488095238095,-111.837301587301"
+              Start="0,0"
+              End="215.488095238095,-104.337301587301">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,-51.8411531795409" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,-51.8411531795409"
+                    Point2="0,-55.8411531795409"
+                    Point3="4,-55.8411531795409" />
+                  <mssgle:LineSegment
+                    End="211.488095238095,-55.8411531795409" />
+                  <mssgle:CubicBezierSegment
+                    Point1="211.488095238095,-55.8411531795409"
+                    Point2="215.488095238095,-55.8411531795409"
+                    Point3="215.488095238095,-59.8411531795409" />
+                  <mssgle:LineSegment
+                    End="215.488095238095,-104.337301587301" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint 3]"
+          TopLeft="627.821428571429,51.1626984126988">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="29.2499999999999,39.1230158730154"
+              Start="0,0"
+              End="29.2499999999999,31.6230158730154">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,11.8072791406123" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,11.8072791406123"
+                    Point2="0,15.8072791406123"
+                    Point3="4,15.8072791406123" />
+                  <mssgle:LineSegment
+                    End="25.2499999999999,15.8072791406123" />
+                  <mssgle:CubicBezierSegment
+                    Point1="25.2499999999999,15.8072791406123"
+                    Point2="29.2499999999999,15.8072791406123"
+                    Point3="29.2499999999999,19.8072791406123" />
+                  <mssgle:LineSegment
+                    End="29.2499999999999,31.6230158730154" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint 4]"
+          TopLeft="657.071428571429,132.285714285714">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="37.642857142857,31.5357142857144"
+              Start="0,0"
+              End="37.642857142857,24.0357142857144">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,11.7678571428572" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,11.7678571428572"
+                    Point2="0,15.7678571428572"
+                    Point3="4,15.7678571428572" />
+                  <mssgle:LineSegment
+                    End="33.642857142857,15.7678571428572" />
+                  <mssgle:CubicBezierSegment
+                    Point1="33.642857142857,15.7678571428572"
+                    Point2="37.642857142857,15.7678571428572"
+                    Point3="37.642857142857,19.7678571428572" />
+                  <mssgle:LineSegment
+                    End="37.642857142857,24.0357142857144" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+      </GraphLayout>
+    </LayoutInfo>
+  </Package>
+  <TaskHost
+    design-time-name="Package\Delete CRM Queue Data Flow Task">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="8" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:mssgm="clr-namespace:Microsoft.SqlServer.Graph.Model;assembly=Microsoft.SqlServer.Graph">
+        <NodeLayout
+          Size="130,42"
+          Id="Package\Delete CRM Queue Data Flow Task\Row Count"
+          TopLeft="808,341" />
+        <NodeLayout
+          Size="169,42"
+          Id="Package\Delete CRM Queue Data Flow Task\QueueItem Lookup"
+          TopLeft="714.5,259.25" />
+        <NodeLayout
+          Size="200,42"
+          Id="Package\Delete CRM Queue Data Flow Task\ODS Case OLE DB Source"
+          TopLeft="668.777777777778,180.333333333333" />
+        <NodeLayout
+          Size="295,42"
+          Id="Package\Delete CRM Queue Data Flow Task\Delete QueueItem Dynamics CRM Destination"
+          TopLeft="763,419.5" />
+        <EdgeLayout
+          Id="Package\Delete CRM Queue Data Flow Task.Paths[Row Count Output 1]"
+          TopLeft="873,383">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="37.5,36.5"
+              Start="0,0"
+              End="37.5,29">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,14.25" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,14.25"
+                    Point2="0,18.25"
+                    Point3="4,18.25" />
+                  <mssgle:LineSegment
+                    End="33.5,18.25" />
+                  <mssgle:CubicBezierSegment
+                    Point1="33.5,18.25"
+                    Point2="37.5,18.25"
+                    Point3="37.5,22.25" />
+                  <mssgle:LineSegment
+                    End="37.5,29" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\Delete CRM Queue Data Flow Task.Paths[OLE DB Source Output]"
+          TopLeft="768.777777777778,222.333333333333">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="30.2222222222219,36.916666666667"
+              Start="0,0"
+              End="30.2222222222219,29.416666666667">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,14.4583333333335" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,14.4583333333335"
+                    Point2="0,18.4583333333335"
+                    Point3="4,18.4583333333335" />
+                  <mssgle:LineSegment
+                    End="26.2222222222219,18.4583333333335" />
+                  <mssgle:CubicBezierSegment
+                    Point1="26.2222222222219,18.4583333333335"
+                    Point2="30.2222222222219,18.4583333333335"
+                    Point3="30.2222222222219,22.4583333333335" />
+                  <mssgle:LineSegment
+                    End="30.2222222222219,29.416666666667" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\Delete CRM Queue Data Flow Task.Paths[Lookup Match Output]"
+          TopLeft="799,301.25">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="74,39.75"
+              Start="0,0"
+              End="74,32.25">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,15.875" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,15.875"
+                    Point2="0,19.875"
+                    Point3="4,19.875" />
+                  <mssgle:LineSegment
+                    End="70,19.875" />
+                  <mssgle:CubicBezierSegment
+                    Point1="70,19.875"
+                    Point2="74,19.875"
+                    Point3="74,23.875" />
+                  <mssgle:LineSegment
+                    End="74,32.25" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <mssgm:EdgeLabel
+              BoundingBox="-11.19138671875,24.875,96.3827734375,11.609375"
+              RelativePosition="Any" />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+      </GraphLayout>
+    </LayoutInfo>
+  </TaskHost>
+  <PipelineComponentMetadata
+    design-time-name="Package\Delete CRM Queue Data Flow Task\QueueItem Lookup">
+    <Properties>
+      <Property>
+        <Name>OverwriteParamsSQLProp</Name>
+        <Value
+          type="q2:boolean">false</Value>
+      </Property>
+      <Property>
+        <Name>UsedTableName</Name>
+        <Value
+          type="q3:string"></Value>
+      </Property>
+      <Property>
+        <Name>TableInfoObjectType</Name>
+        <Value
+          type="q4:int">0</Value>
+      </Property>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+  <PipelineComponentMetadata
+    design-time-name="Package\Delete CRM Queue Data Flow Task\ODS Case OLE DB Source">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+  <TaskHost
+    design-time-name="Package\Load CRM Queue Data Flow Task">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="32" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:mssgm="clr-namespace:Microsoft.SqlServer.Graph.Model;assembly=Microsoft.SqlServer.Graph">
+        <NodeLayout
+          Size="214,42"
+          Id="Package\Load CRM Queue Data Flow Task\Object Type Derived Column"
+          TopLeft="670,98" />
+        <NodeLayout
+          Size="214,42"
+          Id="Package\Load CRM Queue Data Flow Task\stage Exceptions Destination"
+          TopLeft="969,221" />
+        <NodeLayout
+          Size="168,42"
+          Id="Package\Load CRM Queue Data Flow Task\Lookup cog_caseid"
+          TopLeft="694,216" />
+        <NodeLayout
+          Size="273,42"
+          Id="Package\Load CRM Queue Data Flow Task\Create Queue Dynamics CRM Destination"
+          TopLeft="675,573" />
+        <NodeLayout
+          Size="200,42"
+          Id="Package\Load CRM Queue Data Flow Task\Object Type Code Lookup"
+          TopLeft="1010,333" />
+        <NodeLayout
+          Size="130,42"
+          Id="Package\Load CRM Queue Data Flow Task\Row Count"
+          TopLeft="732,489" />
+        <NodeLayout
+          Size="120,42"
+          Id="Package\Load CRM Queue Data Flow Task\Multicast"
+          TopLeft="735,417" />
+        <NodeLayout
+          Size="173,42"
+          Id="Package\Load CRM Queue Data Flow Task\Case Queue Lookup"
+          TopLeft="688,334" />
+        <NodeLayout
+          Size="200,42"
+          Id="Package\Load CRM Queue Data Flow Task\ODS Case OLE DB Source"
+          TopLeft="684.777777777778,2.333333333333" />
+        <EdgeLayout
+          Id="Package\Load CRM Queue Data Flow Task.Paths[Lookup Match Output]"
+          TopLeft="1010,354.5">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="-149,0"
+              Start="0,0"
+              End="-141.5,0">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="-141.5,0" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <mssgm:EdgeLabel
+              BoundingBox="-118.94138671875,5,96.3827734375,11.609375"
+              RelativePosition="Any" />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\Load CRM Queue Data Flow Task.Paths[Derived Column Output]"
+          TopLeft="777.5,140">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,76"
+              Start="0,0"
+              End="0,68.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,68.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\Load CRM Queue Data Flow Task.Paths[Row Count Output 1]"
+          TopLeft="797,531">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="14.5,42"
+              Start="0,0"
+              End="14.5,34.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,17" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,17"
+                    Point2="0,21"
+                    Point3="4,21" />
+                  <mssgle:LineSegment
+                    End="10.5,21" />
+                  <mssgle:CubicBezierSegment
+                    Point1="10.5,21"
+                    Point2="14.5,21"
+                    Point3="14.5,25" />
+                  <mssgle:LineSegment
+                    End="14.5,34.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\Load CRM Queue Data Flow Task.Paths[OLE DB Source Output]"
+          TopLeft="780.888888888889,44.333333333333">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,53.666666666667"
+              Start="0,0"
+              End="0,46.166666666667">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,46.166666666667" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\Load CRM Queue Data Flow Task.Paths[Multicast Output 3]"
+          TopLeft="796,459">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,30"
+              Start="0,0"
+              End="0,22.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,22.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\Load CRM Queue Data Flow Task.Paths[Lookup No Match Output]"
+          TopLeft="862,239.5">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="107,0"
+              Start="0,0"
+              End="99.5,0">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="99.5,0" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <mssgm:EdgeLabel
+              BoundingBox="-6.05638671875,5,111.6127734375,11.609375"
+              RelativePosition="Any" />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\Load CRM Queue Data Flow Task.Paths[Lookup Match Output2]"
+          TopLeft="778,258">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="332,75"
+              Start="0,0"
+              End="332,67.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,33.5" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,33.5"
+                    Point2="0,37.5"
+                    Point3="4,37.5" />
+                  <mssgle:LineSegment
+                    End="328,37.5" />
+                  <mssgle:CubicBezierSegment
+                    Point1="328,37.5"
+                    Point2="332,37.5"
+                    Point3="332,41.5" />
+                  <mssgle:LineSegment
+                    End="332,67.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <mssgm:EdgeLabel
+              BoundingBox="117.80861328125,42.5,96.3827734375,11.609375"
+              RelativePosition="Any" />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\Load CRM Queue Data Flow Task.Paths[Lookup Match Output1]"
+          TopLeft="774.5,376">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="20.5,41"
+              Start="0,0"
+              End="20.5,33.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,16.5" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,16.5"
+                    Point2="0,20.5"
+                    Point3="4,20.5" />
+                  <mssgle:LineSegment
+                    End="16.5,20.5" />
+                  <mssgle:CubicBezierSegment
+                    Point1="16.5,20.5"
+                    Point2="20.5,20.5"
+                    Point3="20.5,24.5" />
+                  <mssgle:LineSegment
+                    End="20.5,33.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <mssgm:EdgeLabel
+              BoundingBox="-37.94138671875,25.5,96.3827734375,11.609375"
+              RelativePosition="Any" />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+      </GraphLayout>
+    </LayoutInfo>
+  </TaskHost>
+  <PipelineComponentMetadata
+    design-time-name="Package\Load CRM Queue Data Flow Task\stage Exceptions Destination">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+      <Property>
+        <Name>TableInfoObjectType</Name>
+        <Value
+          type="q2:string">Table</Value>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+  <PipelineComponentMetadata
+    design-time-name="Package\Load CRM Queue Data Flow Task\Lookup cog_caseid">
+    <Properties>
+      <Property>
+        <Name>OverwriteParamsSQLProp</Name>
+        <Value
+          type="q2:boolean">false</Value>
+      </Property>
+      <Property>
+        <Name>UsedTableName</Name>
+        <Value
+          type="q3:string"></Value>
+      </Property>
+      <Property>
+        <Name>TableInfoObjectType</Name>
+        <Value
+          type="q4:int">0</Value>
+      </Property>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+  <PipelineComponentMetadata
+    design-time-name="Package\Load CRM Queue Data Flow Task\Object Type Code Lookup">
+    <Properties>
+      <Property>
+        <Name>OverwriteParamsSQLProp</Name>
+        <Value
+          type="q2:boolean">false</Value>
+      </Property>
+      <Property>
+        <Name>UsedTableName</Name>
+        <Value
+          type="q3:string"></Value>
+      </Property>
+      <Property>
+        <Name>TableInfoObjectType</Name>
+        <Value
+          type="q4:int">0</Value>
+      </Property>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+  <PipelineComponentMetadata
+    design-time-name="Package\Load CRM Queue Data Flow Task\Case Queue Lookup">
+    <Properties>
+      <Property>
+        <Name>OverwriteParamsSQLProp</Name>
+        <Value
+          type="q2:boolean">false</Value>
+      </Property>
+      <Property>
+        <Name>UsedTableName</Name>
+        <Value
+          type="q3:string"></Value>
+      </Property>
+      <Property>
+        <Name>TableInfoObjectType</Name>
+        <Value
+          type="q4:int">0</Value>
+      </Property>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+  <PipelineComponentMetadata
+    design-time-name="Package\Load CRM Queue Data Flow Task\ODS Case OLE DB Source">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+</Objects>]]></DTS:DesignTimeProperties>
+</DTS:Executable>

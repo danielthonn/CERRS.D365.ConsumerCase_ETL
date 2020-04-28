@@ -1,0 +1,12 @@
+<?xml version="1.0"?>
+<DTS:ConnectionManager xmlns:DTS="www.microsoft.com/SqlServer/Dts"
+  DTS:ObjectName="Dynamics CRM Connection Manager"
+  DTS:DTSID="{69E9725D-93BA-435E-91F1-40D453060B0F}"
+  DTS:CreationName="DynamicsCRM">
+  <DTS:PropertyExpression
+    DTS:Name="ConnectionString">@[$Project::CRM_App_ConnectionString]</DTS:PropertyExpression>
+  <DTS:ObjectData>
+    <CrmConnectionManager
+      ConnectionString="AuthenticationType=Federation;ServiceEndpoint=Soap2011;DiscoveryServerUrl=https://cerrsng.dev.cognosante.cc;UserName=adm_crm@cgs.local;Domain=;OrganizationName=CERRSNGDEV;CrmServerUrl=https://cerrsng.dev.cognosante.cc;ProxyUsername=;ProxyMode=NoProxy;ProxyServer=;ProxyServerPort=0;BypassProxyOnLocal=True;HomeRealmUri=;ApiVersion=;ServiceTimeout=3600;RetryOnIntermittentErrors=True;IgnoreCertificateErrors=True" />
+  </DTS:ObjectData>
+</DTS:ConnectionManager>

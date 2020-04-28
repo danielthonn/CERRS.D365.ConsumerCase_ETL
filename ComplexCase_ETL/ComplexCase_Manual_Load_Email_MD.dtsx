@@ -1,0 +1,1159 @@
+﻿<?xml version="1.0"?>
+<DTS:Executable xmlns:DTS="www.microsoft.com/SqlServer/Dts"
+  DTS:refId="Package"
+  DTS:CreationDate="8/25/2015 5:33:39 PM"
+  DTS:CreationName="Microsoft.Package"
+  DTS:CreatorComputerName="AMDEV01SQL01"
+  DTS:CreatorName="AZ\jhenningsen"
+  DTS:DTSID="{6F268954-2E63-4D1A-8A64-A2745C9596DA}"
+  DTS:ExecutableType="Microsoft.Package"
+  DTS:LastModifiedProductVersion="15.0.2000.68"
+  DTS:LocaleID="1033"
+  DTS:ObjectName="ComplexCase_Manual_Load_Email_MD"
+  DTS:PackageType="5"
+  DTS:ProtectionLevel="0"
+  DTS:VersionBuild="420"
+  DTS:VersionGUID="{FEE1E35B-4315-48DC-8DC3-E4D6A4D4A97F}">
+  <DTS:Property
+    DTS:Name="PackageFormatVersion">8</DTS:Property>
+  <DTS:ConnectionManagers>
+    <DTS:ConnectionManager
+      DTS:refId="Package.ConnectionManagers[Flat File Connection Manager]"
+      DTS:CreationName="FLATFILE"
+      DTS:DTSID="{0A04EFD2-E7E9-4D7A-B07A-5725FA623864}"
+      DTS:ObjectName="Flat File Connection Manager">
+      <DTS:ObjectData>
+        <DTS:ConnectionManager
+          DTS:Format="Delimited"
+          DTS:LocaleID="1033"
+          DTS:HeaderRowDelimiter="_x000D__x000A_"
+          DTS:ColumnNamesInFirstDataRow="True"
+          DTS:RowDelimiter=""
+          DTS:TextQualifier="_x003C_none_x003E_"
+          DTS:CodePage="1252"
+          DTS:ConnectionString="C:\Data\files\in\HICS\CCHC_Manual\Manual_C_Case CSV07152019a.csv">
+          <DTS:FlatFileColumns>
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x002C_"
+              DTS:MaximumWidth="50"
+              DTS:DataType="129"
+              DTS:TextQualified="True"
+              DTS:ObjectName="ApplicationID"
+              DTS:DTSID="{19E30810-EC8E-43BE-972E-7107EC91DEAB}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x002C_"
+              DTS:MaximumWidth="50"
+              DTS:DataType="129"
+              DTS:TextQualified="True"
+              DTS:ObjectName="FullName"
+              DTS:DTSID="{2B2724B6-9682-4F41-863F-98F98FD31103}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x000D__x000A_"
+              DTS:MaximumWidth="50"
+              DTS:DataType="129"
+              DTS:TextQualified="True"
+              DTS:ObjectName="CaseType"
+              DTS:DTSID="{AAF86699-E9B4-4126-BD89-03557CF997CD}"
+              DTS:CreationName="" />
+          </DTS:FlatFileColumns>
+        </DTS:ConnectionManager>
+      </DTS:ObjectData>
+    </DTS:ConnectionManager>
+    <DTS:ConnectionManager
+      DTS:refId="Package.ConnectionManagers[Flat File Connection Manager 2]"
+      DTS:CreationName="FLATFILE"
+      DTS:DTSID="{FBCB02D6-2662-47E0-8AA1-E4684BDF3E0F}"
+      DTS:ObjectName="Flat File Connection Manager 2">
+      <DTS:PropertyExpression
+        DTS:Name="ConnectionString">@[User::FullArchivePath]</DTS:PropertyExpression>
+      <DTS:ObjectData>
+        <DTS:ConnectionManager
+          DTS:Format="Delimited"
+          DTS:LocaleID="1033"
+          DTS:HeaderRowDelimiter="_x000D__x000A_"
+          DTS:RowDelimiter=""
+          DTS:TextQualifier="_x003C_none_x003E_"
+          DTS:CodePage="1252"
+          DTS:ConnectionString="E:\Data\files\in\HICS\CCHC_Manual\ArchiveReports\CCHCManualCasesReport20200313.csv">
+          <DTS:FlatFileColumns>
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x002C_"
+              DTS:MaximumWidth="11"
+              DTS:DataType="129"
+              DTS:TextQualified="True"
+              DTS:ObjectName="ComplexCaseNumber"
+              DTS:DTSID="{61B9D21D-A929-42C8-BD30-888B34B2DFFC}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x002C_"
+              DTS:DataType="20"
+              DTS:TextQualified="True"
+              DTS:ObjectName="ApplicationID"
+              DTS:DTSID="{6EC02801-0805-497D-B483-37EEC2B9BC59}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x002C_"
+              DTS:MaximumWidth="20"
+              DTS:DataType="129"
+              DTS:TextQualified="True"
+              DTS:ObjectName="HICSCaseID"
+              DTS:DTSID="{22CA241D-1769-4EEC-AF13-287C601365B4}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x002C_"
+              DTS:MaximumWidth="255"
+              DTS:DataType="130"
+              DTS:TextQualified="True"
+              DTS:ObjectName="AnalystName"
+              DTS:DTSID="{E4EE6A12-29AD-4E33-B9CA-1DD27517E84C}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x002C_"
+              DTS:MaximumWidth="255"
+              DTS:DataType="130"
+              DTS:TextQualified="True"
+              DTS:ObjectName="CaseType"
+              DTS:DTSID="{35386F78-155D-49E4-AC3F-CFED5E20BF91}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x002C_"
+              DTS:MaximumWidth="3"
+              DTS:DataType="129"
+              DTS:TextQualified="True"
+              DTS:ObjectName="LoadedToCRM"
+              DTS:DTSID="{FB7B7CC9-033C-4F09-A4B2-7C9A2CD00E42}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x000D__x000A_"
+              DTS:DataType="304"
+              DTS:DataScale="2"
+              DTS:TextQualified="True"
+              DTS:ObjectName="CreateDateUtc"
+              DTS:DTSID="{6860A713-CB72-4D03-B5C4-8FAD3EA5630D}"
+              DTS:CreationName="" />
+          </DTS:FlatFileColumns>
+        </DTS:ConnectionManager>
+      </DTS:ObjectData>
+    </DTS:ConnectionManager>
+    <DTS:ConnectionManager
+      DTS:refId="Package.ConnectionManagers[Report_Manual_ComplexCase]"
+      DTS:CreationName="FILE"
+      DTS:DTSID="{F7CE55A7-9F13-4057-B5F3-72F230485A9D}"
+      DTS:ObjectName="Report_Manual_ComplexCase">
+      <DTS:ObjectData>
+        <DTS:ConnectionManager
+          DTS:FileUsageType="1"
+          DTS:ConnectionString="Report_Manual_ComplexCase" />
+      </DTS:ObjectData>
+    </DTS:ConnectionManager>
+  </DTS:ConnectionManagers>
+  <DTS:PackageParameters>
+    <DTS:PackageParameter
+      DTS:CreationName=""
+      DTS:DataType="3"
+      DTS:DTSID="{AC01EA2D-7E51-40B6-8874-7DDBA247EE2F}"
+      DTS:ObjectName="Count">
+      <DTS:Property
+        DTS:DataType="3"
+        DTS:Name="ParameterValue">0</DTS:Property>
+    </DTS:PackageParameter>
+    <DTS:PackageParameter
+      DTS:CreationName=""
+      DTS:DataType="7"
+      DTS:DTSID="{72DA83B8-A510-43B6-B8E7-7752D0CC5FE7}"
+      DTS:ObjectName="LastRunDate">
+      <DTS:Property
+        DTS:DataType="7"
+        DTS:Name="ParameterValue">12/18/2019 1:32:23 PM</DTS:Property>
+    </DTS:PackageParameter>
+  </DTS:PackageParameters>
+  <DTS:Variables>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{61B5D332-4F51-451C-8F53-8D5A3F8A0DB6}"
+      DTS:EvaluateAsExpression="True"
+      DTS:Expression="@[User::CCHC_ManualFileDirectoryName]  + &quot;\\ArchiveReports&quot;"
+      DTS:IncludeInDebugDump="2345"
+      DTS:Namespace="User"
+      DTS:ObjectName="ArchiveReports">
+      <DTS:VariableValue
+        DTS:DataType="8">E:\Data\files\in\HICS\CCHC_Manual\ArchiveReports</DTS:VariableValue>
+    </DTS:Variable>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{3D622307-B528-4CF0-8594-A00D7750ACB8}"
+      DTS:IncludeInDebugDump="6789"
+      DTS:Namespace="User"
+      DTS:ObjectName="Audit_ID">
+      <DTS:VariableValue
+        DTS:DataType="3">0</DTS:VariableValue>
+    </DTS:Variable>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{CDD03635-F143-4394-90E1-F5095C3C223C}"
+      DTS:EvaluateAsExpression="True"
+      DTS:Expression="(DT_WSTR, 50) @[$Project::CCHC_ManualFileDirectoryNameProjectVar]"
+      DTS:IncludeInDebugDump="2345"
+      DTS:Namespace="User"
+      DTS:ObjectName="CCHC_ManualFileDirectoryName">
+      <DTS:VariableValue
+        DTS:DataType="8">E:\Data\files\in\HICS\CCHC_Manual</DTS:VariableValue>
+    </DTS:Variable>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{0B132ED7-8ECC-4725-BD5A-31E1F2E2D905}"
+      DTS:EvaluateAsExpression="True"
+      DTS:Expression="(DT_WSTR, 50) @[$Project::CCHC_ManualFileDirectoryNameProjectVar] + &quot;\\Archive&quot;"
+      DTS:IncludeInDebugDump="2345"
+      DTS:Namespace="User"
+      DTS:ObjectName="CCHC_ManualFileDirectoryNameArchive">
+      <DTS:VariableValue
+        DTS:DataType="8">E:\Data\files\in\HICS\CCHC_Manual\Archive</DTS:VariableValue>
+    </DTS:Variable>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{D3A16C64-8AB5-4105-BE74-01C9FB7E9789}"
+      DTS:IncludeInDebugDump="2345"
+      DTS:Namespace="User"
+      DTS:ObjectName="CCHC_ManualFileName">
+      <DTS:VariableValue
+        DTS:DataType="8">0</DTS:VariableValue>
+    </DTS:Variable>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{347BF4DC-1BB5-4296-86CE-8062063E4939}"
+      DTS:IncludeInDebugDump="6789"
+      DTS:Namespace="User"
+      DTS:ObjectName="Count">
+      <DTS:VariableValue
+        DTS:DataType="3">0</DTS:VariableValue>
+    </DTS:Variable>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{2B60B402-8B77-4948-9B7F-67CF7C3087D0}"
+      DTS:EvaluateAsExpression="True"
+      DTS:Expression="@[User::ArchiveReports]+ &quot;\\CCHCManualCasesReport&quot; +Replace(Substring((DT_STR,50,1252)getdate(),1,10),&quot;-&quot;,&quot;&quot;)+&quot;.csv&quot;"
+      DTS:IncludeInDebugDump="2345"
+      DTS:Namespace="User"
+      DTS:ObjectName="FullArchivePath">
+      <DTS:VariableValue
+        DTS:DataType="8">E:\Data\files\in\HICS\CCHC_Manual\ArchiveReports\CCHCManualCasesReport20200313.csv</DTS:VariableValue>
+    </DTS:Variable>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{7E295426-3E0B-4CCF-B5BF-7EC0CF3493D9}"
+      DTS:IncludeInDebugDump="2345"
+      DTS:Namespace="User"
+      DTS:ObjectName="HtmlEmailBody">
+      <DTS:VariableValue
+        DTS:DataType="8">&lt;h1&gt;CCHC Manual Report&lt;/h1&gt;</DTS:VariableValue>
+    </DTS:Variable>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{5A54069A-3EE7-4CAB-AA83-B71554FD6A17}"
+      DTS:IncludeInDebugDump="2345"
+      DTS:Namespace="User"
+      DTS:ObjectName="HtmlEmailCC">
+      <DTS:VariableValue
+        DTS:DataType="8">Piyush.Goyal@cognosante.com</DTS:VariableValue>
+    </DTS:Variable>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{2FCCBCD0-CB05-441D-ABF9-96799D74EA1C}"
+      DTS:IncludeInDebugDump="2345"
+      DTS:Namespace="User"
+      DTS:ObjectName="HtmlEmailFrom">
+      <DTS:VariableValue
+        DTS:DataType="8">devops@cognosante.com</DTS:VariableValue>
+    </DTS:Variable>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{63EAB607-AFA5-41A5-8423-00BDEB10072F}"
+      DTS:IncludeInDebugDump="2345"
+      DTS:Namespace="User"
+      DTS:ObjectName="HtmlEmailSubject">
+      <DTS:VariableValue
+        DTS:DataType="8">CCHC Manual Cases Report</DTS:VariableValue>
+    </DTS:Variable>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{8919CD19-A671-4CDF-A38B-EA4C64AE68DF}"
+      DTS:IncludeInDebugDump="2345"
+      DTS:Namespace="User"
+      DTS:ObjectName="HtmlEmailTo">
+      <DTS:VariableValue
+        DTS:DataType="8">Piyush.Goyal@cognosante.com; Daniel.Thonn@cognosante.com;Ravali.Tadakamadla@cognosante.com</DTS:VariableValue>
+    </DTS:Variable>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{24DA30F7-D91F-41FF-B363-BAB64B5FBA8E}"
+      DTS:IncludeInDebugDump="6789"
+      DTS:Namespace="User"
+      DTS:ObjectName="Insert_Count">
+      <DTS:VariableValue
+        DTS:DataType="3">0</DTS:VariableValue>
+    </DTS:Variable>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{2D81EBF1-004A-4AA3-812A-589267D6CF25}"
+      DTS:IncludeInDebugDump="6789"
+      DTS:Namespace="User"
+      DTS:ObjectName="LastRunDate">
+      <DTS:VariableValue
+        DTS:DataType="7">1/1/1900</DTS:VariableValue>
+    </DTS:Variable>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{80641C08-B48D-4DC7-893E-AE1273EFDE72}"
+      DTS:IncludeInDebugDump="6789"
+      DTS:Namespace="User"
+      DTS:ObjectName="NewManualCaseCount">
+      <DTS:VariableValue
+        DTS:DataType="3">0</DTS:VariableValue>
+    </DTS:Variable>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{A61A61EA-FC1B-4241-9B2D-19D6A7B8A7DC}"
+      DTS:IncludeInDebugDump="2345"
+      DTS:Namespace="User"
+      DTS:ObjectName="Source">
+      <DTS:VariableValue
+        DTS:DataType="8">ERR_1095A.dbo.HICSCase</DTS:VariableValue>
+    </DTS:Variable>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{F6E69C1A-BFD4-4B81-9961-263013C38BAB}"
+      DTS:EvaluateAsExpression="True"
+      DTS:Expression="&quot;DECLARE @tab char(1) = CHAR(9) &#xA;EXEC msdb.dbo.sp_send_dbmail @profile_name=NULL,&#xA;@body_format='html',@body='&quot;+ @[User::HtmlEmailBody] +&quot;',&#xA;@recipients= '&quot; + @[$Project::ToLine]  + &quot;',&#xA;@subject='&quot; + @[$Project::HtmlEmailSubject]   + &quot;',&#xA;@execute_query_database = 'CERRS_ODS',&#xA;@attach_query_result_as_file = 1,&#xA;@query_attachment_filename = 'CCHCManualCasesReport.csv',&#xA;@query_result_width = 150,&#xA;@query_result_separator=@tab,&#xA;@query_result_no_padding = 1,&#xA;@query_result_header= 1,&#xA;@query = 'SET NOCOUNT ON;&#xA;select&#xA;  LTRIM(REPLACE(ISNULL(ComplexCaseNumber,''''), char(9), '''')) as ComplexCaseNumber&#xA;,ApplicationID&#xA;,LTRIM(REPLACE(ISNULL(HICSCaseID,''''), char(9), '''')) as HICSCaseID&#xA;,LTRIM(REPLACE(ISNULL(AnalystName,''''), char(9), '''')) as AnalystName&#xA;,LTRIM(REPLACE(ISNULL(CaseType,''''), char(9), '''')) as CaseType&#xA;,Case when [CRM_ComplexCaseGUID] is not null then ''Yes''&#xA;else ''No'' end as LoadedToCRM&#xA;,convert(nvarchar(MAX), CreateDateUtc, 20) As CreateDateUtc&#xA;FROM [dbo].[HICSComplexCase]&#xA;where (isnull(Manual,''N'') = ''Y'' )&#xA;and CreateDateUtc &gt;''&quot;+ (DT_STR,30, 1252)@[User::LastRunDate] +&quot;'''&quot;"
+      DTS:IncludeInDebugDump="2345"
+      DTS:Namespace="User"
+      DTS:ObjectName="strSqlDbSendMail">
+      <DTS:VariableValue
+        DTS:DataType="8">DECLARE @tab char(1) = CHAR(9) 
+EXEC msdb.dbo.sp_send_dbmail @profile_name=NULL,
+@body_format='html',@body='&lt;h1&gt;CCHC Manual Report&lt;/h1&gt;',
+@recipients= 'Piyush.Goyal@cognosante.com; Daniel.Thonn@cognosante.com',
+@subject='CCHC Manual Cases Report',
+@execute_query_database = 'CERRS_ODS',
+@attach_query_result_as_file = 1,
+@query_attachment_filename = 'CCHCManualCasesReport.csv',
+@query_result_width = 150,
+@query_result_separator=@tab,
+@query_result_no_padding = 1,
+@query_result_header= 1,
+@query = 'SET NOCOUNT ON;
+select
+  LTRIM(REPLACE(ISNULL(ComplexCaseNumber,''''), char(9), '''')) as ComplexCaseNumber
+,ApplicationID
+,LTRIM(REPLACE(ISNULL(HICSCaseID,''''), char(9), '''')) as HICSCaseID
+,LTRIM(REPLACE(ISNULL(AnalystName,''''), char(9), '''')) as AnalystName
+,LTRIM(REPLACE(ISNULL(CaseType,''''), char(9), '''')) as CaseType
+,Case when [CRM_ComplexCaseGUID] is not null then ''Yes''
+else ''No'' end as LoadedToCRM
+,convert(nvarchar(MAX), CreateDateUtc, 20) As CreateDateUtc
+FROM [dbo].[HICSComplexCase]
+where (isnull(Manual,''N'') = ''Y'' )
+and CreateDateUtc &gt;''1/1/1900'''</DTS:VariableValue>
+    </DTS:Variable>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{D6AECC65-9B20-47A8-9709-E81574ACDFA6}"
+      DTS:IncludeInDebugDump="6789"
+      DTS:Namespace="User"
+      DTS:ObjectName="Update_Count">
+      <DTS:VariableValue
+        DTS:DataType="3">0</DTS:VariableValue>
+    </DTS:Variable>
+  </DTS:Variables>
+  <DTS:Executables>
+    <DTS:Executable
+      DTS:refId="Package\Audit_CC_Manual_Email_End"
+      DTS:CreationName="Microsoft.ExecuteSQLTask"
+      DTS:Description="Execute SQL Task"
+      DTS:DTSID="{365839df-1699-4038-a0ac-04f61ebd770f}"
+      DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Audit_CC_Manual_Email_End"
+      DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2012; © 2007 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+      DTS:ThreadHint="0">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <SQLTask:SqlTaskData
+          SQLTask:Connection="{8C4972B1-9B1F-4586-BAA8-19704B38AB72}"
+          SQLTask:SqlStatementSource="INSERT INTO [dbo].[Audit]&#xA; ([Package] ,[PackageExecutionId] ,[Task],[Inserted])&#xA;VALUES&#xA;(?, ?, ?,? )" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask">
+          <SQLTask:ParameterBinding
+            SQLTask:ParameterName="0"
+            SQLTask:DtsVariableName="System::PackageName"
+            SQLTask:ParameterDirection="Input"
+            SQLTask:DataType="129"
+            SQLTask:ParameterSize="255" />
+          <SQLTask:ParameterBinding
+            SQLTask:ParameterName="1"
+            SQLTask:DtsVariableName="System::ExecutionInstanceGUID"
+            SQLTask:ParameterDirection="Input"
+            SQLTask:DataType="129"
+            SQLTask:ParameterSize="255" />
+          <SQLTask:ParameterBinding
+            SQLTask:ParameterName="2"
+            SQLTask:DtsVariableName="System::TaskName"
+            SQLTask:ParameterDirection="Input"
+            SQLTask:DataType="129"
+            SQLTask:ParameterSize="255" />
+          <SQLTask:ParameterBinding
+            SQLTask:ParameterName="3"
+            SQLTask:DtsVariableName="User::NewManualCaseCount"
+            SQLTask:ParameterDirection="Input"
+            SQLTask:DataType="3"
+            SQLTask:ParameterSize="-1" />
+        </SQLTask:SqlTaskData>
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\Check New Manual Cases SQL Task"
+      DTS:CreationName="Microsoft.ExecuteSQLTask"
+      DTS:Description="Execute SQL Task"
+      DTS:DTSID="{F210C1DF-5C61-4500-A32A-DC6D9C525D87}"
+      DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Check New Manual Cases SQL Task"
+      DTS:ThreadHint="0">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <SQLTask:SqlTaskData
+          SQLTask:Connection="{8C4972B1-9B1F-4586-BAA8-19704B38AB72}"
+          SQLTask:SqlStatementSource="SELECT count(*) as Count&#xA;FROM [dbo].[HICSComplexCase]&#xA;WHERE 1=1        &#xA;and (isnull(Manual,'N') = 'Y' )&#xA;and (dateadd(hour,datediff(hour,getutcdate(),getdate()),CreateDateUtc)) &gt; ?"
+          SQLTask:ResultType="ResultSetType_SingleRow" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask">
+          <SQLTask:ResultBinding
+            SQLTask:ResultName="Count"
+            SQLTask:DtsVariableName="User::NewManualCaseCount" />
+          <SQLTask:ParameterBinding
+            SQLTask:ParameterName="0"
+            SQLTask:DtsVariableName="User::LastRunDate"
+            SQLTask:ParameterDirection="Input"
+            SQLTask:DataType="7"
+            SQLTask:ParameterSize="-1" />
+        </SQLTask:SqlTaskData>
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\Create file from the records for the Email"
+      DTS:CreationName="Microsoft.Pipeline"
+      DTS:Description="Data Flow Task"
+      DTS:DTSID="{4AE824C7-8012-4923-9F5B-6CCEC27013FB}"
+      DTS:ExecutableType="Microsoft.Pipeline"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Create file from the records for the Email"
+      DTS:TaskContact="Performs high-performance data extraction, transformation and loading;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <pipeline
+          version="1">
+          <components>
+            <component
+              refId="Package\Create file from the records for the Email\Flat File Destination"
+              componentClassID="Microsoft.FlatFileDestination"
+              contactInfo="Flat File Destination;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;1"
+              description="Flat File Destination"
+              localeId="1033"
+              name="Flat File Destination">
+              <properties>
+                <property
+                  dataType="System.Boolean"
+                  description="Specifies whether the data will overwrite or append to the destination file."
+                  name="Overwrite">true</property>
+                <property
+                  dataType="System.Null"
+                  description="Specifies the text to write to the destination file before any data is written."
+                  expressionType="Notify"
+                  name="Header" />
+                <property
+                  dataType="System.Boolean"
+                  description="When text qualifier is enabled, specifies whether the text qualifier in the data written to the destination file will be escaped or not."
+                  name="EscapeQualifier">false</property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\Create file from the records for the Email\Flat File Destination.Connections[FlatFileConnection]"
+                  connectionManagerID="Package.ConnectionManagers[Flat File Connection Manager 2]"
+                  connectionManagerRefId="Package.ConnectionManagers[Flat File Connection Manager 2]"
+                  name="FlatFileConnection" />
+              </connections>
+              <inputs>
+                <input
+                  refId="Package\Create file from the records for the Email\Flat File Destination.Inputs[Flat File Destination Input]"
+                  hasSideEffects="true"
+                  name="Flat File Destination Input">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\Create file from the records for the Email\Flat File Destination.Inputs[Flat File Destination Input].Columns[ComplexCaseNumber]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="11"
+                      cachedName="ComplexCaseNumber"
+                      externalMetadataColumnId="Package\Create file from the records for the Email\Flat File Destination.Inputs[Flat File Destination Input].ExternalColumns[ComplexCaseNumber]"
+                      lineageId="Package\Create file from the records for the Email\OLE DB Source.Outputs[OLE DB Source Output].Columns[ComplexCaseNumber]" />
+                    <inputColumn
+                      refId="Package\Create file from the records for the Email\Flat File Destination.Inputs[Flat File Destination Input].Columns[ApplicationID]"
+                      cachedDataType="i8"
+                      cachedName="ApplicationID"
+                      externalMetadataColumnId="Package\Create file from the records for the Email\Flat File Destination.Inputs[Flat File Destination Input].ExternalColumns[ApplicationID]"
+                      lineageId="Package\Create file from the records for the Email\OLE DB Source.Outputs[OLE DB Source Output].Columns[ApplicationID]" />
+                    <inputColumn
+                      refId="Package\Create file from the records for the Email\Flat File Destination.Inputs[Flat File Destination Input].Columns[HICSCaseID]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="20"
+                      cachedName="HICSCaseID"
+                      externalMetadataColumnId="Package\Create file from the records for the Email\Flat File Destination.Inputs[Flat File Destination Input].ExternalColumns[HICSCaseID]"
+                      lineageId="Package\Create file from the records for the Email\OLE DB Source.Outputs[OLE DB Source Output].Columns[HICSCaseID]" />
+                    <inputColumn
+                      refId="Package\Create file from the records for the Email\Flat File Destination.Inputs[Flat File Destination Input].Columns[AnalystName]"
+                      cachedDataType="wstr"
+                      cachedLength="255"
+                      cachedName="AnalystName"
+                      externalMetadataColumnId="Package\Create file from the records for the Email\Flat File Destination.Inputs[Flat File Destination Input].ExternalColumns[AnalystName]"
+                      lineageId="Package\Create file from the records for the Email\OLE DB Source.Outputs[OLE DB Source Output].Columns[AnalystName]" />
+                    <inputColumn
+                      refId="Package\Create file from the records for the Email\Flat File Destination.Inputs[Flat File Destination Input].Columns[CaseType]"
+                      cachedDataType="wstr"
+                      cachedLength="255"
+                      cachedName="CaseType"
+                      externalMetadataColumnId="Package\Create file from the records for the Email\Flat File Destination.Inputs[Flat File Destination Input].ExternalColumns[CaseType]"
+                      lineageId="Package\Create file from the records for the Email\OLE DB Source.Outputs[OLE DB Source Output].Columns[CaseType]" />
+                    <inputColumn
+                      refId="Package\Create file from the records for the Email\Flat File Destination.Inputs[Flat File Destination Input].Columns[LoadedToCRM]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="3"
+                      cachedName="LoadedToCRM"
+                      externalMetadataColumnId="Package\Create file from the records for the Email\Flat File Destination.Inputs[Flat File Destination Input].ExternalColumns[LoadedToCRM]"
+                      lineageId="Package\Create file from the records for the Email\OLE DB Source.Outputs[OLE DB Source Output].Columns[LoadedToCRM]" />
+                    <inputColumn
+                      refId="Package\Create file from the records for the Email\Flat File Destination.Inputs[Flat File Destination Input].Columns[CreateDateUtc]"
+                      cachedDataType="dbTimeStamp2"
+                      cachedName="CreateDateUtc"
+                      cachedScale="2"
+                      externalMetadataColumnId="Package\Create file from the records for the Email\Flat File Destination.Inputs[Flat File Destination Input].ExternalColumns[CreateDateUtc]"
+                      lineageId="Package\Create file from the records for the Email\OLE DB Source.Outputs[OLE DB Source Output].Columns[CreateDateUtc]" />
+                  </inputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\Create file from the records for the Email\Flat File Destination.Inputs[Flat File Destination Input].ExternalColumns[ComplexCaseNumber]"
+                      codePage="1252"
+                      dataType="str"
+                      length="11"
+                      name="ComplexCaseNumber" />
+                    <externalMetadataColumn
+                      refId="Package\Create file from the records for the Email\Flat File Destination.Inputs[Flat File Destination Input].ExternalColumns[ApplicationID]"
+                      dataType="i8"
+                      name="ApplicationID" />
+                    <externalMetadataColumn
+                      refId="Package\Create file from the records for the Email\Flat File Destination.Inputs[Flat File Destination Input].ExternalColumns[HICSCaseID]"
+                      codePage="1252"
+                      dataType="str"
+                      length="20"
+                      name="HICSCaseID" />
+                    <externalMetadataColumn
+                      refId="Package\Create file from the records for the Email\Flat File Destination.Inputs[Flat File Destination Input].ExternalColumns[AnalystName]"
+                      dataType="wstr"
+                      length="255"
+                      name="AnalystName" />
+                    <externalMetadataColumn
+                      refId="Package\Create file from the records for the Email\Flat File Destination.Inputs[Flat File Destination Input].ExternalColumns[CaseType]"
+                      dataType="wstr"
+                      length="255"
+                      name="CaseType" />
+                    <externalMetadataColumn
+                      refId="Package\Create file from the records for the Email\Flat File Destination.Inputs[Flat File Destination Input].ExternalColumns[LoadedToCRM]"
+                      codePage="1252"
+                      dataType="str"
+                      length="3"
+                      name="LoadedToCRM" />
+                    <externalMetadataColumn
+                      refId="Package\Create file from the records for the Email\Flat File Destination.Inputs[Flat File Destination Input].ExternalColumns[CreateDateUtc]"
+                      dataType="dbTimeStamp2"
+                      name="CreateDateUtc"
+                      scale="2" />
+                  </externalMetadataColumns>
+                </input>
+              </inputs>
+            </component>
+            <component
+              refId="Package\Create file from the records for the Email\OLE DB Source"
+              componentClassID="Microsoft.OLEDBSource"
+              contactInfo="OLE DB Source;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;7"
+              description="OLE DB Source"
+              name="OLE DB Source"
+              usesDispositions="true"
+              version="7">
+              <properties>
+                <property
+                  dataType="System.Int32"
+                  description="The number of seconds before a command times out.  A value of 0 indicates an infinite time-out."
+                  name="CommandTimeout">0</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the name of the database object used to open a rowset."
+                  name="OpenRowset"></property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the variable that contains the name of the database object used to open a rowset."
+                  name="OpenRowsetVariable"></property>
+                <property
+                  dataType="System.String"
+                  description="The SQL command to be executed."
+                  name="SqlCommand"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor, Microsoft.DataTransformationServices.Controls, Version=15.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91">SELECT 
+ComplexCaseNumber
+,ApplicationID
+,HICSCaseID
+,AnalystName
+,CaseType
+,Case when [CRM_ComplexCaseGUID] is not null then 'Yes'
+else 'No' end as LoadedToCRM
+,CreateDateUtc
+FROM [dbo].[HICSComplexCase]
+WHERE 1=1        
+and (isnull(Manual,'N') = 'Y' )
+and CreateDateUtc &gt;?</property>
+                <property
+                  dataType="System.String"
+                  description="The variable that contains the SQL command to be executed."
+                  name="SqlCommandVariable"></property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the column code page to use when code page information is unavailable from the data source."
+                  name="DefaultCodePage">1252</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Forces the use of the DefaultCodePage property value when describing character data."
+                  name="AlwaysUseDefaultCodePage">false</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the mode used to access the database."
+                  name="AccessMode"
+                  typeConverter="AccessMode">2</property>
+                <property
+                  dataType="System.String"
+                  description="The mappings between the parameters in the SQL command and variables."
+                  name="ParameterMapping">"Parameter0:Input",{2D81EBF1-004A-4AA3-812A-589267D6CF25};</property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\Create file from the records for the Email\OLE DB Source.Connections[OleDbConnection]"
+                  connectionManagerID="{8C4972B1-9B1F-4586-BAA8-19704B38AB72}:external"
+                  connectionManagerRefId="Project.ConnectionManagers[localhost.CERRS_ODS]"
+                  description="The OLE DB runtime connection used to access the database."
+                  name="OleDbConnection" />
+              </connections>
+              <outputs>
+                <output
+                  refId="Package\Create file from the records for the Email\OLE DB Source.Outputs[OLE DB Source Output]"
+                  name="OLE DB Source Output">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Create file from the records for the Email\OLE DB Source.Outputs[OLE DB Source Output].Columns[ComplexCaseNumber]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Create file from the records for the Email\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[ComplexCaseNumber]"
+                      length="11"
+                      lineageId="Package\Create file from the records for the Email\OLE DB Source.Outputs[OLE DB Source Output].Columns[ComplexCaseNumber]"
+                      name="ComplexCaseNumber"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Create file from the records for the Email\OLE DB Source.Outputs[OLE DB Source Output].Columns[ApplicationID]"
+                      dataType="i8"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Create file from the records for the Email\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[ApplicationID]"
+                      lineageId="Package\Create file from the records for the Email\OLE DB Source.Outputs[OLE DB Source Output].Columns[ApplicationID]"
+                      name="ApplicationID"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Create file from the records for the Email\OLE DB Source.Outputs[OLE DB Source Output].Columns[HICSCaseID]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Create file from the records for the Email\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[HICSCaseID]"
+                      length="20"
+                      lineageId="Package\Create file from the records for the Email\OLE DB Source.Outputs[OLE DB Source Output].Columns[HICSCaseID]"
+                      name="HICSCaseID"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Create file from the records for the Email\OLE DB Source.Outputs[OLE DB Source Output].Columns[AnalystName]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Create file from the records for the Email\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[AnalystName]"
+                      length="255"
+                      lineageId="Package\Create file from the records for the Email\OLE DB Source.Outputs[OLE DB Source Output].Columns[AnalystName]"
+                      name="AnalystName"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Create file from the records for the Email\OLE DB Source.Outputs[OLE DB Source Output].Columns[CaseType]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Create file from the records for the Email\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[CaseType]"
+                      length="255"
+                      lineageId="Package\Create file from the records for the Email\OLE DB Source.Outputs[OLE DB Source Output].Columns[CaseType]"
+                      name="CaseType"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Create file from the records for the Email\OLE DB Source.Outputs[OLE DB Source Output].Columns[LoadedToCRM]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Create file from the records for the Email\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[LoadedToCRM]"
+                      length="3"
+                      lineageId="Package\Create file from the records for the Email\OLE DB Source.Outputs[OLE DB Source Output].Columns[LoadedToCRM]"
+                      name="LoadedToCRM"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Create file from the records for the Email\OLE DB Source.Outputs[OLE DB Source Output].Columns[CreateDateUtc]"
+                      dataType="dbTimeStamp2"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Create file from the records for the Email\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[CreateDateUtc]"
+                      lineageId="Package\Create file from the records for the Email\OLE DB Source.Outputs[OLE DB Source Output].Columns[CreateDateUtc]"
+                      name="CreateDateUtc"
+                      scale="2"
+                      truncationRowDisposition="FailComponent" />
+                  </outputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\Create file from the records for the Email\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[ComplexCaseNumber]"
+                      codePage="1252"
+                      dataType="str"
+                      length="11"
+                      name="ComplexCaseNumber" />
+                    <externalMetadataColumn
+                      refId="Package\Create file from the records for the Email\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[ApplicationID]"
+                      dataType="i8"
+                      name="ApplicationID" />
+                    <externalMetadataColumn
+                      refId="Package\Create file from the records for the Email\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[HICSCaseID]"
+                      codePage="1252"
+                      dataType="str"
+                      length="20"
+                      name="HICSCaseID" />
+                    <externalMetadataColumn
+                      refId="Package\Create file from the records for the Email\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[AnalystName]"
+                      dataType="wstr"
+                      length="255"
+                      name="AnalystName" />
+                    <externalMetadataColumn
+                      refId="Package\Create file from the records for the Email\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[CaseType]"
+                      dataType="wstr"
+                      length="255"
+                      name="CaseType" />
+                    <externalMetadataColumn
+                      refId="Package\Create file from the records for the Email\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[LoadedToCRM]"
+                      codePage="1252"
+                      dataType="str"
+                      length="3"
+                      name="LoadedToCRM" />
+                    <externalMetadataColumn
+                      refId="Package\Create file from the records for the Email\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[CreateDateUtc]"
+                      dataType="dbTimeStamp2"
+                      name="CreateDateUtc"
+                      scale="2" />
+                  </externalMetadataColumns>
+                </output>
+                <output
+                  refId="Package\Create file from the records for the Email\OLE DB Source.Outputs[OLE DB Source Error Output]"
+                  isErrorOut="true"
+                  name="OLE DB Source Error Output">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Create file from the records for the Email\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[ComplexCaseNumber]"
+                      codePage="1252"
+                      dataType="str"
+                      length="11"
+                      lineageId="Package\Create file from the records for the Email\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[ComplexCaseNumber]"
+                      name="ComplexCaseNumber" />
+                    <outputColumn
+                      refId="Package\Create file from the records for the Email\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[ApplicationID]"
+                      dataType="i8"
+                      lineageId="Package\Create file from the records for the Email\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[ApplicationID]"
+                      name="ApplicationID" />
+                    <outputColumn
+                      refId="Package\Create file from the records for the Email\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[HICSCaseID]"
+                      codePage="1252"
+                      dataType="str"
+                      length="20"
+                      lineageId="Package\Create file from the records for the Email\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[HICSCaseID]"
+                      name="HICSCaseID" />
+                    <outputColumn
+                      refId="Package\Create file from the records for the Email\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[AnalystName]"
+                      dataType="wstr"
+                      length="255"
+                      lineageId="Package\Create file from the records for the Email\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[AnalystName]"
+                      name="AnalystName" />
+                    <outputColumn
+                      refId="Package\Create file from the records for the Email\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[CaseType]"
+                      dataType="wstr"
+                      length="255"
+                      lineageId="Package\Create file from the records for the Email\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[CaseType]"
+                      name="CaseType" />
+                    <outputColumn
+                      refId="Package\Create file from the records for the Email\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[LoadedToCRM]"
+                      codePage="1252"
+                      dataType="str"
+                      length="3"
+                      lineageId="Package\Create file from the records for the Email\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[LoadedToCRM]"
+                      name="LoadedToCRM" />
+                    <outputColumn
+                      refId="Package\Create file from the records for the Email\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[CreateDateUtc]"
+                      dataType="dbTimeStamp2"
+                      lineageId="Package\Create file from the records for the Email\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[CreateDateUtc]"
+                      name="CreateDateUtc"
+                      scale="2" />
+                    <outputColumn
+                      refId="Package\Create file from the records for the Email\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\Create file from the records for the Email\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\Create file from the records for the Email\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\Create file from the records for the Email\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+          </components>
+          <paths>
+            <path
+              refId="Package\Create file from the records for the Email.Paths[OLE DB Source Output]"
+              endId="Package\Create file from the records for the Email\Flat File Destination.Inputs[Flat File Destination Input]"
+              name="OLE DB Source Output"
+              startId="Package\Create file from the records for the Email\OLE DB Source.Outputs[OLE DB Source Output]" />
+          </paths>
+        </pipeline>
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\db send mail"
+      DTS:CreationName="Microsoft.ExecuteSQLTask"
+      DTS:Description="Execute SQL Task"
+      DTS:DTSID="{77c73a89-a992-4cec-9de4-94d51f2a78eb}"
+      DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="db send mail"
+      DTS:ThreadHint="1">
+      <DTS:Variables />
+      <DTS:PropertyExpression
+        DTS:Name="SqlStatementSource">@[User::strSqlDbSendMail]</DTS:PropertyExpression>
+      <DTS:ObjectData>
+        <SQLTask:SqlTaskData
+          SQLTask:Connection="{8C4972B1-9B1F-4586-BAA8-19704B38AB72}"
+          SQLTask:SqlStatementSource="DECLARE @tab char(1) = CHAR(9) &#xA;EXEC msdb.dbo.sp_send_dbmail @profile_name=NULL,&#xA;@body_format='html',@body='&lt;h1&gt;CCHC Manual Report&lt;/h1&gt;',&#xA;@recipients= 'Piyush.Goyal@cognosante.com; Daniel.Thonn@cognosante.com',&#xA;@subject='CCHC Manual Cases Report',&#xA;@execute_query_database = 'CERRS_ODS',&#xA;@attach_query_result_as_file = 1,&#xA;@query_attachment_filename = 'CCHCManualCasesReport.csv',&#xA;@query_result_width = 150,&#xA;@query_result_separator=@tab,&#xA;@query_result_no_padding = 1,&#xA;@query_result_header= 1,&#xA;@query = 'SET NOCOUNT ON;&#xA;select&#xA;  LTRIM(REPLACE(ISNULL(ComplexCaseNumber,''''), char(9), '''')) as ComplexCaseNumber&#xA;,ApplicationID&#xA;,LTRIM(REPLACE(ISNULL(HICSCaseID,''''), char(9), '''')) as HICSCaseID&#xA;,LTRIM(REPLACE(ISNULL(AnalystName,''''), char(9), '''')) as AnalystName&#xA;,LTRIM(REPLACE(ISNULL(CaseType,''''), char(9), '''')) as CaseType&#xA;,Case when [CRM_ComplexCaseGUID] is not null then ''Yes''&#xA;else ''No'' end as LoadedToCRM&#xA;,convert(nvarchar(MAX), CreateDateUtc, 20) As CreateDateUtc&#xA;FROM [dbo].[HICSComplexCase]&#xA;where (isnull(Manual,''N'') = ''Y'' )&#xA;and CreateDateUtc &gt;''1/1/1900'''" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\Get LastRunDate Execute SQL Task"
+      DTS:CreationName="Microsoft.ExecuteSQLTask"
+      DTS:Description="Execute SQL Task"
+      DTS:DTSID="{D35AC909-7780-497D-BA29-7E79F8D2308B}"
+      DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Get LastRunDate Execute SQL Task"
+      DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2012; © 2007 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+      DTS:ThreadHint="0">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <SQLTask:SqlTaskData
+          SQLTask:Connection="{8C4972B1-9B1F-4586-BAA8-19704B38AB72}"
+          SQLTask:SqlStatementSource="SELECT COALESCE(MAX(AuditTimestamp), '01/01/1900') AS LastRunDate&#xA;FROM Audit&#xA;WHERE Package = 'ComplexCase_Manual_Load_Email_MD'&#xA;"
+          SQLTask:ResultType="ResultSetType_SingleRow" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask">
+          <SQLTask:ResultBinding
+            SQLTask:ResultName="LastRunDate"
+            SQLTask:DtsVariableName="User::LastRunDate" />
+        </SQLTask:SqlTaskData>
+      </DTS:ObjectData>
+    </DTS:Executable>
+  </DTS:Executables>
+  <DTS:PrecedenceConstraints>
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint]"
+      DTS:CreationName=""
+      DTS:DTSID="{CAE4E389-C144-44FD-92F7-10448396A789}"
+      DTS:From="Package\Get LastRunDate Execute SQL Task"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint"
+      DTS:To="Package\Check New Manual Cases SQL Task" />
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint 1]"
+      DTS:CreationName=""
+      DTS:DTSID="{25067791-BB89-4B72-B1C7-07F77457F952}"
+      DTS:EvalOp="3"
+      DTS:Expression="@[User::NewManualCaseCount] &gt;0"
+      DTS:From="Package\Check New Manual Cases SQL Task"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint 1"
+      DTS:To="Package\Create file from the records for the Email" />
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint 2]"
+      DTS:CreationName=""
+      DTS:DTSID="{313BB15B-117E-4B84-B55E-43A694A6AA21}"
+      DTS:EvalOp="3"
+      DTS:Expression="@[User::NewManualCaseCount] &gt; 0"
+      DTS:From="Package\Check New Manual Cases SQL Task"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint 2"
+      DTS:To="Package\db send mail" />
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint 3]"
+      DTS:CreationName=""
+      DTS:DTSID="{B889533C-63C9-47C7-8435-7F1EB0488435}"
+      DTS:From="Package\Check New Manual Cases SQL Task"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint 3"
+      DTS:To="Package\Audit_CC_Manual_Email_End" />
+  </DTS:PrecedenceConstraints>
+  <DTS:DesignTimeProperties><![CDATA[<?xml version="1.0"?>
+<!--This CDATA section contains the layout information of the package. The section includes information such as (x,y) coordinates, width, and height.-->
+<!--If you manually edit this section and make a mistake, you can delete it. -->
+<!--The package will still be able to load normally but the previous layout information will be lost and the designer will automatically re-arrange the elements on the design surface.-->
+<Objects
+  Version="8">
+  <!--Each node below will contain properties that do not affect runtime behavior.-->
+  <Package
+    design-time-name="Package">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="16" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:mssgm="clr-namespace:Microsoft.SqlServer.Graph.Model;assembly=Microsoft.SqlServer.Graph">
+        <NodeLayout
+          Size="216,42"
+          Id="Package\Audit_CC_Manual_Email_End"
+          TopLeft="755,118.279569888173" />
+        <NodeLayout
+          Size="246,55.2"
+          Id="Package\Check New Manual Cases SQL Task"
+          TopLeft="366.923076993615,110.279569888173" />
+        <NodeLayout
+          Size="272.8,41.6"
+          Id="Package\Create file from the records for the Email"
+          TopLeft="194.461543833716,291.240855904433" />
+        <NodeLayout
+          Size="140,41.6"
+          Id="Package\db send mail"
+          TopLeft="540.923073142238,312.737635304785" />
+        <NodeLayout
+          Size="246,42"
+          Id="Package\Get LastRunDate Execute SQL Task"
+          TopLeft="214.512820531631,0.559139776345639" />
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint]"
+          TopLeft="337.512820531631,42.5591397763456">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="152.410256461984,67.7204301118272"
+              Start="0,0"
+              End="152.410256461984,60.2204301118272">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,29.8602150559136" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,29.8602150559136"
+                    Point2="0,33.8602150559136"
+                    Point3="4,33.8602150559136" />
+                  <mssgle:LineSegment
+                    End="148.410256461984,33.8602150559136" />
+                  <mssgle:CubicBezierSegment
+                    Point1="148.410256461984,33.8602150559136"
+                    Point2="152.410256461984,33.8602150559136"
+                    Point3="152.410256461984,37.8602150559136" />
+                  <mssgle:LineSegment
+                    End="152.410256461984,60.2204301118272" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint 1]"
+          TopLeft="450.256410326948,165.479569888173">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="-119.394866493232,125.76128601626"
+              Start="0,0"
+              End="-119.394866493232,118.26128601626">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,46.79211874647" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,46.79211874647"
+                    Point2="0,50.79211874647"
+                    Point3="-4,50.79211874647" />
+                  <mssgle:LineSegment
+                    End="-115.394866493232,50.79211874647" />
+                  <mssgle:CubicBezierSegment
+                    Point1="-115.394866493232,50.79211874647"
+                    Point2="-119.394866493232,50.79211874647"
+                    Point3="-119.394866493232,54.79211874647" />
+                  <mssgle:LineSegment
+                    End="-119.394866493232,118.26128601626" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <mssgm:EdgeLabel
+              BoundingBox="-67.697433246616,55.79211874647,16,16"
+              RelativePosition="Any" />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint 2]"
+          TopLeft="529.589743660282,165.479569888173">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="81.3333294819562,147.258065416612"
+              Start="0,0"
+              End="81.3333294819562,139.758065416612">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,55.4741782781148" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,55.4741782781148"
+                    Point2="0,59.4741782781148"
+                    Point3="4,59.4741782781148" />
+                  <mssgle:LineSegment
+                    End="77.3333294819562,59.4741782781148" />
+                  <mssgle:CubicBezierSegment
+                    Point1="77.3333294819562,59.4741782781148"
+                    Point2="81.3333294819562,59.4741782781148"
+                    Point3="81.3333294819562,63.4741782781148" />
+                  <mssgle:LineSegment
+                    End="81.3333294819562,139.758065416612" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <mssgm:EdgeLabel
+              BoundingBox="32.6666647409781,64.4741782781148,16,16"
+              RelativePosition="Any" />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint 3]"
+          TopLeft="612.923076993615,138.579569888173">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="142.076923006385,0"
+              Start="0,0"
+              End="134.576923006385,0">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="134.576923006385,0" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+      </GraphLayout>
+    </LayoutInfo>
+  </Package>
+  <TaskHost
+    design-time-name="Package\Create file from the records for the Email">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
+        <NodeLayout
+          Size="174.4,41.6"
+          Id="Package\Create file from the records for the Email\Flat File Destination"
+          TopLeft="230.769239233796,82.1935471228085" />
+        <NodeLayout
+          Size="155.2,41.6"
+          Id="Package\Create file from the records for the Email\OLE DB Source"
+          TopLeft="19.4358981488019,18.9548384181171" />
+        <EdgeLayout
+          Id="Package\Create file from the records for the Email.Paths[OLE DB Source Output]"
+          TopLeft="174.635898148802,39.7548384181171">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="56.1333410849942,63.2387087046914"
+              Start="0,0"
+              End="48.6333410849942,63.2387087046914">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="24.0666705424971,0" />
+                  <mssgle:CubicBezierSegment
+                    Point1="24.0666705424971,0"
+                    Point2="28.0666705424971,0"
+                    Point3="28.0666705424971,4" />
+                  <mssgle:LineSegment
+                    End="28.0666705424971,59.2387087046914" />
+                  <mssgle:CubicBezierSegment
+                    Point1="28.0666705424971,59.2387087046914"
+                    Point2="28.0666705424971,63.2387087046914"
+                    Point3="32.0666705424971,63.2387087046914" />
+                  <mssgle:LineSegment
+                    End="48.6333410849942,63.2387087046914" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+      </GraphLayout>
+    </LayoutInfo>
+  </TaskHost>
+  <PipelineComponentMetadata
+    design-time-name="Package\Create file from the records for the Email\OLE DB Source">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+</Objects>]]></DTS:DesignTimeProperties>
+</DTS:Executable>
